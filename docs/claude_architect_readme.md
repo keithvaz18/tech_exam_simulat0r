@@ -1,6 +1,7 @@
 # 🏛️ Claude Certified Architect – Foundations (CCAR-F)
-
 ![Claude Certified Architect Detailed One Pager](/assets/claude_architect_detailed_one_pager.png)
+
+<img width="1024" height="1536" alt="claude_architect_detailed_one_pager" src="assets/claude_architect_detailed_one_pager.png" />
 
 ### 📘 Interview & Exam Quick Reference (Agent SDK + Claude Code + MCP + Claude API)
 
