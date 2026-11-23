@@ -2,6 +2,8 @@
 
 ![Claude Certified Developer Detailed One Pager](/assets/claude_developer_detailed_one_pager.png)
 
+<img width="1024" height="1536" alt="claude_developer_detailed_one_pager" src="assets/claude_developer_detailed_one_pager.png" />
+
 ### 📘 Interview & Exam Quick Reference (Claude API + Agents + Tools/MCP + Cost + Security)
 
 **Exam facts:** 53 items · 120 min · pass = scaled **720 / 1000** · $125 · valid 12 months · for engineers with 1-5 yrs SWE and 6+ months Claude experience.
