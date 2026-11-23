@@ -371,6 +371,15 @@ pre {
         .infra { background: #8b5cf6; }
         .optim { background: #10b981; }
 
+        /* CLAUDE CERTIFICATION DOMAIN COLORS */
+        .ca-agentic, .cd-agents { background: #7C3AED; }
+        .ca-tools, .cd-tools { background: #0ea5e9; }
+        .ca-code { background: #10b981; }
+        .ca-prompt, .cd-model { background: #f59e0b; }
+        .ca-context, .cd-security { background: #e11d48; }
+        .cd-apps { background: #2563EB; }
+        .cd-eval { background: #64748b; }
+        .cd-prompt { background: #14b8a6; }
         .legend { margin-top: 20px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
         .legend span { padding: 4px 10px; border-radius: 6px; color: white; font-size: 11px; text-transform: uppercase; font-weight: bold; }
 
@@ -396,6 +405,8 @@ document.body.classList.add("loading");
         <h3>Select Your Examination</h3>
         <select id="examPicker">
             <option value="ai_data">SA - AI and Data Technologies</option>
+            <option value="claude_architect">Claude Certified Architect - Foundations</option>
+            <option value="claude_developer">Claude Certified Developer - Foundations</option>
             <option value="snowflake">SnowPro Core/Assoc./Pro Certification</option>
             <option value="databricks">Databricks Data Engineer</option>
             <option value="python_pySpark">Python & PySpark Engineering</option>
@@ -437,6 +448,18 @@ document.body.classList.add("loading");
             <span class="db-spark">Spark</span><span class="db-stream">Streaming</span>
         </div>
     </div> 
+    <div id="claude_architect-cloud" class="cloud-section" style="background: #1e1b4b; color: white;">
+        <h2 class="doc-header" data-doc="claude_architect-cloud" style="color: #a78bfa;cursor:pointer;">Claude Certified Architect Cloud 🏛️</h2>
+        <div class="search-box"><input id="caSearch" placeholder="Search Architect (hooks, tool_choice, MCP...)" style="background: #1e293b; color: white;"></div>
+        <div class="cloud-display" id="caCloud"></div>
+        <div class="legend"><span class="ca-agentic">Agentic</span><span class="ca-tools">Tools/MCP</span><span class="ca-code">Claude Code</span><span class="ca-prompt">Prompt/Output</span><span class="ca-context">Context/Reliability</span></div>
+    </div>
+    <div id="claude_developer-cloud" class="cloud-section" style="background: #0b1220; color: white;">
+        <h2 class="doc-header" data-doc="claude_developer-cloud" style="color: #38bdf8;cursor:pointer;">Claude Certified Developer Cloud 🛠️</h2>
+        <div class="search-box"><input id="cdSearch" placeholder="Search Developer (caching, evals, MCP...)" style="background: #1e293b; color: white;"></div>
+        <div class="cloud-display" id="cdCloud"></div>
+        <div class="legend"><span class="cd-agents">Agents</span><span class="cd-apps">Apps/API</span><span class="cd-eval">Eval</span><span class="cd-model">Model/Cost</span><span class="cd-prompt">Prompt/Context</span><span class="cd-security">Security</span><span class="cd-tools">Tools/MCP</span></div>
+    </div>
     <div id="mongodb-cloud" class="cloud-section" style="background: #f1f5f9;">
     <h2 class="doc-header" data-doc="mongodb-cloud" style="color: #13aa52;cursor:pointer;">MongoDB Atlas Cloud</h2>
     <div class="search-box"><input id="mgSearch" placeholder="Search MongoDB..."></div>
@@ -656,6 +679,14 @@ const docMap = {
   "ai_data-cloud": {
     file: "docs/Databricks_pySpark_readme.md", 
     title: "AI and Data Technologies Architecture"
+  },
+  "claude_architect-cloud": {
+    file: "docs/claude_architect_readme.md",
+    title: "Claude Certified Architect - Foundations Guide"
+  },
+  "claude_developer-cloud": {
+    file: "docs/claude_developer_readme.md",
+    title: "Claude Certified Developer - Foundations Guide"
   },
   "react-cloud": {
     file: "docs/react_readme.md",
@@ -1242,6 +1273,144 @@ const web3BlockChainKeywords = [
     { word: "Tokenomics", weight: 18, class: "wb-defi" }
 ];
 
+const claudeArchitectKeywords = [
+{word:"Agentic Loop", freq:5, domain:"ca-agentic", desc:"Loop on stop_reason tool_use until end_turn"},
+{word:"stop_reason", freq:5, domain:"ca-agentic", desc:"tool_use continues, end_turn terminates"},
+{word:"Hub-and-Spoke", freq:4, domain:"ca-agentic", desc:"Coordinator routes all subagent communication"},
+{word:"Coordinator", freq:5, domain:"ca-agentic", desc:"Decomposes, delegates, aggregates, re-delegates gaps"},
+{word:"Subagents", freq:5, domain:"ca-agentic", desc:"Isolated context; nothing inherited automatically"},
+{word:"Task Tool", freq:4, domain:"ca-agentic", desc:"Spawns subagents; allowedTools must include Task"},
+{word:"Parallel Subagents", freq:4, domain:"ca-agentic", desc:"Multiple Task calls in one coordinator response"},
+{word:"AgentDefinition", freq:3, domain:"ca-agentic", desc:"Description, system prompt and tool limits per subagent"},
+{word:"Hooks", freq:5, domain:"ca-agentic", desc:"Deterministic enforcement vs probabilistic prompts"},
+{word:"PostToolUse", freq:4, domain:"ca-agentic", desc:"Normalize tool results before the model sees them"},
+{word:"Prerequisite Gates", freq:4, domain:"ca-agentic", desc:"Block process_refund until get_customer verified"},
+{word:"Prompt Chaining", freq:4, domain:"ca-agentic", desc:"Fixed sequential passes for predictable reviews"},
+{word:"Dynamic Decomposition", freq:4, domain:"ca-agentic", desc:"Adaptive subtasks for open-ended investigation"},
+{word:"fork_session", freq:4, domain:"ca-agentic", desc:"Independent branches from a shared baseline"},
+{word:"--resume", freq:3, domain:"ca-agentic", desc:"Continue a named session; beware stale tool results"},
+{word:"Tool Descriptions", freq:5, domain:"ca-tools", desc:"Primary mechanism for tool selection"},
+{word:"isError", freq:5, domain:"ca-tools", desc:"MCP failure flag with structured metadata"},
+{word:"Error Categories", freq:4, domain:"ca-tools", desc:"transient / validation / business / permission"},
+{word:"isRetryable", freq:4, domain:"ca-tools", desc:"Prevents wasted retries"},
+{word:"tool_choice", freq:5, domain:"ca-tools", desc:"auto, any, or forced tool selection"},
+{word:"Scoped Tools", freq:4, domain:"ca-tools", desc:"4-5 role tools beat 18 generic ones"},
+{word:"verify_fact", freq:3, domain:"ca-tools", desc:"Scoped cross-role tool for simple lookups"},
+{word:"MCP Resources", freq:4, domain:"ca-tools", desc:"Expose catalogs to cut exploratory calls"},
+{word:".mcp.json", freq:4, domain:"ca-tools", desc:"Project-scoped MCP with ${ENV} expansion"},
+{word:"~/.claude.json", freq:3, domain:"ca-tools", desc:"User-scoped personal MCP servers"},
+{word:"Grep vs Glob", freq:4, domain:"ca-tools", desc:"Content search vs path pattern matching"},
+{word:"Edit Fallback", freq:3, domain:"ca-tools", desc:"Read + Write when Edit anchor is not unique"},
+{word:"CLAUDE.md", freq:5, domain:"ca-code", desc:"User, project and directory hierarchy"},
+{word:"@import", freq:3, domain:"ca-code", desc:"Modular standards files"},
+{word:".claude/rules", freq:4, domain:"ca-code", desc:"Topic rules with YAML paths globs"},
+{word:"Path-Specific Rules", freq:5, domain:"ca-code", desc:"**/*.test.tsx applies across directories"},
+{word:"Slash Commands", freq:4, domain:"ca-code", desc:"Project .claude/commands vs user ~/.claude/commands"},
+{word:"Skills", freq:4, domain:"ca-code", desc:"SKILL.md with context: fork, allowed-tools, argument-hint"},
+{word:"context: fork", freq:4, domain:"ca-code", desc:"Isolates verbose skill output"},
+{word:"Plan Mode", freq:5, domain:"ca-code", desc:"Architectural, multi-file, multiple valid approaches"},
+{word:"Direct Execution", freq:3, domain:"ca-code", desc:"Well-scoped single-file changes"},
+{word:"Explore Subagent", freq:3, domain:"ca-code", desc:"Isolates verbose discovery"},
+{word:"-p / --print", freq:5, domain:"ca-code", desc:"Non-interactive CI mode"},
+{word:"--json-schema", freq:4, domain:"ca-code", desc:"Machine-parseable CI findings"},
+{word:"Independent Review", freq:4, domain:"ca-code", desc:"Fresh instance beats self-review"},
+{word:"Few-Shot", freq:5, domain:"ca-prompt", desc:"Best fix for inconsistent output and ambiguity"},
+{word:"Explicit Criteria", freq:5, domain:"ca-prompt", desc:"Categorical rules beat 'be conservative'"},
+{word:"False Positives", freq:4, domain:"ca-prompt", desc:"Erode developer trust; disable noisy categories"},
+{word:"Severity Criteria", freq:3, domain:"ca-prompt", desc:"Concrete code examples per level"},
+{word:"tool_use Schema", freq:5, domain:"ca-prompt", desc:"Most reliable structured output"},
+{word:"Nullable Fields", freq:4, domain:"ca-prompt", desc:"Prevent fabricated values"},
+{word:"Enum + other", freq:3, domain:"ca-prompt", desc:"Extensible categories; add 'unclear'"},
+{word:"Semantic Validation", freq:4, domain:"ca-prompt", desc:"Schemas fix syntax, not wrong values"},
+{word:"Retry with Feedback", freq:4, domain:"ca-prompt", desc:"Works for format errors, not absent data"},
+{word:"calculated_total", freq:3, domain:"ca-prompt", desc:"Self-check against stated_total"},
+{word:"detected_pattern", freq:3, domain:"ca-prompt", desc:"Analyze dismissed findings"},
+{word:"Message Batches API", freq:5, domain:"ca-prompt", desc:"50% cost, 24h, custom_id, no mid-request tools"},
+{word:"custom_id", freq:3, domain:"ca-prompt", desc:"Correlate batch requests and results"},
+{word:"Multi-Pass Review", freq:4, domain:"ca-prompt", desc:"Per-file then cross-file integration pass"},
+{word:"Case Facts Block", freq:5, domain:"ca-context", desc:"Persist amounts, dates, IDs outside summaries"},
+{word:"Lost in the Middle", freq:4, domain:"ca-context", desc:"Put key findings first; use headers"},
+{word:"Progressive Summarization", freq:3, domain:"ca-context", desc:"Loses numbers and dates"},
+{word:"Trim Tool Output", freq:4, domain:"ca-context", desc:"Keep only relevant fields"},
+{word:"Escalation Criteria", freq:5, domain:"ca-context", desc:"Human request, policy gap, no progress"},
+{word:"Self-Reported Confidence", freq:3, domain:"ca-context", desc:"Poor proxy for complexity"},
+{word:"Structured Handoff", freq:4, domain:"ca-context", desc:"Customer ID, root cause, recommended action"},
+{word:"Error Propagation", freq:5, domain:"ca-context", desc:"Failure type, query, partial results, alternatives"},
+{word:"Local Recovery", freq:3, domain:"ca-context", desc:"Retry transients in subagent first"},
+{word:"Scratchpad Files", freq:3, domain:"ca-context", desc:"Persist findings across context limits"},
+{word:"/compact", freq:3, domain:"ca-context", desc:"Reduce context in long exploration"},
+{word:"Crash Recovery Manifest", freq:3, domain:"ca-context", desc:"Coordinator reloads agent state"},
+{word:"Stratified Sampling", freq:4, domain:"ca-context", desc:"Catch errors hidden by aggregate accuracy"},
+{word:"Claim-Source Mapping", freq:5, domain:"ca-context", desc:"Preserve provenance through synthesis"},
+{word:"Conflict Annotation", freq:4, domain:"ca-context", desc:"Keep both values with sources and dates"}
+];
+
+const claudeDeveloperKeywords = [
+{word:"Workflow vs Agent", freq:5, domain:"cd-agents", desc:"Fixed paths vs model-directed loop"},
+{word:"Agent SDK", freq:5, domain:"cd-agents", desc:"Build agents with Claude's harness"},
+{word:"Tool-Use Loop", freq:5, domain:"cd-agents", desc:"Continue on tool_use, stop on end_turn"},
+{word:"Subagents", freq:4, domain:"cd-agents", desc:"Isolated context and focused tools"},
+{word:"Hooks", freq:5, domain:"cd-agents", desc:"Deterministic control points"},
+{word:"Supervisor", freq:3, domain:"cd-agents", desc:"Manager hierarchy delegating work"},
+{word:"LangGraph", freq:2, domain:"cd-agents", desc:"Agent orchestration framework"},
+{word:"Strands", freq:2, domain:"cd-agents", desc:"Agent framework"},
+{word:"PydanticAI", freq:2, domain:"cd-agents", desc:"Typed agent framework"},
+{word:"Messages API", freq:5, domain:"cd-apps", desc:"Stateless request with full history"},
+{word:"Streaming", freq:4, domain:"cd-apps", desc:"Lower perceived latency"},
+{word:"Vision", freq:3, domain:"cd-apps", desc:"Multi-format input"},
+{word:"Batch API", freq:5, domain:"cd-apps", desc:"Async, 24h, about 50% cheaper"},
+{word:"Rate Limits 429", freq:4, domain:"cd-apps", desc:"Retry with exponential backoff"},
+{word:"Idempotency", freq:3, domain:"cd-apps", desc:"Safe retries for side effects"},
+{word:"REST + JSON", freq:4, domain:"cd-apps", desc:"Software engineering foundations"},
+{word:"Async", freq:3, domain:"cd-apps", desc:"Concurrent API calls"},
+{word:"CLAUDE.md", freq:4, domain:"cd-apps", desc:"Configuration management"},
+{word:"settings.json", freq:4, domain:"cd-apps", desc:"Permissions, hooks, model config"},
+{word:"Version Pinning", freq:5, domain:"cd-apps", desc:"Pin models and prompts"},
+{word:"Prompt Versioning", freq:3, domain:"cd-apps", desc:"Track prompt changes"},
+{word:"Plugins", freq:3, domain:"cd-apps", desc:"Dependencies and management"},
+{word:"Third-Party Providers", freq:3, domain:"cd-apps", desc:"Claude via cloud vendors"},
+{word:"Headless -p", freq:3, domain:"cd-apps", desc:"Run Claude Code in scripts"},
+{word:"Skills", freq:4, domain:"cd-apps", desc:"Reusable on-demand instructions"},
+{word:"Evals", freq:5, domain:"cd-eval", desc:"Labeled cases to catch regressions"},
+{word:"Trace Analysis", freq:4, domain:"cd-eval", desc:"Integration vs model failure"},
+{word:"Error Recovery", freq:4, domain:"cd-eval", desc:"Retry transient, fix validation"},
+{word:"Tokens", freq:5, domain:"cd-model", desc:"Unit of context, cost and limits"},
+{word:"Context Window", freq:5, domain:"cd-model", desc:"Input plus output limit"},
+{word:"Temperature", freq:3, domain:"cd-model", desc:"Sampling variability"},
+{word:"Extended Thinking", freq:4, domain:"cd-model", desc:"Reasoning tokens billed as output"},
+{word:"Adaptive Thinking", freq:4, domain:"cd-model", desc:"Model scales its own reasoning"},
+{word:"Effort Levels", freq:3, domain:"cd-model", desc:"Quality vs cost and speed"},
+{word:"Opus / Sonnet / Haiku", freq:5, domain:"cd-model", desc:"Capability, cost, latency tiers"},
+{word:"Prompt Caching", freq:5, domain:"cd-model", desc:"Cached prefix reads are cheaper"},
+{word:"Cache Breakpoint", freq:3, domain:"cd-model", desc:"Static content first"},
+{word:"Cost Modeling", freq:4, domain:"cd-model", desc:"Input and output priced separately"},
+{word:"max_tokens", freq:3, domain:"cd-model", desc:"Truncation and stop_reason"},
+{word:"Few-Shot", freq:4, domain:"cd-model", desc:"Examples steer output"},
+{word:"Context Engineering", freq:5, domain:"cd-prompt", desc:"Manage what enters the window"},
+{word:"Context Drift", freq:4, domain:"cd-prompt", desc:"Stale content degrades behavior"},
+{word:"Compaction", freq:4, domain:"cd-prompt", desc:"Summarize older turns"},
+{word:"Tool Output Pruning", freq:3, domain:"cd-prompt", desc:"Keep relevant fields"},
+{word:"System vs User", freq:4, domain:"cd-prompt", desc:"Instruction placement"},
+{word:"XML Delimiters", freq:3, domain:"cd-prompt", desc:"Separate data from instructions"},
+{word:"Defensive Parsing", freq:4, domain:"cd-prompt", desc:"Validate model output"},
+{word:"Input Sanitization", freq:3, domain:"cd-prompt", desc:"Constrain untrusted fields"},
+{word:"Prompt Injection", freq:5, domain:"cd-security", desc:"Untrusted content must not command"},
+{word:"Least Privilege", freq:5, domain:"cd-security", desc:"Minimal tools and access"},
+{word:"Guardrail Layering", freq:4, domain:"cd-security", desc:"Multiple independent controls"},
+{word:"PII Redaction", freq:4, domain:"cd-security", desc:"Minimize sensitive data"},
+{word:"Secrets Management", freq:4, domain:"cd-security", desc:"Env vars, rotate leaked keys"},
+{word:"Jailbreak Defense", freq:3, domain:"cd-security", desc:"Filter inputs and outputs"},
+{word:"Server-Side Authz", freq:4, domain:"cd-security", desc:"Enforce access in code"},
+{word:"Tool Descriptions", freq:5, domain:"cd-tools", desc:"Drive tool selection"},
+{word:"tool_result", freq:4, domain:"cd-tools", desc:"Return output with tool_use_id"},
+{word:"Client vs Server Tools", freq:3, domain:"cd-tools", desc:"Who executes the tool"},
+{word:"MCP Server", freq:5, domain:"cd-tools", desc:"Reusable shared tools"},
+{word:"MCP Resources", freq:3, domain:"cd-tools", desc:"Readable data"},
+{word:"stdio vs HTTP", freq:3, domain:"cd-tools", desc:"MCP transports"},
+{word:"Approval Patterns", freq:3, domain:"cd-tools", desc:"Human-in-the-loop for risky calls"},
+{word:"Skills vs MCP", freq:4, domain:"cd-tools", desc:"Instructions vs live systems"}
+];
+
 const dataArchitectKeywords = [
 {word:"Lakehouse", freq:5, domain:"architecture", desc:"Unified architecture combining data lake and warehouse"},
 {word:"Medallion", freq:4, domain:"architecture", desc:"Bronze Silver Gold layered data architecture"},
@@ -1397,6 +1566,8 @@ const eaKeywords = [
     document.addEventListener('DOMContentLoaded', () => {
         // Render
        renderCloud("aiDataCloud", dataArchitectKeywords, "ai_data"); //[...aiKeywords, ...dataArchitectKeywords]
+        renderCloud("caCloud", claudeArchitectKeywords, "claude_architect");
+        renderCloud("cdCloud", claudeDeveloperKeywords, "claude_developer");
         renderCloud("dbCloud", dbKeywords, "databricks");
         renderCloud("aiCloud", aiKeywords, "ai");
         renderCloud("javaCloud", javaKeywords, "java");
@@ -1422,6 +1593,8 @@ const eaKeywords = [
         };
         // Search Binding
         bindSearch("aiDataSearch", "aiDataCloud", dataArchitectKeywords, "ai_data");//[...aiKeywords, ...dataArchitectKeywords]
+        bindSearch("caSearch", "caCloud", claudeArchitectKeywords, "claude_architect");
+        bindSearch("cdSearch", "cdCloud", claudeDeveloperKeywords, "claude_developer");
         bindSearch("dbSearch", "dbCloud", dbKeywords, "databricks");
         bindSearch("aiSearch", "aiCloud", aiKeywords, "ai");
         bindSearch("javaSearch", "javaCloud", javaKeywords, "java");
