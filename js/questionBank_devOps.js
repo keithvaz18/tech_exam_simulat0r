@@ -1,2592 +1,2688 @@
 /* ======================================================
    DEVOPS & OBSERVABILITY ARCHITECT QUESTION BANK
-   Topics: Kubernetes (AKS/EKS), CI/CD (GitOps), ELK, SRE, Kafka, DevSecOps
    Format: High-Order Thinking Skills (HOTS) / Scenario-Based
    ====================================================== */
 
 const questionBank = [
-  /* ======================================================
-     KUBERNETES & CLUSTER GOVERNANCE (AKS/EKS focus)
-     ====================================================== */
   {
-    id: 1,
-    difficulty: "hard",
-    category: "k8s-architecture",
-    question: "A high-traffic microservice on AKS is experiencing sporadic 503 errors during scale-up events. Investigation shows that new pods are receiving traffic before the application is fully ready to process requests. Which configuration fix directly addresses this 'cold start' issue?",
-    options: [
+    "id": 1,
+    "difficulty": "hard",
+    "category": "k8s-architecture",
+    "question": "A high-traffic microservice on AKS is experiencing sporadic 503 errors during scale-up events. Investigation shows that new pods are receiving traffic before the application is fully ready to process requests. Which configuration fix directly addresses this 'cold start' issue?",
+    "options": [
       "Increasing the 'replicas' count in the Horizontal Pod Autoscaler",
-      "Implementing a 'readinessProbe' with an appropriate 'initialDelaySeconds'",
       "Implementing a 'livenessProbe' to restart the container",
+      "Implementing a 'readinessProbe' with an appropriate 'initialDelaySeconds'",
       "Switching from Azure CNI to Kubenet to reduce IP allocation time"
     ],
-    answer: 1,
-    explanation: "The readinessProbe determines when a pod is ready to accept traffic. If missing or misconfigured, the Service might route traffic to a pod that is still initializing, leading to 503s.",
-    hint: "Differentiate between a probe that restarts a container vs. one that controls traffic routing."
+    "answer": 2,
+    "explanation": "The readinessProbe determines when a pod is ready to accept traffic. If missing or misconfigured, the Service might route traffic to a pod that is still initializing, leading to 503s.",
+    "hint": "Differentiate between a probe that restarts a container vs. one that controls traffic routing."
   },
   {
-    id: 2,
-    difficulty: "hard",
-    category: "k8s-security",
-    question: "Your organization requires that no container in the EKS cluster runs as a privileged user. Which combination of tools is best suited to enforce this across multiple teams without manual code reviews?",
-    options: [
-      "IAM Roles for Service Accounts (IRSA)",
+    "id": 2,
+    "difficulty": "hard",
+    "category": "k8s-security",
+    "question": "Your organization requires that no container in the EKS cluster runs as a privileged user. Which combination of tools is best suited to enforce this across multiple teams without manual code reviews?",
+    "options": [
+      "NetworkPolicies and Calico CNI",
       "AWS WAF and Security Groups",
-      "Kyverno or OPA Gatekeeper with a 'MustRunAsNonRoot' policy",
-      "NetworkPolicies and Calico CNI"
+      "IAM Roles for Service Accounts (IRSA)",
+      "Kyverno or OPA Gatekeeper with a 'MustRunAsNonRoot' policy"
     ],
-    answer: 2,
-    explanation: "Policy engines like Kyverno or Gatekeeper act as admission controllers, intercepting requests to the Kubernetes API and rejecting YAML that violates security constraints.",
-    hint: "Think about 'Policy as Code' at the cluster admission level."
+    "answer": 3,
+    "explanation": "Policy engines like Kyverno or Gatekeeper act as admission controllers, intercepting requests to the Kubernetes API and rejecting YAML that violates security constraints.",
+    "hint": "Think about 'Policy as Code' at the cluster admission level."
   },
   {
-    id: 3,
-    difficulty: "medium",
-    category: "k8s-networking",
-    question: "An AKS cluster is running out of IP addresses in its subnet, preventing new pods from being scheduled. The team is currently using Azure CNI. What is the most sustainable architectural solution?",
-    options: [
+    "id": 3,
+    "difficulty": "medium",
+    "category": "k8s-networking",
+    "question": "An AKS cluster is running out of IP addresses in its subnet, preventing new pods from being scheduled. The team is currently using Azure CNI. What is the most sustainable architectural solution?",
+    "options": [
       "Delete old logs in Log Analytics to free up space",
       "Migrate to Azure CNI Overlay or use Dynamic IP allocation",
-      "Reduce the number of replicas for all deployments",
-      "Change the Load Balancer SKU from Basic to Standard"
+      "Change the Load Balancer SKU from Basic to Standard",
+      "Reduce the number of replicas for all deployments"
     ],
-    answer: 1,
-    explanation: "Azure CNI Overlay allows pods to use a private CIDR range separate from the VNet, significantly reducing the IP pressure on the underlying subnet.",
-    hint: "How can we decouple Pod IPs from the VNet IP space?"
+    "answer": 1,
+    "explanation": "Azure CNI Overlay allows pods to use a private CIDR range separate from the VNet, significantly reducing the IP pressure on the underlying subnet.",
+    "hint": "How can we decouple Pod IPs from the VNet IP space?"
   },
-
-  /* ======================================================
-     OBSERVABILITY & SRE (ELK / Prometheus / SRE)
-     ====================================================== */
   {
-    id: 4,
-    difficulty: "hard",
-    category: "observability-elk",
-    question: "During a major sale event, your ELK stack experiences massive ingestion lag. The Logstash buffer is full, and Elasticsearch shows high 'JVM Memory Pressure' (>85%). What is the first architectural step to prevent data loss?",
-    options: [
+    "id": 4,
+    "difficulty": "hard",
+    "category": "observability-elk",
+    "question": "During a major sale event, your ELK stack experiences massive ingestion lag. The Logstash buffer is full, and Elasticsearch shows high 'JVM Memory Pressure' (>85%). What is the first architectural step to prevent data loss?",
+    "options": [
       "Increase the refresh_interval of the Elasticsearch indices",
+      "Switch from Kibana to Grafana for better visualization",
       "Introduce a Kafka or Event Hubs buffer between log producers and Logstash",
-      "Delete the 'Warm' nodes to make room for 'Hot' data",
-      "Switch from Kibana to Grafana for better visualization"
+      "Delete the 'Warm' nodes to make room for 'Hot' data"
     ],
-    answer: 1,
-    explanation: "Using Kafka as a persistent buffer (queue) allows log producers to continue sending data while Logstash/Elasticsearch recovers from the pressure, preventing data loss during spikes.",
-    hint: "This pattern is known as 'Queue-based Load Leveling'."
+    "answer": 2,
+    "explanation": "Using Kafka as a persistent buffer (queue) allows log producers to continue sending data while Logstash/Elasticsearch recovers from the pressure, preventing data loss during spikes.",
+    "hint": "This pattern is known as 'Queue-based Load Leveling'."
   },
   {
-    id: 5,
-    difficulty: "medium",
-    category: "sre-concepts",
-    question: "A Service Level Objective (SLO) is set to 99.9% availability. If the service experiences 45 minutes of downtime in a 30-day window, has the error budget been exceeded?",
-    options: [
-      "No, the error budget for 99.9% is approximately 43 minutes per month",
-      "Yes, the error budget for 99.9% is approximately 43.8 minutes per month",
+    "id": 5,
+    "difficulty": "medium",
+    "category": "sre-concepts",
+    "question": "A Service Level Objective (SLO) is set to 99.9% availability. If the service experiences 45 minutes of downtime in a 30-day window, has the error budget been exceeded?",
+    "options": [
+      "Yes, 99.9% allows only 5 minutes of downtime",
       "No, the error budget is 60 minutes per month",
-      "Yes, 99.9% allows only 5 minutes of downtime"
+      "Yes, the error budget for 99.9% is approximately 43.8 minutes per month",
+      "No, the error budget for 99.9% is approximately 43 minutes per month"
     ],
-    answer: 1,
-    explanation: "99.9% availability allows for 0.1% downtime. (0.001 * 30 days * 24 hours * 60 minutes) = 43.2 minutes. 45 minutes exceeds this limit.",
-    hint: "Calculate 0.1% of the total minutes in a month."
+    "answer": 2,
+    "explanation": "99.9% availability allows for 0.1% downtime. (0.001 * 30 days * 24 hours * 60 minutes) = 43.2 minutes. 45 minutes exceeds this limit.",
+    "hint": "Calculate 0.1% of the total minutes in a month."
   },
-
-  /* ======================================================
-     DATA ARCHITECTURE (Kafka / MSK)
-     ====================================================== */
   {
-    id: 6,
-    difficulty: "hard",
-    category: "data-kafka",
-    question: "A Kafka consumer group is falling behind (increasing lag). You notice that only one partition is significantly larger than the others, and scaling up the number of consumers has no effect on that specific lag. What is the likely cause?",
-    options: [
-      "The broker is down",
+    "id": 6,
+    "difficulty": "hard",
+    "category": "data-kafka",
+    "question": "A Kafka consumer group is falling behind (increasing lag). You notice that only one partition is significantly larger than the others, and scaling up the number of consumers has no effect on that specific lag. What is the likely cause?",
+    "options": [
       "Data Skew caused by an inefficient partition key (Hot Key)",
-      "The 'acks' setting is set to 'all'",
-      "The consumers are using the wrong Schema Registry version"
+      "The consumers are using the wrong Schema Registry version",
+      "The broker is down",
+      "The 'acks' setting is set to 'all'"
     ],
-    answer: 1,
-    explanation: "If a single partition is skewed (has most of the data), it can only be processed by one consumer at a time within a group. Scaling consumers won't help because a partition cannot be shared by consumers in the same group.",
-    hint: "Look into how partition keys distribute data."
+    "answer": 0,
+    "explanation": "If a single partition is skewed (has most of the data), it can only be processed by one consumer at a time within a group. Scaling consumers won't help because a partition cannot be shared by consumers in the same group.",
+    "hint": "Look into how partition keys distribute data."
   },
-
-  /* ======================================================
-     CI/CD & GITOPS
-     ====================================================== */
   {
-    id: 7,
-    difficulty: "medium",
-    category: "cicd-gitops",
-    question: "You are implementing ArgoCD for GitOps. A developer manually changes the replica count of a deployment via 'kubectl edit' to fix an urgent issue. If ArgoCD is set to 'Auto-Sync' and 'Self-Heal', what happens next?",
-    options: [
+    "id": 7,
+    "difficulty": "medium",
+    "category": "cicd-gitops",
+    "question": "You are implementing ArgoCD for GitOps. A developer manually changes the replica count of a deployment via 'kubectl edit' to fix an urgent issue. If ArgoCD is set to 'Auto-Sync' and 'Self-Heal', what happens next?",
+    "options": [
+      "The cluster remains in the manual state until the next Git commit",
       "ArgoCD updates the Git repository to match the cluster",
       "ArgoCD detects the drift and reverts the cluster state to match Git",
-      "The cluster remains in the manual state until the next Git commit",
       "ArgoCD sends an alert but takes no action"
     ],
-    answer: 1,
-    explanation: "Self-healing ensures the cluster matches the 'Source of Truth' (Git). Any manual 'kubectl' changes are treated as drift and automatically reverted.",
-    hint: "Git is the absolute source of truth in GitOps."
+    "answer": 2,
+    "explanation": "Self-healing ensures the cluster matches the 'Source of Truth' (Git). Any manual 'kubectl' changes are treated as drift and automatically reverted.",
+    "hint": "Git is the absolute source of truth in GitOps."
   },
-
-  /* ======================================================
-     INFRASTRUCTURE AS CODE (Terraform / Bicep)
-     ====================================================== */
   {
-    id: 8,
-    difficulty: "hard",
-    category: "iac-terraform",
-    question: "In a multi-environment Terraform setup, you want to ensure that a production database cannot be accidentally deleted if a developer runs 'terraform destroy'. Which lifecycle block is most critical?",
-    options: [
-      "ignore_changes",
+    "id": 8,
+    "difficulty": "hard",
+    "category": "iac-terraform",
+    "question": "In a multi-environment Terraform setup, you want to ensure that a production database cannot be accidentally deleted if a developer runs 'terraform destroy'. Which lifecycle block is most critical?",
+    "options": [
       "prevent_destroy = true",
+      "ignore_changes",
       "create_before_destroy",
       "depends_on"
     ],
-    answer: 1,
-    explanation: "The prevent_destroy meta-argument provides a safety rail that causes Terraform to reject any plan that includes the destruction of that resource.",
-    hint: "This is a safety mechanism within the resource block."
+    "answer": 0,
+    "explanation": "The prevent_destroy meta-argument provides a safety rail that causes Terraform to reject any plan that includes the destruction of that resource.",
+    "hint": "This is a safety mechanism within the resource block."
   },
-
-  /* ======================================================
-     SECURITY & DEVSECOPS
-     ====================================================== */
   {
-    id: 9,
-    difficulty: "medium",
-    category: "security-devsecops",
-    question: "A security audit reveals that your microservices are passing database credentials via environment variables. Which 'Zero-Secret' architecture should you recommend?",
-    options: [
-      "Encrypting the environment variables with Base64",
-      "Using Workload Identity (AKS) or Pod Identity (EKS) to access a Key Vault",
+    "id": 9,
+    "difficulty": "medium",
+    "category": "security-devsecops",
+    "question": "A security audit reveals that your microservices are passing database credentials via environment variables. Which 'Zero-Secret' architecture should you recommend?",
+    "options": [
       "Storing secrets in a private GitHub repository",
+      "Using Workload Identity (AKS) or Pod Identity (EKS) to access a Key Vault",
+      "Encrypting the environment variables with Base64",
       "Hardcoding secrets in a private Docker image"
     ],
-    answer: 1,
-    explanation: "Workload identities allow the pod to authenticate to cloud services (like Vault/KeyVault) using its own identity, eliminating the need for stored passwords or static keys.",
-    hint: "Think about 'Secret-less' authentication."
+    "answer": 1,
+    "explanation": "Workload identities allow the pod to authenticate to cloud services (like Vault/KeyVault) using its own identity, eliminating the need for stored passwords or static keys.",
+    "hint": "Think about 'Secret-less' authentication."
   },
-
-  /* ======================================================
-     COST OPTIMIZATION (FINOPS)
-     ====================================================== */
   {
-    id: 10,
-    difficulty: "medium",
-    category: "finops-cost",
-    question: "Your AWS bill shows high costs for 'Data Transfer Out'. You notice that your EKS pods in us-east-1a are frequently communicating with an RDS instance in us-east-1b. What architectural change reduces this cost?",
-    options: [
-      "Switch to a multi-region VPC peering",
-      "Enable 'Cross-Zone Load Balancing' on the NLB",
+    "id": 10,
+    "difficulty": "medium",
+    "category": "finops-cost",
+    "question": "Your AWS bill shows high costs for 'Data Transfer Out'. You notice that your EKS pods in us-east-1a are frequently communicating with an RDS instance in us-east-1b. What architectural change reduces this cost?",
+    "options": [
       "Implement 'Topology-Aware Routing' to keep traffic within the same AZ",
+      "Enable 'Cross-Zone Load Balancing' on the NLB",
+      "Switch to a multi-region VPC peering",
       "Use S3 Select to filter data before transmission"
     ],
-    answer: 2,
-    explanation: "Inter-AZ data transfer is not free. Topology-aware routing (or keeping services in the same AZ where possible) minimizes cross-AZ traffic, reducing latency and costs.",
-    hint: "Traffic between AZs costs money in most cloud providers."
+    "answer": 0,
+    "explanation": "Inter-AZ data transfer is not free. Topology-aware routing (or keeping services in the same AZ where possible) minimizes cross-AZ traffic, reducing latency and costs.",
+    "hint": "Traffic between AZs costs money in most cloud providers."
   },
-
-/* ======================================================
-   DEVOPS & OBSERVABILITY ARCHITECT - BATCH 2 (IDs 11-60)
-   ====================================================== */
-
-  /* ======================================================
-     ADVANCED KUBERNETES & SCHEDULING
-     ====================================================== */
   {
-    id: 11,
-    difficulty: "hard",
-    category: "k8s-scheduling",
-    question: "A high-performance batch processing workload requires specialized GPU nodes. You have labeled the nodes with 'hardware=gpu'. How do you ensure that only GPU-specific pods run on these nodes AND that these pods don't accidentally run on standard CPU nodes?",
-    options: [
-      "Use only NodeSelector: hardware=gpu",
-      "Use NodeAffinity: requiredDuringSchedulingIgnoredDuringExecution",
+    "id": 11,
+    "difficulty": "hard",
+    "category": "k8s-scheduling",
+    "question": "A high-performance batch processing workload requires specialized GPU nodes. You have labeled the nodes with 'hardware=gpu'. How do you ensure that only GPU-specific pods run on these nodes AND that these pods don't accidentally run on standard CPU nodes?",
+    "options": [
       "Combine a Taint on the node with a corresponding Toleration in the Pod spec, plus NodeAffinity",
-      "Use a ResourceQuota to limit CPU node usage"
+      "Use NodeAffinity: requiredDuringSchedulingIgnoredDuringExecution",
+      "Use a ResourceQuota to limit CPU node usage",
+      "Use only NodeSelector: hardware=gpu"
     ],
-    answer: 2,
-    explanation: "Taints allow a node to repel a set of pods. A Toleration allows (but does not require) pods to schedule onto tainted nodes. Combining this with NodeAffinity ensures the pod 'attracts' to the right node while the Taint ensures standard pods stay away.",
-    hint: "Affinity attracts; Taints repel."
+    "answer": 0,
+    "explanation": "Taints allow a node to repel a set of pods. A Toleration allows (but does not require) pods to schedule onto tainted nodes. Combining this with NodeAffinity ensures the pod 'attracts' to the right node while the Taint ensures standard pods stay away.",
+    "hint": "Affinity attracts; Taints repel."
   },
   {
-    id: 12,
-    difficulty: "hard",
-    category: "k8s-operators",
-    question: "When using the 'Operator Pattern' in Kubernetes to manage a complex stateful database (like Postgres or Kafka), what is the primary advantage of a Custom Resource Definition (CRD) over a standard StatefulSet?",
-    options: [
-      "It makes the database run faster by bypassing the K8s API",
+    "id": 12,
+    "difficulty": "hard",
+    "category": "k8s-operators",
+    "question": "When using the 'Operator Pattern' in Kubernetes to manage a complex stateful database (like Postgres or Kafka), what is the primary advantage of a Custom Resource Definition (CRD) over a standard StatefulSet?",
+    "options": [
       "It allows for automated domain-specific lifecycle management (backup, resize, failover) beyond basic pod restarts",
       "It eliminates the need for Persistent Volumes",
-      "It provides a GUI for database management"
+      "It provides a GUI for database management",
+      "It makes the database run faster by bypassing the K8s API"
     ],
-    answer: 1,
-    explanation: "Operators encapsulate human operational knowledge into code, allowing the 'Controller' to handle complex tasks like schema migrations or leader election that standard K8s controllers cannot do.",
-    hint: "Think about Day-2 operations like 'automated recovery'."
+    "answer": 0,
+    "explanation": "Operators encapsulate human operational knowledge into code, allowing the 'Controller' to handle complex tasks like schema migrations or leader election that standard K8s controllers cannot do.",
+    "hint": "Think about Day-2 operations like 'automated recovery'."
   },
   {
-    id: 13,
-    difficulty: "medium",
-    category: "k8s-networking",
-    question: "You implement an Istio Service Mesh. You want to ensure that 10% of traffic for 'service-a' goes to the new 'v2' version, while 90% stays on 'v1'. Which Istio resource defines this split?",
-    options: [
+    "id": 13,
+    "difficulty": "medium",
+    "category": "k8s-networking",
+    "question": "You implement an Istio Service Mesh. You want to ensure that 10% of traffic for 'service-a' goes to the new 'v2' version, while 90% stays on 'v1'. Which Istio resource defines this split?",
+    "options": [
       "Gateway",
       "VirtualService",
-      "DestinationRule",
-      "ServiceEntry"
+      "ServiceEntry",
+      "DestinationRule"
     ],
-    answer: 1,
-    explanation: "The VirtualService defines the routing rules and traffic weights. The DestinationRule defines the 'subsets' (v1, v2) that those weights point to.",
-    hint: "One defines the traffic path (VirtualService), the other defines the destinations."
+    "answer": 1,
+    "explanation": "The VirtualService defines the routing rules and traffic weights. The DestinationRule defines the 'subsets' (v1, v2) that those weights point to.",
+    "hint": "One defines the traffic path (VirtualService), the other defines the destinations."
   },
-
-  /* ======================================================
-     OBSERVABILITY: METRICS & TRACING
-     ====================================================== */
   {
-    id: 14,
-    difficulty: "hard",
-    category: "observability-prometheus",
-    question: "Your Prometheus server is crashing due to 'Out of Memory' (OOM) errors. Investigation reveals a 'Cardinality Explosion'. Which of the following is the most likely culprit?",
-    options: [
-      "Too many distinct microservices being monitored",
-      "Adding a 'user_id' or 'order_id' as a label in a high-frequency metric",
+    "id": 14,
+    "difficulty": "hard",
+    "category": "observability-prometheus",
+    "question": "Your Prometheus server is crashing due to 'Out of Memory' (OOM) errors. Investigation reveals a 'Cardinality Explosion'. Which of the following is the most likely culprit?",
+    "options": [
       "Setting the scrape interval to 1 second",
+      "Adding a 'user_id' or 'order_id' as a label in a high-frequency metric",
+      "Too many distinct microservices being monitored",
       "Using Grafana to visualize the metrics"
     ],
-    answer: 1,
-    explanation: "Cardinality is the number of unique time-series. If you add high-cardinality labels (like UserIDs), Prometheus creates a new time-series for every single user, quickly exhausting memory.",
-    hint: "Labels should have a finite, small set of possible values."
+    "answer": 1,
+    "explanation": "Cardinality is the number of unique time-series. If you add high-cardinality labels (like UserIDs), Prometheus creates a new time-series for every single user, quickly exhausting memory.",
+    "hint": "Labels should have a finite, small set of possible values."
   },
   {
-    id: 15,
-    difficulty: "medium",
-    category: "observability-tracing",
-    question: "In a distributed tracing setup (Jaeger/Zipkin), a request passes through Service A, B, and C. You see traces for A and C, but B is missing, creating a 'gap'. What is the most common cause?",
-    options: [
-      "Service B is too fast to be traced",
-      "Service B did not propagate the 'Trace Context' headers to Service C",
+    "id": 15,
+    "difficulty": "medium",
+    "category": "observability-tracing",
+    "question": "In a distributed tracing setup (Jaeger/Zipkin), a request passes through Service A, B, and C. You see traces for A and C, but B is missing, creating a 'gap'. What is the most common cause?",
+    "options": [
       "Service B is written in Python, which doesn't support tracing",
-      "The tracing agent on Service B is using a different port"
+      "The tracing agent on Service B is using a different port",
+      "Service B did not propagate the 'Trace Context' headers to Service C",
+      "Service B is too fast to be traced"
     ],
-    answer: 1,
-    explanation: "For distributed tracing to work, every service must extract the trace headers from the incoming request and inject them into the outgoing request to the next service.",
-    hint: "Distributed tracing relies on a 'Chain of Custody' for IDs."
+    "answer": 2,
+    "explanation": "For distributed tracing to work, every service must extract the trace headers from the incoming request and inject them into the outgoing request to the next service.",
+    "hint": "Distributed tracing relies on a 'Chain of Custody' for IDs."
   },
-
-  /* ======================================================
-     DATA OPS (KAFKA & ELK)
-     ====================================================== */
   {
-    id: 16,
-    difficulty: "hard",
-    category: "kafka-operations",
-    question: "You are running Kafka on Kubernetes using Strimzi. You need to perform a zero-downtime rolling upgrade of the Kafka brokers. Which component manages the sequential restart to ensure the 'Controller' role is transitioned correctly?",
-    options: [
+    "id": 16,
+    "difficulty": "hard",
+    "category": "kafka-operations",
+    "question": "You are running Kafka on Kubernetes using Strimzi. You need to perform a zero-downtime rolling upgrade of the Kafka brokers. Which component manages the sequential restart to ensure the 'Controller' role is transitioned correctly?",
+    "options": [
+      "The Zookeeper Quorum",
       "The standard K8s Deployment controller",
       "The Kafka Operator (Strimzi)",
-      "The Zookeeper Quorum",
       "Manual kubectl delete pod commands"
     ],
-    answer: 1,
-    explanation: "The Operator understands Kafka's internal state. It ensures that one broker is updated and passes health checks before moving to the next, maintaining availability and partition ISR (In-Sync Replicas).",
-    hint: "Who 'understands' Kafka's specific restart requirements?"
+    "answer": 2,
+    "explanation": "The Operator understands Kafka's internal state. It ensures that one broker is updated and passes health checks before moving to the next, maintaining availability and partition ISR (In-Sync Replicas).",
+    "hint": "Who 'understands' Kafka's specific restart requirements?"
   },
   {
-    id: 17,
-    difficulty: "hard",
-    category: "elk-stack",
-    question: "To optimize costs in an ELK stack, you implement 'Index Lifecycle Management' (ILM). You want data older than 30 days to be searchable but stored on cheaper, slower hardware. Which node attribute do you target?",
-    options: [
+    "id": 17,
+    "difficulty": "hard",
+    "category": "elk-stack",
+    "question": "To optimize costs in an ELK stack, you implement 'Index Lifecycle Management' (ILM). You want data older than 30 days to be searchable but stored on cheaper, slower hardware. Which node attribute do you target?",
+    "options": [
       "Master-eligible nodes",
-      "Hot nodes",
       "Warm/Cold nodes",
-      "Ingest nodes"
+      "Ingest nodes",
+      "Hot nodes"
     ],
-    answer: 2,
-    explanation: "Warm nodes hold indices that are no longer being updated but are still being queried. They typically use high-density HDDs instead of the SSDs used by Hot nodes.",
-    hint: "Move data from 'Expensive/Fast' to 'Cheap/Slower'."
+    "answer": 1,
+    "explanation": "Warm nodes hold indices that are no longer being updated but are still being queried. They typically use high-density HDDs instead of the SSDs used by Hot nodes.",
+    "hint": "Move data from 'Expensive/Fast' to 'Cheap/Slower'."
   },
-
-  /* ======================================================
-     SRE & CHAOS ENGINEERING
-     ====================================================== */
   {
-    id: 18,
-    difficulty: "medium",
-    category: "sre-chaos",
-    question: "What is the primary goal of a 'Game Day' in Chaos Engineering?",
-    options: [
-      "To see how many pods we can kill in 5 minutes",
-      "To validate that our observability and automated failover work as expected under controlled failure conditions",
+    "id": 18,
+    "difficulty": "medium",
+    "category": "sre-chaos",
+    "question": "What is the primary goal of a 'Game Day' in Chaos Engineering?",
+    "options": [
       "To find who to blame for the last production outage",
-      "To test the speed of the CI/CD pipeline"
+      "To validate that our observability and automated failover work as expected under controlled failure conditions",
+      "To test the speed of the CI/CD pipeline",
+      "To see how many pods we can kill in 5 minutes"
     ],
-    answer: 1,
-    explanation: "Chaos Engineering is about building confidence. Game Days test the system's 'steady state' and the team's response procedures.",
-    hint: "It's about 'confidence' and 'verification', not just breaking things."
+    "answer": 1,
+    "explanation": "Chaos Engineering is about building confidence. Game Days test the system's 'steady state' and the team's response procedures.",
+    "hint": "It's about 'confidence' and 'verification', not just breaking things."
   },
   {
-    id: 19,
-    difficulty: "hard",
-    category: "sre-concepts",
-    question: "You have a 'Burn Rate' alert configured. What is this alert specifically measuring?",
-    options: [
+    "id": 19,
+    "difficulty": "hard",
+    "category": "sre-concepts",
+    "question": "You have a 'Burn Rate' alert configured. What is this alert specifically measuring?",
+    "options": [
       "The amount of money spent on AWS per hour",
       "The rate at which your Error Budget is being consumed relative to your SLO",
       "The CPU temperature of the underlying physical servers",
       "The speed of developer code commits"
     ],
-    answer: 1,
-    explanation: "Burn rate alerts are the 'gold standard' in SRE. They tell you if a current incident will cause you to miss your Monthly SLO if it continues.",
-    hint: "It's the speed of losing your 'Error Budget'."
+    "answer": 1,
+    "explanation": "Burn rate alerts are the 'gold standard' in SRE. They tell you if a current incident will cause you to miss your Monthly SLO if it continues.",
+    "hint": "It's the speed of losing your 'Error Budget'."
   },
-
-  /* ======================================================
-     CI/CD & SECURITY (DEVSECOPS)
-     ====================================================== */
   {
-    id: 20,
-    difficulty: "hard",
-    category: "devsecops",
-    question: "Your pipeline includes a 'Software Bill of Materials' (SBOM) generation step. Why is this critical for a senior DevOps architect?",
-    options: [
-      "It helps in calculating the lines of code for developer productivity",
+    "id": 20,
+    "difficulty": "hard",
+    "category": "devsecops",
+    "question": "Your pipeline includes a 'Software Bill of Materials' (SBOM) generation step. Why is this critical for a senior DevOps architect?",
+    "options": [
+      "It automatically minifies Javascript files",
       "It provides a comprehensive inventory of all third-party libraries and versions to quickly identify vulnerabilities (like Log4j)",
       "It is a requirement for Windows Server deployments only",
-      "It automatically minifies Javascript files"
+      "It helps in calculating the lines of code for developer productivity"
     ],
-    answer: 1,
-    explanation: "An SBOM is the 'ingredients list' of your software. If a new Zero-Day vulnerability is announced, the SBOM allows you to scan all your production images instantly to see if you are affected.",
-    hint: "Think 'Supply Chain Security'."
+    "answer": 1,
+    "explanation": "An SBOM is the 'ingredients list' of your software. If a new Zero-Day vulnerability is announced, the SBOM allows you to scan all your production images instantly to see if you are affected.",
+    "hint": "Think 'Supply Chain Security'."
   },
   {
-    id: 21,
-    difficulty: "medium",
-    category: "cicd-strategies",
-    question: "Which deployment strategy involves keeping two identical production environments and switching the router/load balancer to the new version once verified?",
-    options: [
+    "id": 21,
+    "difficulty": "medium",
+    "category": "cicd-strategies",
+    "question": "Which deployment strategy involves keeping two identical production environments and switching the router/load balancer to the new version once verified?",
+    "options": [
       "Canary Deployment",
-      "Blue/Green Deployment",
       "Rolling Update",
-      "Recreate"
+      "Recreate",
+      "Blue/Green Deployment"
     ],
-    answer: 1,
-    explanation: "Blue/Green provides an instant switch and an instant rollback mechanism by simply pointing the router back to the 'old' environment.",
-    hint: "Environment A vs. Environment B."
+    "answer": 3,
+    "explanation": "Blue/Green provides an instant switch and an instant rollback mechanism by simply pointing the router back to the 'old' environment.",
+    "hint": "Environment A vs. Environment B."
   },
-
-  /* ======================================================
-     STORAGE & STATEFUL WORKLOADS
-     ====================================================== */
   {
-    id: 22,
-    difficulty: "medium",
-    category: "k8s-storage",
-    question: "A pod is stuck in 'ContainerCreating'. Describe shows 'FailedAttachVolume' because the disk is already attached to another node in a different Availability Zone. Which K8s object handles the volume's lifecycle independently of the pod?",
-    options: [
-      "ConfigMap",
+    "id": 22,
+    "difficulty": "medium",
+    "category": "k8s-storage",
+    "question": "A pod is stuck in 'ContainerCreating'. Describe shows 'FailedAttachVolume' because the disk is already attached to another node in a different Availability Zone. Which K8s object handles the volume's lifecycle independently of the pod?",
+    "options": [
+      "StorageClass",
       "PersistentVolume (PV)",
-      "EmptyDir",
-      "StorageClass"
+      "ConfigMap",
+      "EmptyDir"
     ],
-    answer: 1,
-    explanation: "The PersistentVolume (PV) is the cluster-level resource that represents the actual storage. The PersistentVolumeClaim (PVC) is the pod's request for that storage.",
-    hint: "It's the bridge between the pod and the physical cloud disk."
+    "answer": 1,
+    "explanation": "The PersistentVolume (PV) is the cluster-level resource that represents the actual storage. The PersistentVolumeClaim (PVC) is the pod's request for that storage.",
+    "hint": "It's the bridge between the pod and the physical cloud disk."
   },
-
-  /* ======================================================
-     NETWORKING (HYBRID & CLOUD)
-     ====================================================== */
   {
-    id: 23,
-    difficulty: "hard",
-    category: "cloud-networking",
-    question: "You need to connect an AWS VPC to an Azure VNet for a cross-cloud application. You want to avoid the public internet. What is the most 'Enterprise' solution?",
-    options: [
+    "id": 23,
+    "difficulty": "hard",
+    "category": "cloud-networking",
+    "question": "You need to connect an AWS VPC to an Azure VNet for a cross-cloud application. You want to avoid the public internet. What is the most 'Enterprise' solution?",
+    "options": [
       "Public Site-to-Site VPN",
       "AWS Direct Connect and Azure ExpressRoute connected via a Cloud Exchange (e.g., Equinix)",
       "Peering both clouds using a standard Public IP",
       "Using a very long Ethernet cable"
     ],
-    answer: 1,
-    explanation: "For low latency and high security, enterprises use dedicated circuits (Direct Connect/ExpressRoute) joined at a meet-me-point or via a private provider network.",
-    hint: "This is 'Dedicated' and 'Private'."
+    "answer": 1,
+    "explanation": "For low latency and high security, enterprises use dedicated circuits (Direct Connect/ExpressRoute) joined at a meet-me-point or via a private provider network.",
+    "hint": "This is 'Dedicated' and 'Private'."
   },
-
-  /* ======================================================
-     TRICKY "REAL WORLD" SCENARIOS
-     ====================================================== */
   {
-    id: 24,
-    difficulty: "hard",
-    category: "k8s-operations",
-    question: "An AKS cluster upgrade failed halfway through. Some nodes are on v1.27 and some are on v1.28. The API server is unresponsive. What is the first priority?",
-    options: [
-      "Delete the cluster and start over",
+    "id": 24,
+    "difficulty": "hard",
+    "category": "k8s-operations",
+    "question": "An AKS cluster upgrade failed halfway through. Some nodes are on v1.27 and some are on v1.28. The API server is unresponsive. What is the first priority?",
+    "options": [
       "Check the Azure Activity Log and 'Resource Health' for the Control Plane",
       "Scale the deployments to zero to save costs",
+      "Delete the cluster and start over",
       "Try to manually SSH into the nodes and update the Kubelet"
     ],
-    answer: 1,
-    explanation: "In a managed service like AKS, you cannot access the control plane nodes directly. You must use the cloud provider's health logs to diagnose why the managed upgrade stalled.",
-    hint: "In PaaS/Managed K8s, the provider manages the Control Plane."
+    "answer": 0,
+    "explanation": "In a managed service like AKS, you cannot access the control plane nodes directly. You must use the cloud provider's health logs to diagnose why the managed upgrade stalled.",
+    "hint": "In PaaS/Managed K8s, the provider manages the Control Plane."
   },
   {
-    id: 25,
-    difficulty: "medium",
-    category: "iac-management",
-    question: "You have a large Terraform state file. Two developers run 'terraform apply' at the exact same time. What prevents them from corrupting the infrastructure?",
-    options: [
+    "id": 25,
+    "difficulty": "medium",
+    "category": "iac-management",
+    "question": "You have a large Terraform state file. Two developers run 'terraform apply' at the exact same time. What prevents them from corrupting the infrastructure?",
+    "options": [
+      "The Cloud Provider's API will reject the second request",
       "Git branch locks",
-      "State Locking (e.g., via DynamoDB for AWS or Blob Storage for Azure)",
       "Terraform does not allow simultaneous runs by default",
-      "The Cloud Provider's API will reject the second request"
+      "State Locking (e.g., via DynamoDB for AWS or Blob Storage for Azure)"
     ],
-    answer: 1,
-    explanation: "Remote backends (S3/GCS/Azure) support state locking. When one user starts an operation, Terraform creates a 'lock' to prevent others from modifying the state simultaneously.",
-    hint: "How does Terraform keep its 'Map' safe?"
+    "answer": 3,
+    "explanation": "Remote backends (S3/GCS/Azure) support state locking. When one user starts an operation, Terraform creates a 'lock' to prevent others from modifying the state simultaneously.",
+    "hint": "How does Terraform keep its 'Map' safe?"
   },
-  
-/* ======================================================
-   DEVOPS & OBSERVABILITY ARCHITECT - BATCH 3 (IDs 26-75)
-   ====================================================== */
-
-
-  /* ======================================================
-     KUBERNETES NETWORKING & SERVICE MESH
-     ====================================================== */
   {
-    id: 26,
-    difficulty: "hard",
-    category: "k8s-networking",
-    question: "You are implementing an Istio Service Mesh. You notice that egress traffic from your pods to an external third-party API is being blocked by default. What is the most 'Zero-Trust' way to allow this traffic while maintaining visibility?",
-    options: [
-      "Set 'outboundTrafficPolicy.mode' to ALLOW_ANY",
+    "id": 26,
+    "difficulty": "hard",
+    "category": "k8s-networking",
+    "question": "You are implementing an Istio Service Mesh. You notice that egress traffic from your pods to an external third-party API is being blocked by default. What is the most 'Zero-Trust' way to allow this traffic while maintaining visibility?",
+    "options": [
       "Create a 'ServiceEntry' defining the external host and a 'Gateway' for egress",
-      "Disable the Istio sidecar for those specific pods",
-      "Use a Kubernetes NetworkPolicy with an IP-based allowlist"
+      "Use a Kubernetes NetworkPolicy with an IP-based allowlist",
+      "Set 'outboundTrafficPolicy.mode' to ALLOW_ANY",
+      "Disable the Istio sidecar for those specific pods"
     ],
-    answer: 1,
-    explanation: "A ServiceEntry allows you to add an entry to Istio's internal service registry, mapping external DNS names to the mesh. This allows Istio features (like mTLS and metrics) to apply to outbound traffic.",
-    hint: "Think about how Istio tracks services outside the cluster."
+    "answer": 0,
+    "explanation": "A ServiceEntry allows you to add an entry to Istio's internal service registry, mapping external DNS names to the mesh. This allows Istio features (like mTLS and metrics) to apply to outbound traffic.",
+    "hint": "Think about how Istio tracks services outside the cluster."
   },
   {
-    id: 27,
-    difficulty: "hard",
-    category: "k8s-security",
-    question: "A security audit requires that all traffic between microservices in your EKS cluster be encrypted and that identity be verified at the application level. Which architectural pattern satisfies this without changing the application code?",
-    options: [
-      "Using AWS Security Groups at the pod level",
+    "id": 27,
+    "difficulty": "hard",
+    "category": "k8s-security",
+    "question": "A security audit requires that all traffic between microservices in your EKS cluster be encrypted and that identity be verified at the application level. Which architectural pattern satisfies this without changing the application code?",
+    "options": [
+      "Encrypting the EBS volumes where the pods are running",
       "Implementing Mutual TLS (mTLS) via a Service Mesh (Istio/Linkerd)",
       "Using a VPN between every pod",
-      "Encrypting the EBS volumes where the pods are running"
+      "Using AWS Security Groups at the pod level"
     ],
-    answer: 1,
-    explanation: "mTLS provides both encryption in transit and peer identity verification. Service meshes automate the certificate rotation and handshake process via sidecars (Envoy).",
-    hint: "Encryption + Peer Identity without code changes."
+    "answer": 1,
+    "explanation": "mTLS provides both encryption in transit and peer identity verification. Service meshes automate the certificate rotation and handshake process via sidecars (Envoy).",
+    "hint": "Encryption + Peer Identity without code changes."
   },
-
-  /* ======================================================
-     OBSERVABILITY: PROMETHEUS & OPENTELEMETRY
-     ====================================================== */
   {
-    id: 28,
-    difficulty: "hard",
-    category: "observability-prometheus",
-    question: "You are observing high 'scrape_duration' and Prometheus is failing to keep up with ingestion. You find that a specific team is exporting a metric called 'http_request_duration_seconds' with a label for 'full_url'. Why is this a problem?",
-    options: [
-      "The label name is too long",
+    "id": 28,
+    "difficulty": "hard",
+    "category": "observability-prometheus",
+    "question": "You are observing high 'scrape_duration' and Prometheus is failing to keep up with ingestion. You find that a specific team is exporting a metric called 'http_request_duration_seconds' with a label for 'full_url'. Why is this a problem?",
+    "options": [
       "The 'full_url' label creates a Cardinality Explosion because every unique URL (including query params) creates a new time series",
+      "The metric should be a Counter, not a Histogram",
       "Prometheus does not support the 'seconds' unit",
-      "The metric should be a Counter, not a Histogram"
+      "The label name is too long"
     ],
-    answer: 1,
-    explanation: "Metrics should have low-cardinality labels. URLs often contain unique IDs or query parameters, creating millions of unique time series that overwhelm the Prometheus TSDB memory.",
-    hint: "How many unique values can that label have?"
+    "answer": 0,
+    "explanation": "Metrics should have low-cardinality labels. URLs often contain unique IDs or query parameters, creating millions of unique time series that overwhelm the Prometheus TSDB memory.",
+    "hint": "How many unique values can that label have?"
   },
   {
-    id: 29,
-    difficulty: "hard",
-    category: "observability-otel",
-    question: "When deploying OpenTelemetry (OTel), what is the primary architectural benefit of using an 'OTel Collector' instead of sending data directly from the SDK to the backend (e.g., Jaeger/Honeycomb)?",
-    options: [
-      "It makes the application code run faster",
+    "id": 29,
+    "difficulty": "hard",
+    "category": "observability-otel",
+    "question": "When deploying OpenTelemetry (OTel), what is the primary architectural benefit of using an 'OTel Collector' instead of sending data directly from the SDK to the backend (e.g., Jaeger/Honeycomb)?",
+    "options": [
       "It allows for offloading data processing (sampling, filtering, retries) and vendor-agnostic routing outside the application process",
       "It is the only way to support Java applications",
-      "It automatically encrypts the local hard drive"
+      "It automatically encrypts the local hard drive",
+      "It makes the application code run faster"
     ],
-    answer: 1,
-    explanation: "The Collector acts as a proxy that can aggregate, transform, and multi-route data. This decouples the application's telemetry instrumentation from the specific backend used for storage.",
-    hint: "Think about 'offloading' and 'vendor neutrality'."
+    "answer": 0,
+    "explanation": "The Collector acts as a proxy that can aggregate, transform, and multi-route data. This decouples the application's telemetry instrumentation from the specific backend used for storage.",
+    "hint": "Think about 'offloading' and 'vendor neutrality'."
   },
-
-  /* ======================================================
-     CI/CD, GITOPS & HELM
-     ====================================================== */
   {
-    id: 30,
-    difficulty: "medium",
-    category: "cicd-gitops",
-    question: "In an ArgoCD-managed cluster, you notice 'OutOfSync' status even though the Git manifests match the desired state. You find that an Admission Controller is automatically adding default 'sidecars' to every pod. How should you handle this in ArgoCD?",
-    options: [
+    "id": 30,
+    "difficulty": "medium",
+    "category": "cicd-gitops",
+    "question": "In an ArgoCD-managed cluster, you notice 'OutOfSync' status even though the Git manifests match the desired state. You find that an Admission Controller is automatically adding default 'sidecars' to every pod. How should you handle this in ArgoCD?",
+    "options": [
       "Delete the Admission Controller",
       "Use 'ignoreDifferences' in the ArgoCD Application spec for those specific fields",
-      "Manually edit the Git repo to include the sidecars",
-      "Disable the ArgoCD sync process"
+      "Disable the ArgoCD sync process",
+      "Manually edit the Git repo to include the sidecars"
     ],
-    answer: 1,
-    explanation: "Since the cluster is modifying the resource post-submission (mutating), ArgoCD sees a difference. 'ignoreDifferences' tells ArgoCD to overlook specific fields during the comparison.",
-    hint: "How to tell ArgoCD to 'look the other way' for specific fields?"
+    "answer": 1,
+    "explanation": "Since the cluster is modifying the resource post-submission (mutating), ArgoCD sees a difference. 'ignoreDifferences' tells ArgoCD to overlook specific fields during the comparison.",
+    "hint": "How to tell ArgoCD to 'look the other way' for specific fields?"
   },
   {
-    id: 31,
-    difficulty: "hard",
-    category: "helm-operations",
-    question: "You need to deploy a database migration job *before* the main application pods start during a Helm install. Which Helm feature ensures this execution order?",
-    options: [
-      "Using a 'Deployment' for the migration",
+    "id": 31,
+    "difficulty": "hard",
+    "category": "helm-operations",
+    "question": "You need to deploy a database migration job *before* the main application pods start during a Helm install. Which Helm feature ensures this execution order?",
+    "options": [
+      "Using 'depends_on' in the values.yaml",
       "Helm Hooks (specifically 'pre-install' or 'pre-upgrade')",
       "Alphabetical naming of YAML files",
-      "Using 'depends_on' in the values.yaml"
+      "Using a 'Deployment' for the migration"
     ],
-    answer: 1,
-    explanation: "Helm Hooks allow you to run specific jobs at various points in the release lifecycle. A 'pre-install' hook will complete before the rest of the manifests are applied.",
-    hint: "Lifecycle events in Helm."
+    "answer": 1,
+    "explanation": "Helm Hooks allow you to run specific jobs at various points in the release lifecycle. A 'pre-install' hook will complete before the rest of the manifests are applied.",
+    "hint": "Lifecycle events in Helm."
   },
-
-  /* ======================================================
-     CLOUD ARCHITECTURE (AWS & AZURE)
-     ====================================================== */
   {
-    id: 32,
-    difficulty: "hard",
-    category: "cloud-networking",
-    question: "An application in Azure needs to access an Azure SQL Database. For compliance, the traffic must *never* leave the Microsoft backbone and the SQL DB must not have a public IP. Which feature is required?",
-    options: [
+    "id": 32,
+    "difficulty": "hard",
+    "category": "cloud-networking",
+    "question": "An application in Azure needs to access an Azure SQL Database. For compliance, the traffic must *never* leave the Microsoft backbone and the SQL DB must not have a public IP. Which feature is required?",
+    "options": [
       "Service Endpoints",
+      "Azure Bastion",
       "Private Link / Private Endpoint",
-      "VNet Peering",
-      "Azure Bastion"
+      "VNet Peering"
     ],
-    answer: 1,
-    explanation: "Private Link maps a private IP from your VNet to a specific service instance. This ensures traffic is entirely internal and the service is not exposed to the internet.",
-    hint: "Which one provides a 'Private IP' for a PaaS service?"
+    "answer": 2,
+    "explanation": "Private Link maps a private IP from your VNet to a specific service instance. This ensures traffic is entirely internal and the service is not exposed to the internet.",
+    "hint": "Which one provides a 'Private IP' for a PaaS service?"
   },
   {
-    id: 33,
-    difficulty: "medium",
-    category: "aws-storage",
-    question: "Your AWS EKS cluster uses EBS volumes for stateful pods. You observe that performance drops significantly every day at 2 PM during a heavy reporting job. 'VolumeQueueLength' is high. What should you upgrade?",
-    options: [
-      "The Instance Type to a larger family",
-      "The EBS volume type from gp2 to gp3/io2 and increase Provisioned IOPS",
+    "id": 33,
+    "difficulty": "medium",
+    "category": "aws-storage",
+    "question": "Your AWS EKS cluster uses EBS volumes for stateful pods. You observe that performance drops significantly every day at 2 PM during a heavy reporting job. 'VolumeQueueLength' is high. What should you upgrade?",
+    "options": [
       "The VPC bandwidth",
-      "The S3 bucket policy"
+      "The EBS volume type from gp2 to gp3/io2 and increase Provisioned IOPS",
+      "The S3 bucket policy",
+      "The Instance Type to a larger family"
     ],
-    answer: 1,
-    explanation: "High queue length on storage usually indicates the disk cannot handle the number of I/O requests. GP3 and IO2 allow you to provision IOPS independently of storage size.",
-    hint: "Storage-level bottlenecks."
+    "answer": 1,
+    "explanation": "High queue length on storage usually indicates the disk cannot handle the number of I/O requests. GP3 and IO2 allow you to provision IOPS independently of storage size.",
+    "hint": "Storage-level bottlenecks."
   },
-
-  /* ======================================================
-     KAFKA & DATA OPERATIONS
-     ====================================================== */
   {
-    id: 34,
-    difficulty: "hard",
-    category: "kafka-architecture",
-    question: "A Kafka producer is configured with 'acks=1'. During a broker failure, the producer receives an acknowledgment, but the data is lost before it can be replicated to other brokers. What is the fix for maximum durability?",
-    options: [
-      "Set 'acks=0'",
-      "Set 'acks=all' (or -1) and ensure 'min.insync.replicas' is at least 2",
+    "id": 34,
+    "difficulty": "hard",
+    "category": "kafka-architecture",
+    "question": "A Kafka producer is configured with 'acks=1'. During a broker failure, the producer receives an acknowledgment, but the data is lost before it can be replicated to other brokers. What is the fix for maximum durability?",
+    "options": [
+      "Decrease the retention period",
       "Increase the number of partitions",
-      "Decrease the retention period"
+      "Set 'acks=all' (or -1) and ensure 'min.insync.replicas' is at least 2",
+      "Set 'acks=0'"
     ],
-    answer: 1,
-    explanation: "'acks=all' ensures the leader waits for all in-sync replicas to acknowledge. Combined with 'min.insync.replicas', it prevents data loss if the leader fails immediately after acknowledging.",
-    hint: "Wait for the 'whole team' to say yes."
+    "answer": 2,
+    "explanation": "'acks=all' ensures the leader waits for all in-sync replicas to acknowledge. Combined with 'min.insync.replicas', it prevents data loss if the leader fails immediately after acknowledging.",
+    "hint": "Wait for the 'whole team' to say yes."
   },
   {
-    id: 35,
-    difficulty: "hard",
-    category: "kafka-consumers",
-    question: "You use KEDA to scale your Kafka consumers. You want to scale based on how many messages are waiting to be processed, not just CPU usage. Which KEDA scaler should you use?",
-    options: [
-      "CPU Scaler",
-      "Memory Scaler",
+    "id": 35,
+    "difficulty": "hard",
+    "category": "kafka-consumers",
+    "question": "You use KEDA to scale your Kafka consumers. You want to scale based on how many messages are waiting to be processed, not just CPU usage. Which KEDA scaler should you use?",
+    "options": [
       "Kafka Scaler (using consumer group lag)",
+      "Memory Scaler",
+      "CPU Scaler",
       "Cron Scaler"
     ],
-    answer: 2,
-    explanation: "Lag is the correct metric for scaling asynchronous workers. If the lag increases, KEDA adds more pods to process the backlog regardless of current CPU usage.",
-    hint: "Scaling based on the 'backlog'."
+    "answer": 0,
+    "explanation": "Lag is the correct metric for scaling asynchronous workers. If the lag increases, KEDA adds more pods to process the backlog regardless of current CPU usage.",
+    "hint": "Scaling based on the 'backlog'."
   },
-
-  /* ======================================================
-     SRE, RESILIENCE & CHAOS
-     ====================================================== */
   {
-    id: 36,
-    difficulty: "hard",
-    category: "sre-resilience",
-    question: "In a microservices architecture, Service A calls Service B. Service B is currently timing out. Service A continues to retry rapidly, further overwhelming Service B. Which pattern prevents this 'Retry Storm'?",
-    options: [
+    "id": 36,
+    "difficulty": "hard",
+    "category": "sre-resilience",
+    "question": "In a microservices architecture, Service A calls Service B. Service B is currently timing out. Service A continues to retry rapidly, further overwhelming Service B. Which pattern prevents this 'Retry Storm'?",
+    "options": [
       "Rate Limiting",
+      "Horizontal Pod Autoscaling",
       "Circuit Breaker",
-      "Load Balancing",
-      "Horizontal Pod Autoscaling"
+      "Load Balancing"
     ],
-    answer: 1,
-    explanation: "A Circuit Breaker 'trips' after a certain number of failures, immediately returning an error for subsequent calls without hitting the downstream service, allowing it time to recover.",
-    hint: "Stop the flow when the destination is 'broken'."
+    "answer": 2,
+    "explanation": "A Circuit Breaker 'trips' after a certain number of failures, immediately returning an error for subsequent calls without hitting the downstream service, allowing it time to recover.",
+    "hint": "Stop the flow when the destination is 'broken'."
   },
   {
-    id: 37,
-    difficulty: "medium",
-    category: "sre-concepts",
-    question: "What is the difference between an SLI and an SLO?",
-    options: [
-      "An SLI is a target; an SLO is the actual measurement",
+    "id": 37,
+    "difficulty": "medium",
+    "category": "sre-concepts",
+    "question": "What is the difference between an SLI and an SLO?",
+    "options": [
       "An SLI is the metric (e.g., latency); an SLO is the target value (e.g., < 200ms)",
+      "There is no difference",
       "SLOs are for developers; SLIs are for customers",
-      "There is no difference"
+      "An SLI is a target; an SLO is the actual measurement"
     ],
-    answer: 1,
-    explanation: "Service Level Indicator (SLI) is the quantitative measure (the 'what'); Service Level Objective (SLO) is the target level we want to achieve (the 'how much').",
-    hint: "Metric vs. Target."
+    "answer": 0,
+    "explanation": "Service Level Indicator (SLI) is the quantitative measure (the 'what'); Service Level Objective (SLO) is the target level we want to achieve (the 'how much').",
+    "hint": "Metric vs. Target."
   },
-
-  /* ======================================================
-     SECURITY & DEVSECOPS
-     ====================================================== */
   {
-    id: 38,
-    difficulty: "hard",
-    category: "security-vault",
-    question: "You are using HashiCorp Vault for dynamic secrets. Why are 'Dynamic Secrets' considered more secure than 'Static Secrets'?",
-    options: [
-      "They are longer and harder to crack",
-      "They are generated on-demand with a short Time-to-Live (TTL) and are automatically revoked, minimizing the window of exposure",
+    "id": 38,
+    "difficulty": "hard",
+    "category": "security-vault",
+    "question": "You are using HashiCorp Vault for dynamic secrets. Why are 'Dynamic Secrets' considered more secure than 'Static Secrets'?",
+    "options": [
       "They are stored in a Git repository",
+      "They are generated on-demand with a short Time-to-Live (TTL) and are automatically revoked, minimizing the window of exposure",
+      "They are longer and harder to crack",
       "They don't require encryption"
     ],
-    answer: 1,
-    explanation: "Dynamic secrets (like temporary DB credentials) do not exist until requested and disappear shortly after, ensuring that leaked credentials have very limited utility.",
-    hint: "Ephemeral vs. Permanent."
+    "answer": 1,
+    "explanation": "Dynamic secrets (like temporary DB credentials) do not exist until requested and disappear shortly after, ensuring that leaked credentials have very limited utility.",
+    "hint": "Ephemeral vs. Permanent."
   },
   {
-    id: 39,
-    difficulty: "hard",
-    category: "security-container",
-    question: "A container scan reveals a vulnerability in the 'base image'. What is the most effective senior architect's response?",
-    options: [
-      "Ignore it if the app is behind a firewall",
+    "id": 39,
+    "difficulty": "hard",
+    "category": "security-container",
+    "question": "A container scan reveals a vulnerability in the 'base image'. What is the most effective senior architect's response?",
+    "options": [
       "Switch to a 'Distroless' image or a minimal base like Alpine to reduce the attack surface",
       "Manually patch the running container using SSH",
-      "Write a script to delete the vulnerable files after the container starts"
+      "Write a script to delete the vulnerable files after the container starts",
+      "Ignore it if the app is behind a firewall"
     ],
-    answer: 1,
-    explanation: "Minimal images (Distroless/Alpine) remove unnecessary binaries (like shells or package managers), significantly reducing the number of potential vulnerabilities and the attack surface.",
-    hint: "Smaller footprint = fewer targets."
+    "answer": 0,
+    "explanation": "Minimal images (Distroless/Alpine) remove unnecessary binaries (like shells or package managers), significantly reducing the number of potential vulnerabilities and the attack surface.",
+    "hint": "Smaller footprint = fewer targets."
   },
-
-  /* ======================================================
-     FINOPS & COST OPTIMIZATION
-     ====================================================== */
   {
-    id: 40,
-    difficulty: "medium",
-    category: "finops",
-    question: "You are tasked with reducing the cost of a non-production AKS cluster that is only used during business hours. What is the most effective automation?",
-    options: [
-      "Deleting the cluster every night and recreating it",
-      "Using the 'AKS Stop/Start' feature or scaling the node pools to zero via a scheduled task",
+    "id": 40,
+    "difficulty": "medium",
+    "category": "finops",
+    "question": "You are tasked with reducing the cost of a non-production AKS cluster that is only used during business hours. What is the most effective automation?",
+    "options": [
+      "Turning off logging",
       "Moving all pods to a single node",
-      "Turning off logging"
+      "Deleting the cluster every night and recreating it",
+      "Using the 'AKS Stop/Start' feature or scaling the node pools to zero via a scheduled task"
     ],
-    answer: 1,
-    explanation: "Azure allows you to stop the cluster entirely (keeping configuration) or scale node pools to 0, which eliminates the cost of the VMs while the cluster is not in use.",
-    hint: "Pause the bill without losing the work."
+    "answer": 3,
+    "explanation": "Azure allows you to stop the cluster entirely (keeping configuration) or scale node pools to 0, which eliminates the cost of the VMs while the cluster is not in use.",
+    "hint": "Pause the bill without losing the work."
   },
-
-  /* ======================================================
-     ADVANCED TROUBLESHOOTING
-     ====================================================== */
   {
-    id: 41,
-    difficulty: "hard",
-    category: "k8s-troubleshooting",
-    question: "A pod is in 'CrashLoopBackOff'. The logs show nothing. The 'describe pod' shows 'OOMKilled'. What does this mean, and what is the fix?",
-    options: [
+    "id": 41,
+    "difficulty": "hard",
+    "category": "k8s-troubleshooting",
+    "question": "A pod is in 'CrashLoopBackOff'. The logs show nothing. The 'describe pod' shows 'OOMKilled'. What does this mean, and what is the fix?",
+    "options": [
       "The pod ran out of CPU; increase 'cpu limits'",
       "The pod exceeded its memory limit; increase the 'memory limits' or fix a memory leak",
-      "The disk is full; add a PersistentVolume",
-      "The network is down; check the CNI"
+      "The network is down; check the CNI",
+      "The disk is full; add a PersistentVolume"
     ],
-    answer: 1,
-    explanation: "OOMKilled (Out Of Memory) occurs when a container tries to use more RAM than its 'limit'. Kubernetes kills the process to protect the node's stability.",
-    hint: "It's a memory issue, not CPU."
+    "answer": 1,
+    "explanation": "OOMKilled (Out Of Memory) occurs when a container tries to use more RAM than its 'limit'. Kubernetes kills the process to protect the node's stability.",
+    "hint": "It's a memory issue, not CPU."
   },
   {
-    id: 42,
-    difficulty: "hard",
-    category: "k8s-scheduling",
-    question: "You want to ensure that two specific pods (e.g., a Web Frontend and a Cache) are always placed on the same physical node to minimize network latency. Which K8s feature do you use?",
-    options: [
+    "id": 42,
+    "difficulty": "hard",
+    "category": "k8s-scheduling",
+    "question": "You want to ensure that two specific pods (e.g., a Web Frontend and a Cache) are always placed on the same physical node to minimize network latency. Which K8s feature do you use?",
+    "options": [
       "Pod Anti-Affinity",
-      "Pod Affinity (with topologyKey: kubernetes.io/hostname)",
       "Taints and Tolerations",
-      "Resource Quotas"
+      "Resource Quotas",
+      "Pod Affinity (with topologyKey: kubernetes.io/hostname)"
     ],
-    answer: 1,
-    explanation: "Pod Affinity tells the scheduler to place a pod near other pods that match a specific label. Using 'hostname' as the topology key ensures they land on the same node.",
-    hint: "Affinity = Attraction."
+    "answer": 3,
+    "explanation": "Pod Affinity tells the scheduler to place a pod near other pods that match a specific label. Using 'hostname' as the topology key ensures they land on the same node.",
+    "hint": "Affinity = Attraction."
   },
-
-  /* ======================================================
-     LOGGING & ELK ARCHITECTURE
-     ====================================================== */
   {
-    id: 43,
-    difficulty: "hard",
-    category: "elk-ingestion",
-    question: "Your ELK stack is receiving logs from 500 different microservices. You want to parse the 'timestamp' field from the log message and use it as the official Elasticsearch document timestamp. Which component should handle this?",
-    options: [
-      "Kibana",
-      "The 'Date' filter in Logstash or an 'Ingest Pipeline' in Elasticsearch",
+    "id": 43,
+    "difficulty": "hard",
+    "category": "elk-ingestion",
+    "question": "Your ELK stack is receiving logs from 500 different microservices. You want to parse the 'timestamp' field from the log message and use it as the official Elasticsearch document timestamp. Which component should handle this?",
+    "options": [
+      "Filebeat",
       "The application code",
-      "Filebeat"
+      "Kibana",
+      "The 'Date' filter in Logstash or an 'Ingest Pipeline' in Elasticsearch"
     ],
-    answer: 1,
-    explanation: "Logstash or Ingest Pipelines are used to transform and normalize data. The 'Date' processor/filter converts a string timestamp into the @timestamp field used for indexing.",
-    hint: "Transformation happens during ingestion."
+    "answer": 3,
+    "explanation": "Logstash or Ingest Pipelines are used to transform and normalize data. The 'Date' processor/filter converts a string timestamp into the @timestamp field used for indexing.",
+    "hint": "Transformation happens during ingestion."
   },
   {
-    id: 44,
-    difficulty: "medium",
-    category: "elk-storage",
-    question: "You want to implement 'Snapshot Lifecycle Management' (SLM) for your ELK cluster. What is the purpose of this?",
-    options: [
-      "To make Kibana load faster",
+    "id": 44,
+    "difficulty": "medium",
+    "category": "elk-storage",
+    "question": "You want to implement 'Snapshot Lifecycle Management' (SLM) for your ELK cluster. What is the purpose of this?",
+    "options": [
       "To automate backups of indices to external storage (like S3/Azure Blob) for disaster recovery",
-      "To encrypt the data in transit",
-      "To increase the search speed"
+      "To increase the search speed",
+      "To make Kibana load faster",
+      "To encrypt the data in transit"
     ],
-    answer: 1,
-    explanation: "SLM automates the process of taking backups (snapshots) and cleaning up old ones, ensuring data can be recovered if the cluster is lost.",
-    hint: "Backups for the search engine."
+    "answer": 0,
+    "explanation": "SLM automates the process of taking backups (snapshots) and cleaning up old ones, ensuring data can be recovered if the cluster is lost.",
+    "hint": "Backups for the search engine."
   },
-
-  /* ======================================================
-     MISC SENIOR ARCHITECTURE
-     ====================================================== */
   {
-    id: 45,
-    difficulty: "hard",
-    category: "cloud-patterns",
-    question: "What is 'Thundering Herd' problem in the context of a cache failure, and how do you prevent it?",
-    options: [
+    "id": 45,
+    "difficulty": "hard",
+    "category": "cloud-patterns",
+    "question": "What is 'Thundering Herd' problem in the context of a cache failure, and how do you prevent it?",
+    "options": [
       "Too many logs being generated; fix with sampling",
       "When a cache expires and all users hit the database at once; fix with 'cache warming' or 'request collapsing'",
       "When nodes fail simultaneously; fix with multi-AZ",
       "When the CI/CD pipeline is too slow; fix with parallelism"
     ],
-    answer: 1,
-    explanation: "If a popular cache key expires, the sudden surge of traffic to the database can crash it. Protective measures include staggering expiration times or ensuring only one request fetches the data while others wait.",
-    hint: "Sudden rush to the source of truth."
+    "answer": 1,
+    "explanation": "If a popular cache key expires, the sudden surge of traffic to the database can crash it. Protective measures include staggering expiration times or ensuring only one request fetches the data while others wait.",
+    "hint": "Sudden rush to the source of truth."
   },
   {
-    id: 46,
-    difficulty: "hard",
-    category: "k8s-architecture",
-    question: "When using 'Sidecar Containers' (like a logging agent or proxy), what happens if the Sidecar container fails but the main application container is healthy?",
-    options: [
-      "The pod is marked as healthy",
-      "The Kubelet will restart the failed sidecar container; the pod status depends on the restart policy",
+    "id": 46,
+    "difficulty": "hard",
+    "category": "k8s-architecture",
+    "question": "When using 'Sidecar Containers' (like a logging agent or proxy), what happens if the Sidecar container fails but the main application container is healthy?",
+    "options": [
       "The entire node is rebooted",
-      "The main container is automatically stopped"
+      "The main container is automatically stopped",
+      "The Kubelet will restart the failed sidecar container; the pod status depends on the restart policy",
+      "The pod is marked as healthy"
     ],
-    answer: 1,
-    explanation: "Kubernetes manages containers within a pod individually. If one fails, it is restarted according to the 'restartPolicy', but the other containers in the pod keep running.",
-    hint: "Containers in a pod share the network, but are individual processes."
+    "answer": 2,
+    "explanation": "Kubernetes manages containers within a pod individually. If one fails, it is restarted according to the 'restartPolicy', but the other containers in the pod keep running.",
+    "hint": "Containers in a pod share the network, but are individual processes."
   },
   {
-    id: 47,
-    difficulty: "medium",
-    category: "iac-management",
-    question: "In Terraform, what is a 'Provider'?",
-    options: [
-      "A person who writes code",
-      "A plugin that allows Terraform to communicate with a specific API (e.g., AWS, Azure, Google Cloud)",
+    "id": 47,
+    "difficulty": "medium",
+    "category": "iac-management",
+    "question": "In Terraform, what is a 'Provider'?",
+    "options": [
       "A local folder where state is stored",
-      "A variable that defines the project name"
+      "A plugin that allows Terraform to communicate with a specific API (e.g., AWS, Azure, Google Cloud)",
+      "A variable that defines the project name",
+      "A person who writes code"
     ],
-    answer: 1,
-    explanation: "Providers are the bridge between Terraform's abstract language and the actual APIs of cloud or SaaS platforms.",
-    hint: "The 'translator' for the cloud."
+    "answer": 1,
+    "explanation": "Providers are the bridge between Terraform's abstract language and the actual APIs of cloud or SaaS platforms.",
+    "hint": "The 'translator' for the cloud."
   },
   {
-    id: 48,
-    difficulty: "hard",
-    category: "observability-concepts",
-    question: "What is 'Distributed Tracing Propagation'?",
-    options: [
-      "Copying logs to a backup server",
-      "The process of passing trace IDs and metadata (Context) through HTTP headers as a request moves across service boundaries",
+    "id": 48,
+    "difficulty": "hard",
+    "category": "observability-concepts",
+    "question": "What is 'Distributed Tracing Propagation'?",
+    "options": [
+      "Installing agents on every VM",
       "Sending metrics to a central dashboard",
-      "Installing agents on every VM"
+      "The process of passing trace IDs and metadata (Context) through HTTP headers as a request moves across service boundaries",
+      "Copying logs to a backup server"
     ],
-    answer: 1,
-    explanation: "Propagation is how the 'Trace ID' travels. Without it, separate services wouldn't know they are part of the same original user request.",
-    hint: "Passing the 'ID' along the chain."
+    "answer": 2,
+    "explanation": "Propagation is how the 'Trace ID' travels. Without it, separate services wouldn't know they are part of the same original user request.",
+    "hint": "Passing the 'ID' along the chain."
   },
   {
-    id: 49,
-    difficulty: "hard",
-    category: "sre-resilience",
-    question: "You want to implement 'Graceful Shutdown' for your pods to ensure no requests are dropped during a scale-down. Which signal does Kubernetes send to the container, and which YAML field allows for extra time?",
-    options: [
-      "SIGKILL and 'restartPolicy'",
+    "id": 49,
+    "difficulty": "hard",
+    "category": "sre-resilience",
+    "question": "You want to implement 'Graceful Shutdown' for your pods to ensure no requests are dropped during a scale-down. Which signal does Kubernetes send to the container, and which YAML field allows for extra time?",
+    "options": [
       "SIGTERM and 'terminationGracePeriodSeconds'",
       "SIGSTOP and 'timeoutSeconds'",
-      "SIGINT and 'readinessProbe'"
+      "SIGINT and 'readinessProbe'",
+      "SIGKILL and 'restartPolicy'"
     ],
-    answer: 1,
-    explanation: "K8s sends SIGTERM to the app process. The app should stop accepting new work and finish current tasks. 'terminationGracePeriodSeconds' defines how long K8s waits before force-killing with SIGKILL.",
-    hint: "The 'Nice' signal vs. the 'Hard' kill."
+    "answer": 0,
+    "explanation": "K8s sends SIGTERM to the app process. The app should stop accepting new work and finish current tasks. 'terminationGracePeriodSeconds' defines how long K8s waits before force-killing with SIGKILL.",
+    "hint": "The 'Nice' signal vs. the 'Hard' kill."
   },
   {
-    id: 50,
-    difficulty: "hard",
-    category: "cicd-security",
-    question: "What is 'Shift Left' security?",
-    options: [
-      "Moving security checks from the production phase to the earlier stages of development (e.g., IDE, Commit, Build)",
-      "Hiring more security engineers",
+    "id": 50,
+    "difficulty": "hard",
+    "category": "cicd-security",
+    "question": "What is 'Shift Left' security?",
+    "options": [
       "Buying a more expensive firewall",
-      "Only allowing senior developers to push code"
+      "Only allowing senior developers to push code",
+      "Hiring more security engineers",
+      "Moving security checks from the production phase to the earlier stages of development (e.g., IDE, Commit, Build)"
     ],
-    answer: 0, // In this array, using 0-based for the last few to match previous pattern logic
-    explanation: "Shift Left aims to find and fix vulnerabilities as early as possible in the lifecycle, reducing cost and risk.",
-    hint: "Earlier in the timeline."
+    "answer": 3,
+    "explanation": "Shift Left aims to find and fix vulnerabilities as early as possible in the lifecycle, reducing cost and risk.",
+    "hint": "Earlier in the timeline."
   },
- 
-/* ======================================================
-   DEVOPS & OBSERVABILITY ARCHITECT - BATCH 4 (IDs 51-100)
-   ====================================================== */
-
-  /* ======================================================
-     KUBERNETES: STATEFUL WORKLOADS & OPERATORS
-     ====================================================== */
   {
-    id: 51,
-    difficulty: "hard",
-    category: "k8s-stateful",
-    question: "You are deploying a 3-node MongoDB cluster using a StatefulSet. Why is a 'Headless Service' (clusterIP: None) required for this architecture?",
-    options: [
+    "id": 51,
+    "difficulty": "hard",
+    "category": "k8s-stateful",
+    "question": "You are deploying a 3-node MongoDB cluster using a StatefulSet. Why is a 'Headless Service' (clusterIP: None) required for this architecture?",
+    "options": [
       "To provide a single load-balanced IP for all nodes",
+      "To disable networking for the database for security reasons",
       "To allow the MongoDB nodes to discover each other's individual Pod DNS identities (pod-name.service-name) for replica set formation",
-      "To expose the database to the public internet",
-      "To disable networking for the database for security reasons"
+      "To expose the database to the public internet"
     ],
-    answer: 1,
-    explanation: "StatefulSets require a Headless Service to maintain the 'Network Identity' of each pod. This allows nodes to address each other directly (e.g., mongo-0, mongo-1) which is essential for clustering logic.",
-    hint: "Think about 'Direct Pod-to-Pod communication' vs. 'Load Balancing'."
+    "answer": 2,
+    "explanation": "StatefulSets require a Headless Service to maintain the 'Network Identity' of each pod. This allows nodes to address each other directly (e.g., mongo-0, mongo-1) which is essential for clustering logic.",
+    "hint": "Think about 'Direct Pod-to-Pod communication' vs. 'Load Balancing'."
   },
   {
-    id: 52,
-    difficulty: "hard",
-    category: "k8s-operator-design",
-    question: "An Operator's 'Reconciliation Loop' is constantly failing with 'Conflict' errors when updating a Custom Resource (CR). What is the standard architectural fix for this in Kubernetes development?",
-    options: [
-      "Increase the CPU of the Operator pod",
-      "Implement exponential backoff and use 'ResourceVersion' for optimistic concurrency control",
+    "id": 52,
+    "difficulty": "hard",
+    "category": "k8s-operator-design",
+    "question": "An Operator's 'Reconciliation Loop' is constantly failing with 'Conflict' errors when updating a Custom Resource (CR). What is the standard architectural fix for this in Kubernetes development?",
+    "options": [
       "Disable the API server's cache",
-      "Delete and recreate the CR on every loop"
+      "Increase the CPU of the Operator pod",
+      "Delete and recreate the CR on every loop",
+      "Implement exponential backoff and use 'ResourceVersion' for optimistic concurrency control"
     ],
-    answer: 1,
-    explanation: "Kubernetes uses optimistic concurrency. If the resource has changed since the Operator last read it, the update will fail. Operators must catch this, re-read the latest version, and retry.",
-    hint: "How does K8s handle two people editing the same file?"
+    "answer": 3,
+    "explanation": "Kubernetes uses optimistic concurrency. If the resource has changed since the Operator last read it, the update will fail. Operators must catch this, re-read the latest version, and retry.",
+    "hint": "How does K8s handle two people editing the same file?"
   },
-
-  /* ======================================================
-     KAFKA: TRANSACTIONS & EXACTLY-ONCE
-     ====================================================== */
   {
-    id: 53,
-    difficulty: "hard",
-    category: "kafka-durability",
-    question: "To achieve 'Exactly-Once Semantics' (EOS) in a Kafka-to-Kafka streaming application, which producer configuration is mandatory?",
-    options: [
-      "acks=1",
+    "id": 53,
+    "difficulty": "hard",
+    "category": "kafka-durability",
+    "question": "To achieve 'Exactly-Once Semantics' (EOS) in a Kafka-to-Kafka streaming application, which producer configuration is mandatory?",
+    "options": [
       "enable.idempotence=true and transactional.id=some-unique-string",
-      "retries=0",
-      "compression.type=gzip"
+      "compression.type=gzip",
+      "acks=1",
+      "retries=0"
     ],
-    answer: 1,
-    explanation: "EOS requires idempotency (to prevent duplicates on retry) and transactions (to ensure atomic writes across multiple partitions).",
-    hint: "Atomic + Non-duplicating."
+    "answer": 0,
+    "explanation": "EOS requires idempotency (to prevent duplicates on retry) and transactions (to ensure atomic writes across multiple partitions).",
+    "hint": "Atomic + Non-duplicating."
   },
   {
-    id: 54,
-    difficulty: "hard",
-    category: "kafka-rebalancing",
-    question: "A large Kafka consumer group is experiencing 'Rebalance Storms,' where consumers stop processing for several minutes during a rebalance. Which consumer configuration helps mitigate this by allowing consumers to keep their partitions if the rebalance is 'Cooperative'?",
-    options: [
+    "id": 54,
+    "difficulty": "hard",
+    "category": "kafka-rebalancing",
+    "question": "A large Kafka consumer group is experiencing 'Rebalance Storms,' where consumers stop processing for several minutes during a rebalance. Which consumer configuration helps mitigate this by allowing consumers to keep their partitions if the rebalance is 'Cooperative'?",
+    "options": [
       "partition.assignment.strategy = CooperativeStickyAssignor",
-      "session.timeout.ms = 100",
       "auto.offset.reset = earliest",
+      "session.timeout.ms = 100",
       "heartbeat.interval.ms = 10000"
     ],
-    answer: 0,
-    explanation: "The CooperativeStickyAssignor reduces the 'Stop-the-World' effect by only revoking partitions that actually need to move, rather than revoking all partitions from all consumers.",
-    hint: "Look for a strategy that is 'Sticky'."
+    "answer": 0,
+    "explanation": "The CooperativeStickyAssignor reduces the 'Stop-the-World' effect by only revoking partitions that actually need to move, rather than revoking all partitions from all consumers.",
+    "hint": "Look for a strategy that is 'Sticky'."
   },
-
-  /* ======================================================
-     NETWORKING: MULTI-REGION & HYBRID
-     ====================================================== */
   {
-    id: 55,
-    difficulty: "hard",
-    category: "cloud-networking",
-    question: "You have a hybrid-cloud setup using a VPN. You notice that large file transfers fail, but small 'pings' work fine. You suspect an MTU (Maximum Transmission Unit) mismatch. What is the standard fix on the network interface?",
-    options: [
+    "id": 55,
+    "difficulty": "hard",
+    "category": "cloud-networking",
+    "question": "You have a hybrid-cloud setup using a VPN. You notice that large file transfers fail, but small 'pings' work fine. You suspect an MTU (Maximum Transmission Unit) mismatch. What is the standard fix on the network interface?",
+    "options": [
       "Disable the firewall",
-      "Enable 'MSS Clamping' or reduce the MTU to account for the VPN overhead (typically to 1350 or 1400)",
       "Increase the MTU to 9000 (Jumbo Frames)",
-      "Switch from UDP to TCP"
+      "Switch from UDP to TCP",
+      "Enable 'MSS Clamping' or reduce the MTU to account for the VPN overhead (typically to 1350 or 1400)"
     ],
-    answer: 1,
-    explanation: "VPN headers take up space. If the packet + VPN header exceeds the 1500-byte MTU of the underlying internet, the packet is dropped or fragmented. MSS clamping ensures the TCP handshake negotiates a smaller size.",
-    hint: "Think 'Packet size minus Header overhead'."
+    "answer": 3,
+    "explanation": "VPN headers take up space. If the packet + VPN header exceeds the 1500-byte MTU of the underlying internet, the packet is dropped or fragmented. MSS clamping ensures the TCP handshake negotiates a smaller size.",
+    "hint": "Think 'Packet size minus Header overhead'."
   },
   {
-    id: 56,
-    difficulty: "hard",
-    category: "azure-networking",
-    question: "You are designing a global Azure application. You need to route users to the nearest healthy region, but the application uses non-HTTP protocols (e.g., custom TCP). Which service should you use?",
-    options: [
-      "Azure Front Door",
-      "Azure Traffic Manager (DNS-based) or Azure Cross-Region Load Balancer",
+    "id": 56,
+    "difficulty": "hard",
+    "category": "azure-networking",
+    "question": "You are designing a global Azure application. You need to route users to the nearest healthy region, but the application uses non-HTTP protocols (e.g., custom TCP). Which service should you use?",
+    "options": [
       "Application Gateway",
-      "Standard VNet Peering"
+      "Standard VNet Peering",
+      "Azure Traffic Manager (DNS-based) or Azure Cross-Region Load Balancer",
+      "Azure Front Door"
     ],
-    answer: 1,
-    explanation: "Front Door is only for HTTP/S. For global TCP/UDP routing, Traffic Manager (via DNS) or the Global/Cross-Region Load Balancer is required.",
-    hint: "TCP support vs. HTTP-only."
+    "answer": 2,
+    "explanation": "Front Door is only for HTTP/S. For global TCP/UDP routing, Traffic Manager (via DNS) or the Global/Cross-Region Load Balancer is required.",
+    "hint": "TCP support vs. HTTP-only."
   },
-
-  /* ======================================================
-     OBSERVABILITY: FINOPS & SAMPLING
-     ====================================================== */
   {
-    id: 57,
-    difficulty: "medium",
-    category: "observability-finops",
-    question: "Your Splunk/ELK costs have tripled. You find that 90% of your logs are 'HTTP 200 OK' traces. What architectural pattern reduces cost without losing 'Error' visibility?",
-    options: [
+    "id": 57,
+    "difficulty": "medium",
+    "category": "observability-finops",
+    "question": "Your Splunk/ELK costs have tripled. You find that 90% of your logs are 'HTTP 200 OK' traces. What architectural pattern reduces cost without losing 'Error' visibility?",
+    "options": [
+      "Increasing the log retention to 1 year",
       "Turning off logging entirely",
       "Implementing 'Dynamic Sampling' (e.g., keep 1% of 200 OKs and 100% of 5xx Errors)",
-      "Increasing the log retention to 1 year",
       "Compressing the logs on the server"
     ],
-    answer: 1,
-    explanation: "Sampling allows you to maintain statistical confidence for successful requests while ensuring every failure is captured for debugging.",
-    hint: "Keep the bad, sample the good."
+    "answer": 2,
+    "explanation": "Sampling allows you to maintain statistical confidence for successful requests while ensuring every failure is captured for debugging.",
+    "hint": "Keep the bad, sample the good."
   },
   {
-    id: 58,
-    difficulty: "hard",
-    category: "observability-alerts",
-    question: "You are setting up an alert for a 'Long Tail' latency issue (P99). Why is it better to use a 'Histogram' bucket instead of a simple 'Average' (Mean)?",
-    options: [
+    "id": 58,
+    "difficulty": "hard",
+    "category": "observability-alerts",
+    "question": "You are setting up an alert for a 'Long Tail' latency issue (P99). Why is it better to use a 'Histogram' bucket instead of a simple 'Average' (Mean)?",
+    "options": [
       "Averages are faster to calculate",
       "Averages hide outliers; a small number of very slow requests won't significantly move the mean, but will show up in P99/P99.9 buckets",
-      "Histograms use less memory",
-      "K8s only supports Histograms"
+      "K8s only supports Histograms",
+      "Histograms use less memory"
     ],
-    answer: 1,
-    explanation: "Averages mask the 'misery' of your unluckiest users. Histograms allow you to see the distribution and specifically target the 1% or 0.1% of worst-case latencies.",
-    hint: "Outliers vs. Medians."
+    "answer": 1,
+    "explanation": "Averages mask the 'misery' of your unluckiest users. Histograms allow you to see the distribution and specifically target the 1% or 0.1% of worst-case latencies.",
+    "hint": "Outliers vs. Medians."
   },
-
-  /* ======================================================
-     RESILIENCE & FAILURE MODES
-     ====================================================== */
   {
-    id: 59,
-    difficulty: "hard",
-    category: "sre-resilience",
-    question: "A 'Poison Pill' message is crashing your Kafka consumer repeatedly. Every time the consumer restarts, it reads the same bad message and crashes again. How do you break this cycle in production?",
-    options: [
+    "id": 59,
+    "difficulty": "hard",
+    "category": "sre-resilience",
+    "question": "A 'Poison Pill' message is crashing your Kafka consumer repeatedly. Every time the consumer restarts, it reads the same bad message and crashes again. How do you break this cycle in production?",
+    "options": [
+      "Delete the Kafka Topic",
       "Restart the Kafka Broker",
       "Manually advance the Consumer Offset past the poison pill or implement a Try/Catch with a Dead Letter Queue (DLQ)",
-      "Increase the RAM of the consumer",
-      "Delete the Kafka Topic"
+      "Increase the RAM of the consumer"
     ],
-    answer: 1,
-    explanation: "A DLQ allows the application to 'sideline' the problematic message and continue processing others. Alternatively, moving the offset is a manual 'emergency' fix.",
-    hint: "How to skip the 'bad' and move to the 'next'?"
+    "answer": 2,
+    "explanation": "A DLQ allows the application to 'sideline' the problematic message and continue processing others. Alternatively, moving the offset is a manual 'emergency' fix.",
+    "hint": "How to skip the 'bad' and move to the 'next'?"
   },
   {
-    id: 60,
-    difficulty: "hard",
-    category: "k8s-failure",
-    question: "Your cluster is using 'Spot Instances' (AWS) or 'Spot VMs' (Azure) to save costs. How should you configure your StatefulSet to handle the 2-minute eviction warning gracefully?",
-    options: [
-      "Spot instances cannot run StatefulSets",
-      "Use 'Pre-Stop Hooks' to trigger a backup or graceful shutdown and ensure replicas are spread across On-Demand nodes as well",
+    "id": 60,
+    "difficulty": "hard",
+    "category": "k8s-failure",
+    "question": "Your cluster is using 'Spot Instances' (AWS) or 'Spot VMs' (Azure) to save costs. How should you configure your StatefulSet to handle the 2-minute eviction warning gracefully?",
+    "options": [
       "Set replicas to 1",
+      "Use 'Pre-Stop Hooks' to trigger a backup or graceful shutdown and ensure replicas are spread across On-Demand nodes as well",
+      "Spot instances cannot run StatefulSets",
       "Increase the 'terminationGracePeriodSeconds' to 3600"
     ],
-    answer: 1,
-    explanation: "Pre-stop hooks run when the eviction signal is received. For stateful workloads, you must assume nodes can disappear and use a mix of 'Spot' and 'On-Demand' to maintain quorum.",
-    hint: "What to do *before* the node dies?"
+    "answer": 1,
+    "explanation": "Pre-stop hooks run when the eviction signal is received. For stateful workloads, you must assume nodes can disappear and use a mix of 'Spot' and 'On-Demand' to maintain quorum.",
+    "hint": "What to do *before* the node dies?"
   },
-
-  /* ======================================================
-     SECURITY & DEVSECOPS (IDs 61-100 preview)
-     ====================================================== */
   {
-    id: 61,
-    difficulty: "medium",
-    category: "devsecops-cicd",
-    question: "You want to implement 'Static Application Security Testing' (SAST) in your pipeline. Where does this run?",
-    options: [
-      "On the running production environment",
-      "On the source code before it is compiled/packaged",
+    "id": 61,
+    "difficulty": "medium",
+    "category": "devsecops-cicd",
+    "question": "You want to implement 'Static Application Security Testing' (SAST) in your pipeline. Where does this run?",
+    "options": [
+      "On the developer's laptop only",
       "Inside the database",
-      "On the developer's laptop only"
+      "On the running production environment",
+      "On the source code before it is compiled/packaged"
     ],
-    answer: 1,
-    explanation: "SAST scans the source code for patterns indicating vulnerabilities (like SQL injection) without executing the code.",
-    hint: "Static = Not running."
+    "answer": 3,
+    "explanation": "SAST scans the source code for patterns indicating vulnerabilities (like SQL injection) without executing the code.",
+    "hint": "Static = Not running."
   },
   {
-    id: 62,
-    difficulty: "hard",
-    category: "k8s-security",
-    question: "What is 'Runtime Security' in the context of Kubernetes (e.g., using Falco)?",
-    options: [
-      "Checking the YAML before deployment",
-      "Monitoring system calls and container activity for suspicious behavior (e.g., a shell being opened in a web pod) at execution time",
+    "id": 62,
+    "difficulty": "hard",
+    "category": "k8s-security",
+    "question": "What is 'Runtime Security' in the context of Kubernetes (e.g., using Falco)?",
+    "options": [
+      "Setting up a password for the cluster",
       "Encrypting the hard drive",
-      "Setting up a password for the cluster"
+      "Checking the YAML before deployment",
+      "Monitoring system calls and container activity for suspicious behavior (e.g., a shell being opened in a web pod) at execution time"
     ],
-    answer: 1,
-    explanation: "Runtime security detects threats after the pod is already running by looking for abnormal behavior in the OS kernel/syscalls.",
-    hint: "Detecting the 'Intruder' while they are inside."
+    "answer": 3,
+    "explanation": "Runtime security detects threats after the pod is already running by looking for abnormal behavior in the OS kernel/syscalls.",
+    "hint": "Detecting the 'Intruder' while they are inside."
   },
-  
-/* ======================================================
-   DEVOPS & OBSERVABILITY ARCHITECT - BATCH 5 (IDs 63-112)
-   ====================================================== */
-
-  /* ======================================================
-     KAFKA CONNECT & SCHEMA GOVERNANCE
-     ====================================================== */
   {
-    id: 63,
-    difficulty: "hard",
-    category: "kafka-connect",
-    question: "You need to mask PII data (e.g., credit card numbers) in real-time as data flows from a source database into Kafka. Which Kafka Connect feature allows you to modify individual messages without writing a custom stream processing app?",
-    options: [
+    "id": 63,
+    "difficulty": "hard",
+    "category": "kafka-connect",
+    "question": "You need to mask PII data (e.g., credit card numbers) in real-time as data flows from a source database into Kafka. Which Kafka Connect feature allows you to modify individual messages without writing a custom stream processing app?",
+    "options": [
+      "KSQLDB",
       "Kafka Streams API",
       "Single Message Transforms (SMTs)",
-      "KSQLDB",
       "Kafka Connect Converters"
     ],
-    answer: 1,
-    explanation: "SMTs are applied to messages as they pass through Connect. They are ideal for simple transformations like masking fields, routing to specific topics, or changing data types.",
-    hint: "Think of 'lightweight transformations' within the connector."
+    "answer": 2,
+    "explanation": "SMTs are applied to messages as they pass through Connect. They are ideal for simple transformations like masking fields, routing to specific topics, or changing data types.",
+    "hint": "Think of 'lightweight transformations' within the connector."
   },
   {
-    id: 64,
-    difficulty: "hard",
-    category: "schema-registry",
-    question: "A producer updates its schema by removing a field that has a default value. Which Schema Registry compatibility mode ensures that existing consumers (still using the old schema) can still read the new messages?",
-    options: [
-      "BACKWARD Compatibility",
+    "id": 64,
+    "difficulty": "hard",
+    "category": "schema-registry",
+    "question": "A producer updates its schema by removing a field that has a default value. Which Schema Registry compatibility mode ensures that existing consumers (still using the old schema) can still read the new messages?",
+    "options": [
+      "NONE",
       "FORWARD Compatibility",
-      "FULL Compatibility",
-      "NONE"
+      "BACKWARD Compatibility",
+      "FULL Compatibility"
     ],
-    answer: 1,
-    explanation: "FORWARD compatibility allows older consumers to read data produced with a newer schema. Removing a field with a default value is a forward-compatible change.",
-    hint: "New producer, old consumer."
+    "answer": 1,
+    "explanation": "FORWARD compatibility allows older consumers to read data produced with a newer schema. Removing a field with a default value is a forward-compatible change.",
+    "hint": "New producer, old consumer."
   },
   {
-    id: 65,
-    difficulty: "medium",
-    category: "kafka-ops",
-    question: "You notice that your Kafka topic size is growing indefinitely even though you only care about the latest value for each key (e.g., user profile updates). Which cleanup policy should you enable?",
-    options: [
-      "delete",
+    "id": 65,
+    "difficulty": "medium",
+    "category": "kafka-ops",
+    "question": "You notice that your Kafka topic size is growing indefinitely even though you only care about the latest value for each key (e.g., user profile updates). Which cleanup policy should you enable?",
+    "options": [
       "compact",
       "truncate",
-      "snapshot"
+      "snapshot",
+      "delete"
     ],
-    answer: 1,
-    explanation: "Log compaction ensures that Kafka retains at least the last known value for each message key within the log of data for a single topic partition.",
-    hint: "Keep the 'latest' state per key."
+    "answer": 0,
+    "explanation": "Log compaction ensures that Kafka retains at least the last known value for each message key within the log of data for a single topic partition.",
+    "hint": "Keep the 'latest' state per key."
   },
-
-  /* ======================================================
-     INFRASTRUCTURE AS CODE (TERRAFORM / BICEP)
-     ====================================================== */
   {
-    id: 66,
-    difficulty: "hard",
-    category: "iac-terraform",
-    question: "When refactoring Terraform code, you move a resource from the root module to a child module. On the next 'plan', Terraform wants to destroy the old resource and create a new one. How do you prevent this without touching the actual cloud infrastructure?",
-    options: [
-      "Use 'terraform refresh'",
+    "id": 66,
+    "difficulty": "hard",
+    "category": "iac-terraform",
+    "question": "When refactoring Terraform code, you move a resource from the root module to a child module. On the next 'plan', Terraform wants to destroy the old resource and create a new one. How do you prevent this without touching the actual cloud infrastructure?",
+    "options": [
       "Use 'terraform state mv' to manually update the state mapping",
+      "Use 'terraform refresh'",
       "Use 'terraform import'",
       "Add a 'lifecycle { ignore_changes = all }' block"
     ],
-    answer: 1,
-    explanation: "The 'state mv' command allows you to rename or move resources in the state file so that Terraform recognizes they are the same objects under a different address.",
-    hint: "Refactoring the 'map' to match the 'terrain'."
+    "answer": 0,
+    "explanation": "The 'state mv' command allows you to rename or move resources in the state file so that Terraform recognizes they are the same objects under a different address.",
+    "hint": "Refactoring the 'map' to match the 'terrain'."
   },
   {
-    id: 67,
-    difficulty: "hard",
-    category: "iac-patterns",
-    question: "You need to create 50 S3 buckets with unique names defined in a list. Why is 'for_each' generally preferred over 'count' in this scenario?",
-    options: [
-      "for_each is faster",
+    "id": 67,
+    "difficulty": "hard",
+    "category": "iac-patterns",
+    "question": "You need to create 50 S3 buckets with unique names defined in a list. Why is 'for_each' generally preferred over 'count' in this scenario?",
+    "options": [
       "If you remove an item from the middle of a list, 'count' will force a recreation/rename of all subsequent resources; 'for_each' tracks resources by their unique key.",
+      "for_each is faster",
       "count only works with numbers",
       "for_each automatically enables encryption"
     ],
-    answer: 1,
-    explanation: "Using 'count' maps resources to index integers (0, 1, 2...). Removing index 1 shifts index 2 into index 1, causing a destructive update. 'for_each' maps to a stable key (e.g., the bucket name).",
-    hint: "Index-based vs. Key-based mapping."
+    "answer": 0,
+    "explanation": "Using 'count' maps resources to index integers (0, 1, 2...). Removing index 1 shifts index 2 into index 1, causing a destructive update. 'for_each' maps to a stable key (e.g., the bucket name).",
+    "hint": "Index-based vs. Key-based mapping."
   },
   {
-    id: 68,
-    difficulty: "medium",
-    category: "iac-governance",
-    question: "What is the primary benefit of using a 'Terraform Remote Backend' (like S3 + DynamoDB) over a local state file in a team environment?",
-    options: [
+    "id": 68,
+    "difficulty": "medium",
+    "category": "iac-governance",
+    "question": "What is the primary benefit of using a 'Terraform Remote Backend' (like S3 + DynamoDB) over a local state file in a team environment?",
+    "options": [
+      "It eliminates the need for AWS credentials",
       "It makes the code run faster",
       "It provides state locking to prevent concurrent modifications and a central source of truth for all team members",
-      "It eliminates the need for AWS credentials",
       "It automatically generates documentation"
     ],
-    answer: 1,
-    explanation: "Remote backends enable collaboration by ensuring everyone uses the same state and preventing two people from running 'apply' simultaneously via locking.",
-    hint: "Concurrency and Synchronization."
+    "answer": 2,
+    "explanation": "Remote backends enable collaboration by ensuring everyone uses the same state and preventing two people from running 'apply' simultaneously via locking.",
+    "hint": "Concurrency and Synchronization."
   },
-
-  /* ======================================================
-     KUBERNETES DAY-2 OPERATIONS
-     ====================================================== */
   {
-    id: 69,
-    difficulty: "hard",
-    category: "k8s-resilience",
-    question: "You want to ensure that a cluster autoscaler doesn't evict too many pods of a critical application during a node drain. Which Kubernetes object should you define?",
-    options: [
-      "ResourceQuota",
-      "PodDisruptionBudget (PDB)",
+    "id": 69,
+    "difficulty": "hard",
+    "category": "k8s-resilience",
+    "question": "You want to ensure that a cluster autoscaler doesn't evict too many pods of a critical application during a node drain. Which Kubernetes object should you define?",
+    "options": [
       "HorizontalPodAutoscaler (HPA)",
+      "PodDisruptionBudget (PDB)",
+      "ResourceQuota",
       "LimitRange"
     ],
-    answer: 1,
-    explanation: "A PDB limits the number of pods of a replicated application that are down simultaneously from voluntary disruptions (like node upgrades/drains).",
-    hint: "Minimum availability 'Insurance'."
+    "answer": 1,
+    "explanation": "A PDB limits the number of pods of a replicated application that are down simultaneously from voluntary disruptions (like node upgrades/drains).",
+    "hint": "Minimum availability 'Insurance'."
   },
   {
-    id: 70,
-    difficulty: "hard",
-    category: "k8s-autoscaling",
-    question: "Your application has high memory usage but low CPU. The HPA (based on CPU) is not triggering, causing pods to be OOMKilled. Which autoscaler should be used to adjust the 'requests' and 'limits' of the pods automatically over time?",
-    options: [
+    "id": 70,
+    "difficulty": "hard",
+    "category": "k8s-autoscaling",
+    "question": "Your application has high memory usage but low CPU. The HPA (based on CPU) is not triggering, causing pods to be OOMKilled. Which autoscaler should be used to adjust the 'requests' and 'limits' of the pods automatically over time?",
+    "options": [
       "Horizontal Pod Autoscaler (HPA)",
-      "Vertical Pod Autoscaler (VPA)",
       "Cluster Autoscaler (CA)",
+      "Vertical Pod Autoscaler (VPA)",
       "Node Problem Detector"
     ],
-    answer: 1,
-    explanation: "The VPA analyzes historical usage and adjusts the resource requests/limits of your pods so they are sized correctly, preventing OOM issues or wasted resources.",
-    hint: "Scaling 'Up' (Size) vs Scaling 'Out' (Count)."
+    "answer": 2,
+    "explanation": "The VPA analyzes historical usage and adjusts the resource requests/limits of your pods so they are sized correctly, preventing OOM issues or wasted resources.",
+    "hint": "Scaling 'Up' (Size) vs Scaling 'Out' (Count)."
   },
-
-  /* ======================================================
-     OBSERVABILITY: TRACING & ADVANCED METRICS
-     ====================================================== */
   {
-    id: 71,
-    difficulty: "hard",
-    category: "observability-metrics",
-    question: "You see a spike in latency in your Prometheus dashboard. You want to click a specific point on the graph and see the exact trace associated with that high-latency request. Which feature is required?",
-    options: [
-      "Prometheus Recording Rules",
-      "Exemplars",
+    "id": 71,
+    "difficulty": "hard",
+    "category": "observability-metrics",
+    "question": "You see a spike in latency in your Prometheus dashboard. You want to click a specific point on the graph and see the exact trace associated with that high-latency request. Which feature is required?",
+    "options": [
+      "Alertmanager Silencing",
       "Remote Write",
-      "Alertmanager Silencing"
+      "Prometheus Recording Rules",
+      "Exemplars"
     ],
-    answer: 1,
-    explanation: "Exemplars are metadata (like a TraceID) attached to a specific metric observation. This creates a direct link between a metric spike and a specific trace in your tracing system.",
-    hint: "The 'Bridge' between metrics and traces."
+    "answer": 3,
+    "explanation": "Exemplars are metadata (like a TraceID) attached to a specific metric observation. This creates a direct link between a metric spike and a specific trace in your tracing system.",
+    "hint": "The 'Bridge' between metrics and traces."
   },
   {
-    id: 72,
-    difficulty: "hard",
-    category: "observability-networking",
-    question: "You need to monitor network traffic and latency between pods without instrumenting the application code or using a sidecar proxy. Which Linux technology enables this via the kernel?",
-    options: [
-      "IPtables",
-      "eBPF (Extended Berkeley Packet Filter)",
+    "id": 72,
+    "difficulty": "hard",
+    "category": "observability-networking",
+    "question": "You need to monitor network traffic and latency between pods without instrumenting the application code or using a sidecar proxy. Which Linux technology enables this via the kernel?",
+    "options": [
       "Nginx",
-      "Kube-proxy"
+      "Kube-proxy",
+      "eBPF (Extended Berkeley Packet Filter)",
+      "IPtables"
     ],
-    answer: 1,
-    explanation: "eBPF allows you to run sandboxed programs in the Linux kernel. Tools like Cilium or Pixie use eBPF to observe network calls, security events, and performance without touching the app code.",
-    hint: "Observability from 'inside' the OS kernel."
+    "answer": 2,
+    "explanation": "eBPF allows you to run sandboxed programs in the Linux kernel. Tools like Cilium or Pixie use eBPF to observe network calls, security events, and performance without touching the app code.",
+    "hint": "Observability from 'inside' the OS kernel."
   },
   {
-    id: 73,
-    difficulty: "medium",
-    category: "sre-monitoring",
-    question: "Which monitoring strategy involves observing the system from the outside (probing endpoints) to verify availability?",
-    options: [
-      "White-box monitoring",
+    "id": 73,
+    "difficulty": "medium",
+    "category": "sre-monitoring",
+    "question": "Which monitoring strategy involves observing the system from the outside (probing endpoints) to verify availability?",
+    "options": [
+      "Log Aggregation",
       "Black-box monitoring",
       "Distributed Tracing",
-      "Log Aggregation"
+      "White-box monitoring"
     ],
-    answer: 1,
-    explanation: "Black-box monitoring (like synthetic pings) tests the system as a user would, without knowledge of its internals. White-box monitoring uses internal metrics (like CPU/GC logs).",
-    hint: "Probing from the 'outside-in'."
+    "answer": 1,
+    "explanation": "Black-box monitoring (like synthetic pings) tests the system as a user would, without knowledge of its internals. White-box monitoring uses internal metrics (like CPU/GC logs).",
+    "hint": "Probing from the 'outside-in'."
   },
-
-  /* ======================================================
-     NETWORKING & CLOUD SECURITY
-     ====================================================== */
   {
-    id: 74,
-    difficulty: "hard",
-    category: "cloud-networking",
-    question: "In a 'Hub-and-Spoke' VNet/VPC architecture, you want to ensure that Spoke A can communicate with Spoke B, but they are not directly peered. How do you enable this routing?",
-    options: [
+    "id": 74,
+    "difficulty": "hard",
+    "category": "cloud-networking",
+    "question": "In a 'Hub-and-Spoke' VNet/VPC architecture, you want to ensure that Spoke A can communicate with Spoke B, but they are not directly peered. How do you enable this routing?",
+    "options": [
+      "Spoke-to-Spoke communication is impossible in this model",
       "Enable 'Allow Gateway Transit' in the Hub and use a Network Virtual Appliance (NVA) or Azure Firewall as a next hop",
       "Create a direct peering between Spoke A and Spoke B",
-      "Use Public IPs for all services",
-      "Spoke-to-Spoke communication is impossible in this model"
+      "Use Public IPs for all services"
     ],
-    answer: 0,
-    explanation: "VPC/VNet peering is not transitive. To allow spokes to talk, traffic must be routed through a central appliance (Hub) that acts as a router.",
-    hint: "Traffic must 'pass through' the Hub."
+    "answer": 1,
+    "explanation": "VPC/VNet peering is not transitive. To allow spokes to talk, traffic must be routed through a central appliance (Hub) that acts as a router.",
+    "hint": "Traffic must 'pass through' the Hub."
   },
   {
-    id: 75,
-    difficulty: "hard",
-    category: "aws-security",
-    question: "You want to prevent any account within your AWS Organization from ever disabling CloudTrail. Which tool allows you to set this 'Guardrail' globally?",
-    options: [
+    "id": 75,
+    "difficulty": "hard",
+    "category": "aws-security",
+    "question": "You want to prevent any account within your AWS Organization from ever disabling CloudTrail. Which tool allows you to set this 'Guardrail' globally?",
+    "options": [
+      "Security Groups",
       "IAM Policies",
-      "Service Control Policies (SCPs)",
       "AWS Config",
-      "Security Groups"
+      "Service Control Policies (SCPs)"
     ],
-    answer: 1,
-    explanation: "SCPs are organization-level policies that define the maximum available permissions for an account. They can explicitly 'Deny' actions even if an account admin has full IAM access.",
-    hint: "The 'Max' permission boundary."
+    "answer": 3,
+    "explanation": "SCPs are organization-level policies that define the maximum available permissions for an account. They can explicitly 'Deny' actions even if an account admin has full IAM access.",
+    "hint": "The 'Max' permission boundary."
   },
-
-  /* ======================================================
-     REMAINING BATCH 5 PREVIEW (IDs 76-112)
-     ====================================================== */
   {
-    id: 76,
-    difficulty: "medium",
-    category: "devsecops-cicd",
-    question: "What is 'DAST' (Dynamic Application Security Testing)?",
-    options: [
+    "id": 76,
+    "difficulty": "medium",
+    "category": "devsecops-cicd",
+    "question": "What is 'DAST' (Dynamic Application Security Testing)?",
+    "options": [
       "Scanning source code for vulnerabilities",
-      "Testing the running application for vulnerabilities by simulating external attacks (e.g., SQL injection)",
       "Managing database passwords",
-      "Encrypting the build server"
+      "Encrypting the build server",
+      "Testing the running application for vulnerabilities by simulating external attacks (e.g., SQL injection)"
     ],
-    answer: 1,
-    explanation: "DAST interacts with the application while it's running (in a test environment) to find vulnerabilities that only manifest at runtime.",
-    hint: "Testing the 'Running' app."
+    "answer": 3,
+    "explanation": "DAST interacts with the application while it's running (in a test environment) to find vulnerabilities that only manifest at runtime.",
+    "hint": "Testing the 'Running' app."
   },
   {
-    id: 77,
-    difficulty: "hard",
-    category: "sre-concepts",
-    question: "When calculating latency for an SLO, why is the 99th percentile (P99) often a better indicator of user experience than the average?",
-    options: [
-      "Averages are harder to compute",
+    "id": 77,
+    "difficulty": "hard",
+    "category": "sre-concepts",
+    "question": "When calculating latency for an SLO, why is the 99th percentile (P99) often a better indicator of user experience than the average?",
+    "options": [
       "Averages hide the 'tail'—a significant portion of users could be having a terrible experience that is masked by the majority of fast responses",
-      "P99 is always lower than the average",
-      "P99 is only used for networking issues"
+      "Averages are harder to compute",
+      "P99 is only used for networking issues",
+      "P99 is always lower than the average"
     ],
-    answer: 1,
-    explanation: "High percentiles (P95, P99) show the 'worst case' experience. If the average is 100ms but the P99 is 5 seconds, 1% of your users are seeing extreme slowness.",
-    hint: "Think about the 'unlucky' users."
+    "answer": 0,
+    "explanation": "High percentiles (P95, P99) show the 'worst case' experience. If the average is 100ms but the P99 is 5 seconds, 1% of your users are seeing extreme slowness.",
+    "hint": "Think about the 'unlucky' users."
   },
   {
-    id: 78,
-    difficulty: "hard",
-    category: "k8s-security",
-    question: "A pod needs to access an S3 bucket. Instead of hardcoding an AWS Access Key, you assign an IAM Role directly to the Kubernetes ServiceAccount. What is this feature called in EKS?",
-    options: [
+    "id": 78,
+    "difficulty": "hard",
+    "category": "k8s-security",
+    "question": "A pod needs to access an S3 bucket. Instead of hardcoding an AWS Access Key, you assign an IAM Role directly to the Kubernetes ServiceAccount. What is this feature called in EKS?",
+    "options": [
       "Node Instance Profile",
       "IAM Roles for Service Accounts (IRSA)",
-      "Kube-Proxy",
-      "VPC CNI"
+      "VPC CNI",
+      "Kube-Proxy"
     ],
-    answer: 1,
-    explanation: "IRSA uses OIDC to provide temporary AWS credentials to pods via a ServiceAccount, following the principle of least privilege and avoiding static keys.",
-    hint: "Pod Identity."
+    "answer": 1,
+    "explanation": "IRSA uses OIDC to provide temporary AWS credentials to pods via a ServiceAccount, following the principle of least privilege and avoiding static keys.",
+    "hint": "Pod Identity."
   },
   {
-    id: 79,
-    difficulty: "hard",
-    category: "kafka-ops",
-    question: "A Kafka cluster is running out of disk space. You decide to implement 'Tiered Storage'. What does this do?",
-    options: [
-      "Deletes old data automatically",
+    "id": 79,
+    "difficulty": "hard",
+    "category": "kafka-ops",
+    "question": "A Kafka cluster is running out of disk space. You decide to implement 'Tiered Storage'. What does this do?",
+    "options": [
+      "Increases the compression ratio",
       "Offloads older log segments to cheaper object storage (like S3/Azure Blob) while keeping them searchable via the Kafka API",
       "Moves data to a different Kafka cluster",
-      "Increases the compression ratio"
+      "Deletes old data automatically"
     ],
-    answer: 1,
-    explanation: "Tiered storage separates compute from storage, allowing you to retain years of data cost-effectively in S3 while the brokers only keep the 'Hot' data on local SSDs.",
-    hint: "Local SSD for Hot data, S3 for Cold data."
+    "answer": 1,
+    "explanation": "Tiered storage separates compute from storage, allowing you to retain years of data cost-effectively in S3 while the brokers only keep the 'Hot' data on local SSDs.",
+    "hint": "Local SSD for Hot data, S3 for Cold data."
   },
   {
-    id: 80,
-    difficulty: "medium",
-    category: "iac-management",
-    question: "In Terraform, what does the 'taint' command (now replaced by -replace) do?",
-    options: [
-      "Deletes the state file",
-      "Marks a specific resource to be destroyed and recreated on the next 'apply', even if no code changes were made",
+    "id": 80,
+    "difficulty": "medium",
+    "category": "iac-management",
+    "question": "In Terraform, what does the 'taint' command (now replaced by -replace) do?",
+    "options": [
       "Encrypts the resource",
+      "Marks a specific resource to be destroyed and recreated on the next 'apply', even if no code changes were made",
+      "Deletes the state file",
       "Hides the resource from the plan"
     ],
-    answer: 1,
-    explanation: "Tainting is used when a resource is in a bad state (e.g., a VM was manually tampered with) and you want Terraform to replace it with a fresh instance.",
-    hint: "Force a 'Recreation'."
+    "answer": 1,
+    "explanation": "Tainting is used when a resource is in a bad state (e.g., a VM was manually tampered with) and you want Terraform to replace it with a fresh instance.",
+    "hint": "Force a 'Recreation'."
   },
-  /* ======================================================
-   DEVOPS & OBSERVABILITY ARCHITECT - BATCH 6 (IDs 81-130)
-   ====================================================== */
-
-  /* ======================================================
-     SRE: ERROR BUDGETS & BURN RATES
-     ====================================================== */
   {
-    id: 81,
-    difficulty: "hard",
-    category: "sre-concepts",
-    question: "Your service has an SLO of 99.9% availability. You are currently consuming your error budget at a rate that will exhaust it in exactly 24 hours. What is the 'Burn Rate' for this period?",
-    options: [
-      "1x",
+    "id": 81,
+    "difficulty": "hard",
+    "category": "sre-concepts",
+    "question": "Your service has an SLO of 99.9% availability. You are currently consuming your error budget at a rate that will exhaust it in exactly 24 hours. What is the 'Burn Rate' for this period?",
+    "options": [
       "14.4x",
+      "1x",
       "30x",
       "720x"
     ],
-    answer: 2,
-    explanation: "A burn rate of 1x means you will exhaust your budget in exactly 30 days. To exhaust it in 1 day (24 hours), the burn rate is 30 / 1 = 30x.",
-    hint: "Burn Rate = (Budget Period in hours) / (Time until exhaustion in hours)."
+    "answer": 2,
+    "explanation": "A burn rate of 1x means you will exhaust your budget in exactly 30 days. To exhaust it in 1 day (24 hours), the burn rate is 30 / 1 = 30x.",
+    "hint": "Burn Rate = (Budget Period in hours) / (Time until exhaustion in hours)."
   },
   {
-    id: 82,
-    difficulty: "hard",
-    category: "sre-governance",
-    question: "What is the primary architectural consequence of 'Exhausting an Error Budget' in a mature SRE organization?",
-    options: [
-      "All developers are fired",
+    "id": 82,
+    "difficulty": "hard",
+    "category": "sre-governance",
+    "question": "What is the primary architectural consequence of 'Exhausting an Error Budget' in a mature SRE organization?",
+    "options": [
       "A 'Feature Freeze' is implemented; all engineering effort shifts to reliability and fixing the causes of the outages until the budget recovers",
+      "The monitoring system is disabled to stop the alerts",
       "The SLO is lowered to 99%",
-      "The monitoring system is disabled to stop the alerts"
+      "All developers are fired"
     ],
-    answer: 1,
-    explanation: "Error budgets align incentives between Dev and Ops. If the budget is gone, the risk of new features is too high, necessitating a focus on stability.",
-    hint: "Balancing 'Innovation' vs 'Reliability'."
+    "answer": 0,
+    "explanation": "Error budgets align incentives between Dev and Ops. If the budget is gone, the risk of new features is too high, necessitating a focus on stability.",
+    "hint": "Balancing 'Innovation' vs 'Reliability'."
   },
-
-  /* ======================================================
-     SERVICE MESH & ADVANCED TRAFFIC (ISTIO)
-     ====================================================== */
   {
-    id: 83,
-    difficulty: "hard",
-    category: "istio-traffic",
-    question: "You want to implement 'Locality Load Balancing' in Istio to ensure that pods in 'us-east-1a' always prefer talking to services in 'us-east-1a' before failing over to 'us-east-1b'. Which Istio resource handles this?",
-    options: [
-      "VirtualService",
-      "DestinationRule (outlierDetection + loadBalancer settings)",
+    "id": 83,
+    "difficulty": "hard",
+    "category": "istio-traffic",
+    "question": "You want to implement 'Locality Load Balancing' in Istio to ensure that pods in 'us-east-1a' always prefer talking to services in 'us-east-1a' before failing over to 'us-east-1b'. Which Istio resource handles this?",
+    "options": [
+      "ServiceEntry",
       "Gateway",
-      "ServiceEntry"
+      "DestinationRule (outlierDetection + loadBalancer settings)",
+      "VirtualService"
     ],
-    answer: 1,
-    explanation: "Locality-aware routing is configured in the DestinationRule. It requires 'outlierDetection' to be enabled so the mesh knows when a local instance is unhealthy and needs to fail over.",
-    hint: "Think about 'Destination' behavior, not 'Routing' logic."
+    "answer": 2,
+    "explanation": "Locality-aware routing is configured in the DestinationRule. It requires 'outlierDetection' to be enabled so the mesh knows when a local instance is unhealthy and needs to fail over.",
+    "hint": "Think about 'Destination' behavior, not 'Routing' logic."
   },
   {
-    id: 84,
-    difficulty: "hard",
-    category: "istio-security",
-    question: "You are implementing Istio mTLS in 'STRICT' mode. You notice that Prometheus (running outside the mesh) can no longer scrape metrics from your pods. What is the standard fix?",
-    options: [
-      "Switch mTLS to 'PERMISSIVE' mode",
-      "Define a 'PeerAuthentication' policy that allows plain-text on the metrics port (e.g., 8080 or 15020)",
+    "id": 84,
+    "difficulty": "hard",
+    "category": "istio-security",
+    "question": "You are implementing Istio mTLS in 'STRICT' mode. You notice that Prometheus (running outside the mesh) can no longer scrape metrics from your pods. What is the standard fix?",
+    "options": [
+      "Expose the pods via a Public Load Balancer",
       "Disable Prometheus",
-      "Expose the pods via a Public Load Balancer"
+      "Define a 'PeerAuthentication' policy that allows plain-text on the metrics port (e.g., 8080 or 15020)",
+      "Switch mTLS to 'PERMISSIVE' mode"
     ],
-    answer: 1,
-    explanation: "Strict mTLS requires all incoming traffic to be encrypted. Since the scraper isn't in the mesh, it fails. Port-level exceptions in PeerAuthentication allow the scraper to work while keeping app traffic secure.",
-    hint: "Keep the app 'Locked' but the metrics 'Open'."
+    "answer": 2,
+    "explanation": "Strict mTLS requires all incoming traffic to be encrypted. Since the scraper isn't in the mesh, it fails. Port-level exceptions in PeerAuthentication allow the scraper to work while keeping app traffic secure.",
+    "hint": "Keep the app 'Locked' but the metrics 'Open'."
   },
-
-  /* ======================================================
-     KUBERNETES SECURITY (POLICY AS CODE)
-     ====================================================== */
   {
-    id: 85,
-    difficulty: "hard",
-    category: "k8s-policy",
-    question: "You are using OPA Gatekeeper. You want to prevent any Service from being created with 'type: LoadBalancer' to avoid accidental public exposure and costs. Which OPA object defines the 'Logic' of this rule?",
-    options: [
+    "id": 85,
+    "difficulty": "hard",
+    "category": "k8s-policy",
+    "question": "You are using OPA Gatekeeper. You want to prevent any Service from being created with 'type: LoadBalancer' to avoid accidental public exposure and costs. Which OPA object defines the 'Logic' of this rule?",
+    "options": [
+      "NetworkPolicy",
       "Constraint",
       "ConstraintTemplate (Rego logic)",
-      "ConfigMap",
-      "NetworkPolicy"
+      "ConfigMap"
     ],
-    answer: 1,
-    explanation: "ConstraintTemplates hold the Rego code that defines the logic. Constraints are instances of those templates applied to specific resources.",
-    hint: "Template = Logic; Constraint = Enforcement."
+    "answer": 2,
+    "explanation": "ConstraintTemplates hold the Rego code that defines the logic. Constraints are instances of those templates applied to specific resources.",
+    "hint": "Template = Logic; Constraint = Enforcement."
   },
   {
-    id: 86,
-    difficulty: "hard",
-    category: "k8s-security",
-    question: "What is the primary risk of using 'hostPath' volumes in a Kubernetes deployment?",
-    options: [
-      "It is too slow",
-      "It allows a container to escape its isolation and read/write files on the physical host node, leading to potential node takeover",
+    "id": 86,
+    "difficulty": "hard",
+    "category": "k8s-security",
+    "question": "What is the primary risk of using 'hostPath' volumes in a Kubernetes deployment?",
+    "options": [
       "It consumes too much RAM",
+      "It allows a container to escape its isolation and read/write files on the physical host node, leading to potential node takeover",
+      "It is too slow",
       "It only works on AWS"
     ],
-    answer: 1,
-    explanation: "hostPath maps a directory from the node into the pod. If a pod is compromised, the attacker can access sensitive host files like /etc/shadow or Docker socket.",
-    hint: "Escape the 'Sandbox'."
+    "answer": 1,
+    "explanation": "hostPath maps a directory from the node into the pod. If a pod is compromised, the attacker can access sensitive host files like /etc/shadow or Docker socket.",
+    "hint": "Escape the 'Sandbox'."
   },
-
-  /* ======================================================
-     KAFKA STREAMS & KSQLDB
-     ====================================================== */
   {
-    id: 87,
-    difficulty: "hard",
-    category: "kafka-streams",
-    question: "In Kafka Streams, what is the difference between a KStream and a KTable?",
-    options: [
-      "KStream is for storage; KTable is for processing",
+    "id": 87,
+    "difficulty": "hard",
+    "category": "kafka-streams",
+    "question": "In Kafka Streams, what is the difference between a KStream and a KTable?",
+    "options": [
       "KStream is a record stream (fact); KTable is a changelog stream representing the latest 'state' for each key",
-      "KStream only supports JSON; KTable only supports Avro",
-      "There is no difference"
+      "KStream is for storage; KTable is for processing",
+      "There is no difference",
+      "KStream only supports JSON; KTable only supports Avro"
     ],
-    answer: 1,
-    explanation: "A KStream is like a list of transactions (Insert only). A KTable is like a database table where each new record with the same key updates the previous value (Upsert).",
-    hint: "History vs. Current State."
+    "answer": 0,
+    "explanation": "A KStream is like a list of transactions (Insert only). A KTable is like a database table where each new record with the same key updates the previous value (Upsert).",
+    "hint": "History vs. Current State."
   },
   {
-    id: 88,
-    difficulty: "hard",
-    category: "kafka-streams",
-    question: "A Kafka Streams application is performing a 'Join' between two streams. Why is it mandatory that both streams have the same number of partitions and are co-partitioned by the same key?",
-    options: [
+    "id": 88,
+    "difficulty": "hard",
+    "category": "kafka-streams",
+    "question": "A Kafka Streams application is performing a 'Join' between two streams. Why is it mandatory that both streams have the same number of partitions and are co-partitioned by the same key?",
+    "options": [
       "To save disk space",
       "To ensure that records with the same key from both streams land on the same Kafka Streams instance (task) for processing",
       "It is a limitation of the Java programming language",
       "To reduce the number of brokers"
     ],
-    answer: 1,
-    explanation: "Joining happens locally in memory. If 'User 1' data is on Task A and 'Order 1' data is on Task B, they can never be joined. Co-partitioning ensures they meet on the same task.",
-    hint: "Data must 'Meet' in the same worker node."
+    "answer": 1,
+    "explanation": "Joining happens locally in memory. If 'User 1' data is on Task A and 'Order 1' data is on Task B, they can never be joined. Co-partitioning ensures they meet on the same task.",
+    "hint": "Data must 'Meet' in the same worker node."
   },
-
-  /* ======================================================
-     CLOUD NETWORKING: GLOBAL TRAFFIC
-     ====================================================== */
   {
-    id: 89,
-    difficulty: "hard",
-    category: "azure-networking",
-    question: "Your Azure application needs to handle millions of requests per second with SSL termination at the 'Edge' (closest to the user) and WAF protection. Which service is best suited?",
-    options: [
-      "Azure Load Balancer",
+    "id": 89,
+    "difficulty": "hard",
+    "category": "azure-networking",
+    "question": "Your Azure application needs to handle millions of requests per second with SSL termination at the 'Edge' (closest to the user) and WAF protection. Which service is best suited?",
+    "options": [
       "Azure Front Door",
+      "Azure Traffic Manager",
       "Azure Application Gateway",
-      "Azure Traffic Manager"
+      "Azure Load Balancer"
     ],
-    answer: 1,
-    explanation: "Front Door is a global, 'Anycast' edge service. It handles SSL termination at Microsoft's POPs (Point of Presence), providing lower latency and global scale compared to regional App Gateways.",
-    hint: "Global Edge vs. Regional Gateway."
+    "answer": 0,
+    "explanation": "Front Door is a global, 'Anycast' edge service. It handles SSL termination at Microsoft's POPs (Point of Presence), providing lower latency and global scale compared to regional App Gateways.",
+    "hint": "Global Edge vs. Regional Gateway."
   },
   {
-    id: 90,
-    difficulty: "hard",
-    category: "aws-networking",
-    question: "You have a fleet of EC2 instances in a Private Subnet. They need to download updates from the internet, but must not be reachable from the internet. What should you deploy in the Public Subnet?",
-    options: [
+    "id": 90,
+    "difficulty": "hard",
+    "category": "aws-networking",
+    "question": "You have a fleet of EC2 instances in a Private Subnet. They need to download updates from the internet, but must not be reachable from the internet. What should you deploy in the Public Subnet?",
+    "options": [
       "Internet Gateway",
-      "NAT Gateway",
       "VPC Peering",
+      "NAT Gateway",
       "Direct Connect"
     ],
-    answer: 1,
-    explanation: "A NAT Gateway allows instances in a private subnet to connect to the internet (outbound) but prevents the internet from initiating a connection to those instances (inbound).",
-    hint: "One-way traffic to the web."
+    "answer": 2,
+    "explanation": "A NAT Gateway allows instances in a private subnet to connect to the internet (outbound) but prevents the internet from initiating a connection to those instances (inbound).",
+    "hint": "One-way traffic to the web."
   },
-
-  /* ======================================================
-     OBSERVABILITY: ADVANCED LOGGING (ELK)
-     ====================================================== */
   {
-    id: 91,
-    difficulty: "hard",
-    category: "elk-stack",
-    question: "Your Elasticsearch cluster is 'Yellow'. What does this status specifically indicate?",
-    options: [
-      "The cluster is completely down",
+    "id": 91,
+    "difficulty": "hard",
+    "category": "elk-stack",
+    "question": "Your Elasticsearch cluster is 'Yellow'. What does this status specifically indicate?",
+    "options": [
       "All primary shards are allocated, but at least one replica shard is unallocated (possibly due to a missing node)",
       "The disk is 100% full",
+      "The cluster is completely down",
       "The JVM is crashing"
     ],
-    answer: 1,
-    explanation: "Yellow means data is available but not fully redundant. Red means at least one primary shard is missing (data loss). Green means all shards (primary and replica) are allocated.",
-    hint: "Primary is OK, Replica is missing."
+    "answer": 0,
+    "explanation": "Yellow means data is available but not fully redundant. Red means at least one primary shard is missing (data loss). Green means all shards (primary and replica) are allocated.",
+    "hint": "Primary is OK, Replica is missing."
   },
   {
-    id: 92,
-    difficulty: "medium",
-    category: "observability-concepts",
-    question: "What is 'Structured Logging', and why is it superior to 'Plain Text' logging for a DevOps architect?",
-    options: [
+    "id": 92,
+    "difficulty": "medium",
+    "category": "observability-concepts",
+    "question": "What is 'Structured Logging', and why is it superior to 'Plain Text' logging for a DevOps architect?",
+    "options": [
+      "Logging only on weekends",
       "Logging in alphabetical order",
       "Logging in a machine-readable format like JSON; it allows log aggregators to parse fields automatically without complex RegEx",
-      "Writing logs in bold text",
-      "Logging only on weekends"
+      "Writing logs in bold text"
     ],
-    answer: 1,
-    explanation: "Structured logs (JSON) turn logs into data. Instead of searching 'Error occurred for user 123', you can query 'user_id: 123 AND level: ERROR' instantly.",
-    hint: "JSON vs. String."
+    "answer": 2,
+    "explanation": "Structured logs (JSON) turn logs into data. Instead of searching 'Error occurred for user 123', you can query 'user_id: 123 AND level: ERROR' instantly.",
+    "hint": "JSON vs. String."
   },
-
-  /* ======================================================
-     FINOPS: CLOUD ECONOMICS
-     ====================================================== */
   {
-    id: 93,
-    difficulty: "hard",
-    category: "finops",
-    question: "You have several 'Idle' Load Balancers and 'Unattached' EBS volumes. Which FinOps 'Phase' is primarily responsible for identifying and removing these 'Zombies'?",
-    options: [
-      "Inform",
-      "Optimize",
+    "id": 93,
+    "difficulty": "hard",
+    "category": "finops",
+    "question": "You have several 'Idle' Load Balancers and 'Unattached' EBS volumes. Which FinOps 'Phase' is primarily responsible for identifying and removing these 'Zombies'?",
+    "options": [
       "Operate",
-      "Forecast"
+      "Optimize",
+      "Forecast",
+      "Inform"
     ],
-    answer: 1,
-    explanation: "The 'Optimize' phase focuses on cost-reduction activities like rightsizing, removing unused resources, and purchasing Reserved Instances.",
-    hint: "Identify waste and 'Cut' it."
+    "answer": 1,
+    "explanation": "The 'Optimize' phase focuses on cost-reduction activities like rightsizing, removing unused resources, and purchasing Reserved Instances.",
+    "hint": "Identify waste and 'Cut' it."
   },
   {
-    id: 94,
-    difficulty: "medium",
-    category: "finops",
-    question: "What is the difference between 'Reserved Instances' (RI) and 'Savings Plans' in AWS?",
-    options: [
-      "RIs are for storage; Savings Plans are for compute",
+    "id": 94,
+    "difficulty": "medium",
+    "category": "finops",
+    "question": "What is the difference between 'Reserved Instances' (RI) and 'Savings Plans' in AWS?",
+    "options": [
       "RIs are tied to specific instance types/regions; Savings Plans offer more flexibility across instance families and regions in exchange for a commitment to a consistent amount of usage ($/hr)",
+      "There is no difference",
       "Savings Plans are free",
-      "There is no difference"
+      "RIs are for storage; Savings Plans are for compute"
     ],
-    answer: 1,
-    explanation: "Savings Plans are the modern approach, providing broader flexibility (e.g., covering both EC2 and Fargate/Lambda) compared to the rigid nature of RIs.",
-    hint: "Rigid commitment vs. Flexible commitment."
+    "answer": 0,
+    "explanation": "Savings Plans are the modern approach, providing broader flexibility (e.g., covering both EC2 and Fargate/Lambda) compared to the rigid nature of RIs.",
+    "hint": "Rigid commitment vs. Flexible commitment."
   },
-
-  /* ======================================================
-     ADVANCED CI/CD (GIT)
-     ====================================================== */
   {
-    id: 95,
-    difficulty: "medium",
-    category: "git-operations",
-    question: "You want to combine multiple small commits into a single, clean commit before merging into the 'main' branch. Which Git command do you use?",
-    options: [
+    "id": 95,
+    "difficulty": "medium",
+    "category": "git-operations",
+    "question": "You want to combine multiple small commits into a single, clean commit before merging into the 'main' branch. Which Git command do you use?",
+    "options": [
       "git push --force",
+      "git fetch",
       "git rebase -i (interactive squash)",
-      "git checkout",
-      "git fetch"
+      "git checkout"
     ],
-    answer: 1,
-    explanation: "Interactive rebase allows you to 'squash' commits, keeping the history clean and readable for reviewers.",
-    hint: "Consolidate history."
+    "answer": 2,
+    "explanation": "Interactive rebase allows you to 'squash' commits, keeping the history clean and readable for reviewers.",
+    "hint": "Consolidate history."
   },
   {
-    id: 96,
-    difficulty: "hard",
-    category: "cicd-strategies",
-    question: "What is 'Trunk-Based Development'?",
-    options: [
-      "Developers work on long-lived feature branches for months",
+    "id": 96,
+    "difficulty": "hard",
+    "category": "cicd-strategies",
+    "question": "What is 'Trunk-Based Development'?",
+    "options": [
       "Developers merge small, frequent updates to a single shared branch (trunk) at least once a day, avoiding 'Merge Hell'",
-      "Deleting the repository after every build",
-      "Only the CTO is allowed to write code"
+      "Only the CTO is allowed to write code",
+      "Developers work on long-lived feature branches for months",
+      "Deleting the repository after every build"
     ],
-    answer: 1,
-    explanation: "Trunk-based development is a prerequisite for CI/CD. It reduces integration friction and encourages small, testable increments.",
-    hint: "No long-lived branches."
+    "answer": 0,
+    "explanation": "Trunk-based development is a prerequisite for CI/CD. It reduces integration friction and encourages small, testable increments.",
+    "hint": "No long-lived branches."
   },
-
-  /* ======================================================
-     KUBERNETES: ADVANCED STORAGE
-     ====================================================== */
   {
-    id: 97,
-    difficulty: "hard",
-    category: "k8s-storage",
-    question: "A pod uses a PersistentVolumeClaim (PVC) with 'accessModes: ReadWriteOnce'. Can two different pods on two different physical nodes use this volume simultaneously?",
-    options: [
-      "Yes, K8s will replicate the data",
-      "No, 'ReadWriteOnce' means the volume can only be mounted by a single node at a time",
+    "id": 97,
+    "difficulty": "hard",
+    "category": "k8s-storage",
+    "question": "A pod uses a PersistentVolumeClaim (PVC) with 'accessModes: ReadWriteOnce'. Can two different pods on two different physical nodes use this volume simultaneously?",
+    "options": [
       "Yes, if they are in the same namespace",
-      "Only on Azure"
+      "No, 'ReadWriteOnce' means the volume can only be mounted by a single node at a time",
+      "Only on Azure",
+      "Yes, K8s will replicate the data"
     ],
-    answer: 1,
-    explanation: "ReadWriteOnce (RWO) is node-exclusive. If you need multi-node access, you must use 'ReadWriteMany' (RWX), typically backed by NFS or Azure Files.",
-    hint: "Focus on the word 'Once'—it refers to the Node."
+    "answer": 1,
+    "explanation": "ReadWriteOnce (RWO) is node-exclusive. If you need multi-node access, you must use 'ReadWriteMany' (RWX), typically backed by NFS or Azure Files.",
+    "hint": "Focus on the word 'Once'—it refers to the Node."
   },
   {
-    id: 98,
-    difficulty: "hard",
-    category: "k8s-operations",
-    question: "You notice several pods are in 'Evicted' state. 'kubectl describe' shows 'DiskPressure'. What is the Kubelet doing?",
-    options: [
-      "Protecting the node's system stability by terminating lower-priority pods to free up disk space for logs and images",
-      "Rebooting the node",
+    "id": 98,
+    "difficulty": "hard",
+    "category": "k8s-operations",
+    "question": "You notice several pods are in 'Evicted' state. 'kubectl describe' shows 'DiskPressure'. What is the Kubelet doing?",
+    "options": [
+      "Deleting the deployment",
       "Formatting the hard drive",
-      "Deleting the deployment"
+      "Protecting the node's system stability by terminating lower-priority pods to free up disk space for logs and images",
+      "Rebooting the node"
     ],
-    answer: 0,
-    explanation: "When a node's disk reaches a critical threshold (e.g., 85-90%), the Kubelet evicts pods to prevent the node from becoming completely unresponsive.",
-    hint: "Node survival mechanism."
+    "answer": 2,
+    "explanation": "When a node's disk reaches a critical threshold (e.g., 85-90%), the Kubelet evicts pods to prevent the node from becoming completely unresponsive.",
+    "hint": "Node survival mechanism."
   },
-
-  /* ======================================================
-     SECURITY: SECRETS MANAGEMENT
-     ====================================================== */
   {
-    id: 99,
-    difficulty: "hard",
-    category: "security-vault",
-    question: "In HashiCorp Vault, what is the 'Transit' secrets engine primarily used for?",
-    options: [
-      "Moving data between folders",
+    "id": 99,
+    "difficulty": "hard",
+    "category": "security-vault",
+    "question": "In HashiCorp Vault, what is the 'Transit' secrets engine primarily used for?",
+    "options": [
+      "Generating SSH certificates",
       "Encryption as a Service (EaaS)—encrypting data in-flight without Vault storing the data itself",
       "Managing AWS Access Keys",
-      "Generating SSH certificates"
+      "Moving data between folders"
     ],
-    answer: 1,
-    explanation: "Transit EaaS allows apps to send plain text to Vault, get back ciphertext, and store it in their own DB. Vault handles the key management and rotation, but not the storage.",
-    hint: "Cryptographic offloading."
+    "answer": 1,
+    "explanation": "Transit EaaS allows apps to send plain text to Vault, get back ciphertext, and store it in their own DB. Vault handles the key management and rotation, but not the storage.",
+    "hint": "Cryptographic offloading."
   },
   {
-    id: 100,
-    difficulty: "hard",
-    category: "security-compliance",
-    question: "What is 'Attestation' in the context of a secure software supply chain (e.g., using Sigstore/Cosign)?",
-    options: [
-      "Writing a blog post about security",
+    "id": 100,
+    "difficulty": "hard",
+    "category": "security-compliance",
+    "question": "What is 'Attestation' in the context of a secure software supply chain (e.g., using Sigstore/Cosign)?",
+    "options": [
+      "A password for the Docker image",
       "A digitally signed statement that verifies a specific action (like a successful security scan or build) was performed by a trusted identity",
       "Encrypting the source code",
-      "A password for the Docker image"
+      "Writing a blog post about security"
     ],
-    answer: 1,
-    explanation: "Attestations allow you to verify that an image didn't just come from 'somewhere', but specifically passed through your approved CI/CD steps and security scans.",
-    hint: "A 'Notarized' proof of process."
+    "answer": 1,
+    "explanation": "Attestations allow you to verify that an image didn't just come from 'somewhere', but specifically passed through your approved CI/CD steps and security scans.",
+    "hint": "A 'Notarized' proof of process."
   },
-   
-/* ======================================================
-   DEVOPS & OBSERVABILITY ARCHITECT - BATCH 7 (IDs 101-150)
-   ====================================================== */
-
-  /* ======================================================
-     AZURE ARCHITECTURE & IDENTITY (From azure_readme.md)
-     ====================================================== */
   {
-    id: 101,
-    difficulty: "hard",
-    category: "azure-identity",
-    question: "A large enterprise moves to Entra ID (Azure AD). Users belonging to hundreds of nested security groups report they can no longer log into certain applications, receiving a '400 Bad Request (Request Header Too Long)' error. What is this phenomenon called?",
-    options: [
+    "id": 101,
+    "difficulty": "hard",
+    "category": "azure-identity",
+    "question": "A large enterprise moves to Entra ID (Azure AD). Users belonging to hundreds of nested security groups report they can no longer log into certain applications, receiving a '400 Bad Request (Request Header Too Long)' error. What is this phenomenon called?",
+    "options": [
       "Group Policy Object (GPO) Conflict",
-      "Token Bloat",
       "Managed Identity Exhaustion",
-      "RBAC Propagation Delay"
+      "RBAC Propagation Delay",
+      "Token Bloat"
     ],
-    answer: 1,
-    explanation: "Token Bloat occurs when the authentication token becomes too large due to the inclusion of too many group claims, exceeding the header size limits of web servers or load balancers.",
-    hint: "Think about 'Groups' inflating the size of the identity payload."
+    "answer": 3,
+    "explanation": "Token Bloat occurs when the authentication token becomes too large due to the inclusion of too many group claims, exceeding the header size limits of web servers or load balancers.",
+    "hint": "Think about 'Groups' inflating the size of the identity payload."
   },
   {
-    id: 102,
-    difficulty: "hard",
-    category: "azure-networking",
-    question: "Your Azure App Service is experiencing intermittent 'Connection Timeout' errors when calling external third-party APIs under high load. You suspect SNAT Port Exhaustion. What is the most effective architectural fix?",
-    options: [
+    "id": 102,
+    "difficulty": "hard",
+    "category": "azure-networking",
+    "question": "Your Azure App Service is experiencing intermittent 'Connection Timeout' errors when calling external third-party APIs under high load. You suspect SNAT Port Exhaustion. What is the most effective architectural fix?",
+    "options": [
+      "Disable the firewall on the App Service",
       "Scale up the App Service Plan to a higher tier",
-      "Implement VNet Integration and route outbound traffic through an Azure NAT Gateway",
       "Increase the number of instances in the App Service",
-      "Disable the firewall on the App Service"
+      "Implement VNet Integration and route outbound traffic through an Azure NAT Gateway"
     ],
-    answer: 1,
-    explanation: "Azure NAT Gateway provides a larger, scalable pool of SNAT ports (64,000 per IP) compared to the limited default pool provided by App Service, effectively solving exhaustion issues for outbound traffic.",
-    hint: "Look for a dedicated service to handle 'Source Network Address Translation'."
+    "answer": 3,
+    "explanation": "Azure NAT Gateway provides a larger, scalable pool of SNAT ports (64,000 per IP) compared to the limited default pool provided by App Service, effectively solving exhaustion issues for outbound traffic.",
+    "hint": "Look for a dedicated service to handle 'Source Network Address Translation'."
   },
-
-  /* ======================================================
-     AWS INFRASTRUCTURE & SECURITY (From aws_readme.md)
-     ===================================================== */
   {
-    id: 103,
-    difficulty: "medium",
-    category: "aws-networking",
-    question: "You cannot connect to an EC2 instance via SSH, even though the instance is running and has a Public IP. You check the Security Group and see port 22 is open. What is the next 'stateless' network component you should check?",
-    options: [
-      "IAM Role permissions",
-      "Network Access Control List (NACL)",
+    "id": 103,
+    "difficulty": "medium",
+    "category": "aws-networking",
+    "question": "You cannot connect to an EC2 instance via SSH, even though the instance is running and has a Public IP. You check the Security Group and see port 22 is open. What is the next 'stateless' network component you should check?",
+    "options": [
       "Route Table 'Local' route",
-      "S3 Bucket Policy"
+      "IAM Role permissions",
+      "S3 Bucket Policy",
+      "Network Access Control List (NACL)"
     ],
-    answer: 1,
-    explanation: "Unlike Security Groups (which are stateful), NACLs are stateless. You must explicitly allow both inbound and outbound traffic for a connection to work.",
-    hint: "Stateful vs. Stateless filters."
+    "answer": 3,
+    "explanation": "Unlike Security Groups (which are stateful), NACLs are stateless. You must explicitly allow both inbound and outbound traffic for a connection to work.",
+    "hint": "Stateful vs. Stateless filters."
   },
   {
-    id: 104,
-    difficulty: "hard",
-    category: "aws-compute",
-    question: "A Lambda function is experiencing high 'Cold Start' latency, impacting a customer-facing API. Which AWS feature provides pre-warmed execution environments to eliminate this delay?",
-    options: [
-      "Reserved Instances",
+    "id": 104,
+    "difficulty": "hard",
+    "category": "aws-compute",
+    "question": "A Lambda function is experiencing high 'Cold Start' latency, impacting a customer-facing API. Which AWS feature provides pre-warmed execution environments to eliminate this delay?",
+    "options": [
       "Provisioned Concurrency",
-      "Lambda Layers",
-      "AWS App Runner"
+      "Reserved Instances",
+      "AWS App Runner",
+      "Lambda Layers"
     ],
-    answer: 1,
-    explanation: "Provisioned Concurrency keeps a specified number of Lambda functions initialized and ready to respond immediately to events.",
-    hint: "Keeping the environment 'warm' for a price."
+    "answer": 0,
+    "explanation": "Provisioned Concurrency keeps a specified number of Lambda functions initialized and ready to respond immediately to events.",
+    "hint": "Keeping the environment 'warm' for a price."
   },
-
-  /* ======================================================
-     KAFKA RELIABILITY & CHAOS (From kafka_readme.md)
-     ====================================================== */
   {
-    id: 105,
-    difficulty: "hard",
-    category: "kafka-durability",
-    question: "In a Kafka cluster, you notice that the 'Under-Replicated Partitions' metric is spiking. Upon investigation, you see that the 'In-Sync Replicas' (ISR) list for several partitions has shrunk. What is the most likely cause?",
-    options: [
+    "id": 105,
+    "difficulty": "hard",
+    "category": "kafka-durability",
+    "question": "In a Kafka cluster, you notice that the 'Under-Replicated Partitions' metric is spiking. Upon investigation, you see that the 'In-Sync Replicas' (ISR) list for several partitions has shrunk. What is the most likely cause?",
+    "options": [
       "A consumer group is rebalancing",
       "A broker is experiencing high disk I/O or network latency, failing to keep up with the leader's log",
       "The producer is using acks=0",
       "The Schema Registry is down"
     ],
-    answer: 1,
-    explanation: "The ISR contains replicas that are caught up with the leader. If a follower falls behind (due to hardware issues or congestion), the leader removes it from the ISR to maintain availability for producers using 'acks=all'.",
-    hint: "Followers failing to keep up."
+    "answer": 1,
+    "explanation": "The ISR contains replicas that are caught up with the leader. If a follower falls behind (due to hardware issues or congestion), the leader removes it from the ISR to maintain availability for producers using 'acks=all'.",
+    "hint": "Followers failing to keep up."
   },
   {
-    id: 106,
-    difficulty: "hard",
-    category: "kafka-architecture",
-    question: "You are designing a Kafka cluster across three Availability Zones (AZs). To ensure that data remains available even if an entire AZ fails, which setting must be configured on both the brokers and the topics?",
-    options: [
+    "id": 106,
+    "difficulty": "hard",
+    "category": "kafka-architecture",
+    "question": "You are designing a Kafka cluster across three Availability Zones (AZs). To ensure that data remains available even if an entire AZ fails, which setting must be configured on both the brokers and the topics?",
+    "options": [
+      "Min.insync.replicas = 1",
       "Compression (Gzip)",
       "Rack Awareness (broker.rack and replication-factor of 3)",
-      "Exactly-Once Semantics",
-      "Min.insync.replicas = 1"
+      "Exactly-Once Semantics"
     ],
-    answer: 1,
-    explanation: "Rack awareness ensures that replicas of the same partition are spread across different physical racks (or AZs), preventing a single-point-of-failure for the data.",
-    hint: "Spreading data across physical locations."
+    "answer": 2,
+    "explanation": "Rack awareness ensures that replicas of the same partition are spread across different physical racks (or AZs), preventing a single-point-of-failure for the data.",
+    "hint": "Spreading data across physical locations."
   },
-
-  /* ======================================================
-     ADVANCED IaC (TERRAFORM / BICEP)
-     ====================================================== */
   {
-    id: 107,
-    difficulty: "hard",
-    category: "iac-terraform",
-    question: "You are using Terraform to manage a multi-cloud environment. You want to pass the Output of an AWS VPC module as an Input to an Azure VNet peering module in the same configuration. What is the correct way to handle this?",
-    options: [
-      "Manually copy the ID into a variables file",
+    "id": 107,
+    "difficulty": "hard",
+    "category": "iac-terraform",
+    "question": "You are using Terraform to manage a multi-cloud environment. You want to pass the Output of an AWS VPC module as an Input to an Azure VNet peering module in the same configuration. What is the correct way to handle this?",
+    "options": [
       "Use 'Data Sources' or reference the module output directly: module.aws_vpc.vpc_id",
-      "Terraform cannot communicate between different cloud providers",
-      "Use the 'terraform import' command"
+      "Manually copy the ID into a variables file",
+      "Use the 'terraform import' command",
+      "Terraform cannot communicate between different cloud providers"
     ],
-    answer: 1,
-    explanation: "Terraform allows cross-resource and cross-provider referencing. As long as the resources are in the same state/configuration, outputs from one can be fed into another.",
-    hint: "Piping output to input."
+    "answer": 0,
+    "explanation": "Terraform allows cross-resource and cross-provider referencing. As long as the resources are in the same state/configuration, outputs from one can be fed into another.",
+    "hint": "Piping output to input."
   },
   {
-    id: 108,
-    difficulty: "hard",
-    category: "iac-bicep",
-    question: "In Azure Bicep, you want to ensure that a Storage Account is only deployed if the environment parameter is set to 'prod'. Which syntax should you use?",
-    options: [
-      "resource stg ... if(env == 'prod') { ... }",
+    "id": 108,
+    "difficulty": "hard",
+    "category": "iac-bicep",
+    "question": "In Azure Bicep, you want to ensure that a Storage Account is only deployed if the environment parameter is set to 'prod'. Which syntax should you use?",
+    "options": [
+      "Bicep does not support conditional deployment",
       "resource stg ... = if env == 'prod' ?",
-      "if (env == 'prod') { resource stg ... }",
-      "Bicep does not support conditional deployment"
+      "resource stg ... if(env == 'prod') { ... }",
+      "if (env == 'prod') { resource stg ... }"
     ],
-    answer: 2, // 0-based: 2 is the 3rd option
-    explanation: "Bicep uses the 'if' keyword directly before the resource body for conditional logic.",
-    hint: "Conditional resource declaration."
+    "answer": 3,
+    "explanation": "Bicep uses the 'if' keyword directly before the resource body for conditional logic.",
+    "hint": "Conditional resource declaration."
   },
-
-  /* ======================================================
-     OBSERVABILITY: TROUBLESHOOTING & SRE
-     ====================================================== */
   {
-    id: 109,
-    difficulty: "hard",
-    category: "observability-sre",
-    question: "While debugging a high-latency issue, you find that 'Mean Time To Detect' (MTTD) is low, but 'Mean Time To Repair' (MTTR) is very high. Which area of your DevOps process likely needs improvement?",
-    options: [
-      "Alerting thresholds",
-      "Automated monitoring",
+    "id": 109,
+    "difficulty": "hard",
+    "category": "observability-sre",
+    "question": "While debugging a high-latency issue, you find that 'Mean Time To Detect' (MTTD) is low, but 'Mean Time To Repair' (MTTR) is very high. Which area of your DevOps process likely needs improvement?",
+    "options": [
+      "Log ingestion speed",
       "Incident Response Playbooks and Automated Remediation (Self-healing)",
-      "Log ingestion speed"
+      "Alerting thresholds",
+      "Automated monitoring"
     ],
-    answer: 2,
-    explanation: "If you know there is a problem quickly (Low MTTD) but take a long time to fix it (High MTTR), the bottleneck is in the diagnostic or resolution phase, not the monitoring phase.",
-    hint: "Fixing vs. Finding."
+    "answer": 1,
+    "explanation": "If you know there is a problem quickly (Low MTTD) but take a long time to fix it (High MTTR), the bottleneck is in the diagnostic or resolution phase, not the monitoring phase.",
+    "hint": "Fixing vs. Finding."
   },
   {
-    id: 110,
-    difficulty: "medium",
-    category: "k8s-observability",
-    question: "A developer complains that their pod was deleted, and they don't know why. Which Kubernetes resource should you query to see the history of scaling events or OOM kills for that namespace?",
-    options: [
-      "Pods",
-      "Events",
+    "id": 110,
+    "difficulty": "medium",
+    "category": "k8s-observability",
+    "question": "A developer complains that their pod was deleted, and they don't know why. Which Kubernetes resource should you query to see the history of scaling events or OOM kills for that namespace?",
+    "options": [
       "Services",
+      "Events",
+      "Pods",
       "Endpoints"
     ],
-    answer: 1,
-    explanation: "The 'Events' resource in K8s stores information about state changes, errors, and actions taken by the controllers (e.g., 'Successfully pulled image', 'NodeHasDiskPressure').",
-    hint: "The 'History log' of the cluster."
+    "answer": 1,
+    "explanation": "The 'Events' resource in K8s stores information about state changes, errors, and actions taken by the controllers (e.g., 'Successfully pulled image', 'NodeHasDiskPressure').",
+    "hint": "The 'History log' of the cluster."
   },
-
-  /* ======================================================
-     IDENTITY & ACCESS (ENTRA / IAM)
-     ====================================================== */
   {
-    id: 111,
-    difficulty: "hard",
-    category: "security-identity",
-    question: "To achieve 'Zero-Secret' architecture, you want your application running on an Azure Virtual Machine to retrieve a database connection string from Key Vault without using a Client Secret or Password. What do you enable on the VM?",
-    options: [
-      "Public IP",
-      "Managed Identity (System-assigned or User-assigned)",
+    "id": 111,
+    "difficulty": "hard",
+    "category": "security-identity",
+    "question": "To achieve 'Zero-Secret' architecture, you want your application running on an Azure Virtual Machine to retrieve a database connection string from Key Vault without using a Client Secret or Password. What do you enable on the VM?",
+    "options": [
       "Just-In-Time (JIT) access",
+      "Managed Identity (System-assigned or User-assigned)",
+      "Public IP",
       "SSH Key"
     ],
-    answer: 1,
-    explanation: "Managed Identities provide an automatically managed identity in Entra ID for the resource. The application uses this identity to get tokens for Key Vault, removing the need for secrets in code.",
-    hint: "The resource *is* the identity."
+    "answer": 1,
+    "explanation": "Managed Identities provide an automatically managed identity in Entra ID for the resource. The application uses this identity to get tokens for Key Vault, removing the need for secrets in code.",
+    "hint": "The resource *is* the identity."
   },
   {
-    id: 112,
-    difficulty: "medium",
-    category: "security-iam",
-    question: "You need to grant a third-party audit firm temporary access to your AWS account to view S3 logs. What is the most secure way to do this?",
-    options: [
-      "Create an IAM User and email them the password",
-      "Provide them with your Root account credentials",
+    "id": 112,
+    "difficulty": "medium",
+    "category": "security-iam",
+    "question": "You need to grant a third-party audit firm temporary access to your AWS account to view S3 logs. What is the most secure way to do this?",
+    "options": [
+      "Make the S3 bucket public",
       "Create a Cross-Account IAM Role with an 'External ID' for them to assume",
-      "Make the S3 bucket public"
+      "Create an IAM User and email them the password",
+      "Provide them with your Root account credentials"
     ],
-    answer: 2,
-    explanation: "Cross-account roles allow users from another AWS account to securely access your resources. The 'External ID' protects against the 'Confused Deputy' problem.",
-    hint: "Assume the role."
+    "answer": 1,
+    "explanation": "Cross-account roles allow users from another AWS account to securely access your resources. The 'External ID' protects against the 'Confused Deputy' problem.",
+    "hint": "Assume the role."
   },
-/* ======================================================
-   DEVOPS & OBSERVABILITY ARCHITECT - BATCH 8 (IDs 113-162)
-   ====================================================== */
-
-
-  /* ======================================================
-     PROMETHEUS & ALERTMANAGER (From Observability Specs)
-     ====================================================== */
   {
-    id: 113,
-    difficulty: "hard",
-    category: "observability-alerts",
-    question: "You have an alert rule that triggers when CPU > 80%. During a rolling update, 20 new pods spark the alert simultaneously, flooding Slack. Which Alertmanager feature groups these into a single notification?",
-    options: [
-      "Inhibition",
-      "Gossip Protocol",
+    "id": 113,
+    "difficulty": "hard",
+    "category": "observability-alerts",
+    "question": "You have an alert rule that triggers when CPU > 80%. During a rolling update, 20 new pods spark the alert simultaneously, flooding Slack. Which Alertmanager feature groups these into a single notification?",
+    "options": [
       "Grouping (group_by: ['alertname', 'cluster'])",
-      "Silencing"
+      "Inhibition",
+      "Silencing",
+      "Gossip Protocol"
     ],
-    answer: 2,
-    explanation: "Grouping categorizes alerts of a similar nature into a single notification. This prevents 'Alert Fatigue' by sending one message saying '20 pods have high CPU' instead of 20 individual messages.",
-    hint: "Aggregating multiple alerts into one."
+    "answer": 0,
+    "explanation": "Grouping categorizes alerts of a similar nature into a single notification. This prevents 'Alert Fatigue' by sending one message saying '20 pods have high CPU' instead of 20 individual messages.",
+    "hint": "Aggregating multiple alerts into one."
   },
   {
-    id: 114,
-    difficulty: "hard",
-    category: "observability-alerts",
-    question: "You have a 'Critical' alert for 'DatabaseDown' and a 'Warning' alert for 'AppConnectionError'. When the Database is down, both trigger. How do you suppress the 'Warning' alert so only the 'Critical' one shows?",
-    options: [
+    "id": 114,
+    "difficulty": "hard",
+    "category": "observability-alerts",
+    "question": "You have a 'Critical' alert for 'DatabaseDown' and a 'Warning' alert for 'AppConnectionError'. When the Database is down, both trigger. How do you suppress the 'Warning' alert so only the 'Critical' one shows?",
+    "options": [
+      "Increase the 'for' duration of the Warning alert",
       "Delete the Warning alert",
       "Alertmanager Inhibition Rules",
-      "Increase the 'for' duration of the Warning alert",
       "Use a Recording Rule"
     ],
-    answer: 1,
-    explanation: "Inhibition allows you to suppress a set of alerts if another set of alerts (the source) is already firing. This is key for root-cause clarity.",
-    hint: "Mute the 'Symptom' if the 'Root Cause' is already known."
+    "answer": 2,
+    "explanation": "Inhibition allows you to suppress a set of alerts if another set of alerts (the source) is already firing. This is key for root-cause clarity.",
+    "hint": "Mute the 'Symptom' if the 'Root Cause' is already known."
   },
-
-  /* ======================================================
-     KAFKA PRODUCER & CLUSTER INTERNALS (From kafka_readme.md)
-     ====================================================== */
   {
-    id: 115,
-    difficulty: "hard",
-    category: "kafka-performance",
-    question: "A Kafka producer is experiencing high latency. You notice that 'linger.ms' is set to 0 and 'batch.size' is 16KB. What is the most likely cause of the latency and how do you fix it for better throughput?",
-    options: [
-      "The producer is sending too many small requests; increase 'linger.ms' to allow more messages to group into a single batch",
-      "The producer is too slow; set 'acks=0'",
+    "id": 115,
+    "difficulty": "hard",
+    "category": "kafka-performance",
+    "question": "A Kafka producer is experiencing high latency. You notice that 'linger.ms' is set to 0 and 'batch.size' is 16KB. What is the most likely cause of the latency and how do you fix it for better throughput?",
+    "options": [
       "The network is down",
-      "Decrease the 'batch.size' to 1KB"
+      "The producer is sending too many small requests; increase 'linger.ms' to allow more messages to group into a single batch",
+      "Decrease the 'batch.size' to 1KB",
+      "The producer is too slow; set 'acks=0'"
     ],
-    answer: 0,
-    explanation: "With linger.ms=0, the producer sends messages immediately. Increasing it (e.g., to 5-10ms) allows the producer to wait and group more messages into one request, significantly increasing throughput and reducing overhead.",
-    hint: "Trade a tiny bit of latency for massive throughput."
+    "answer": 1,
+    "explanation": "With linger.ms=0, the producer sends messages immediately. Increasing it (e.g., to 5-10ms) allows the producer to wait and group more messages into one request, significantly increasing throughput and reducing overhead.",
+    "hint": "Trade a tiny bit of latency for massive throughput."
   },
   {
-    id: 116,
-    difficulty: "hard",
-    category: "kafka-chaos",
-    question: "During a network partition, a Kafka partition has two leaders (Split Brain). How does KRaft/Zookeeper resolve this when the network is restored?",
-    options: [
+    "id": 116,
+    "difficulty": "hard",
+    "category": "kafka-chaos",
+    "question": "During a network partition, a Kafka partition has two leaders (Split Brain). How does KRaft/Zookeeper resolve this when the network is restored?",
+    "options": [
       "Both leaders stay active",
       "The leader with the lower 'Epoch' or 'Term' number realizes it is stale and steps down in favor of the newer leader",
       "The cluster deletes the topic",
       "Manual intervention is required to delete the old leader"
     ],
-    answer: 1,
-    explanation: "Kafka uses a 'Controller' and 'Epochs' (version numbers). When a partitioned node returns, it sees a higher Epoch in the cluster and realizes its leadership is no longer valid.",
-    hint: "Consensus via Versioning (Epochs)."
+    "answer": 1,
+    "explanation": "Kafka uses a 'Controller' and 'Epochs' (version numbers). When a partitioned node returns, it sees a higher Epoch in the cluster and realizes its leadership is no longer valid.",
+    "hint": "Consensus via Versioning (Epochs)."
   },
-
-  /* ======================================================
-     GITOPS & MULTI-CLUSTER (ARGO / FLUX)
-     ====================================================== */
   {
-    id: 117,
-    difficulty: "hard",
-    category: "gitops-architecture",
-    question: "You are managing 50 Kubernetes clusters using ArgoCD. You want to avoid defining 50 individual 'Application' YAMLs. Which ArgoCD feature allows you to generate applications dynamically based on a list of clusters or a Git folder structure?",
-    options: [
-      "Argo Rollouts",
-      "ApplicationSet",
+    "id": 117,
+    "difficulty": "hard",
+    "category": "gitops-architecture",
+    "question": "You are managing 50 Kubernetes clusters using ArgoCD. You want to avoid defining 50 individual 'Application' YAMLs. Which ArgoCD feature allows you to generate applications dynamically based on a list of clusters or a Git folder structure?",
+    "options": [
       "AppProject",
-      "Argo Events"
+      "Argo Events",
+      "Argo Rollouts",
+      "ApplicationSet"
     ],
-    answer: 1,
-    explanation: "ApplicationSet provides a 'Generator' (like Git or Cluster generators) that automates the creation of many applications from a single template.",
-    hint: "Template-based scaling for ArgoCD."
+    "answer": 3,
+    "explanation": "ApplicationSet provides a 'Generator' (like Git or Cluster generators) that automates the creation of many applications from a single template.",
+    "hint": "Template-based scaling for ArgoCD."
   },
   {
-    id: 118,
-    difficulty: "medium",
-    category: "gitops-concepts",
-    question: "In a GitOps workflow, where is the 'Source of Truth' for the infrastructure state?",
-    options: [
+    "id": 118,
+    "difficulty": "medium",
+    "category": "gitops-concepts",
+    "question": "In a GitOps workflow, where is the 'Source of Truth' for the infrastructure state?",
+    "options": [
       "The running cluster (etcd)",
-      "The Git repository",
       "The developer's laptop",
+      "The Git repository",
       "The CI/CD build logs"
     ],
-    answer: 1,
-    explanation: "The core tenet of GitOps is that the Git repository defines the desired state. If the cluster deviates, the GitOps operator (Argo/Flux) pulls it back to match Git.",
-    hint: "State is in the Code."
+    "answer": 2,
+    "explanation": "The core tenet of GitOps is that the Git repository defines the desired state. If the cluster deviates, the GitOps operator (Argo/Flux) pulls it back to match Git.",
+    "hint": "State is in the Code."
   },
-
-  /* ======================================================
-     CLOUD DISASTER RECOVERY (From aws_readme.md & azure_readme.md)
-     ====================================================== */
   {
-    id: 119,
-    difficulty: "hard",
-    category: "cloud-dr",
-    question: "You are implementing a 'Pilot Light' DR strategy. Which of the following best describes the state of your secondary region?",
-    options: [
-      "A full copy of the environment is running at 100% capacity",
+    "id": 119,
+    "difficulty": "hard",
+    "category": "cloud-dr",
+    "question": "You are implementing a 'Pilot Light' DR strategy. Which of the following best describes the state of your secondary region?",
+    "options": [
+      "The secondary region is a backup on tape",
       "Only the data is replicated; no compute is running",
       "The database is live/replicated, but compute resources (like ASGs or K8s clusters) are off or at minimal scale, ready to be scaled up during a failover",
-      "The secondary region is a backup on tape"
+      "A full copy of the environment is running at 100% capacity"
     ],
-    answer: 2,
-    explanation: "Pilot Light keeps the 'fire' (data) going, but the 'house' (compute) is only built when needed. It is more cost-effective than a 'Warm Standby'.",
-    hint: "Data is ready, compute is scaled at zero."
+    "answer": 2,
+    "explanation": "Pilot Light keeps the 'fire' (data) going, but the 'house' (compute) is only built when needed. It is more cost-effective than a 'Warm Standby'.",
+    "hint": "Data is ready, compute is scaled at zero."
   },
   {
-    id: 120,
-    difficulty: "hard",
-    category: "cloud-networking",
-    question: "To achieve multi-region failover for a web application, you use DNS-based routing. Which record type allows you to check if an endpoint is healthy before returning its IP?",
-    options: [
-      "Standard A Record",
+    "id": 120,
+    "difficulty": "hard",
+    "category": "cloud-networking",
+    "question": "To achieve multi-region failover for a web application, you use DNS-based routing. Which record type allows you to check if an endpoint is healthy before returning its IP?",
+    "options": [
+      "TXT Record",
       "Alias Record with Health Checks (e.g., AWS Route 53 or Azure Traffic Manager)",
       "CNAME",
-      "TXT Record"
+      "Standard A Record"
     ],
-    answer: 1,
-    explanation: "Global traffic managers use health probes to monitor endpoints. If 'Region A' fails its health check, the DNS stops returning that IP and directs users to 'Region B'.",
-    hint: "DNS with 'Eyes' on the service health."
+    "answer": 1,
+    "explanation": "Global traffic managers use health probes to monitor endpoints. If 'Region A' fails its health check, the DNS stops returning that IP and directs users to 'Region B'.",
+    "hint": "DNS with 'Eyes' on the service health."
   },
-
-  /* ======================================================
-     ADVANCED K8S NETWORKING (CNI)
-     ====================================================== */
   {
-    id: 121,
-    difficulty: "hard",
-    category: "k8s-networking",
-    question: "In Azure Kubernetes Service (AKS), what is the primary difference between 'Kubenet' and 'Azure CNI'?",
-    options: [
+    "id": 121,
+    "difficulty": "hard",
+    "category": "k8s-networking",
+    "question": "In Azure Kubernetes Service (AKS), what is the primary difference between 'Kubenet' and 'Azure CNI'?",
+    "options": [
       "Kubenet is faster",
+      "Azure CNI only works for Windows",
       "Azure CNI assigns every pod a real IP address from the VNet subnet, whereas Kubenet uses an internal overlay network with NAT",
-      "Kubenet doesn't support Linux",
-      "Azure CNI only works for Windows"
+      "Kubenet doesn't support Linux"
     ],
-    answer: 1,
-    explanation: "Azure CNI provides better performance as there is no NAT/overlay overhead, but it requires much larger subnets as every pod consumes a VNet IP.",
-    hint: "Direct VNet IPs vs. Overlay NAT."
+    "answer": 2,
+    "explanation": "Azure CNI provides better performance as there is no NAT/overlay overhead, but it requires much larger subnets as every pod consumes a VNet IP.",
+    "hint": "Direct VNet IPs vs. Overlay NAT."
   },
   {
-    id: 122,
-    difficulty: "hard",
-    category: "k8s-security",
-    question: "A pod in your cluster needs to communicate with the Kubernetes API server to list other pods. What is the most secure way to authorize this?",
-    options: [
-      "Hardcode the admin token in the pod environment variables",
+    "id": 122,
+    "difficulty": "hard",
+    "category": "k8s-security",
+    "question": "A pod in your cluster needs to communicate with the Kubernetes API server to list other pods. What is the most secure way to authorize this?",
+    "options": [
       "Use RBAC (Role-Based Access Control) to bind a ServiceAccount to a Role with 'get/list' permissions for the 'pods' resource",
       "Disable the API server firewall",
+      "Hardcode the admin token in the pod environment variables",
       "Run the pod as 'privileged: true'"
     ],
-    answer: 1,
-    explanation: "RBAC follows the principle of least privilege. You define exactly what the ServiceAccount can do and nothing more.",
-    hint: "Role + ServiceAccount + Binding."
+    "answer": 0,
+    "explanation": "RBAC follows the principle of least privilege. You define exactly what the ServiceAccount can do and nothing more.",
+    "hint": "Role + ServiceAccount + Binding."
   },
-
-  /* ======================================================
-     REMAINING BATCH 8 PREVIEW (IDs 123-162)
-     ====================================================== */
   {
-    id: 123,
-    difficulty: "medium",
-    category: "iac-terraform",
-    question: "You want to run a script on a VM immediately after it is created by Terraform. Which argument in 'aws_instance' or 'azurerm_linux_virtual_machine' do you use?",
-    options: [
+    "id": 123,
+    "difficulty": "medium",
+    "category": "iac-terraform",
+    "question": "You want to run a script on a VM immediately after it is created by Terraform. Which argument in 'aws_instance' or 'azurerm_linux_virtual_machine' do you use?",
+    "options": [
       "post_install",
-      "user_data (AWS) or custom_data (Azure)",
+      "provisioner_run",
       "script_block",
-      "provisioner_run"
+      "user_data (AWS) or custom_data (Azure)"
     ],
-    answer: 1,
-    explanation: "User-data/Custom-data is the cloud-init mechanism used to bootstrap instances during their first boot.",
-    hint: "Boot-time script."
+    "answer": 3,
+    "explanation": "User-data/Custom-data is the cloud-init mechanism used to bootstrap instances during their first boot.",
+    "hint": "Boot-time script."
   },
   {
-    id: 124,
-    difficulty: "hard",
-    category: "sre-concepts",
-    question: "What is 'Windowed SLO Error Budget Alerting'?",
-    options: [
+    "id": 124,
+    "difficulty": "hard",
+    "category": "sre-concepts",
+    "question": "What is 'Windowed SLO Error Budget Alerting'?",
+    "options": [
       "Alerting only during business hours",
       "Alerting based on the consumption of the error budget over different time windows (e.g., 1 hour and 6 hours) to detect both fast and slow 'burns'",
       "Closing the window when an alert triggers",
       "Using Grafana to view alerts"
     ],
-    answer: 1,
-    explanation: "Multi-window alerts catch sudden catastrophic failures (fast burn) as well as slow, creeping reliability issues (slow burn) that would eventually exhaust the budget.",
-    hint: "Detecting the 'Fire' vs the 'Leak'."
+    "answer": 1,
+    "explanation": "Multi-window alerts catch sudden catastrophic failures (fast burn) as well as slow, creeping reliability issues (slow burn) that would eventually exhaust the budget.",
+    "hint": "Detecting the 'Fire' vs the 'Leak'."
   },
   {
-    id: 125,
-    difficulty: "hard",
-    category: "k8s-scheduling",
-    question: "You have a node pool with high-cost SSDs and a node pool with low-cost HDDs. How do you ensure your 'Logging' pods only run on the HDD nodes?",
-    options: [
-      "Use NodeSelector or NodeAffinity matching a label like 'disktype=hdd'",
+    "id": 125,
+    "difficulty": "hard",
+    "category": "k8s-scheduling",
+    "question": "You have a node pool with high-cost SSDs and a node pool with low-cost HDDs. How do you ensure your 'Logging' pods only run on the HDD nodes?",
+    "options": [
+      "Use a ServiceMesh",
       "Increase the CPU of the HDD nodes",
-      "Delete the SSD nodes",
-      "Use a ServiceMesh"
+      "Use NodeSelector or NodeAffinity matching a label like 'disktype=hdd'",
+      "Delete the SSD nodes"
     ],
-    answer: 0,
-    explanation: "NodeSelectors and NodeAffinity allow you to constrain pods to nodes with specific hardware or logical labels.",
-    hint: "Matching Pods to Node Labels."
+    "answer": 2,
+    "explanation": "NodeSelectors and NodeAffinity allow you to constrain pods to nodes with specific hardware or logical labels.",
+    "hint": "Matching Pods to Node Labels."
   },
-  
-/* ======================================================
-   DEVOPS & OBSERVABILITY ARCHITECT - BATCH 9 (IDs 126-162)
-   ====================================================== */
-
-  /* ======================================================
-     SERVICE MESH & ZERO TRUST
-     ====================================================== */
   {
-    id: 126,
-    difficulty: "hard",
-    category: "istio-security",
-    question: "You want to implement 'AuthorizationPolicies' in Istio. What is the default behavior of Istio when you apply a single 'ALLOW' policy to a specific workload?",
-    options: [
+    "id": 126,
+    "difficulty": "hard",
+    "category": "istio-security",
+    "question": "You want to implement 'AuthorizationPolicies' in Istio. What is the default behavior of Istio when you apply a single 'ALLOW' policy to a specific workload?",
+    "options": [
       "All other traffic is still allowed by default",
+      "Istio will crash",
       "All other traffic to that workload that doesn't match the ALLOW rule is implicitly denied (Whitelist approach)",
-      "The policy is ignored unless mTLS is set to STRICT",
-      "Istio will crash"
+      "The policy is ignored unless mTLS is set to STRICT"
     ],
-    answer: 1,
-    explanation: "Istio's AuthorizationPolicy follows a 'Default Deny' logic once a policy is applied. If you define one ALLOW rule, anything not matching that rule is blocked.",
-    hint: "Think 'Implicit Deny'."
+    "answer": 2,
+    "explanation": "Istio's AuthorizationPolicy follows a 'Default Deny' logic once a policy is applied. If you define one ALLOW rule, anything not matching that rule is blocked.",
+    "hint": "Think 'Implicit Deny'."
   },
   {
-    id: 127,
-    difficulty: "hard",
-    category: "k8s-security",
-    question: "A security requirement states that pods should not be able to escalate their own privileges to 'root'. Which field in the PodSecurityContext or SecurityContext must be set to 'true'?",
-    options: [
-      "privileged: true",
+    "id": 127,
+    "difficulty": "hard",
+    "category": "k8s-security",
+    "question": "A security requirement states that pods should not be able to escalate their own privileges to 'root'. Which field in the PodSecurityContext or SecurityContext must be set to 'true'?",
+    "options": [
+      "readOnlyRootFilesystem: true",
       "allowPrivilegeEscalation: false",
-      "runAsUser: 0",
-      "readOnlyRootFilesystem: true"
+      "privileged: true",
+      "runAsUser: 0"
     ],
-    answer: 1,
-    explanation: "Setting 'allowPrivilegeEscalation: false' prevents a process from gaining more privileges than its parent process (e.g., via setuid binaries).",
-    hint: "Stopping the 'sudo' climb."
+    "answer": 1,
+    "explanation": "Setting 'allowPrivilegeEscalation: false' prevents a process from gaining more privileges than its parent process (e.g., via setuid binaries).",
+    "hint": "Stopping the 'sudo' climb."
   },
-
-  /* ======================================================
-     ADVANCED GITOPS (ARGO / FLUX)
-     ====================================================== */
   {
-    id: 128,
-    difficulty: "hard",
-    category: "gitops-operations",
-    question: "You are using ArgoCD and need to deploy a specific version of a Helm chart to 'Staging' and a different version to 'Production' using a single Git repository. What is the best pattern?",
-    options: [
-      "Create two separate Git repositories",
-      "Use a 'Helm Umbrella Chart' or 'Kustomize + Helm' to override the 'targetRevision' or 'chart version' per environment folder",
+    "id": 128,
+    "difficulty": "hard",
+    "category": "gitops-operations",
+    "question": "You are using ArgoCD and need to deploy a specific version of a Helm chart to 'Staging' and a different version to 'Production' using a single Git repository. What is the best pattern?",
+    "options": [
       "Manually edit the ArgoCD UI for each environment",
-      "Use only the 'latest' tag for everything"
+      "Create two separate Git repositories",
+      "Use only the 'latest' tag for everything",
+      "Use a 'Helm Umbrella Chart' or 'Kustomize + Helm' to override the 'targetRevision' or 'chart version' per environment folder"
     ],
-    answer: 1,
-    explanation: "GitOps best practice involves using a directory structure (e.g., /overlays/prod and /overlays/staging) where Kustomize or Helm values files provide environment-specific overrides while sharing the base manifests.",
-    hint: "Environment-specific overrides."
+    "answer": 3,
+    "explanation": "GitOps best practice involves using a directory structure (e.g., /overlays/prod and /overlays/staging) where Kustomize or Helm values files provide environment-specific overrides while sharing the base manifests.",
+    "hint": "Environment-specific overrides."
   },
   {
-    id: 129,
-    difficulty: "medium",
-    category: "gitops-security",
-    question: "How do you handle 'Secrets' in a GitOps repository where all manifests are public or shared?",
-    options: [
-      "Commit the secrets in plain text",
+    "id": 129,
+    "difficulty": "medium",
+    "category": "gitops-security",
+    "question": "How do you handle 'Secrets' in a GitOps repository where all manifests are public or shared?",
+    "options": [
+      "Hardcode them in the Dockerfile",
       "Use a tool like 'Sealed Secrets' (Bitnami) or 'SOPS' (Mozilla) to encrypt secrets in Git, which are then decrypted by a controller inside the cluster",
       "Don't use secrets; use ConfigMaps instead",
-      "Hardcode them in the Dockerfile"
+      "Commit the secrets in plain text"
     ],
-    answer: 1,
-    explanation: "Secrets must never be in plain text in Git. Sealed Secrets and SOPS allow you to safely store encrypted values that only the cluster's private key can unlock.",
-    hint: "Encryption at rest in Git."
+    "answer": 1,
+    "explanation": "Secrets must never be in plain text in Git. Sealed Secrets and SOPS allow you to safely store encrypted values that only the cluster's private key can unlock.",
+    "hint": "Encryption at rest in Git."
   },
-
-  /* ======================================================
-     KAFKA: SCALING & DATA RETENTION
-     ====================================================== */
   {
-    id: 130,
-    difficulty: "hard",
-    category: "kafka-scaling",
-    question: "You need to add 3 new brokers to an existing 3-broker Kafka cluster to handle increased load. Does adding the brokers automatically rebalance the existing data to the new nodes?",
-    options: [
-      "Yes, Kafka rebalances automatically",
+    "id": 130,
+    "difficulty": "hard",
+    "category": "kafka-scaling",
+    "question": "You need to add 3 new brokers to an existing 3-broker Kafka cluster to handle increased load. Does adding the brokers automatically rebalance the existing data to the new nodes?",
+    "options": [
       "No, you must manually generate and execute a 'Partition Reassignment' plan to move existing data to the new brokers",
+      "Yes, Kafka rebalances automatically",
       "Yes, but only if you restart the cluster",
       "No, the new brokers will only accept new topics"
     ],
-    answer: 1,
-    explanation: "Kafka does not automatically redistribute existing partitions when new brokers join. You must use the 'kafka-reassign-partitions' tool or a manager like Cruise Control.",
-    hint: "Data is 'heavy' and doesn't move on its own."
+    "answer": 0,
+    "explanation": "Kafka does not automatically redistribute existing partitions when new brokers join. You must use the 'kafka-reassign-partitions' tool or a manager like Cruise Control.",
+    "hint": "Data is 'heavy' and doesn't move on its own."
   },
   {
-    id: 131,
-    difficulty: "hard",
-    category: "kafka-performance",
-    question: "You notice high 'Consumer Lag' on a specific topic. You check the consumer metrics and see the pods are idle (low CPU/RAM). You want to add more consumers, but you already have 10 consumers for a topic with 10 partitions. Will adding an 11th consumer help?",
-    options: [
-      "Yes, it will share the load",
+    "id": 131,
+    "difficulty": "hard",
+    "category": "kafka-performance",
+    "question": "You notice high 'Consumer Lag' on a specific topic. You check the consumer metrics and see the pods are idle (low CPU/RAM). You want to add more consumers, but you already have 10 consumers for a topic with 10 partitions. Will adding an 11th consumer help?",
+    "options": [
+      "No, you must delete the topic first",
       "No, in a single consumer group, each partition can only be assigned to one consumer. The 11th consumer will be idle.",
-      "Yes, if you use a Service Mesh",
-      "No, you must delete the topic first"
+      "Yes, it will share the load",
+      "Yes, if you use a Service Mesh"
     ],
-    answer: 1,
-    explanation: "The number of partitions is the upper limit for parallelism within a single consumer group. To scale further, you must increase the number of partitions for that topic.",
-    hint: "Partition Count = Max Consumer Count."
+    "answer": 1,
+    "explanation": "The number of partitions is the upper limit for parallelism within a single consumer group. To scale further, you must increase the number of partitions for that topic.",
+    "hint": "Partition Count = Max Consumer Count."
   },
-
-  /* ======================================================
-     CLOUD NETWORKING & EGRESS
-     ====================================================== */
   {
-    id: 132,
-    difficulty: "hard",
-    category: "azure-networking",
-    question: "In Azure, you have multiple VNets that need to connect to a single On-Premise data center via ExpressRoute. Instead of peering every VNet to the ExpressRoute gateway, what is the 'Hub' architecture component used for centralized connectivity?",
-    options: [
-      "Azure Bastion",
-      "Virtual WAN or a Hub VNet with a Gateway",
+    "id": 132,
+    "difficulty": "hard",
+    "category": "azure-networking",
+    "question": "In Azure, you have multiple VNets that need to connect to a single On-Premise data center via ExpressRoute. Instead of peering every VNet to the ExpressRoute gateway, what is the 'Hub' architecture component used for centralized connectivity?",
+    "options": [
       "Private Link",
+      "Virtual WAN or a Hub VNet with a Gateway",
+      "Azure Bastion",
       "Traffic Manager"
     ],
-    answer: 1,
-    explanation: "A Hub-and-Spoke model with Virtual WAN or a Central Hub VNet allows for transitive routing, simplifying connectivity and reducing costs for hybrid connections.",
-    hint: "Centralizing the 'Gateway'."
+    "answer": 1,
+    "explanation": "A Hub-and-Spoke model with Virtual WAN or a Central Hub VNet allows for transitive routing, simplifying connectivity and reducing costs for hybrid connections.",
+    "hint": "Centralizing the 'Gateway'."
   },
   {
-    id: 133,
-    difficulty: "hard",
-    category: "aws-networking",
-    question: "You want to inspect all outbound traffic from your VPC to the internet for security threats (IDS/IPS). Which AWS service allows you to insert a firewall into the traffic flow transparently?",
-    options: [
-      "AWS WAF",
-      "AWS Network Firewall or Gateway Load Balancer (GWLB)",
+    "id": 133,
+    "difficulty": "hard",
+    "category": "aws-networking",
+    "question": "You want to inspect all outbound traffic from your VPC to the internet for security threats (IDS/IPS). Which AWS service allows you to insert a firewall into the traffic flow transparently?",
+    "options": [
       "Security Groups",
-      "Inspector"
+      "AWS WAF",
+      "Inspector",
+      "AWS Network Firewall or Gateway Load Balancer (GWLB)"
     ],
-    answer: 1,
-    explanation: "GWLB allows you to deploy third-party virtual appliances and route traffic through them transparently at Layer 3. AWS Network Firewall provides native managed protection.",
-    hint: "Transparent inspection at the VPC level."
+    "answer": 3,
+    "explanation": "GWLB allows you to deploy third-party virtual appliances and route traffic through them transparently at Layer 3. AWS Network Firewall provides native managed protection.",
+    "hint": "Transparent inspection at the VPC level."
   },
-
-  /* ======================================================
-     OBSERVABILITY: TRACING & CONTEXT
-     ====================================================== */
   {
-    id: 134,
-    difficulty: "hard",
-    category: "observability-tracing",
-    question: "Your distributed trace is 'broken'—you see a trace for Service A and a separate trace for Service B, but they aren't linked even though A called B. What is the most likely technical failure?",
-    options: [
-      "The network is too slow",
-      "The 'TraceParent' or 'B3' HTTP headers were not propagated from Service A's outgoing request to Service B's incoming context",
+    "id": 134,
+    "difficulty": "hard",
+    "category": "observability-tracing",
+    "question": "Your distributed trace is 'broken'—you see a trace for Service A and a separate trace for Service B, but they aren't linked even though A called B. What is the most likely technical failure?",
+    "options": [
+      "The Trace ID is too long",
       "Service B doesn't have a database",
-      "The Trace ID is too long"
+      "The 'TraceParent' or 'B3' HTTP headers were not propagated from Service A's outgoing request to Service B's incoming context",
+      "The network is too slow"
     ],
-    answer: 1,
-    explanation: "Context Propagation is the mechanism of passing the TraceID through headers. If the application or proxy doesn't 'pass the baton,' the tracing system treats them as unrelated events.",
-    hint: "The 'Baton' was dropped in the middle."
+    "answer": 2,
+    "explanation": "Context Propagation is the mechanism of passing the TraceID through headers. If the application or proxy doesn't 'pass the baton,' the tracing system treats them as unrelated events.",
+    "hint": "The 'Baton' was dropped in the middle."
   },
   {
-    id: 135,
-    difficulty: "medium",
-    category: "observability-concepts",
-    question: "What is 'Cardinality' in the context of time-series metrics?",
-    options: [
+    "id": 135,
+    "difficulty": "medium",
+    "category": "observability-concepts",
+    "question": "What is 'Cardinality' in the context of time-series metrics?",
+    "options": [
+      "The color of the dashboard",
       "The number of times a metric is scraped",
-      "The number of unique combinations of label values for a given metric",
       "The speed of the database",
-      "The color of the dashboard"
+      "The number of unique combinations of label values for a given metric"
     ],
-    answer: 1,
-    explanation: "High cardinality (e.g., adding 'user_id' as a label) creates a massive number of unique series, which can crash monitoring systems like Prometheus.",
-    hint: "Unique label combinations."
+    "answer": 3,
+    "explanation": "High cardinality (e.g., adding 'user_id' as a label) creates a massive number of unique series, which can crash monitoring systems like Prometheus.",
+    "hint": "Unique label combinations."
   },
-
-  /* ======================================================
-     SRE: INCIDENT MANAGEMENT
-     ====================================================== */
   {
-    id: 136,
-    difficulty: "hard",
-    category: "sre-operations",
-    question: "During a major incident, what is the primary responsibility of the 'Incident Commander' (IC)?",
-    options: [
+    "id": 136,
+    "difficulty": "hard",
+    "category": "sre-operations",
+    "question": "During a major incident, what is the primary responsibility of the 'Incident Commander' (IC)?",
+    "options": [
+      "Talking to the press",
       "Writing code to fix the bug",
       "Managing the communication, delegating tasks, and ensuring the team stays focused on resolution rather than deep-diving into root cause during the outage",
-      "Talking to the press",
       "Logging into the database to check rows"
     ],
-    answer: 1,
-    explanation: "The IC is the 'Air Traffic Controller'. They don't fly the planes; they ensure no one crashes and that the right people are working on the right things.",
-    hint: "The 'Conductor' of the orchestra."
+    "answer": 2,
+    "explanation": "The IC is the 'Air Traffic Controller'. They don't fly the planes; they ensure no one crashes and that the right people are working on the right things.",
+    "hint": "The 'Conductor' of the orchestra."
   },
   {
-    id: 137,
-    difficulty: "hard",
-    category: "sre-culture",
-    question: "What is the key characteristic of a 'Blame-Free Post-Mortem'?",
-    options: [
-      "No one is allowed to talk",
+    "id": 137,
+    "difficulty": "hard",
+    "category": "sre-culture",
+    "question": "What is the key characteristic of a 'Blame-Free Post-Mortem'?",
+    "options": [
       "Focusing on 'How' the system failed and what 'Guardrails' were missing, rather than 'Who' made the mistake",
       "Deleting the logs of the incident",
-      "Firing the person who caused the bug in secret"
+      "Firing the person who caused the bug in secret",
+      "No one is allowed to talk"
     ],
-    answer: 1,
-    explanation: "Blame-free culture encourages honesty. If people fear being fired, they hide mistakes. Focusing on the system improves reliability for everyone.",
-    hint: "System failure vs. Human error."
+    "answer": 0,
+    "explanation": "Blame-free culture encourages honesty. If people fear being fired, they hide mistakes. Focusing on the system improves reliability for everyone.",
+    "hint": "System failure vs. Human error."
   },
-
-  /* ======================================================
-   DEVOPS & OBSERVABILITY ARCHITECT - BATCH 10 (IDs 138-187)
-   ====================================================== */
-
-  /* ======================================================
-     INFRASTRUCTURE AS CODE: STATE & WORKFLOWS
-     ====================================================== */
   {
-    id: 138,
-    difficulty: "hard",
-    category: "iac-terraform",
-    question: "You are running Terraform in a CI/CD pipeline. The pipeline fails halfway through an 'apply' because the runner was preempted. Now, every subsequent run fails with a 'State Locked' error. How do you safely resolve this?",
-    options: [
+    "id": 138,
+    "difficulty": "hard",
+    "category": "iac-terraform",
+    "question": "You are running Terraform in a CI/CD pipeline. The pipeline fails halfway through an 'apply' because the runner was preempted. Now, every subsequent run fails with a 'State Locked' error. How do you safely resolve this?",
+    "options": [
       "Delete the Terraform state file and start over",
-      "Identify the Lock ID from the error message and run 'terraform force-unlock <LockID>'",
+      "Disable the backend configuration",
       "Manually delete the resources in the Cloud Console",
-      "Disable the backend configuration"
+      "Identify the Lock ID from the error message and run 'terraform force-unlock <LockID>'"
     ],
-    answer: 1,
-    explanation: "When using a remote backend with locking (like DynamoDB), Terraform creates a lock to prevent concurrent writes. If a process crashes, the lock remains. 'force-unlock' is the surgical way to release it.",
-    hint: "Don't delete the state; just break the 'lock'."
+    "answer": 3,
+    "explanation": "When using a remote backend with locking (like DynamoDB), Terraform creates a lock to prevent concurrent writes. If a process crashes, the lock remains. 'force-unlock' is the surgical way to release it.",
+    "hint": "Don't delete the state; just break the 'lock'."
   },
   {
-    id: 139,
-    difficulty: "hard",
-    category: "iac-terraform",
-    question: "What is the primary purpose of 'Terraform Workspaces'?",
-    options: [
-      "To store different versions of the Terraform binary",
-      "To manage multiple distinct instances of the same configuration (e.g., dev, staging, prod) within the same state backend",
+    "id": 139,
+    "difficulty": "hard",
+    "category": "iac-terraform",
+    "question": "What is the primary purpose of 'Terraform Workspaces'?",
+    "options": [
+      "To encrypt the source code",
       "To share code between different companies",
-      "To encrypt the source code"
+      "To manage multiple distinct instances of the same configuration (e.g., dev, staging, prod) within the same state backend",
+      "To store different versions of the Terraform binary"
     ],
-    answer: 1,
-    explanation: "Workspaces allow you to use one set of configuration files to manage multiple parallel environments, each with its own state, without duplicating code.",
-    hint: "Parallel environments, one code base."
+    "answer": 2,
+    "explanation": "Workspaces allow you to use one set of configuration files to manage multiple parallel environments, each with its own state, without duplicating code.",
+    "hint": "Parallel environments, one code base."
   },
-
-  /* ======================================================
-     KUBERNETES: ADMISSION CONTROL & SCHEDULING
-     ====================================================== */
   {
-    id: 140,
-    difficulty: "hard",
-    category: "k8s-internals",
-    question: "You want to automatically inject an environment variable into every pod deployed in a specific namespace. Which Kubernetes feature allows you to intercept and modify requests to the API server before the object is stored?",
-    options: [
+    "id": 140,
+    "difficulty": "hard",
+    "category": "k8s-internals",
+    "question": "You want to automatically inject an environment variable into every pod deployed in a specific namespace. Which Kubernetes feature allows you to intercept and modify requests to the API server before the object is stored?",
+    "options": [
       "Validating Admission Webhook",
-      "Mutating Admission Webhook",
       "Custom Resource Definition (CRD)",
+      "Mutating Admission Webhook",
       "ConfigMap"
     ],
-    answer: 1,
-    explanation: "Mutating webhooks can modify the submitted object (e.g., adding sidecars or env vars). Validating webhooks can only 'Approve' or 'Deny' the request.",
-    hint: "Intercept and 'Change'."
+    "answer": 2,
+    "explanation": "Mutating webhooks can modify the submitted object (e.g., adding sidecars or env vars). Validating webhooks can only 'Approve' or 'Deny' the request.",
+    "hint": "Intercept and 'Change'."
   },
   {
-    id: 141,
-    difficulty: "hard",
-    category: "k8s-scheduling",
-    question: "A 'Taint' is applied to a Node to repel pods. What must be added to a Pod's YAML to allow it to be scheduled on that specific node?",
-    options: [
-      "Affinity",
+    "id": 141,
+    "difficulty": "hard",
+    "category": "k8s-scheduling",
+    "question": "A 'Taint' is applied to a Node to repel pods. What must be added to a Pod's YAML to allow it to be scheduled on that specific node?",
+    "options": [
+      "PriorityClass",
       "Toleration",
-      "Selector",
-      "PriorityClass"
+      "Affinity",
+      "Selector"
     ],
-    answer: 1,
-    explanation: "Taints are applied to nodes; Tolerations are applied to pods. A pod will only land on a tainted node if it has a matching toleration.",
-    hint: "The node 'stinks' (Taint), the pod needs a 'mask' (Toleration)."
+    "answer": 1,
+    "explanation": "Taints are applied to nodes; Tolerations are applied to pods. A pod will only land on a tainted node if it has a matching toleration.",
+    "hint": "The node 'stinks' (Taint), the pod needs a 'mask' (Toleration)."
   },
-
-  /* ======================================================
-     KAFKA: SECURITY & SCHEMA MANAGEMENT (From kafka_readme.md)
-     ====================================================== */
   {
-    id: 142,
-    difficulty: "hard",
-    category: "kafka-security",
-    question: "You are implementing 'Disk Encryption' for Kafka. Which component is responsible for ensuring data is encrypted while 'At Rest' on the broker's physical drives?",
-    options: [
+    "id": 142,
+    "difficulty": "hard",
+    "category": "kafka-security",
+    "question": "You are implementing 'Disk Encryption' for Kafka. Which component is responsible for ensuring data is encrypted while 'At Rest' on the broker's physical drives?",
+    "options": [
       "mTLS",
-      "OS-level encryption (LUKS) or Cloud-provider managed encryption (EBS/Managed Disk encryption)",
       "SASL/SCRAM",
+      "OS-level encryption (LUKS) or Cloud-provider managed encryption (EBS/Managed Disk encryption)",
       "Kafka ACLs"
     ],
-    answer: 1,
-    explanation: "Kafka itself does not encrypt data on disk. You must use underlying filesystem or block-storage encryption (like AWS KMS-encrypted EBS) to protect data at rest.",
-    hint: "Encryption below the application layer."
+    "answer": 2,
+    "explanation": "Kafka itself does not encrypt data on disk. You must use underlying filesystem or block-storage encryption (like AWS KMS-encrypted EBS) to protect data at rest.",
+    "hint": "Encryption below the application layer."
   },
   {
-    id: 143,
-    difficulty: "hard",
-    category: "kafka-schema",
-    question: "In a 'Breaking Change' scenario where a producer must change a field type (e.g., String to Integer), how should you migrate without crashing existing consumers?",
-    options: [
+    "id": 143,
+    "difficulty": "hard",
+    "category": "kafka-schema",
+    "question": "In a 'Breaking Change' scenario where a producer must change a field type (e.g., String to Integer), how should you migrate without crashing existing consumers?",
+    "options": [
       "Just update the schema and hope for the best",
       "Create a new topic with the new schema, run both in parallel, and migrate consumers gradually",
       "Delete the old schema from the Registry",
       "Stop the entire cluster for maintenance"
     ],
-    answer: 1,
-    explanation: "If a change is not backward or forward compatible, you cannot evolve the schema in place. A blue/green migration to a new topic is the safest architectural path.",
-    hint: "Side-by-side migration."
+    "answer": 1,
+    "explanation": "If a change is not backward or forward compatible, you cannot evolve the schema in place. A blue/green migration to a new topic is the safest architectural path.",
+    "hint": "Side-by-side migration."
   },
-
-  /* ======================================================
-     CLOUD GOVERNANCE & COST (From azure_readme.md / aws_readme.md)
-     ====================================================== */
   {
-    id: 144,
-    difficulty: "medium",
-    category: "cloud-governance",
-    question: "What is 'Tagging Enforcement' and why is it critical for a DevOps Architect?",
-    options: [
-      "It makes the UI look better",
+    "id": 144,
+    "difficulty": "medium",
+    "category": "cloud-governance",
+    "question": "What is 'Tagging Enforcement' and why is it critical for a DevOps Architect?",
+    "options": [
+      "It is only for security purposes",
       "Using policies to ensure every resource has 'Owner' and 'Environment' tags, enabling accurate cost allocation (FinOps) and automation",
       "It speeds up the network",
-      "It is only for security purposes"
+      "It makes the UI look better"
     ],
-    answer: 1,
-    explanation: "Without tags, you cannot identify which team is spending money or which resources belong to 'Production' vs 'Dev'. Policies (Azure Policy / AWS SCP) can block resource creation if tags are missing.",
-    hint: "No tag, no resource."
+    "answer": 1,
+    "explanation": "Without tags, you cannot identify which team is spending money or which resources belong to 'Production' vs 'Dev'. Policies (Azure Policy / AWS SCP) can block resource creation if tags are missing.",
+    "hint": "No tag, no resource."
   },
   {
-    id: 145,
-    difficulty: "hard",
-    category: "azure-governance",
-    question: "In Azure, what is the difference between Azure RBAC and Azure Policy?",
-    options: [
+    "id": 145,
+    "difficulty": "hard",
+    "category": "azure-governance",
+    "question": "In Azure, what is the difference between Azure RBAC and Azure Policy?",
+    "options": [
       "RBAC is for users; Policy is for machines",
-      "RBAC controls 'Who' has access to do 'What'; Azure Policy controls the 'Properties' of the resources being created (e.g., 'No Public IPs allowed')",
+      "RBAC is more expensive",
       "There is no difference",
-      "RBAC is more expensive"
+      "RBAC controls 'Who' has access to do 'What'; Azure Policy controls the 'Properties' of the resources being created (e.g., 'No Public IPs allowed')"
     ],
-    answer: 1,
-    explanation: "RBAC is about Identity/Permission. Policy is about Governance/Compliance. You can have permission to create a VM (RBAC), but Policy might block it if you try to create it in the wrong region.",
-    hint: "Permissions vs. Guardrails."
+    "answer": 3,
+    "explanation": "RBAC is about Identity/Permission. Policy is about Governance/Compliance. You can have permission to create a VM (RBAC), but Policy might block it if you try to create it in the wrong region.",
+    "hint": "Permissions vs. Guardrails."
   },
-
-  /* ======================================================
-     OBSERVABILITY: DATA PIPELINES
-     ====================================================== */
   {
-    id: 146,
-    difficulty: "hard",
-    category: "observability-architecture",
-    question: "You are using 'Vector' or 'Fluentbit' as a log aggregator. What is the benefit of a 'Buffer' or 'Queue' in this pipeline?",
-    options: [
-      "It makes the logs smaller",
+    "id": 146,
+    "difficulty": "hard",
+    "category": "observability-architecture",
+    "question": "You are using 'Vector' or 'Fluentbit' as a log aggregator. What is the benefit of a 'Buffer' or 'Queue' in this pipeline?",
+    "options": [
       "It prevents data loss during downstream outages (e.g., if Elasticsearch is down) by temporarily storing logs in memory or on disk",
-      "It encrypts the logs",
-      "It automatically deletes errors"
+      "It makes the logs smaller",
+      "It automatically deletes errors",
+      "It encrypts the logs"
     ],
-    answer: 1,
-    explanation: "Backpressure and buffering are essential for reliability. If your log destination is slow or down, the buffer prevents the application from crashing or losing telemetry data.",
-    hint: "Shock absorbers for data."
+    "answer": 0,
+    "explanation": "Backpressure and buffering are essential for reliability. If your log destination is slow or down, the buffer prevents the application from crashing or losing telemetry data.",
+    "hint": "Shock absorbers for data."
   },
   {
-    id: 147,
-    difficulty: "medium",
-    category: "sre-concepts",
-    question: "What is an 'Error Budget Policy'?",
-    options: [
-      "A document that says how much money you can spend on bugs",
-      "A pre-agreed set of actions (like halting releases) that the team MUST take when an SLO is violated and the budget is exhausted",
+    "id": 147,
+    "difficulty": "medium",
+    "category": "sre-concepts",
+    "question": "What is an 'Error Budget Policy'?",
+    "options": [
       "A tool that counts how many times the app crashed",
-      "A list of people to blame for an outage"
+      "A document that says how much money you can spend on bugs",
+      "A list of people to blame for an outage",
+      "A pre-agreed set of actions (like halting releases) that the team MUST take when an SLO is violated and the budget is exhausted"
     ],
-    answer: 1,
-    explanation: "A policy ensures that the SLO is not just a 'suggestion' but has teeth. It defines the social contract between Product and Engineering regarding stability.",
-    hint: "The 'Rules of Engagement' for failures."
+    "answer": 3,
+    "explanation": "A policy ensures that the SLO is not just a 'suggestion' but has teeth. It defines the social contract between Product and Engineering regarding stability.",
+    "hint": "The 'Rules of Engagement' for failures."
   },
-
-  /* ======================================================
-     NETWORKING: HYBRID & SECURITY
-     ====================================================== */
   {
-    id: 148,
-    difficulty: "hard",
-    category: "cloud-networking",
-    question: "You are setting up an AWS Direct Connect. What is a 'Hosted Virtual Interface' (VIF)?",
-    options: [
+    "id": 148,
+    "difficulty": "hard",
+    "category": "cloud-networking",
+    "question": "You are setting up an AWS Direct Connect. What is a 'Hosted Virtual Interface' (VIF)?",
+    "options": [
       "A physical cable",
-      "A logical connection that allows you to access VPC resources over a Direct Connect link owned by a partner",
       "A type of firewall",
-      "A public IP address"
+      "A public IP address",
+      "A logical connection that allows you to access VPC resources over a Direct Connect link owned by a partner"
     ],
-    answer: 1,
-    explanation: "Hosted VIFs allow third-party partners to share their physical Direct Connect capacity with your AWS account.",
-    hint: "Sharing the 'Pipe'."
+    "answer": 3,
+    "explanation": "Hosted VIFs allow third-party partners to share their physical Direct Connect capacity with your AWS account.",
+    "hint": "Sharing the 'Pipe'."
   },
   {
-    id: 149,
-    difficulty: "hard",
-    category: "security-identity",
-    question: "What is 'Workload Identity Federation'?",
-    options: [
-      "Connecting two different companies",
-      "Allowing workloads running outside of a cloud (e.g., On-prem or GitHub Actions) to access cloud resources using short-lived tokens instead of long-lived secrets",
+    "id": 149,
+    "difficulty": "hard",
+    "category": "security-identity",
+    "question": "What is 'Workload Identity Federation'?",
+    "options": [
       "A new type of password",
-      "Merging two Entra ID tenants"
+      "Merging two Entra ID tenants",
+      "Connecting two different companies",
+      "Allowing workloads running outside of a cloud (e.g., On-prem or GitHub Actions) to access cloud resources using short-lived tokens instead of long-lived secrets"
     ],
-    answer: 1,
-    explanation: "Federation allows you to trust an external OIDC provider (like GitHub) to vouch for an identity, so you don't have to store AWS/Azure keys in your CI/CD secrets.",
-    hint: "Trust-based access, no static keys."
+    "answer": 3,
+    "explanation": "Federation allows you to trust an external OIDC provider (like GitHub) to vouch for an identity, so you don't have to store AWS/Azure keys in your CI/CD secrets.",
+    "hint": "Trust-based access, no static keys."
   },
   {
-    id: 150,
-    difficulty: "hard",
-    category: "k8s-networking",
-    question: "What is the function of the 'CoreDNS' in a Kubernetes cluster?",
-    options: [
+    "id": 150,
+    "difficulty": "hard",
+    "category": "k8s-networking",
+    "question": "What is the function of the 'CoreDNS' in a Kubernetes cluster?",
+    "options": [
       "To route external traffic to pods",
-      "To provide service discovery within the cluster by allowing pods to resolve service names (e.g., my-db.svc.cluster.local) to Cluster IPs",
       "To encrypt network traffic",
-      "To manage node IP addresses"
+      "To manage node IP addresses",
+      "To provide service discovery within the cluster by allowing pods to resolve service names (e.g., my-db.svc.cluster.local) to Cluster IPs"
     ],
-    answer: 1,
-    explanation: "CoreDNS is the internal telephone book. It translates service names into IPs so pods can find each other without knowing hardcoded IP addresses.",
-    hint: "Internal Name Resolution."
+    "answer": 3,
+    "explanation": "CoreDNS is the internal telephone book. It translates service names into IPs so pods can find each other without knowing hardcoded IP addresses.",
+    "hint": "Internal Name Resolution."
   },
+  {
+    "id": 151,
+    "difficulty": "medium",
+    "category": "iac-management",
+    "question": "A team must configure 200 Linux servers over SSH without installing agents, using idempotent YAML playbooks. Which tool fits?",
+    "options": [
+      "Jaeger",
+      "Prometheus",
+      "Ansible",
+      "Istio"
+    ],
+    "answer": 2,
+    "explanation": "Ansible: agentless configuration management using YAML playbooks over SSH. Tasks are idempotent so reruns converge to the desired state."
+  },
+  {
+    "id": 152,
+    "difficulty": "medium",
+    "category": "iac-management",
+    "question": "An Azure-only team wants a first-party declarative language that compiles to ARM templates. Which should they choose?",
+    "options": [
+      "Packer",
+      "Ansible Vault",
+      "Helm",
+      "Bicep"
+    ],
+    "answer": 3,
+    "explanation": "Bicep: Azure's domain-specific IaC language that transpiles to ARM. Terraform is the multi-cloud alternative."
+  },
+  {
+    "id": 153,
+    "difficulty": "hard",
+    "category": "iac-management",
+    "question": "A platform team wants developers to request databases and buckets as Kubernetes custom resources, with the control plane provisioning them in the cloud. Which tool?",
+    "options": [
+      "Crossplane",
+      "Trivy",
+      "Kustomize",
+      "Fluentd"
+    ],
+    "answer": 0,
+    "explanation": "Crossplane: a Kubernetes-native control plane that composes cloud resources through CRDs and compositions, continuously reconciling them like any other Kubernetes object."
+  },
+  {
+    "id": 154,
+    "difficulty": "easy",
+    "category": "k8s-architecture",
+    "question": "What do AKS and EKS have in common?",
+    "options": [
+      "They are container registries",
+      "They are managed Kubernetes services where the cloud provider operates the control plane",
+      "They are CI servers",
+      "They are service meshes"
+    ],
+    "answer": 1,
+    "explanation": "AKS/EKS: Azure Kubernetes Service and Amazon Elastic Kubernetes Service run and patch the control plane, leaving node pools and workloads to you."
+  },
+  {
+    "id": 155,
+    "difficulty": "hard",
+    "category": "k8s-architecture",
+    "question": "A queue consumer should scale pods based on queue length, down to zero when empty. Which combination fits?",
+    "options": [
+      "Cluster Autoscaler alone",
+      "KEDA for event-driven scaling, which drives the HPA",
+      "A cron job",
+      "VPA alone"
+    ],
+    "answer": 1,
+    "explanation": "KEDA: scales workloads from external event sources, including to zero. HPA: the native controller that adjusts replicas from CPU, memory or custom metrics."
+  },
+  {
+    "id": 156,
+    "difficulty": "medium",
+    "category": "k8s-architecture",
+    "question": "Which statement about autoscaling in Kubernetes is correct?",
+    "options": [
+      "Autoscaling happens at pod level (HPA/KEDA) and node level (cluster autoscaler), and each needs resource requests to be meaningful",
+      "HPA adds nodes directly",
+      "Autoscaling needs no metrics",
+      "Only nodes can scale"
+    ],
+    "answer": 0,
+    "explanation": "Autoscaling: HPA changes replica counts, the cluster autoscaler adds nodes, and KEDA adds event triggers."
+  },
+  {
+    "id": 157,
+    "difficulty": "medium",
+    "category": "k8s-architecture",
+    "question": "How does an Ingress Controller differ from a Service of type LoadBalancer for HTTP apps?",
+    "options": [
+      "It creates pods",
+      "It replaces CoreDNS",
+      "An Ingress Controller routes many hostnames and paths to services through one entry point, applying Ingress rules at layer 7",
+      "It only works for UDP"
+    ],
+    "answer": 2,
+    "explanation": "Ingress Controller: NGINX, Traefik or cloud-native implementations realize Ingress resources, consolidating public endpoints and TLS."
+  },
+  {
+    "id": 158,
+    "difficulty": "medium",
+    "category": "cicd-gitops",
+    "question": "Which statement about Pipelines and CI/CD Pipeline as Code is correct?",
+    "options": [
+      "Pipelines cannot be tested",
+      "Pipeline definitions live in version-controlled YAML next to the application, so changes are reviewed and reproducible",
+      "Pipelines are configured only in a web UI",
+      "Pipeline as code requires no repository"
+    ],
+    "answer": 1,
+    "explanation": "CI/CD Pipeline as Code: storing definitions in the repo, as with Azure Pipelines or GitHub Actions, gives review, history and rollbacks for the pipeline itself."
+  },
+  {
+    "id": 159,
+    "difficulty": "hard",
+    "category": "cicd-gitops",
+    "question": "A GitHub Actions workflow deploys to AWS using long-lived access keys stored as secrets. What is the better practice?",
+    "options": [
+      "Check the keys into the repository",
+      "Rotate the keys yearly",
+      "Use OpenID Connect so the workflow obtains short-lived credentials without stored keys",
+      "Share one key across all repositories"
+    ],
+    "answer": 2,
+    "explanation": "GitHub Actions: OIDC federation removes long-lived cloud secrets. This is core Secrets Management and Supply Chain Security hygiene."
+  },
+  {
+    "id": 160,
+    "difficulty": "medium",
+    "category": "cicd-gitops",
+    "question": "A release must be switched instantly between two identical environments with instant rollback. Which strategy?",
+    "options": [
+      "Big bang on a weekend",
+      "Recreate only",
+      "Blue-Green deployment",
+      "Rolling restart without a spare"
+    ],
+    "answer": 2,
+    "explanation": "Blue-Green: run the new version beside the old and flip traffic; rollback means flipping back. Cost is duplicate capacity."
+  },
+  {
+    "id": 161,
+    "difficulty": "hard",
+    "category": "cicd-gitops",
+    "question": "A team wants to expose a new version to 5% of users, watch error rates, and then expand. Which strategy?",
+    "options": [
+      "Blue-Green",
+      "Canary release, optionally automated by a progressive delivery tool",
+      "Shadow database migration",
+      "Recreate"
+    ],
+    "answer": 1,
+    "explanation": "Canary: gradual exposure with metric gates. Unlike Blue-Green it validates with real traffic incrementally."
+  },
+  {
+    "id": 162,
+    "difficulty": "easy",
+    "category": "observability-concepts",
+    "question": "Which tool is most commonly used to build dashboards on top of Prometheus, Loki and Tempo data?",
+    "options": [
+      "Terraform",
+      "Grafana",
+      "Ansible",
+      "Vault"
+    ],
+    "answer": 1,
+    "explanation": "Grafana: visualization and alerting across metrics, logs and traces data sources."
+  },
+  {
+    "id": 163,
+    "difficulty": "hard",
+    "category": "observability-concepts",
+    "question": "A company wants vendor-neutral instrumentation across languages, with a collector that routes telemetry to any backend. Which standard?",
+    "options": [
+      "OpenTelemetry",
+      "SNMP",
+      "Syslog only",
+      "A proprietary agent for each vendor"
+    ],
+    "answer": 0,
+    "explanation": "OpenTelemetry: CNCF standard APIs, SDKs and collector for traces, metrics and logs. Pair with Grafana and a backend of choice."
+  },
+  {
+    "id": 164,
+    "difficulty": "hard",
+    "category": "observability-concepts",
+    "question": "Which technology gives low-overhead kernel-level visibility and networking without changing application code?",
+    "options": [
+      "Log rotation",
+      "Cron",
+      "JMX",
+      "eBPF"
+    ],
+    "answer": 3,
+    "explanation": "eBPF: programs run safely in the Linux kernel for observability, security and networking (for example Cilium CNI), with no sidecar needed."
+  },
+  {
+    "id": 165,
+    "difficulty": "hard",
+    "category": "sre-concepts",
+    "question": "A service has a 99.9% availability objective. What are the SLI, SLO and the error budget?",
+    "options": [
+      "They are all identical",
+      "The SLO is measured and the SLI is the target",
+      "The error budget is the cloud bill",
+      "The SLI is measured availability, the SLO is the 99.9% target, and the error budget is the 0.1% of allowed failure"
+    ],
+    "answer": 3,
+    "explanation": "SLI/SLO: indicators measure behavior and objectives set targets. Error Budgets turn the gap into a release-velocity decision: when it is spent, reliability work takes priority."
+  },
+  {
+    "id": 166,
+    "difficulty": "medium",
+    "category": "sre-concepts",
+    "question": "A team wants to verify that the system survives pod and node failures before they happen in production. Which practice?",
+    "options": [
+      "Code review",
+      "Backups",
+      "Chaos Engineering, injecting controlled failures to test resilience",
+      "Load testing only"
+    ],
+    "answer": 2,
+    "explanation": "Chaos Engineering: hypothesis-driven fault injection, run with a defined blast radius and steady-state SLI checks."
+  },
+  {
+    "id": 167,
+    "difficulty": "hard",
+    "category": "devsecops",
+    "question": "Where should database passwords and API keys for workloads be stored and delivered?",
+    "options": [
+      "In container image layers",
+      "In a secrets manager such as Key Vault or AWS Secrets Manager, delivered at runtime with short-lived identity-based access",
+      "In plain ConfigMaps",
+      "In the Git repository"
+    ],
+    "answer": 1,
+    "explanation": "Secrets Management: central vaults, rotation and least-privilege access. Zero Trust adds identity verification for every request."
+  },
+  {
+    "id": 168,
+    "difficulty": "medium",
+    "category": "devsecops",
+    "question": "What is the core principle of Zero Trust?",
+    "options": [
+      "Disable authentication internally",
+      "Trust everything inside the VPN",
+      "Never trust, always verify: authenticate and authorize every request regardless of network location",
+      "Trust internal IP ranges"
+    ],
+    "answer": 2,
+    "explanation": "Zero Trust: assumes breach, uses strong identity, least privilege and segmentation instead of a trusted perimeter."
+  },
+  {
+    "id": 169,
+    "difficulty": "hard",
+    "category": "devsecops",
+    "question": "A new regulation requires you to list every library inside each shipped image and prove it was not tampered with. Which two controls?",
+    "options": [
+      "An SBOM for each build plus signed artifacts as part of Supply Chain Security",
+      "Only a firewall",
+      "Annual penetration test",
+      "Manual spreadsheet"
+    ],
+    "answer": 0,
+    "explanation": "SBOM: a software bill of materials in SPDX or CycloneDX format. Supply Chain Security: image signing, provenance and dependency scanning."
+  },
+  {
+    "id": 170,
+    "difficulty": "easy",
+    "category": "cloud-networking",
+    "question": "Which AWS service acts as a hub connecting many VPCs and on-premises networks?",
+    "options": [
+      "CloudFront",
+      "KMS",
+      "Route 53",
+      "Transit Gateway"
+    ],
+    "answer": 3,
+    "explanation": "Transit Gateway: simplifies many-to-many VPC connectivity versus peering meshes."
+  },
+  {
+    "id": 171,
+    "difficulty": "medium",
+    "category": "cloud-networking",
+    "question": "A workload must reach a SaaS or PaaS service without traversing the public internet. Which capability?",
+    "options": [
+      "A public IP with a firewall rule",
+      "A larger VM",
+      "NAT to the internet",
+      "Private Link (private endpoints)"
+    ],
+    "answer": 3,
+    "explanation": "Private Link: exposes a service via a private IP in your network. Transit Gateway solves routing between networks instead."
+  },
+  {
+    "id": 172,
+    "difficulty": "medium",
+    "category": "finops",
+    "question": "Fault-tolerant batch workers can be interrupted. How do you cut compute cost most?",
+    "options": [
+      "Larger on-demand nodes",
+      "Disable autoscaling",
+      "Use Spot Instances with checkpointing, accepting that they can be reclaimed",
+      "Reserved Instances for all"
+    ],
+    "answer": 2,
+    "explanation": "Spot Instances: deeply discounted spare capacity that can be reclaimed. Use with Autoscaling and interruption handling."
+  },
+  {
+    "id": 173,
+    "difficulty": "hard",
+    "category": "finops",
+    "question": "A CTO compares moving to Serverless against running VMs. Which factor belongs in the TCO analysis besides compute price?",
+    "options": [
+      "Nothing else",
+      "Only the per-hour VM price",
+      "Operations and staffing effort, idle capacity, and scaling behavior, not only unit price",
+      "Only the logo of the provider"
+    ],
+    "answer": 2,
+    "explanation": "Serverless: pay-per-use compute. TCO (total cost of ownership) includes operations, tooling, licensing and risk alongside runtime cost."
+  },
+  {
+    "id": 174,
+    "difficulty": "hard",
+    "category": "platform-engineering",
+    "question": "A platform team wants developers to self-serve compliant services quickly. Which approach and tool pairing is common?",
+    "options": [
+      "A single shared admin account",
+      "Letting each team invent its own tooling",
+      "A ticket queue for every request",
+      "Platform Engineering with Golden Paths, surfaced through an internal developer portal such as Backstage"
+    ],
+    "answer": 3,
+    "explanation": "Platform Engineering: treats the platform as a product. Golden Paths: opinionated, supported templates. Backstage: an open-source developer portal with a software catalog and scaffolding."
+  },
+  {
+    "id": 175,
+    "difficulty": "medium",
+    "category": "platform-engineering",
+    "question": "Why do platform teams provide Golden Paths?",
+    "options": [
+      "They forbid all customization",
+      "They make the secure, compliant way the easiest way, lowering cognitive load while still allowing exceptions",
+      "They remove CI",
+      "They replace monitoring"
+    ],
+    "answer": 1,
+    "explanation": "Golden Paths: paved, well-supported routes such as service templates and pipelines, typically offered via Backstage and Platform Engineering practices."
+  },
+  {
+    "id": 176,
+    "difficulty": "medium",
+    "category": "iac-management",
+    "question": "Which pair is correct for provisioning versus configuring infrastructure?",
+    "options": [
+      "Crossplane installs packages over SSH",
+      "They are interchangeable",
+      "Crossplane or Terraform provision resources, while Ansible configures what runs on them",
+      "Ansible provisions Kubernetes control planes"
+    ],
+    "answer": 2,
+    "explanation": "Ansible: configuration management of hosts. Crossplane: declarative provisioning of cloud resources through Kubernetes APIs."
+  },
+  {
+    "id": 177,
+    "difficulty": "medium",
+    "category": "k8s-architecture",
+    "question": "In a managed cluster on AKS/EKS, who patches the Kubernetes control plane, and who patches worker node images?",
+    "options": [
+      "The provider operates the control plane; you manage node image upgrades unless using managed or auto-upgrade options",
+      "You patch the control plane",
+      "The provider patches everything with no options",
+      "Nobody patches anything"
+    ],
+    "answer": 0,
+    "explanation": "AKS/EKS: the shared responsibility model puts control plane operations with the provider while node lifecycle remains largely with the customer."
+  },
+  {
+    "id": 178,
+    "difficulty": "hard",
+    "category": "cicd-gitops",
+    "question": "A canary rollout is gated by SLI/SLO metrics and halts automatically if the error rate exceeds the objective. Which two ideas are combined?",
+    "options": [
+      "Blue-Green and manual approval only",
+      "Canary delivery and SLI/SLO-based automated gates",
+      "Cron and logging",
+      "Recreate and chaos testing"
+    ],
+    "answer": 1,
+    "explanation": "Canary: incremental exposure. SLI/SLO: objective measures that decide whether to proceed or roll back."
+  },
+  {
+    "id": 179,
+    "difficulty": "hard",
+    "category": "finops",
+    "question": "Compare a Serverless function platform with always-on VMs for spiky traffic. How should TCO be judged?",
+    "options": [
+      "Only the number of regions",
+      "Ignore operations",
+      "Only the hourly VM rate",
+      "Include per-invocation cost, idle cost avoided, operational effort, cold-start and limits, not just unit price"
+    ],
+    "answer": 3,
+    "explanation": "Serverless: pay per use and scale to zero. TCO: total cost of ownership across compute, people, tooling and risk."
+  },
+  {
+    "id": 180,
+    "difficulty": "medium",
+    "category": "cicd-gitops",
+    "question": "A team keeps its pipeline in the repository and exposes the app through an Ingress Controller in Kubernetes. Which two practices are shown?",
+    "options": [
+      "Ingress for UDP only",
+      "Pipelines on one laptop",
+      "CI/CD Pipeline as Code and layer 7 routing through an Ingress Controller",
+      "Manual UI pipelines and NodePort for everything"
+    ],
+    "answer": 2,
+    "explanation": "CI/CD Pipeline as Code: reviewable, versioned automation. Ingress Controller: shared HTTP entry point for many services."
+  }
 ];
-
-
-
-
 
 // --- TOP 100 INTERVIEW INDICES ---
 // These indices point to unique, high-value questions from the bank for rapid interview prep.
 // Focus: 
 const hotsQuestions = [
-    2, 3, 5, 
+    // Existing curated entries (valid ids kept)
+    2, 3, 5,
+
+    // Added: hardest questions, spread across categories
+    1, 4, 6, 8, 11, 12, 14, 16, 17, 19, 20, 23, 24, 26, 27, 29, 31, 34, 35, 36, 38, 39, 41, 43, 45, 48, 50, 51, 52, 53, 54, 56, 58, 60, 63, 64, 67, 69, 70, 71, 72, 75, 79, 82, 83, 84, 85, 87, 90, 93, 96, 97, 100, 101, 104, 108, 109, 111, 115, 116, 117, 119, 128, 130, 134, 136, 137, 140, 142, 143, 145, 146, 153, 159, 174, 9, 10, 18, 33, 44, 57, 61, 68, 73, 95, 110, 112, 118, 129, 144, 46, 66, 42, 28, 91, 77, 167
 ];

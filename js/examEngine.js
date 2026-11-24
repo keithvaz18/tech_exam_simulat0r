@@ -94,8 +94,11 @@ function startExam() {
 
     if (isHotMode) {
         // 1. Map to actual question objects and remove undefined (out-of-range)
+        // hotsQuestions holds question IDs (banks are 0- or 1-based, and some have gaps),
+        // so resolve by id rather than by array position.
+        const byId = new Map(questionBank.map(q => [q.id, q]));
         const validQuestions = hotsQuestions
-           .map(idx => questionBank[idx])
+           .map(id => byId.get(id))
            .filter(q => q !== undefined);
 
         // 2. Use a temporary Set to ensure absolute uniqueness in case of duplicate indices
@@ -127,6 +130,18 @@ function startExam() {
             (q.category && q.category.toLowerCase().includes(keyword)) ||
             (q.explanation && q.explanation.toLowerCase().includes(keyword))
         );
+
+        // Safety net: if the exact phrase matches nothing, fall back to questions that
+        // mention every word of the keyword anywhere (question, options, explanation).
+        if (fullBank.length === 0) {
+            const words = keyword.split(/[^a-z0-9_.@#+\-]+/).filter(w => w.length > 1 && w !== 'vs');
+            if (words.length > 0) {
+                fullBank = questionBank.filter(q => {
+                    const hay = (q.question + ' ' + (q.options || []).join(' ') + ' ' + (q.explanation || '')).toLowerCase();
+                    return words.every(w => hay.includes(w));
+                });
+            }
+        }
         
         if (fullBank.length === 0) {
             alert("No questions found for '" + keyword + "'. Loading full bank.");

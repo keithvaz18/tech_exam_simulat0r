@@ -380,6 +380,56 @@ pre {
         .cd-apps { background: #2563EB; }
         .cd-eval { background: #64748b; }
         .cd-prompt { background: #14b8a6; }
+
+        /* ---- Domain colours that were referenced by keywords but never defined ---- */
+        .tools { background: #0ea5e9; }          /* databricks: tooling */
+        .eval { background: #f59e0b; }           /* ai: evaluation */
+        .vector { background: #8b5cf6; }         /* ai: vector / retrieval */
+        .ops { background: #475569; }            /* ai: LLMOps */
+        .spring-web { background: #2563eb; }     /* java: MVC / web */
+        .spring-arch { background: #0f766e; }    /* java: architecture patterns */
+        .aws-ml { background: #be185d; }         /* aws: ML / AI services */
+        .mg-cost { background: #475569; }        /* mongodb: cost */
+        .ingestion { background: #0ea5e9; }      /* data architect */
+        .modelling { background: #3b82f6; }
+        .analytics { background: #14b8a6; }
+        .scale { background: #6366f1; }
+
+
+        /* CLOUD DOMAIN COLORS (generated) */
+        .aiData-ai { background: #2563EB; }
+        .aiData-lakehouse { background: #7C3AED; }
+        .aiData-platform { background: #10b981; }
+        .aiData-governance { background: #f59e0b; }
+        .py-core { background: #2563EB; }
+        .py-concurrency { background: #7C3AED; }
+        .py-spark { background: #10b981; }
+        .py-algorithms { background: #f59e0b; }
+        .sq-query { background: #2563EB; }
+        .sq-performance { background: #7C3AED; }
+        .sq-transactions { background: #10b981; }
+        .sq-design { background: #f59e0b; }
+        .nj-runtime { background: #2563EB; }
+        .nj-async { background: #7C3AED; }
+        .nj-web { background: #10b981; }
+        .nj-ops { background: #f59e0b; }
+        .js-core { background: #2563EB; }
+        .js-async { background: #7C3AED; }
+        .js-data { background: #10b981; }
+        .js-web { background: #f59e0b; }
+        .dn-language { background: #2563EB; }
+        .dn-runtime { background: #7C3AED; }
+        .dn-web { background: #10b981; }
+        .dn-data { background: #f59e0b; }
+        .dn-architecture { background: #e11d48; }
+        .aar-ai { background: #2563EB; }
+        .aar-platform { background: #7C3AED; }
+        .aar-security { background: #10b981; }
+        .aar-ops { background: #f59e0b; }
+        .hl-v2 { background: #2563EB; }
+        .hl-fhir { background: #7C3AED; }
+        .hl-docs { background: #10b981; }
+        .hl-integration { background: #f59e0b; }
         .legend { margin-top: 20px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
         .legend span { padding: 4px 10px; border-radius: 6px; color: white; font-size: 11px; text-transform: uppercase; font-weight: bold; }
 
@@ -441,12 +491,7 @@ document.body.classList.add("loading");
             <h2 class="doc-header" data-doc="ai_data-cloud" style="color: #38bdf8;cursor:pointer;">AI & Data Technologies Cloud</h2>
         <div class="search-box"><input id="aiDataSearch" placeholder="Search AI Data (RAG, Shuffle...)" style="background: #1e293b; color: white;"></div>
         <div class="cloud-display" id="aiDataCloud"></div>
-        <div class="legend">
-            <span class="rag">RAG</span><span class="infra">Infra</span>
-            <span class="optim">Optim</span><span class="agent" style="background: #f59e0b;">Agents</span>
-            <span class="db-arch">Architecture</span><span class="db-delta">Delta</span>
-            <span class="db-spark">Spark</span><span class="db-stream">Streaming</span>
-        </div>
+        <div class="legend"><span class="aiData-ai">Ai</span><span class="aiData-lakehouse">Lakehouse</span><span class="aiData-platform">Platform</span><span class="aiData-governance">Governance</span></div>
     </div> 
     <div id="claude_architect-cloud" class="cloud-section" style="background: #1e1b4b; color: white;">
         <h2 class="doc-header" data-doc="claude_architect-cloud" style="color: #a78bfa;cursor:pointer;">Claude Certified Architect Cloud 🏛️</h2>
@@ -460,7 +505,56 @@ document.body.classList.add("loading");
         <div class="cloud-display" id="cdCloud"></div>
         <div class="legend"><span class="cd-agents">Agents</span><span class="cd-apps">Apps/API</span><span class="cd-eval">Eval</span><span class="cd-model">Model/Cost</span><span class="cd-prompt">Prompt/Context</span><span class="cd-security">Security</span><span class="cd-tools">Tools/MCP</span></div>
     </div>
-    <div id="mongodb-cloud" class="cloud-section" style="background: #f1f5f9;">
+    
+<div id="python_pySpark-cloud" class="cloud-section" style="background:#0f172a; color:white;">
+    <h2 class="doc-header" data-doc="python_pySpark-cloud" style="color:#facc15;cursor:pointer;">Python & PySpark Cloud</h2>
+    <div class="search-box"><input id="pySearch" placeholder="Search Python & PySpark keywords..." style="background:#1e293b; color:white;"></div>
+    <div class="cloud-display" id="pyCloud"></div>
+    <div class="legend"><span class="py-core">Core</span><span class="py-concurrency">Concurrency</span><span class="py-spark">Spark</span><span class="py-algorithms">Algorithms</span></div>
+</div>
+
+<div id="sql-cloud" class="cloud-section" style="background:#0f172a; color:white;">
+    <h2 class="doc-header" data-doc="sql-cloud" style="color:#38bdf8;cursor:pointer;">SQL Cloud</h2>
+    <div class="search-box"><input id="sqSearch" placeholder="Search SQL keywords..." style="background:#1e293b; color:white;"></div>
+    <div class="cloud-display" id="sqCloud"></div>
+    <div class="legend"><span class="sq-query">Query</span><span class="sq-performance">Performance</span><span class="sq-transactions">Transactions</span><span class="sq-design">Design</span></div>
+</div>
+
+<div id="nodejs-cloud" class="cloud-section" style="background:#0f172a; color:white;">
+    <h2 class="doc-header" data-doc="nodejs-cloud" style="color:#84cc16;cursor:pointer;">Node.js Cloud</h2>
+    <div class="search-box"><input id="njSearch" placeholder="Search Node.js keywords..." style="background:#1e293b; color:white;"></div>
+    <div class="cloud-display" id="njCloud"></div>
+    <div class="legend"><span class="nj-runtime">Runtime</span><span class="nj-async">Async</span><span class="nj-web">Web</span><span class="nj-ops">Ops</span></div>
+</div>
+
+<div id="JavaScript-cloud" class="cloud-section" style="background:#0f172a; color:white;">
+    <h2 class="doc-header" data-doc="JavaScript-cloud" style="color:#facc15;cursor:pointer;">JavaScript Cloud</h2>
+    <div class="search-box"><input id="jsSearch" placeholder="Search JavaScript keywords..." style="background:#1e293b; color:white;"></div>
+    <div class="cloud-display" id="jsCloud"></div>
+    <div class="legend"><span class="js-core">Core</span><span class="js-async">Async</span><span class="js-data">Data</span><span class="js-web">Web</span></div>
+</div>
+
+<div id="dotnet-cloud" class="cloud-section" style="background:#0f172a; color:white;">
+    <h2 class="doc-header" data-doc="dotnet-cloud" style="color:#a78bfa;cursor:pointer;">.NET & C# Cloud</h2>
+    <div class="search-box"><input id="dnSearch" placeholder="Search .NET & C# keywords..." style="background:#1e293b; color:white;"></div>
+    <div class="cloud-display" id="dnCloud"></div>
+    <div class="legend"><span class="dn-language">Language</span><span class="dn-runtime">Runtime</span><span class="dn-web">Web</span><span class="dn-data">Data</span><span class="dn-architecture">Architecture</span></div>
+</div>
+
+<div id="ai_arch-cloud" class="cloud-section" style="background:#0f172a; color:white;">
+    <h2 class="doc-header" data-doc="ai_arch-cloud" style="color:#f472b6;cursor:pointer;">AI Architecture Cloud</h2>
+    <div class="search-box"><input id="aarSearch" placeholder="Search AI Architecture keywords..." style="background:#1e293b; color:white;"></div>
+    <div class="cloud-display" id="aarCloud"></div>
+    <div class="legend"><span class="aar-ai">Ai</span><span class="aar-platform">Platform</span><span class="aar-security">Security</span><span class="aar-ops">Ops</span></div>
+</div>
+
+<div id="hl7-cloud" class="cloud-section" style="background:#0f172a; color:white;">
+    <h2 class="doc-header" data-doc="hl7-cloud" style="color:#34d399;cursor:pointer;">HL7 & FHIR Cloud</h2>
+    <div class="search-box"><input id="hlSearch" placeholder="Search HL7 & FHIR keywords..." style="background:#1e293b; color:white;"></div>
+    <div class="cloud-display" id="hlCloud"></div>
+    <div class="legend"><span class="hl-v2">V2</span><span class="hl-fhir">Fhir</span><span class="hl-docs">Docs</span><span class="hl-integration">Integration</span></div>
+</div>
+<div id="mongodb-cloud" class="cloud-section" style="background: #f1f5f9;">
     <h2 class="doc-header" data-doc="mongodb-cloud" style="color: #13aa52;cursor:pointer;">MongoDB Atlas Cloud</h2>
     <div class="search-box"><input id="mgSearch" placeholder="Search MongoDB..."></div>
     <div class="cloud-display" id="mgCloud"></div>
@@ -607,11 +701,7 @@ document.body.classList.add("loading");
     <div class="cloud-display" id="web3BlockChainCloud"></div>
 
     <div class="legend">
-        <span class="architecture">Architecture</span>
-        <span class="data">Data</span>
-        <span class="security">Security</span>
-        <span class="component">Component</span>
-        <span class="compute">Compute</span>
+        <span class="wb-core">Core</span><span class="wb-security">Security</span><span class="wb-infrastructure">Infrastructure</span><span class="wb-defi">DeFi</span><span class="wb-tooling">Tooling</span><span class="wb-zkp">ZKP</span>
     </div>
 </div>   
     
@@ -675,6 +765,34 @@ window.onclick = function(event) {
   }
 }    
 const docMap = {
+  "sql-cloud": {
+    file: "docs/sql_readme.md",
+    title: "SQL Interview & Exam Guide"
+  },
+  "nodejs-cloud": {
+    file: "docs/nodejs_readme.md",
+    title: "Node.js Interview & Exam Guide"
+  },
+  "JavaScript-cloud": {
+    file: "docs/JavaScript_readme.md",
+    title: "JavaScript Interview & Exam Guide"
+  },
+  "dotnet-cloud": {
+    file: "docs/dotnet_readme.md",
+    title: ".NET / C# / ASP.NET Core Guide"
+  },
+  "ai_arch-cloud": {
+    file: "docs/AI_Architecture_readme.md",
+    title: "AI Architecture Guide"
+  },
+  "hl7-cloud": {
+    file: "docs/HL7_readme.md",
+    title: "HL7 v2 & FHIR Guide"
+  },
+  "python_pySpark-cloud": {
+    file: "docs/python_test_readme.md",
+    title: "Python & PySpark Guide"
+  },
     
   "ai_data-cloud": {
     file: "docs/Databricks_pySpark_readme.md", 
@@ -895,6 +1013,16 @@ const dbKeywords = [
   {word:"Execution",freq:3,domain:"spark",desc:"execution stages"}, 
   {word:"cost", freq:3, domain:"spark", desc:"cost optimization"},
    // {word:"Tungsten",freq:3,domain:"spark",desc:"Spark Execution engine: Memory management and code generation engine"},
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"Delta Table", freq:4, domain:"delta", desc:"24 practice questions"},
+    {word:"Metastore", freq:3, domain:"governance", desc:"11 practice questions"},
+    {word:"Airflow", freq:3, domain:"tools", desc:"14 practice questions"},
+    {word:"ADF", freq:4, domain:"tools", desc:"25 practice questions"},
+    {word:"Databricks SQL", freq:3, domain:"workspace", desc:"13 practice questions"},
+    {word:"Parquet", freq:2, domain:"delta", desc:"9 practice questions"},
+    {word:"DataFrame", freq:3, domain:"spark", desc:"16 practice questions"},
+    {word:"Delta Live Tables", freq:1, domain:"streaming", desc:"3 practice questions"},
+    {word:"S3", freq:3, domain:"tools", desc:"15 practice questions"}
 ];    
 
 const aiKeywords = [
@@ -929,7 +1057,17 @@ const aiKeywords = [
   {word:"Speculative Decoding", freq:3, domain:"optim", desc:"Using a small model to draft tokens for a larger model to verify"},
   {word:"Chunking", freq:3, domain:"rag", desc:"How documents are split (Recursive, Semantic, Fixed) for RAG"},
   {word:"Routing", freq:3, domain:"ops", desc:"Directing queries to cheaper or smarter models based on complexity"},
-  {word:"cost", freq:3, domain:"cost", desc:"cost optimization"},  
+  {word:"cost", freq:3, domain:"cost", desc:"cost optimization"},
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"LLM", freq:5, domain:"infra", desc:"87 practice questions"},
+    {word:"GPU", freq:4, domain:"infra", desc:"28 practice questions"},
+    {word:"MLOps", freq:3, domain:"ops", desc:"12 practice questions"},
+    {word:"Few-Shot", freq:2, domain:"optim", desc:"7 practice questions"},
+    {word:"Inference", freq:4, domain:"infra", desc:"30 practice questions"},
+    {word:"Transformer", freq:2, domain:"infra", desc:"8 practice questions"},
+    {word:"OpenAI", freq:1, domain:"agent", desc:"3 practice questions"},
+    {word:"Retrieval", freq:3, domain:"rag", desc:"17 practice questions"},
+    {word:"Prompt Engineering", freq:1, domain:"optim", desc:"3 practice questions"}
 ];
 
 const javaKeywords = [
@@ -1026,7 +1164,17 @@ const javaKeywords = [
     { word: "Gradle", freq: 10, domain: "spring-build" },
     { word: "Fat JAR", freq: 8, domain: "spring-build" },
     { word: "Embedded Tomcat", freq: 9, domain: "spring-runtime" },
-    { word: "Externalized Config", freq: 9, domain: "spring-runtime" }
+    { word: "Externalized Config", freq: 9, domain: "spring-runtime" },
+    // --- Reverse-check additions (bank-backed) ---
+    { word: "Docker", freq: 6, domain: "spring-build" },
+    { word: "Kubernetes", freq: 6, domain: "spring-runtime" },
+    { word: "JVM", freq: 4, domain: "spring-runtime" },
+    { word: "Redis", freq: 2, domain: "spring-data" },
+    { word: "Java 21", freq: 4, domain: "spring-runtime" },
+    { word: "JSON", freq: 6, domain: "spring-api" },
+    { word: "Batch", freq: 4, domain: "spring-build" },
+    { word: "Garbage Collection", freq: 2, domain: "spring-runtime" },
+    { word: "Virtual Threads", freq: 2, domain: "spring-runtime" }
 ];
 const awsKeywords = [
   {word:"Nitro", freq:5, domain:"aws-core", desc:"Underlying hardware acceleration for instances"},
@@ -1072,7 +1220,17 @@ const awsKeywords = [
   { word: "CloudWatch Logs", freq: 9, domain: "aws-obs" },
   { word: "X-Ray", freq: 8, domain: "aws-obs" },
   { word: "NAT Gateway", freq: 8, domain: "aws-net" },
-  { word: "Private Subnet", freq: 8, domain: "aws-net" },  
+  { word: "Private Subnet", freq: 8, domain: "aws-net" },
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"AWS Config", freq:4, domain:"aws-sec", desc:"5 practice questions"},
+    {word:"Direct Connect", freq:4, domain:"aws-net", desc:"5 practice questions"},
+    {word:"EBS", freq:6, domain:"aws-core", desc:"17 practice questions"},
+    {word:"CloudFormation", freq:4, domain:"aws-core", desc:"7 practice questions"},
+    {word:"Inspector", freq:2, domain:"aws-sec", desc:"4 practice questions"},
+    {word:"Trusted Advisor", freq:2, domain:"aws-cost", desc:"3 practice questions"},
+    {word:"Peering", freq:4, domain:"aws-net", desc:"6 practice questions"},
+    {word:"Aurora", freq:6, domain:"aws-db", desc:"11 practice questions"},
+    {word:"GuardDuty", freq:2, domain:"aws-sec", desc:"3 practice questions"}
 ];
     
 const azKeywords = [
@@ -1115,6 +1273,16 @@ const azKeywords = [
   {word:"Log Analytics", freq:5, domain:"az-gov", desc:"Tool to edit and run log queries for Azure Monitor data"},
   {word:"Container Apps", freq:4, domain:"az-compute", desc:"Serverless containers for microservices and jobs"},
   {word:"cost", freq:3, domain:"az-cost", desc:"cost optimization"},
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"Azure Policy", freq:5, domain:"az-gov", desc:"13 practice questions"},
+    {word:"Azure Advisor", freq:2, domain:"az-gov", desc:"4 practice questions"},
+    {word:"Front Door", freq:4, domain:"az-net", desc:"8 practice questions"},
+    {word:"VPN", freq:4, domain:"az-net", desc:"6 practice questions"},
+    {word:"Firewall", freq:5, domain:"az-security", desc:"16 practice questions"},
+    {word:"Application Gateway", freq:2, domain:"az-net", desc:"3 practice questions"},
+    {word:"Blob", freq:5, domain:"az-data", desc:"16 practice questions"},
+    {word:"SQL Database", freq:5, domain:"az-data", desc:"12 practice questions"},
+    {word:"Azure Monitor", freq:5, domain:"az-gov", desc:"11 practice questions"}
 ];
 
 const mgKeywords = [
@@ -1130,7 +1298,13 @@ const mgKeywords = [
   {word:"GridFS", freq:2, domain:"mg-arch", desc:"Storing large files > 16MB"},
   {word:"Compound Index", freq:3, domain:"mg-perf", desc:"Index on multiple fields"},
   {word:"WiredTiger", freq:3, domain:"mg-arch", desc:"Default storage engine"},
-  {word:"cost", freq:3, domain:"mg-cost", desc:"cost optimization"},  
+  {word:"cost", freq:3, domain:"mg-cost", desc:"cost optimization"},
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"Replica Set", freq:4, domain:"mg-arch", desc:"25 practice questions"},
+    {word:"Aggregation", freq:4, domain:"mg-crud", desc:"29 practice questions"},
+    {word:"Change Streams", freq:1, domain:"mg-crud", desc:"4 practice questions"},
+    {word:"Transaction", freq:2, domain:"mg-crud", desc:"5 practice questions"},
+    {word:"Schema Design", freq:1, domain:"mg-arch", desc:"4 practice questions"}
 ];
 
 const rKeywords = [
@@ -1151,7 +1325,16 @@ const rKeywords = [
   { word: "Concurrent Rendering", freq: 9, domain: "r-perf" },
   { word: "Suspense", freq: 8, domain: "r-core" },
   { word: "React Query", freq: 9, domain: "r-state" },
-  { word: "Zustand", freq: 7, domain: "r-state" },  
+  { word: "Zustand", freq: 7, domain: "r-state" },
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"useMemo", freq:4, domain:"r-hooks", desc:"8 practice questions"},
+    {word:"useReducer", freq:4, domain:"r-hooks", desc:"6 practice questions"},
+    {word:"useCallback", freq:4, domain:"r-hooks", desc:"6 practice questions"},
+    {word:"useContext", freq:4, domain:"r-hooks", desc:"6 practice questions"},
+    {word:"React.memo", freq:4, domain:"r-perf", desc:"8 practice questions"},
+    {word:"Re-render", freq:5, domain:"r-perf", desc:"19 practice questions"},
+    {word:"CSS", freq:5, domain:"r-core", desc:"10 practice questions"},
+    {word:"React 18", freq:4, domain:"r-core", desc:"9 practice questions"}
 ];
     
 const snKeywords = [
@@ -1166,7 +1349,21 @@ const snKeywords = [
   {word:"cost", freq:3, domain:"sn-compute", desc:"cost optimization"},
   {word:"history", freq:3, domain:"sn-compute", desc:"history tables"},
   {word:"Search Optimization", freq:4, domain:"sn-services", desc:"Speeds up point lookup queries"},
-  {word:"cost", freq:3, domain:"sn-cost", desc:"cost optimization"},      
+  {word:"cost", freq:3, domain:"sn-cost", desc:"cost optimization"},
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"Streams", freq:3, domain:"sn-services", desc:"19 practice questions"},
+    {word:"Tasks", freq:3, domain:"sn-services", desc:"18 practice questions"},
+    {word:"Materialized Views", freq:1, domain:"sn-compute", desc:"4 practice questions"},
+    {word:"Stages", freq:1, domain:"sn-storage", desc:"3 practice questions"},
+    {word:"Masking Policies", freq:2, domain:"sn-core", desc:"9 practice questions"},
+    {word:"Query Acceleration", freq:2, domain:"sn-compute", desc:"6 practice questions"},
+    {word:"Dynamic Tables", freq:3, domain:"sn-services", desc:"11 practice questions"},
+    {word:"Cloud Services", freq:3, domain:"sn-core", desc:"12 practice questions"},
+    {word:"Replication", freq:2, domain:"sn-core", desc:"9 practice questions"},
+    {word:"Metadata", freq:4, domain:"sn-core", desc:"20 practice questions"},
+    {word:"Snowpark", freq:3, domain:"sn-services", desc:"11 practice questions"},
+    {word:"Iceberg", freq:3, domain:"sn-storage", desc:"10 practice questions"},
+    {word:"Clustering", freq:2, domain:"sn-compute", desc:"9 practice questions"}
 ];
 
 const kfKeywords = [
@@ -1180,7 +1377,20 @@ const kfKeywords = [
   {word:"Kafka Streams", freq:4, domain:"kf-stream", desc:"Client library for building stream processing apps"},
   {word:"Schema Registry", freq:5, domain:"kf-connect", desc:"Centralized management of Avro/JSON schemas"},
   {word:"Replication Factor", freq:3, domain:"kf-ops", desc:"Number of copies of data for fault tolerance"},
-  {word:"cost", freq:3, domain:"kf-cost", desc:"cost optimization"},  
+  {word:"cost", freq:3, domain:"kf-cost", desc:"cost optimization"},
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"ACLs", freq:3, domain:"kf-ops", desc:"13 practice questions"},
+    {word:"ISR", freq:2, domain:"kf-core", desc:"8 practice questions"},
+    {word:"SSL", freq:2, domain:"kf-ops", desc:"7 practice questions"},
+    {word:"Confluent", freq:3, domain:"kf-connect", desc:"10 practice questions"},
+    {word:"Producer", freq:4, domain:"kf-core", desc:"38 practice questions"},
+    {word:"Partition", freq:5, domain:"kf-core", desc:"45 practice questions"},
+    {word:"Offset", freq:3, domain:"kf-core", desc:"17 practice questions"},
+    {word:"Replication", freq:2, domain:"kf-core", desc:"9 practice questions"},
+    {word:"Rebalance", freq:3, domain:"kf-ops", desc:"14 practice questions"},
+    {word:"Retention", freq:1, domain:"kf-ops", desc:"3 practice questions"},
+    {word:"Compaction", freq:3, domain:"kf-core", desc:"11 practice questions"},
+    {word:"Exactly-once", freq:1, domain:"kf-stream", desc:"3 practice questions"}
 ];
 /**
  * Keyword mapping for the 500 MCQ Question Bank
@@ -1222,7 +1432,17 @@ const typescriptNestjsKeywords = [
   // --- TESTING ---
   { word: "Jest", freq: 8, domain: "architecture", desc: "Unit testing framework for NestJS and Angular" },
   { word: "Cypress", freq: 6, domain: "architecture", desc: "End-to-end testing for frontend workflows" },
-  { word: "Mocks", freq: 5, domain: "architecture", desc: "Simulating dependencies for isolated tests" }
+  { word: "Mocks", freq: 5, domain: "architecture", desc: "Simulating dependencies for isolated tests" },
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"Module", freq:10, domain:"architecture", desc:"58 practice questions"},
+    {word:"Injectable", freq:4, domain:"architecture", desc:"5 practice questions"},
+    {word:"Middleware", freq:4, domain:"architecture", desc:"9 practice questions"},
+    {word:"Controller", freq:8, domain:"architecture", desc:"25 practice questions"},
+    {word:"Node.js", freq:4, domain:"compute", desc:"7 practice questions"},
+    {word:"Omit", freq:2, domain:"data", desc:"3 practice questions"},
+    {word:"Decorator", freq:10, domain:"architecture", desc:"53 practice questions"},
+    {word:"Interceptor", freq:8, domain:"architecture", desc:"23 practice questions"},
+    {word:"DTO", freq:4, domain:"data", desc:"6 practice questions"}
 ];
     
 // Keywords for Web3 Technical Architect
@@ -1270,7 +1490,26 @@ const web3BlockChainKeywords = [
 
     // DeFi & Economy
     { word: "DeFi", weight: 20, class: "wb-defi" },
-    { word: "Tokenomics", weight: 18, class: "wb-defi" }
+    { word: "Tokenomics", weight: 18, class: "wb-defi" },
+    // --- Reverse-check additions (bank-backed) ---
+    { word: "Ethereum", weight: 20, class: "wb-core" },
+    { word: "Solidity", weight: 15, class: "wb-tooling" },
+    { word: "MEV", weight: 20, class: "wb-security" },
+    { word: "Bitcoin", weight: 10, class: "wb-core" },
+    { word: "DAO", weight: 15, class: "wb-defi" },
+    { word: "Solana", weight: 15, class: "wb-infrastructure" },
+    { word: "RWA", weight: 20, class: "wb-defi" },
+    { word: "Cross-chain", weight: 15, class: "wb-infrastructure" },
+    { word: "NFT", weight: 10, class: "wb-core" },
+    { word: "EVM", weight: 15, class: "wb-tooling" },
+    { word: "Gas", weight: 15, class: "wb-core" },
+    { word: "On-chain", weight: 10, class: "wb-core" },
+    { word: "Off-chain", weight: 10, class: "wb-core" },
+    { word: "Optimistic", weight: 10, class: "wb-infrastructure" },
+    { word: "Rollup", weight: 15, class: "wb-infrastructure" },
+    { word: "Smart Contract", weight: 20, class: "wb-core" },
+    { word: "Consensus", weight: 10, class: "wb-core" },
+    { word: "Oracle", weight: 20, class: "wb-infrastructure" }
 ];
 
 const claudeArchitectKeywords = [
@@ -1411,6 +1650,280 @@ const claudeDeveloperKeywords = [
 {word:"Skills vs MCP", freq:4, domain:"cd-tools", desc:"Instructions vs live systems"}
 ];
 
+const saAiDataKeywords = [
+{word:"RAG", freq:4, domain:"aiData-ai", desc:"25 practice questions"},
+{word:"LLM", freq:3, domain:"aiData-ai", desc:"13 practice questions"},
+{word:"Agentic", freq:2, domain:"aiData-ai", desc:"8 practice questions"},
+{word:"Embedding", freq:2, domain:"aiData-ai", desc:"5 practice questions"},
+{word:"Vector", freq:2, domain:"aiData-ai", desc:"9 practice questions"},
+{word:"Fine-tuning", freq:1, domain:"aiData-ai", desc:"2 practice questions"},
+{word:"Hallucination", freq:1, domain:"aiData-ai", desc:"2 practice questions"},
+{word:"Guardrails", freq:1, domain:"aiData-ai", desc:"2 practice questions"},
+{word:"Prompt Injection", freq:1, domain:"aiData-ai", desc:"4 practice questions"},
+{word:"MLOps", freq:1, domain:"aiData-ai", desc:"2 practice questions"},
+{word:"Feature Store", freq:1, domain:"aiData-ai", desc:"2 practice questions"},
+{word:"Responsible AI", freq:1, domain:"aiData-ai", desc:"3 practice questions"},
+{word:"LangGraph", freq:1, domain:"aiData-ai", desc:"2 practice questions"},
+{word:"Lakehouse", freq:2, domain:"aiData-lakehouse", desc:"5 practice questions"},
+{word:"Medallion", freq:1, domain:"aiData-lakehouse", desc:"2 practice questions"},
+{word:"Delta Lake", freq:2, domain:"aiData-lakehouse", desc:"8 practice questions"},
+{word:"Databricks", freq:5, domain:"aiData-lakehouse", desc:"40 practice questions"},
+{word:"Snowflake", freq:1, domain:"aiData-lakehouse", desc:"2 practice questions"},
+{word:"Unity Catalog", freq:1, domain:"aiData-lakehouse", desc:"3 practice questions"},
+{word:"Auto Loader", freq:1, domain:"aiData-lakehouse", desc:"2 practice questions"},
+{word:"Spark", freq:4, domain:"aiData-lakehouse", desc:"29 practice questions"},
+{word:"Kafka", freq:2, domain:"aiData-platform", desc:"9 practice questions"},
+{word:"Streaming", freq:2, domain:"aiData-platform", desc:"6 practice questions"},
+{word:"Event-Driven", freq:1, domain:"aiData-platform", desc:"2 practice questions"},
+{word:"High Availability", freq:1, domain:"aiData-platform", desc:"2 practice questions"},
+{word:"Observability", freq:1, domain:"aiData-platform", desc:"3 practice questions"},
+{word:"Cost Optimization", freq:1, domain:"aiData-platform", desc:"2 practice questions"},
+{word:"Kubernetes", freq:1, domain:"aiData-platform", desc:"2 practice questions"},
+{word:"Governance", freq:3, domain:"aiData-governance", desc:"16 practice questions"},
+{word:"Purview", freq:1, domain:"aiData-governance", desc:"2 practice questions"},
+{word:"Encryption", freq:1, domain:"aiData-governance", desc:"3 practice questions"},
+{word:"Zero Trust", freq:1, domain:"aiData-governance", desc:"2 practice questions"},
+{word:"Stakeholder", freq:1, domain:"aiData-governance", desc:"3 practice questions"},
+{word:"TCO", freq:1, domain:"aiData-governance", desc:"2 practice questions"},
+{word:"Photon", freq:2, domain:"aiData-platform", desc:"3 practice questions"},
+{word:"Data Lineage", freq:2, domain:"aiData-governance", desc:"3 practice questions"}
+];
+
+const pythonPySparkKeywords = [
+{word:"GIL", freq:1, domain:"py-core", desc:"3 practice questions"},
+{word:"Decorator", freq:2, domain:"py-core", desc:"5 practice questions"},
+{word:"Generator", freq:2, domain:"py-core", desc:"6 practice questions"},
+{word:"Iterator", freq:2, domain:"py-core", desc:"6 practice questions"},
+{word:"Comprehension", freq:3, domain:"py-core", desc:"12 practice questions"},
+{word:"Lambda", freq:2, domain:"py-core", desc:"7 practice questions"},
+{word:"Closure", freq:1, domain:"py-core", desc:"2 practice questions"},
+{word:"Context Manager", freq:2, domain:"py-core", desc:"5 practice questions"},
+{word:"Dataclass", freq:1, domain:"py-core", desc:"2 practice questions"},
+{word:"Mutable", freq:1, domain:"py-core", desc:"2 practice questions"},
+{word:"Type Hints", freq:1, domain:"py-core", desc:"2 practice questions"},
+{word:"Exception", freq:1, domain:"py-core", desc:"4 practice questions"},
+{word:"Garbage Collection", freq:1, domain:"py-core", desc:"2 practice questions"},
+{word:"Asyncio", freq:2, domain:"py-concurrency", desc:"9 practice questions"},
+{word:"Threading", freq:1, domain:"py-concurrency", desc:"2 practice questions"},
+{word:"Multiprocessing", freq:1, domain:"py-concurrency", desc:"2 practice questions"},
+{word:"Coroutine", freq:1, domain:"py-concurrency", desc:"3 practice questions"},
+{word:"Spark", freq:5, domain:"py-spark", desc:"131 practice questions"},
+{word:"PySpark", freq:4, domain:"py-spark", desc:"30 practice questions"},
+{word:"DataFrame", freq:4, domain:"py-spark", desc:"23 practice questions"},
+{word:"RDD", freq:1, domain:"py-spark", desc:"2 practice questions"},
+{word:"Shuffle", freq:4, domain:"py-spark", desc:"22 practice questions"},
+{word:"Broadcast", freq:2, domain:"py-spark", desc:"8 practice questions"},
+{word:"Partition", freq:4, domain:"py-spark", desc:"23 practice questions"},
+{word:"Lazy Evaluation", freq:1, domain:"py-spark", desc:"3 practice questions"},
+{word:"UDF", freq:2, domain:"py-spark", desc:"5 practice questions"},
+{word:"Catalyst", freq:2, domain:"py-spark", desc:"7 practice questions"},
+{word:"Window", freq:3, domain:"py-spark", desc:"16 practice questions"},
+{word:"Cache", freq:2, domain:"py-spark", desc:"6 practice questions"},
+{word:"Big O", freq:1, domain:"py-algorithms", desc:"2 practice questions"},
+{word:"Binary Search", freq:1, domain:"py-algorithms", desc:"2 practice questions"},
+{word:"Heap", freq:1, domain:"py-algorithms", desc:"4 practice questions"}
+];
+
+const sqlKeywords = [
+{word:"Join", freq:4, domain:"sq-query", desc:"26 practice questions"},
+{word:"Subquery", freq:3, domain:"sq-query", desc:"15 practice questions"},
+{word:"CTE", freq:3, domain:"sq-query", desc:"19 practice questions"},
+{word:"Recursive", freq:1, domain:"sq-query", desc:"3 practice questions"},
+{word:"Window Function", freq:2, domain:"sq-query", desc:"7 practice questions"},
+{word:"RANK", freq:1, domain:"sq-query", desc:"3 practice questions"},
+{word:"DENSE_RANK", freq:1, domain:"sq-query", desc:"2 practice questions"},
+{word:"LAG", freq:1, domain:"sq-query", desc:"2 practice questions"},
+{word:"GROUP BY", freq:3, domain:"sq-query", desc:"11 practice questions"},
+{word:"HAVING", freq:2, domain:"sq-query", desc:"6 practice questions"},
+{word:"UNION", freq:2, domain:"sq-query", desc:"7 practice questions"},
+{word:"NULL", freq:3, domain:"sq-query", desc:"14 practice questions"},
+{word:"PIVOT", freq:1, domain:"sq-query", desc:"2 practice questions"},
+{word:"MERGE", freq:1, domain:"sq-query", desc:"2 practice questions"},
+{word:"Index", freq:4, domain:"sq-performance", desc:"35 practice questions"},
+{word:"Covering Index", freq:1, domain:"sq-performance", desc:"3 practice questions"},
+{word:"Clustered", freq:2, domain:"sq-performance", desc:"5 practice questions"},
+{word:"Execution Plan", freq:1, domain:"sq-performance", desc:"4 practice questions"},
+{word:"SARGable", freq:1, domain:"sq-performance", desc:"2 practice questions"},
+{word:"Partition", freq:2, domain:"sq-performance", desc:"6 practice questions"},
+{word:"Statistics", freq:1, domain:"sq-performance", desc:"3 practice questions"},
+{word:"Transaction", freq:3, domain:"sq-transactions", desc:"17 practice questions"},
+{word:"ACID", freq:2, domain:"sq-transactions", desc:"6 practice questions"},
+{word:"Deadlock", freq:1, domain:"sq-transactions", desc:"2 practice questions"},
+{word:"Isolation Level", freq:1, domain:"sq-transactions", desc:"4 practice questions"},
+{word:"NOLOCK", freq:1, domain:"sq-transactions", desc:"2 practice questions"},
+{word:"Locking", freq:1, domain:"sq-transactions", desc:"2 practice questions"},
+{word:"Normalization", freq:1, domain:"sq-design", desc:"3 practice questions"},
+{word:"Denormalization", freq:1, domain:"sq-design", desc:"2 practice questions"},
+{word:"Primary Key", freq:1, domain:"sq-design", desc:"4 practice questions"},
+{word:"Foreign Key", freq:1, domain:"sq-design", desc:"2 practice questions"},
+{word:"Constraint", freq:1, domain:"sq-design", desc:"4 practice questions"},
+{word:"Trigger", freq:1, domain:"sq-design", desc:"4 practice questions"},
+{word:"View", freq:3, domain:"sq-design", desc:"12 practice questions"},
+{word:"Stored Procedure", freq:2, domain:"sq-design", desc:"7 practice questions"},
+{word:"Star Schema", freq:1, domain:"sq-design", desc:"2 practice questions"}
+];
+
+const nodeKeywords = [
+{word:"Event Loop", freq:3, domain:"nj-runtime", desc:"15 practice questions"},
+{word:"libuv", freq:1, domain:"nj-runtime", desc:"4 practice questions"},
+{word:"V8", freq:3, domain:"nj-runtime", desc:"17 practice questions"},
+{word:"Garbage Collection", freq:1, domain:"nj-runtime", desc:"2 practice questions"},
+{word:"Memory Leak", freq:1, domain:"nj-runtime", desc:"4 practice questions"},
+{word:"Microtask", freq:1, domain:"nj-runtime", desc:"2 practice questions"},
+{word:"nextTick", freq:1, domain:"nj-runtime", desc:"3 practice questions"},
+{word:"Buffer", freq:3, domain:"nj-runtime", desc:"11 practice questions"},
+{word:"Worker Threads", freq:1, domain:"nj-runtime", desc:"3 practice questions"},
+{word:"Cluster", freq:2, domain:"nj-runtime", desc:"7 practice questions"},
+{word:"Child Process", freq:1, domain:"nj-runtime", desc:"2 practice questions"},
+{word:"Promise", freq:3, domain:"nj-async", desc:"10 practice questions"},
+{word:"async/await", freq:1, domain:"nj-async", desc:"2 practice questions"},
+{word:"Callback", freq:3, domain:"nj-async", desc:"10 practice questions"},
+{word:"EventEmitter", freq:1, domain:"nj-async", desc:"3 practice questions"},
+{word:"Streams", freq:3, domain:"nj-async", desc:"13 practice questions"},
+{word:"Backpressure", freq:1, domain:"nj-async", desc:"3 practice questions"},
+{word:"Express", freq:4, domain:"nj-web", desc:"20 practice questions"},
+{word:"Middleware", freq:2, domain:"nj-web", desc:"9 practice questions"},
+{word:"REST", freq:2, domain:"nj-web", desc:"8 practice questions"},
+{word:"WebSocket", freq:1, domain:"nj-web", desc:"2 practice questions"},
+{word:"CORS", freq:1, domain:"nj-web", desc:"2 practice questions"},
+{word:"Rate Limiting", freq:1, domain:"nj-web", desc:"2 practice questions"},
+{word:"JWT", freq:1, domain:"nj-web", desc:"2 practice questions"},
+{word:"Helmet", freq:1, domain:"nj-web", desc:"2 practice questions"},
+{word:"Graceful Shutdown", freq:1, domain:"nj-web", desc:"2 practice questions"},
+{word:"npm", freq:2, domain:"nj-ops", desc:"8 practice questions"},
+{word:"Profiling", freq:1, domain:"nj-ops", desc:"3 practice questions"}
+];
+
+const jsKeywords = [
+{word:"Closure", freq:2, domain:"js-core", desc:"6 practice questions"},
+{word:"Hoisting", freq:1, domain:"js-core", desc:"2 practice questions"},
+{word:"Prototype", freq:2, domain:"js-core", desc:"5 practice questions"},
+{word:"this", freq:4, domain:"js-core", desc:"27 practice questions"},
+{word:"Temporal Dead Zone", freq:1, domain:"js-core", desc:"2 practice questions"},
+{word:"Strict Mode", freq:1, domain:"js-core", desc:"3 practice questions"},
+{word:"Proxy", freq:1, domain:"js-core", desc:"2 practice questions"},
+{word:"Generator", freq:1, domain:"js-core", desc:"2 practice questions"},
+{word:"Destructuring", freq:1, domain:"js-core", desc:"2 practice questions"},
+{word:"Spread", freq:1, domain:"js-core", desc:"3 practice questions"},
+{word:"Currying", freq:1, domain:"js-core", desc:"2 practice questions"},
+{word:"Event Loop", freq:1, domain:"js-async", desc:"3 practice questions"},
+{word:"Promise", freq:3, domain:"js-async", desc:"16 practice questions"},
+{word:"async/await", freq:1, domain:"js-async", desc:"3 practice questions"},
+{word:"Callback", freq:1, domain:"js-async", desc:"3 practice questions"},
+{word:"Fetch", freq:1, domain:"js-async", desc:"4 practice questions"},
+{word:"Debounce", freq:1, domain:"js-async", desc:"3 practice questions"},
+{word:"Throttle", freq:1, domain:"js-async", desc:"2 practice questions"},
+{word:"Map", freq:2, domain:"js-data", desc:"5 practice questions"},
+{word:"Set", freq:4, domain:"js-data", desc:"21 practice questions"},
+{word:"Shallow Copy", freq:1, domain:"js-data", desc:"2 practice questions"},
+{word:"Immutable", freq:1, domain:"js-data", desc:"2 practice questions"},
+{word:"Memoization", freq:1, domain:"js-data", desc:"2 practice questions"},
+{word:"REST", freq:4, domain:"js-web", desc:"23 practice questions"},
+{word:"Versioning", freq:3, domain:"js-web", desc:"19 practice questions"},
+{word:"CORS", freq:1, domain:"js-web", desc:"3 practice questions"},
+{word:"Event Delegation", freq:1, domain:"js-web", desc:"2 practice questions"},
+{word:"LocalStorage", freq:1, domain:"js-web", desc:"2 practice questions"},
+{word:"Module", freq:2, domain:"js-web", desc:"5 practice questions"},
+{word:"ES6", freq:2, domain:"js-web", desc:"8 practice questions"}
+];
+
+const dotnetKeywords = [
+{word:"LINQ", freq:2, domain:"dn-language", desc:"6 practice questions"},
+{word:"Async", freq:2, domain:"dn-language", desc:"8 practice questions"},
+{word:"Delegate", freq:1, domain:"dn-language", desc:"3 practice questions"},
+{word:"Generics", freq:1, domain:"dn-language", desc:"4 practice questions"},
+{word:"Record", freq:1, domain:"dn-language", desc:"4 practice questions"},
+{word:"Span", freq:1, domain:"dn-language", desc:"4 practice questions"},
+{word:"Task", freq:3, domain:"dn-language", desc:"12 practice questions"},
+{word:"IDisposable", freq:1, domain:"dn-language", desc:"2 practice questions"},
+{word:"Nullable", freq:1, domain:"dn-language", desc:"2 practice questions"},
+{word:"CLR", freq:1, domain:"dn-runtime", desc:"2 practice questions"},
+{word:"JIT", freq:2, domain:"dn-runtime", desc:"7 practice questions"},
+{word:"Garbage Collection", freq:2, domain:"dn-runtime", desc:"7 practice questions"},
+{word:"Kestrel", freq:1, domain:"dn-runtime", desc:"2 practice questions"},
+{word:"Docker", freq:1, domain:"dn-runtime", desc:"4 practice questions"},
+{word:"Middleware", freq:3, domain:"dn-web", desc:"11 practice questions"},
+{word:"Dependency Injection", freq:2, domain:"dn-web", desc:"9 practice questions"},
+{word:"Minimal API", freq:1, domain:"dn-web", desc:"2 practice questions"},
+{word:"Blazor", freq:2, domain:"dn-web", desc:"5 practice questions"},
+{word:"SignalR", freq:1, domain:"dn-web", desc:"2 practice questions"},
+{word:"gRPC", freq:1, domain:"dn-web", desc:"2 practice questions"},
+{word:"Razor", freq:1, domain:"dn-web", desc:"2 practice questions"},
+{word:"Health Checks", freq:1, domain:"dn-web", desc:"2 practice questions"},
+{word:"Entity Framework", freq:1, domain:"dn-data", desc:"3 practice questions"},
+{word:"Dapper", freq:1, domain:"dn-data", desc:"2 practice questions"},
+{word:"Migration", freq:1, domain:"dn-data", desc:"3 practice questions"},
+{word:"Transaction", freq:1, domain:"dn-data", desc:"4 practice questions"},
+{word:"Microservices", freq:4, domain:"dn-architecture", desc:"38 practice questions"},
+{word:"SOLID", freq:1, domain:"dn-architecture", desc:"3 practice questions"},
+{word:"Polly", freq:1, domain:"dn-architecture", desc:"2 practice questions"},
+{word:"JWT", freq:3, domain:"dn-architecture", desc:"11 practice questions"},
+{word:"Identity", freq:2, domain:"dn-architecture", desc:"8 practice questions"},
+{word:"CQRS", freq:1, domain:"dn-architecture", desc:"4 practice questions"},
+{word:"Clean Architecture", freq:1, domain:"dn-architecture", desc:"3 practice questions"}
+];
+
+const aiArchKeywords = [
+{word:"RAG", freq:4, domain:"aar-ai", desc:"27 practice questions"},
+{word:"Vector Database", freq:2, domain:"aar-ai", desc:"6 practice questions"},
+{word:"LangGraph", freq:1, domain:"aar-ai", desc:"2 practice questions"},
+{word:"Guardrails", freq:1, domain:"aar-ai", desc:"4 practice questions"},
+{word:"Fine-tuning", freq:1, domain:"aar-ai", desc:"4 practice questions"},
+{word:"Model Serving", freq:1, domain:"aar-ai", desc:"2 practice questions"},
+{word:"Prompt Injection", freq:1, domain:"aar-ai", desc:"3 practice questions"},
+{word:"LLMOps", freq:1, domain:"aar-ai", desc:"2 practice questions"},
+{word:"GPU", freq:3, domain:"aar-ai", desc:"10 practice questions"},
+{word:"Token", freq:3, domain:"aar-ai", desc:"11 practice questions"},
+{word:"Kubernetes", freq:4, domain:"aar-platform", desc:"34 practice questions"},
+{word:"Service Mesh", freq:3, domain:"aar-platform", desc:"10 practice questions"},
+{word:"Karpenter", freq:1, domain:"aar-platform", desc:"2 practice questions"},
+{word:"Canary", freq:1, domain:"aar-platform", desc:"3 practice questions"},
+{word:"Multi-Region", freq:2, domain:"aar-platform", desc:"8 practice questions"},
+{word:"Circuit Breaker", freq:3, domain:"aar-platform", desc:"10 practice questions"},
+{word:"mTLS", freq:1, domain:"aar-security", desc:"4 practice questions"},
+{word:"Zero Trust", freq:1, domain:"aar-security", desc:"2 practice questions"},
+{word:"OIDC", freq:1, domain:"aar-security", desc:"2 practice questions"},
+{word:"Secrets Management", freq:1, domain:"aar-security", desc:"2 practice questions"},
+{word:"Data Residency", freq:1, domain:"aar-security", desc:"2 practice questions"},
+{word:"OWASP", freq:1, domain:"aar-security", desc:"2 practice questions"},
+{word:"Observability", freq:3, domain:"aar-ops", desc:"10 practice questions"},
+{word:"Latency", freq:3, domain:"aar-ops", desc:"19 practice questions"},
+{word:"Throughput", freq:2, domain:"aar-ops", desc:"5 practice questions"},
+{word:"Distributed Tracing", freq:1, domain:"aar-ops", desc:"3 practice questions"}
+];
+
+const hl7Keywords = [
+{word:"ADT", freq:3, domain:"hl-v2", desc:"18 practice questions"},
+{word:"ORU", freq:2, domain:"hl-v2", desc:"6 practice questions"},
+{word:"ORM", freq:5, domain:"hl-v2", desc:"55 practice questions"},
+{word:"SIU", freq:3, domain:"hl-v2", desc:"11 practice questions"},
+{word:"MSH", freq:3, domain:"hl-v2", desc:"18 practice questions"},
+{word:"PID", freq:3, domain:"hl-v2", desc:"14 practice questions"},
+{word:"OBX", freq:4, domain:"hl-v2", desc:"24 practice questions"},
+{word:"Segment", freq:5, domain:"hl-v2", desc:"85 practice questions"},
+{word:"Acknowledgment", freq:1, domain:"hl-v2", desc:"3 practice questions"},
+{word:"MLLP", freq:1, domain:"hl-v2", desc:"4 practice questions"},
+{word:"Z-segment", freq:1, domain:"hl-v2", desc:"2 practice questions"},
+{word:"A01", freq:2, domain:"hl-v2", desc:"5 practice questions"},
+{word:"FHIR", freq:5, domain:"hl-fhir", desc:"57 practice questions"},
+{word:"Resource", freq:4, domain:"hl-fhir", desc:"24 practice questions"},
+{word:"Bundle", freq:1, domain:"hl-fhir", desc:"2 practice questions"},
+{word:"Patient", freq:4, domain:"hl-fhir", desc:"33 practice questions"},
+{word:"Observation", freq:3, domain:"hl-fhir", desc:"10 practice questions"},
+{word:"Encounter", freq:1, domain:"hl-fhir", desc:"2 practice questions"},
+{word:"Profile", freq:1, domain:"hl-fhir", desc:"2 practice questions"},
+{word:"SMART on FHIR", freq:1, domain:"hl-fhir", desc:"3 practice questions"},
+{word:"REST", freq:4, domain:"hl-fhir", desc:"20 practice questions"},
+{word:"CDA", freq:3, domain:"hl-docs", desc:"13 practice questions"},
+{word:"LOINC", freq:2, domain:"hl-docs", desc:"5 practice questions"},
+{word:"SNOMED", freq:1, domain:"hl-docs", desc:"2 practice questions"},
+{word:"Terminology", freq:1, domain:"hl-docs", desc:"3 practice questions"},
+{word:"Interface Engine", freq:1, domain:"hl-integration", desc:"2 practice questions"},
+{word:"Mirth", freq:1, domain:"hl-integration", desc:"3 practice questions"},
+{word:"OAuth", freq:1, domain:"hl-integration", desc:"2 practice questions"},
+{word:"HIPAA", freq:1, domain:"hl-integration", desc:"2 practice questions"}
+];
+
 const dataArchitectKeywords = [
 {word:"Lakehouse", freq:5, domain:"architecture", desc:"Unified architecture combining data lake and warehouse"},
 {word:"Medallion", freq:4, domain:"architecture", desc:"Bronze Silver Gold layered data architecture"},
@@ -1433,6 +1946,13 @@ const dataArchitectKeywords = [
 {word:"Analytics", freq:4, domain:"analytics", desc:"Streaming based analytics processing"},
 {word:"Petabyte", freq:5, domain:"scale", desc:"Data platforms operating at PB scale"},
 {word:"cost", freq:3, domain:"cost", desc:"cost optimization"},
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"HBase", freq:3, domain:"architecture", desc:"17 practice questions"},
+    {word:"Iceberg", freq:2, domain:"architecture", desc:"9 practice questions"},
+    {word:"Kafka", freq:2, domain:"streaming", desc:"5 practice questions"},
+    {word:"Real-time", freq:3, domain:"streaming", desc:"11 practice questions"},
+    {word:"Delta Lake", freq:1, domain:"architecture", desc:"3 practice questions"},
+    {word:"ELT", freq:1, domain:"ingestion", desc:"3 practice questions"}
 ];
 
 const devOpsKeywords = [
@@ -1507,6 +2027,10 @@ const devOpsKeywords = [
     { word: "Private Link", freq: 7, domain: "devops-network" },
     { word: "Transit Gateway", freq: 7, domain: "devops-network" },
     { word: "CNI", freq: 6, domain: "devops-network" },
+    // --- Reverse-check additions (bank-backed) ---
+    {word:"VPC", freq:4, domain:"devops-network", desc:"5 practice questions"},
+    {word:"VNet", freq:4, domain:"devops-network", desc:"7 practice questions"},
+    {word:"Pod", freq:8, domain:"devops-k8s", desc:"38 practice questions"}
 ];
     
 const eaKeywords = [
@@ -1537,17 +2061,47 @@ const eaKeywords = [
     { word: "phase", freq: 6, domain: "ea-framework" },
     { word: "Legacy", freq: 7, domain: "ea-strategy" },
     { word: "cost", freq:3, domain:"ea-governance" },
+    // Reverse-check additions (bank-backed, >=3 matching questions)
+    { word: "Risk", freq: 8, domain: "ea-governance", desc: "28 practice questions" },
+    { word: "Vendor", freq: 7, domain: "ea-governance", desc: "12 practice questions" },
+    { word: "Target Architecture", freq: 6, domain: "ea-framework", desc: "6 practice questions" },
+    { word: "Baseline", freq: 5, domain: "ea-framework", desc: "4 practice questions" },
+    { word: "Gap Analysis", freq: 5, domain: "ea-framework", desc: "5 practice questions" },
+    { word: "Architecture Board", freq: 5, domain: "ea-governance", desc: "4 practice questions" },
+    { word: "Architecture Repository", freq: 6, domain: "ea-framework", desc: "7 practice questions" },
+    { word: "Building Block", freq: 5, domain: "ea-framework", desc: "5 practice questions" },
+    { word: "Business Architecture", freq: 5, domain: "ea-business", desc: "4 practice questions" },
+    { word: "Security Architecture", freq: 5, domain: "ea-security", desc: "5 practice questions" },
+    { word: "Change Management", freq: 5, domain: "ea-governance", desc: "4 practice questions" },
+    { word: "Architecture Contract", freq: 4, domain: "ea-governance", desc: "3 practice questions" },
+    { word: "Requirements Management", freq: 5, domain: "ea-framework", desc: "4 practice questions" },
+    { word: "Observability", freq: 5, domain: "ea-technical", desc: "4 practice questions" },
+    { word: "API Gateway", freq: 5, domain: "ea-technical", desc: "4 practice questions" },
+    { word: "Strangler", freq: 4, domain: "ea-strategy", desc: "3 practice questions" },
+    { word: "Technical Debt", freq: 4, domain: "ea-strategy", desc: "3 practice questions" },
+    { word: "Disaster Recovery", freq: 6, domain: "ea-technical", desc: "7 practice questions" },
+    { word: "Event-Driven", freq: 4, domain: "ea-technical", desc: "3 practice questions" },
+    { word: "Business Capability", freq: 4, domain: "ea-business", desc: "3 practice questions" },
+    { word: "Architecture Vision", freq: 6, domain: "ea-framework", desc: "6 practice questions" },
 ];
     
     // --- LOGIC ---
+    // Normalises every keyword schema used across clouds:
+    //  - size:  freq (1-5) | freq (1-10) | weight (any scale)  -> bucket 1..5 (scaled per list)
+    //  - color: domain | class
+    //  - tooltip: desc (falls back to the word itself)
     function renderCloud(containerId, list, type) {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
+        const raw = k => (k.freq != null ? k.freq : (k.weight != null ? k.weight : 3));
+        const max = Math.max(5, ...list.map(raw));
         list.forEach(k => {
             const tag = document.createElement("span");
-            tag.className = `tag freq${k.freq} ${k.domain}`;
+            let bucket = max <= 5 ? raw(k) : Math.ceil((raw(k) / max) * 5);
+            bucket = Math.min(5, Math.max(1, Math.round(bucket)));
+            tag.className = `tag freq${bucket} ${k.domain || k.class || ""}`.trim();
             tag.textContent = k.word;
-            tag.title = k.desc;
+            tag.title = k.desc || k.word;
             tag.onclick = () => jumpToExam(type, k.word);
             container.appendChild(tag);
         });
@@ -1565,9 +2119,16 @@ const eaKeywords = [
     // Initialize all
     document.addEventListener('DOMContentLoaded', () => {
         // Render
-       renderCloud("aiDataCloud", dataArchitectKeywords, "ai_data"); //[...aiKeywords, ...dataArchitectKeywords]
+       renderCloud("aiDataCloud", saAiDataKeywords, "ai_data"); //[...aiKeywords, ...dataArchitectKeywords]
         renderCloud("caCloud", claudeArchitectKeywords, "claude_architect");
         renderCloud("cdCloud", claudeDeveloperKeywords, "claude_developer");
+        renderCloud("pyCloud", pythonPySparkKeywords, "python_pySpark");
+        renderCloud("sqCloud", sqlKeywords, "sql");
+        renderCloud("njCloud", nodeKeywords, "nodejs");
+        renderCloud("jsCloud", jsKeywords, "JavaScript");
+        renderCloud("dnCloud", dotnetKeywords, "dotnet");
+        renderCloud("aarCloud", aiArchKeywords, "ai_arch");
+        renderCloud("hlCloud", hl7Keywords, "hl7");
         renderCloud("dbCloud", dbKeywords, "databricks");
         renderCloud("aiCloud", aiKeywords, "ai");
         renderCloud("javaCloud", javaKeywords, "java");
@@ -1592,9 +2153,16 @@ const eaKeywords = [
             });
         };
         // Search Binding
-        bindSearch("aiDataSearch", "aiDataCloud", dataArchitectKeywords, "ai_data");//[...aiKeywords, ...dataArchitectKeywords]
+        bindSearch("aiDataSearch", "aiDataCloud", saAiDataKeywords, "ai_data");//[...aiKeywords, ...dataArchitectKeywords]
         bindSearch("caSearch", "caCloud", claudeArchitectKeywords, "claude_architect");
         bindSearch("cdSearch", "cdCloud", claudeDeveloperKeywords, "claude_developer");
+        bindSearch("pySearch", "pyCloud", pythonPySparkKeywords, "python_pySpark");
+        bindSearch("sqSearch", "sqCloud", sqlKeywords, "sql");
+        bindSearch("njSearch", "njCloud", nodeKeywords, "nodejs");
+        bindSearch("jsSearch", "jsCloud", jsKeywords, "JavaScript");
+        bindSearch("dnSearch", "dnCloud", dotnetKeywords, "dotnet");
+        bindSearch("aarSearch", "aarCloud", aiArchKeywords, "ai_arch");
+        bindSearch("hlSearch", "hlCloud", hl7Keywords, "hl7");
         bindSearch("dbSearch", "dbCloud", dbKeywords, "databricks");
         bindSearch("aiSearch", "aiCloud", aiKeywords, "ai");
         bindSearch("javaSearch", "javaCloud", javaKeywords, "java");
