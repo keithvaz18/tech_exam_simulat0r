@@ -4,7 +4,7 @@ const questionBank = [
     "id": 1,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a multi-step task has a predictable sequence and strict latency budget. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: a multi-step task has a predictable sequence and strict latency budget. Which implementation choice is most appropriate?",
     "options": [
       "Use a deterministic workflow with explicit steps; reserve agentic autonomy for genuinely variable decisions",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -18,7 +18,7 @@ const questionBank = [
     "id": 2,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: an agent must execute a tool and then reason over its result. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: an agent must execute a tool and then reason over its result. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -32,7 +32,7 @@ const questionBank = [
     "id": 3,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a research task needs parallel specialist investigation. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that a research task needs parallel specialist investigation. Which response best addresses the requirement?",
     "options": [
       "Use a supervisor to delegate bounded subtasks to isolated subagents and synthesize their results",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -46,7 +46,7 @@ const questionBank = [
     "id": 4,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, an agent repeatedly calls tools without progress. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, an agent repeatedly calls tools without progress. Which action is the strongest engineering choice?",
     "options": [
       "Add explicit loop limits, progress criteria, tool-result checks and a controlled stop/recovery path",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -60,7 +60,7 @@ const questionBank = [
     "id": 5,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a high-impact operation requires predictable policy enforcement. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a high-impact operation requires predictable policy enforcement. What is the most reliable approach?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -74,7 +74,7 @@ const questionBank = [
     "id": 6,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a long-running agent loses track of its objective. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: a long-running agent loses track of its objective. Which implementation choice is most appropriate?",
     "options": [
       "Maintain a compact task state and periodically summarize or rehydrate only relevant context",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -88,7 +88,7 @@ const questionBank = [
     "id": 7,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a workflow contains one uncertain classification step. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: a workflow contains one uncertain classification step. What should the engineer recommend?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -102,7 +102,7 @@ const questionBank = [
     "id": 8,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a team needs to compare manager-agent and peer-agent designs. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that a team needs to compare manager-agent and peer-agent designs. Which response best addresses the requirement?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Choose a manager when centralized delegation, policy and synthesis are required",
@@ -116,7 +116,7 @@ const questionBank = [
     "id": 9,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, an agent must recover after a transient downstream outage. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, an agent must recover after a transient downstream outage. Which action is the strongest engineering choice?",
     "options": [
       "Use bounded retries with backoff and jitter, preserve task state, and expose a recoverable failure",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -130,7 +130,7 @@ const questionBank = [
     "id": 10,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a task can be decomposed into independent analyses. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a task can be decomposed into independent analyses. What is the most reliable approach?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -144,7 +144,7 @@ const questionBank = [
     "id": 11,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a tool has an ambiguous description and is selected inconsistently. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: a tool has an ambiguous description and is selected inconsistently. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -158,7 +158,7 @@ const questionBank = [
     "id": 12,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a tool call fails because a required field is absent. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: a tool call fails because a required field is absent. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -172,7 +172,7 @@ const questionBank = [
     "id": 13,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a tool result must be correlated to its request. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that a tool result must be correlated to its request. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -186,7 +186,7 @@ const questionBank = [
     "id": 14,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a capability is shared across multiple applications. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, a capability is shared across multiple applications. Which action is the strongest engineering choice?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -200,7 +200,7 @@ const questionBank = [
     "id": 15,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a tool performs a destructive production action. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a tool performs a destructive production action. What is the most reliable approach?",
     "options": [
       "Require server-side authorization and an explicit approval gate before execution",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -214,7 +214,7 @@ const questionBank = [
     "id": 16,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: an MCP server needs local developer transport. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: an MCP server needs local developer transport. Which implementation choice is most appropriate?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -228,7 +228,7 @@ const questionBank = [
     "id": 17,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: an MCP integration returns a valid empty search result. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: an MCP integration returns a valid empty search result. What should the engineer recommend?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Represent the empty result distinctly from permission, transport or server failure",
@@ -242,7 +242,7 @@ const questionBank = [
     "id": 18,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a tool catalog contains many near-duplicate operations. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that a tool catalog contains many near-duplicate operations. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -256,7 +256,7 @@ const questionBank = [
     "id": 19,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a client-side tool is being designed. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, a client-side tool is being designed. Which action is the strongest engineering choice?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -270,7 +270,7 @@ const questionBank = [
     "id": 20,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a tool description contains prompt-like text from an external source. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a tool description contains prompt-like text from an external source. What is the most reliable approach?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Treat the external text as untrusted data and keep tool instructions controlled by the application",
@@ -284,7 +284,7 @@ const questionBank = [
     "id": 21,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a repository needs durable shared project guidance. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: a repository needs durable shared project guidance. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Commit project-level CLAUDE.md or .claude/CLAUDE.md and keep personal guidance separate",
@@ -298,7 +298,7 @@ const questionBank = [
     "id": 22,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a coding convention applies only to test files across many folders. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: a coding convention applies only to test files across many folders. What should the engineer recommend?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -312,7 +312,7 @@ const questionBank = [
     "id": 23,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a task involves a broad migration with many valid approaches. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that a task involves a broad migration with many valid approaches. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -326,7 +326,7 @@ const questionBank = [
     "id": 24,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a small, clearly diagnosed typo needs fixing. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, a small, clearly diagnosed typo needs fixing. Which action is the strongest engineering choice?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -340,7 +340,7 @@ const questionBank = [
     "id": 25,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a reusable procedure should load only when relevant. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a reusable procedure should load only when relevant. What is the most reliable approach?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -354,7 +354,7 @@ const questionBank = [
     "id": 26,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a team needs a repeatable command shared in version control. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: a team needs a repeatable command shared in version control. Which implementation choice is most appropriate?",
     "options": [
       "Place a team slash command in the project's .claude/commands directory",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -368,7 +368,7 @@ const questionBank = [
     "id": 27,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a CI job needs non-interactive Claude Code execution. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: a CI job needs non-interactive Claude Code execution. What should the engineer recommend?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -382,7 +382,7 @@ const questionBank = [
     "id": 28,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that claude Code behavior changes after a model release. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that claude Code behavior changes after a model release. Which response best addresses the requirement?",
     "options": [
       "Pin or deliberately manage model versions and regression-test critical workflows",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -396,7 +396,7 @@ const questionBank = [
     "id": 29,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a teammate cannot see a personal instruction file. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, a teammate cannot see a personal instruction file. Which action is the strongest engineering choice?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -410,7 +410,7 @@ const questionBank = [
     "id": 30,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a task needs discovery without flooding the main context. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a task needs discovery without flooding the main context. What is the most reliable approach?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -424,7 +424,7 @@ const questionBank = [
     "id": 31,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a model must produce machine-consumable JSON. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: a model must produce machine-consumable JSON. Which implementation choice is most appropriate?",
     "options": [
       "Define a precise schema, constrain the response where supported, and validate it in application code",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -438,7 +438,7 @@ const questionBank = [
     "id": 32,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a prompt mixes trusted instructions and retrieved documents. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: a prompt mixes trusted instructions and retrieved documents. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -452,7 +452,7 @@ const questionBank = [
     "id": 33,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a classification prompt is inconsistent on edge cases. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that a classification prompt is inconsistent on edge cases. Which response best addresses the requirement?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Add representative positive, negative and boundary examples and evaluate them",
@@ -466,7 +466,7 @@ const questionBank = [
     "id": 34,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a response must follow a strict output format. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, a response must follow a strict output format. Which action is the strongest engineering choice?",
     "options": [
       "Specify required fields, allowed values, missing-value behavior and validation rules",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -480,7 +480,7 @@ const questionBank = [
     "id": 35,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a task requires extracting evidence from source text. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a task requires extracting evidence from source text. What is the most reliable approach?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Request source-grounded fields and evidence spans, then verify spans against the source",
@@ -494,7 +494,7 @@ const questionBank = [
     "id": 36,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a prompt has grown too long and contradictory. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: a prompt has grown too long and contradictory. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Remove redundant instructions, prioritize constraints and separate task data from policy",
@@ -508,7 +508,7 @@ const questionBank = [
     "id": 37,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: an output field can be unknown. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: an output field can be unknown. What should the engineer recommend?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Define an explicit null/unknown representation and prohibit guessing",
@@ -522,7 +522,7 @@ const questionBank = [
     "id": 38,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a prompt is vulnerable to instruction-like content in documents. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that a prompt is vulnerable to instruction-like content in documents. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -536,7 +536,7 @@ const questionBank = [
     "id": 39,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a response needs a concise rationale and a decision. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, a response needs a concise rationale and a decision. Which action is the strongest engineering choice?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Separate decision fields from concise supporting evidence and validate both",
@@ -550,7 +550,7 @@ const questionBank = [
     "id": 40,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a prompt change appears to improve one example. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a prompt change appears to improve one example. What is the most reliable approach?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -564,7 +564,7 @@ const questionBank = [
     "id": 41,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: repeated static instructions dominate token usage. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: repeated static instructions dominate token usage. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -578,7 +578,7 @@ const questionBank = [
     "id": 42,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a conversation accumulates irrelevant history. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: a conversation accumulates irrelevant history. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Prune tool output and compact older turns into a faithful task summary",
@@ -592,7 +592,7 @@ const questionBank = [
     "id": 43,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a response stops before completing the requested structure. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that a response stops before completing the requested structure. Which response best addresses the requirement?",
     "options": [
       "Inspect stop_reason and token usage; increase output budget or continue safely when truncation is confirmed",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -606,7 +606,7 @@ const questionBank = [
     "id": 44,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a service receives HTTP 429. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, a service receives HTTP 429. Which action is the strongest engineering choice?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Honor retry-after when present and use bounded exponential backoff with jitter",
@@ -620,7 +620,7 @@ const questionBank = [
     "id": 45,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a request receives a 400 validation error. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a request receives a 400 validation error. What is the most reliable approach?",
     "options": [
       "Correct the request or schema; do not blindly retry an unchanged client error",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -634,7 +634,7 @@ const questionBank = [
     "id": 46,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a side-effecting request may be retried after timeout. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A platform team encounters this situation: a side-effecting request may be retried after timeout. Which implementation choice is most appropriate?",
     "options": [
       "Use an idempotency key and reconcile the operation's status before repeating it",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -648,7 +648,7 @@ const questionBank = [
     "id": 47,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a model migration changes output quality. What should the engineer recommend? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "During a production design review, the team observes: a model migration changes output quality. What should the engineer recommend?",
     "options": [
       "Use pinned versions where needed and run regression evaluations against representative tasks",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -662,7 +662,7 @@ const questionBank = [
     "id": 48,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a service must meet latency and cost objectives. Which response best addresses the requirement? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A delivery team is validating its solution and finds that a service must meet latency and cost objectives. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -676,7 +676,7 @@ const questionBank = [
     "id": 49,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a batch workload is non-urgent and large. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "In a scenario-based assessment, a batch workload is non-urgent and large. Which action is the strongest engineering choice?",
     "options": [
       "Evaluate the Batch API for asynchronous processing and lower-cost bulk work",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -690,7 +690,7 @@ const questionBank = [
     "id": 50,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A regulated enterprise is preparing a production rollout. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a production integration fails intermittently. What is the most reliable approach? Which design decision best meets the requirement? Which design decision best meets the requirement?",
+    "question": "A service owner asks how to handle this case: a production integration fails intermittently. What is the most reliable approach?",
     "options": [
       "Separate transport, provider, tool and model-output failure classes and instrument traces",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -704,7 +704,7 @@ const questionBank = [
     "id": 51,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a multi-step task has a predictable sequence and strict latency budget. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: a multi-step task has a predictable sequence and strict latency budget. Which implementation choice is most appropriate?",
     "options": [
       "Use a deterministic workflow with explicit steps; reserve agentic autonomy for genuinely variable decisions",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -718,7 +718,7 @@ const questionBank = [
     "id": 52,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: an agent must execute a tool and then reason over its result. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: an agent must execute a tool and then reason over its result. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -732,7 +732,7 @@ const questionBank = [
     "id": 53,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a research task needs parallel specialist investigation. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that a research task needs parallel specialist investigation. Which response best addresses the requirement?",
     "options": [
       "Use a supervisor to delegate bounded subtasks to isolated subagents and synthesize their results",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -746,7 +746,7 @@ const questionBank = [
     "id": 54,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, an agent repeatedly calls tools without progress. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, an agent repeatedly calls tools without progress. Which action is the strongest engineering choice?",
     "options": [
       "Add explicit loop limits, progress criteria, tool-result checks and a controlled stop/recovery path",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -760,7 +760,7 @@ const questionBank = [
     "id": 55,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a high-impact operation requires predictable policy enforcement. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a high-impact operation requires predictable policy enforcement. What is the most reliable approach?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -774,7 +774,7 @@ const questionBank = [
     "id": 56,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a long-running agent loses track of its objective. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: a long-running agent loses track of its objective. Which implementation choice is most appropriate?",
     "options": [
       "Maintain a compact task state and periodically summarize or rehydrate only relevant context",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -788,7 +788,7 @@ const questionBank = [
     "id": 57,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a workflow contains one uncertain classification step. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: a workflow contains one uncertain classification step. What should the engineer recommend?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -802,7 +802,7 @@ const questionBank = [
     "id": 58,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a team needs to compare manager-agent and peer-agent designs. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that a team needs to compare manager-agent and peer-agent designs. Which response best addresses the requirement?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Choose a manager when centralized delegation, policy and synthesis are required",
@@ -816,7 +816,7 @@ const questionBank = [
     "id": 59,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, an agent must recover after a transient downstream outage. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, an agent must recover after a transient downstream outage. Which action is the strongest engineering choice?",
     "options": [
       "Use bounded retries with backoff and jitter, preserve task state, and expose a recoverable failure",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -830,7 +830,7 @@ const questionBank = [
     "id": 60,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a task can be decomposed into independent analyses. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a task can be decomposed into independent analyses. What is the most reliable approach?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -844,7 +844,7 @@ const questionBank = [
     "id": 61,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a tool has an ambiguous description and is selected inconsistently. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: a tool has an ambiguous description and is selected inconsistently. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -858,7 +858,7 @@ const questionBank = [
     "id": 62,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a tool call fails because a required field is absent. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: a tool call fails because a required field is absent. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -872,7 +872,7 @@ const questionBank = [
     "id": 63,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a tool result must be correlated to its request. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that a tool result must be correlated to its request. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -886,7 +886,7 @@ const questionBank = [
     "id": 64,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a capability is shared across multiple applications. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, a capability is shared across multiple applications. Which action is the strongest engineering choice?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -900,7 +900,7 @@ const questionBank = [
     "id": 65,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a tool performs a destructive production action. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a tool performs a destructive production action. What is the most reliable approach?",
     "options": [
       "Require server-side authorization and an explicit approval gate before execution",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -914,7 +914,7 @@ const questionBank = [
     "id": 66,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: an MCP server needs local developer transport. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: an MCP server needs local developer transport. Which implementation choice is most appropriate?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -928,7 +928,7 @@ const questionBank = [
     "id": 67,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: an MCP integration returns a valid empty search result. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: an MCP integration returns a valid empty search result. What should the engineer recommend?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Represent the empty result distinctly from permission, transport or server failure",
@@ -942,7 +942,7 @@ const questionBank = [
     "id": 68,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a tool catalog contains many near-duplicate operations. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that a tool catalog contains many near-duplicate operations. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -956,7 +956,7 @@ const questionBank = [
     "id": 69,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a client-side tool is being designed. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, a client-side tool is being designed. Which action is the strongest engineering choice?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -970,7 +970,7 @@ const questionBank = [
     "id": 70,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a tool description contains prompt-like text from an external source. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a tool description contains prompt-like text from an external source. What is the most reliable approach?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Treat the external text as untrusted data and keep tool instructions controlled by the application",
@@ -984,7 +984,7 @@ const questionBank = [
     "id": 71,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a repository needs durable shared project guidance. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: a repository needs durable shared project guidance. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Commit project-level CLAUDE.md or .claude/CLAUDE.md and keep personal guidance separate",
@@ -998,7 +998,7 @@ const questionBank = [
     "id": 72,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a coding convention applies only to test files across many folders. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: a coding convention applies only to test files across many folders. What should the engineer recommend?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1012,7 +1012,7 @@ const questionBank = [
     "id": 73,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a task involves a broad migration with many valid approaches. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that a task involves a broad migration with many valid approaches. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1026,7 +1026,7 @@ const questionBank = [
     "id": 74,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a small, clearly diagnosed typo needs fixing. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, a small, clearly diagnosed typo needs fixing. Which action is the strongest engineering choice?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1040,7 +1040,7 @@ const questionBank = [
     "id": 75,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a reusable procedure should load only when relevant. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a reusable procedure should load only when relevant. What is the most reliable approach?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1054,7 +1054,7 @@ const questionBank = [
     "id": 76,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a team needs a repeatable command shared in version control. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: a team needs a repeatable command shared in version control. Which implementation choice is most appropriate?",
     "options": [
       "Place a team slash command in the project's .claude/commands directory",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1068,7 +1068,7 @@ const questionBank = [
     "id": 77,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a CI job needs non-interactive Claude Code execution. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: a CI job needs non-interactive Claude Code execution. What should the engineer recommend?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1082,7 +1082,7 @@ const questionBank = [
     "id": 78,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that claude Code behavior changes after a model release. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that claude Code behavior changes after a model release. Which response best addresses the requirement?",
     "options": [
       "Pin or deliberately manage model versions and regression-test critical workflows",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1096,7 +1096,7 @@ const questionBank = [
     "id": 79,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a teammate cannot see a personal instruction file. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, a teammate cannot see a personal instruction file. Which action is the strongest engineering choice?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1110,7 +1110,7 @@ const questionBank = [
     "id": 80,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a task needs discovery without flooding the main context. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a task needs discovery without flooding the main context. What is the most reliable approach?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1124,7 +1124,7 @@ const questionBank = [
     "id": 81,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a model must produce machine-consumable JSON. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: a model must produce machine-consumable JSON. Which implementation choice is most appropriate?",
     "options": [
       "Define a precise schema, constrain the response where supported, and validate it in application code",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1138,7 +1138,7 @@ const questionBank = [
     "id": 82,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a prompt mixes trusted instructions and retrieved documents. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: a prompt mixes trusted instructions and retrieved documents. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1152,7 +1152,7 @@ const questionBank = [
     "id": 83,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a classification prompt is inconsistent on edge cases. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that a classification prompt is inconsistent on edge cases. Which response best addresses the requirement?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Add representative positive, negative and boundary examples and evaluate them",
@@ -1166,7 +1166,7 @@ const questionBank = [
     "id": 84,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a response must follow a strict output format. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, a response must follow a strict output format. Which action is the strongest engineering choice?",
     "options": [
       "Specify required fields, allowed values, missing-value behavior and validation rules",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1180,7 +1180,7 @@ const questionBank = [
     "id": 85,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a task requires extracting evidence from source text. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a task requires extracting evidence from source text. What is the most reliable approach?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Request source-grounded fields and evidence spans, then verify spans against the source",
@@ -1194,7 +1194,7 @@ const questionBank = [
     "id": 86,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a prompt has grown too long and contradictory. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: a prompt has grown too long and contradictory. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Remove redundant instructions, prioritize constraints and separate task data from policy",
@@ -1208,7 +1208,7 @@ const questionBank = [
     "id": 87,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: an output field can be unknown. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: an output field can be unknown. What should the engineer recommend?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Define an explicit null/unknown representation and prohibit guessing",
@@ -1222,7 +1222,7 @@ const questionBank = [
     "id": 88,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a prompt is vulnerable to instruction-like content in documents. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that a prompt is vulnerable to instruction-like content in documents. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1236,7 +1236,7 @@ const questionBank = [
     "id": 89,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a response needs a concise rationale and a decision. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, a response needs a concise rationale and a decision. Which action is the strongest engineering choice?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Separate decision fields from concise supporting evidence and validate both",
@@ -1250,7 +1250,7 @@ const questionBank = [
     "id": 90,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a prompt change appears to improve one example. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a prompt change appears to improve one example. What is the most reliable approach?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1264,7 +1264,7 @@ const questionBank = [
     "id": 91,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: repeated static instructions dominate token usage. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: repeated static instructions dominate token usage. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1278,7 +1278,7 @@ const questionBank = [
     "id": 92,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a conversation accumulates irrelevant history. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: a conversation accumulates irrelevant history. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Prune tool output and compact older turns into a faithful task summary",
@@ -1292,7 +1292,7 @@ const questionBank = [
     "id": 93,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a response stops before completing the requested structure. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that a response stops before completing the requested structure. Which response best addresses the requirement?",
     "options": [
       "Inspect stop_reason and token usage; increase output budget or continue safely when truncation is confirmed",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1306,7 +1306,7 @@ const questionBank = [
     "id": 94,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a service receives HTTP 429. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, a service receives HTTP 429. Which action is the strongest engineering choice?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Honor retry-after when present and use bounded exponential backoff with jitter",
@@ -1320,7 +1320,7 @@ const questionBank = [
     "id": 95,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a request receives a 400 validation error. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a request receives a 400 validation error. What is the most reliable approach?",
     "options": [
       "Correct the request or schema; do not blindly retry an unchanged client error",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1334,7 +1334,7 @@ const questionBank = [
     "id": 96,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a side-effecting request may be retried after timeout. Which implementation choice is most appropriate? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A platform team encounters this situation: a side-effecting request may be retried after timeout. Which implementation choice is most appropriate?",
     "options": [
       "Use an idempotency key and reconcile the operation's status before repeating it",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1348,7 +1348,7 @@ const questionBank = [
     "id": 97,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a model migration changes output quality. What should the engineer recommend? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. During a production design review, the team observes: a model migration changes output quality. What should the engineer recommend?",
     "options": [
       "Use pinned versions where needed and run regression evaluations against representative tasks",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1362,7 +1362,7 @@ const questionBank = [
     "id": 98,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a service must meet latency and cost objectives. Which response best addresses the requirement? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A delivery team is validating its solution and finds that a service must meet latency and cost objectives. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1376,7 +1376,7 @@ const questionBank = [
     "id": 99,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a batch workload is non-urgent and large. Which action is the strongest engineering choice? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. In a scenario-based assessment, a batch workload is non-urgent and large. Which action is the strongest engineering choice?",
     "options": [
       "Evaluate the Batch API for asynchronous processing and lower-cost bulk work",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1390,7 +1390,7 @@ const questionBank = [
     "id": 100,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "A team is reviewing an incident from its staging environment. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a production integration fails intermittently. What is the most reliable approach? Which design decision best meets the requirement? What should the implementation team do next?",
+    "question": "A team is reviewing an incident from its staging environment. A service owner asks how to handle this case: a production integration fails intermittently. What is the most reliable approach?",
     "options": [
       "Separate transport, provider, tool and model-output failure classes and instrument traces",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1404,7 +1404,7 @@ const questionBank = [
     "id": 101,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a multi-step task has a predictable sequence and strict latency budget. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: a multi-step task has a predictable sequence and strict latency budget. Which implementation choice is most appropriate?",
     "options": [
       "Use a deterministic workflow with explicit steps; reserve agentic autonomy for genuinely variable decisions",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1418,7 +1418,7 @@ const questionBank = [
     "id": 102,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: an agent must execute a tool and then reason over its result. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: an agent must execute a tool and then reason over its result. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1432,7 +1432,7 @@ const questionBank = [
     "id": 103,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a research task needs parallel specialist investigation. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that a research task needs parallel specialist investigation. Which response best addresses the requirement?",
     "options": [
       "Use a supervisor to delegate bounded subtasks to isolated subagents and synthesize their results",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1446,7 +1446,7 @@ const questionBank = [
     "id": 104,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, an agent repeatedly calls tools without progress. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, an agent repeatedly calls tools without progress. Which action is the strongest engineering choice?",
     "options": [
       "Add explicit loop limits, progress criteria, tool-result checks and a controlled stop/recovery path",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1460,7 +1460,7 @@ const questionBank = [
     "id": 105,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a high-impact operation requires predictable policy enforcement. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a high-impact operation requires predictable policy enforcement. What is the most reliable approach?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1474,7 +1474,7 @@ const questionBank = [
     "id": 106,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a long-running agent loses track of its objective. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: a long-running agent loses track of its objective. Which implementation choice is most appropriate?",
     "options": [
       "Maintain a compact task state and periodically summarize or rehydrate only relevant context",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1488,7 +1488,7 @@ const questionBank = [
     "id": 107,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a workflow contains one uncertain classification step. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: a workflow contains one uncertain classification step. What should the engineer recommend?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1502,7 +1502,7 @@ const questionBank = [
     "id": 108,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a team needs to compare manager-agent and peer-agent designs. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that a team needs to compare manager-agent and peer-agent designs. Which response best addresses the requirement?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Choose a manager when centralized delegation, policy and synthesis are required",
@@ -1516,7 +1516,7 @@ const questionBank = [
     "id": 109,
     "difficulty": "hard",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, an agent must recover after a transient downstream outage. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, an agent must recover after a transient downstream outage. Which action is the strongest engineering choice?",
     "options": [
       "Use bounded retries with backoff and jitter, preserve task state, and expose a recoverable failure",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1530,7 +1530,7 @@ const questionBank = [
     "id": 110,
     "difficulty": "medium",
     "category": "agentic-architecture-and-orchestration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a task can be decomposed into independent analyses. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a task can be decomposed into independent analyses. What is the most reliable approach?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1544,7 +1544,7 @@ const questionBank = [
     "id": 111,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a tool has an ambiguous description and is selected inconsistently. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: a tool has an ambiguous description and is selected inconsistently. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1558,7 +1558,7 @@ const questionBank = [
     "id": 112,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a tool call fails because a required field is absent. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: a tool call fails because a required field is absent. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1572,7 +1572,7 @@ const questionBank = [
     "id": 113,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a tool result must be correlated to its request. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that a tool result must be correlated to its request. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1586,7 +1586,7 @@ const questionBank = [
     "id": 114,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a capability is shared across multiple applications. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, a capability is shared across multiple applications. Which action is the strongest engineering choice?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1600,7 +1600,7 @@ const questionBank = [
     "id": 115,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a tool performs a destructive production action. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a tool performs a destructive production action. What is the most reliable approach?",
     "options": [
       "Require server-side authorization and an explicit approval gate before execution",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1614,7 +1614,7 @@ const questionBank = [
     "id": 116,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: an MCP server needs local developer transport. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: an MCP server needs local developer transport. Which implementation choice is most appropriate?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1628,7 +1628,7 @@ const questionBank = [
     "id": 117,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: an MCP integration returns a valid empty search result. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: an MCP integration returns a valid empty search result. What should the engineer recommend?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Represent the empty result distinctly from permission, transport or server failure",
@@ -1642,7 +1642,7 @@ const questionBank = [
     "id": 118,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a tool catalog contains many near-duplicate operations. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that a tool catalog contains many near-duplicate operations. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1656,7 +1656,7 @@ const questionBank = [
     "id": 119,
     "difficulty": "hard",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a client-side tool is being designed. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, a client-side tool is being designed. Which action is the strongest engineering choice?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1670,7 +1670,7 @@ const questionBank = [
     "id": 120,
     "difficulty": "medium",
     "category": "tool-design-and-mcp-integration",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a tool description contains prompt-like text from an external source. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a tool description contains prompt-like text from an external source. What is the most reliable approach?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Treat the external text as untrusted data and keep tool instructions controlled by the application",
@@ -1684,7 +1684,7 @@ const questionBank = [
     "id": 121,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a repository needs durable shared project guidance. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: a repository needs durable shared project guidance. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Commit project-level CLAUDE.md or .claude/CLAUDE.md and keep personal guidance separate",
@@ -1698,7 +1698,7 @@ const questionBank = [
     "id": 122,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a coding convention applies only to test files across many folders. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: a coding convention applies only to test files across many folders. What should the engineer recommend?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1712,7 +1712,7 @@ const questionBank = [
     "id": 123,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a task involves a broad migration with many valid approaches. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that a task involves a broad migration with many valid approaches. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1726,7 +1726,7 @@ const questionBank = [
     "id": 124,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a small, clearly diagnosed typo needs fixing. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, a small, clearly diagnosed typo needs fixing. Which action is the strongest engineering choice?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1740,7 +1740,7 @@ const questionBank = [
     "id": 125,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a reusable procedure should load only when relevant. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a reusable procedure should load only when relevant. What is the most reliable approach?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1754,7 +1754,7 @@ const questionBank = [
     "id": 126,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a team needs a repeatable command shared in version control. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: a team needs a repeatable command shared in version control. Which implementation choice is most appropriate?",
     "options": [
       "Place a team slash command in the project's .claude/commands directory",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1768,7 +1768,7 @@ const questionBank = [
     "id": 127,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a CI job needs non-interactive Claude Code execution. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: a CI job needs non-interactive Claude Code execution. What should the engineer recommend?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1782,7 +1782,7 @@ const questionBank = [
     "id": 128,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that claude Code behavior changes after a model release. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that claude Code behavior changes after a model release. Which response best addresses the requirement?",
     "options": [
       "Pin or deliberately manage model versions and regression-test critical workflows",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1796,7 +1796,7 @@ const questionBank = [
     "id": 129,
     "difficulty": "hard",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a teammate cannot see a personal instruction file. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, a teammate cannot see a personal instruction file. Which action is the strongest engineering choice?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1810,7 +1810,7 @@ const questionBank = [
     "id": 130,
     "difficulty": "medium",
     "category": "claude-code-configuration-and-workflows",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a task needs discovery without flooding the main context. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a task needs discovery without flooding the main context. What is the most reliable approach?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1824,7 +1824,7 @@ const questionBank = [
     "id": 131,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a model must produce machine-consumable JSON. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: a model must produce machine-consumable JSON. Which implementation choice is most appropriate?",
     "options": [
       "Define a precise schema, constrain the response where supported, and validate it in application code",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -1838,7 +1838,7 @@ const questionBank = [
     "id": 132,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a prompt mixes trusted instructions and retrieved documents. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: a prompt mixes trusted instructions and retrieved documents. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1852,7 +1852,7 @@ const questionBank = [
     "id": 133,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a classification prompt is inconsistent on edge cases. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that a classification prompt is inconsistent on edge cases. Which response best addresses the requirement?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Add representative positive, negative and boundary examples and evaluate them",
@@ -1866,7 +1866,7 @@ const questionBank = [
     "id": 134,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a response must follow a strict output format. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, a response must follow a strict output format. Which action is the strongest engineering choice?",
     "options": [
       "Specify required fields, allowed values, missing-value behavior and validation rules",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1880,7 +1880,7 @@ const questionBank = [
     "id": 135,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a task requires extracting evidence from source text. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a task requires extracting evidence from source text. What is the most reliable approach?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Request source-grounded fields and evidence spans, then verify spans against the source",
@@ -1894,7 +1894,7 @@ const questionBank = [
     "id": 136,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a prompt has grown too long and contradictory. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: a prompt has grown too long and contradictory. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Remove redundant instructions, prioritize constraints and separate task data from policy",
@@ -1908,7 +1908,7 @@ const questionBank = [
     "id": 137,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: an output field can be unknown. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: an output field can be unknown. What should the engineer recommend?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Define an explicit null/unknown representation and prohibit guessing",
@@ -1922,7 +1922,7 @@ const questionBank = [
     "id": 138,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a prompt is vulnerable to instruction-like content in documents. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that a prompt is vulnerable to instruction-like content in documents. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1936,7 +1936,7 @@ const questionBank = [
     "id": 139,
     "difficulty": "hard",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a response needs a concise rationale and a decision. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, a response needs a concise rationale and a decision. Which action is the strongest engineering choice?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Separate decision fields from concise supporting evidence and validate both",
@@ -1950,7 +1950,7 @@ const questionBank = [
     "id": 140,
     "difficulty": "medium",
     "category": "prompt-engineering-and-structured-output",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a prompt change appears to improve one example. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a prompt change appears to improve one example. What is the most reliable approach?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -1964,7 +1964,7 @@ const questionBank = [
     "id": 141,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: repeated static instructions dominate token usage. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: repeated static instructions dominate token usage. Which implementation choice is most appropriate?",
     "options": [
       "Make the entire design autonomous and remove deterministic application controls",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -1978,7 +1978,7 @@ const questionBank = [
     "id": 142,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a conversation accumulates irrelevant history. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: a conversation accumulates irrelevant history. What should the engineer recommend?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Prune tool output and compact older turns into a faithful task summary",
@@ -1992,7 +1992,7 @@ const questionBank = [
     "id": 143,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a response stops before completing the requested structure. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that a response stops before completing the requested structure. Which response best addresses the requirement?",
     "options": [
       "Inspect stop_reason and token usage; increase output budget or continue safely when truncation is confirmed",
       "Make the entire design autonomous and remove deterministic application controls",
@@ -2006,7 +2006,7 @@ const questionBank = [
     "id": 144,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a service receives HTTP 429. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, a service receives HTTP 429. Which action is the strongest engineering choice?",
     "options": [
       "Increase model capacity and assume the architectural risk is resolved",
       "Honor retry-after when present and use bounded exponential backoff with jitter",
@@ -2020,7 +2020,7 @@ const questionBank = [
     "id": 145,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a request receives a 400 validation error. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a request receives a 400 validation error. What is the most reliable approach?",
     "options": [
       "Correct the request or schema; do not blindly retry an unchanged client error",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -2034,7 +2034,7 @@ const questionBank = [
     "id": 146,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A platform team encounters this situation: a side-effecting request may be retried after timeout. Which implementation choice is most appropriate? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A platform team encounters this situation: a side-effecting request may be retried after timeout. Which implementation choice is most appropriate?",
     "options": [
       "Use an idempotency key and reconcile the operation's status before repeating it",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -2048,7 +2048,7 @@ const questionBank = [
     "id": 147,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. During a production design review, the team observes: a model migration changes output quality. What should the engineer recommend? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "During a production design review, the team observes: a model migration changes output quality. What should the engineer recommend?",
     "options": [
       "Use pinned versions where needed and run regression evaluations against representative tasks",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -2062,7 +2062,7 @@ const questionBank = [
     "id": 148,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A delivery team is validating its solution and finds that a service must meet latency and cost objectives. Which response best addresses the requirement? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A delivery team is validating its solution and finds that a service must meet latency and cost objectives. Which response best addresses the requirement?",
     "options": [
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
       "Increase model capacity and assume the architectural risk is resolved",
@@ -2076,7 +2076,7 @@ const questionBank = [
     "id": 149,
     "difficulty": "hard",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. In a scenario-based assessment, a batch workload is non-urgent and large. Which action is the strongest engineering choice? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "In a scenario-based assessment, a batch workload is non-urgent and large. Which action is the strongest engineering choice?",
     "options": [
       "Evaluate the Batch API for asynchronous processing and lower-cost bulk work",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
@@ -2090,7 +2090,7 @@ const questionBank = [
     "id": 150,
     "difficulty": "medium",
     "category": "context-management-and-reliability",
-    "question": "An architecture board is assessing a proposed change. A regulated enterprise is preparing a production rollout. A service owner asks how to handle this case: a production integration fails intermittently. What is the most reliable approach? Which design decision best meets the requirement? Which response most effectively reduces operational risk?",
+    "question": "A service owner asks how to handle this case: a production integration fails intermittently. What is the most reliable approach?",
     "options": [
       "Separate transport, provider, tool and model-output failure classes and instrument traces",
       "Solve the symptom locally without defining ownership, boundaries or recovery behavior",
