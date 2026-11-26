@@ -1,8 +1,16 @@
-# python PySpark — Exam Recall & Decision Guide
+# Algorithm Complexity Analysis (Python Solutions Guide)
 
-> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+![python PySpark Quick Recall Mind Map](../assets/python_pySpark_quick_recall_mind_map.png)
 
-## Consolidated mind map
+[Open the answer PDF](python_pySpark_answers.pdf)
+
+
+![17856035100463924647405069389957](./assets/Python_exam.png)
+<img width="1024" height="1536" alt="17856035100463924647405069389957" src="../assets/Python_exam.png" />
+
+---
+
+## Consolidated Mind Map
 
 ```text
 PYTHON PYSPARK
@@ -20,7 +28,8 @@ PYTHON PYSPARK
       ├─ Trigger: identify the scenario constraint
       ├─ Answer: recall the source-backed technical choice
       ├─ Reason: connect choice to behavior or requirement
-      └─ Trap: reject a plausible distractor and its mismatch
+      └─ Trap: reject a distractor that conflicts with the requirement
+```
 
 ## Four-keyword recall cards
 
@@ -39,25 +48,18 @@ PYTHON PYSPARK
 ## How to use this map
 
 1. Read the trigger and identify the requirement or failure mode in the scenario.
-2. Recall the answer keywords before looking at the full explanation.
-3. State the decision rule in your own words; the reason column gives the source explanation.
-4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+2. Recall the answer keywords before looking at the explanation.
+3. State why the answer works using the reason column.
+4. Eliminate the trap because it conflicts with the scenario or source explanation.
 
 ## Source coverage
 
 - Question bank: `questionBank_python_pySpark.js`
 - Questions in source bank: **435**
 - Consolidated recall cards: **9**
-- Category labels represented in the mind-map hierarchy: **9**
-- Distractors are drawn from the question options; explanations are drawn from the question bank.
+- Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
 ---
-
-# Algorithm Complexity Analysis (Python Solutions Guide)
-
-![17856035100463924647405069389957](./assets/Python_exam.png)
-
-<img width="1024" height="1536" alt="17856035100463924647405069389957" src="../assets/Python_exam.png" />
 
 This document provides **questions, logic, implementations, and Big O analysis** for a 20-problem set.  
 Designed for high-level engineering assessments (e.g., Crossover-style tests).

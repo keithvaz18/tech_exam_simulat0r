@@ -1,8 +1,16 @@
-# typescript nestjs — Exam Recall & Decision Guide
+# 🚀 NestJS – Complete Interview & Architecture Guide (2026)
 
-> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+![typescript nestjs Quick Recall Mind Map](../assets/typescript_nestjs_quick_recall_mind_map.png)
 
-## Consolidated mind map
+[Open the answer PDF](typescript_nestjs_answers.pdf)
+
+
+![17856392711787349495618933068711](assets/Nestjs.png)
+<img width="1024" height="1536" alt="17856392711787349495618933068711" src="../assets/Nestjs.png" />
+
+---
+
+## Consolidated Mind Map
 
 ```text
 TYPESCRIPT NESTJS
@@ -26,7 +34,8 @@ TYPESCRIPT NESTJS
       ├─ Trigger: identify the scenario constraint
       ├─ Answer: recall the source-backed technical choice
       ├─ Reason: connect choice to behavior or requirement
-      └─ Trap: reject a plausible distractor and its mismatch
+      └─ Trap: reject a distractor that conflicts with the requirement
+```
 
 ## Four-keyword recall cards
 
@@ -46,23 +55,18 @@ TYPESCRIPT NESTJS
 ## How to use this map
 
 1. Read the trigger and identify the requirement or failure mode in the scenario.
-2. Recall the answer keywords before looking at the full explanation.
-3. State the decision rule in your own words; the reason column gives the source explanation.
-4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+2. Recall the answer keywords before looking at the explanation.
+3. State why the answer works using the reason column.
+4. Eliminate the trap because it conflicts with the scenario or source explanation.
 
 ## Source coverage
 
 - Question bank: `questionBank_typescript_nestjs.js`
 - Questions in source bank: **517**
 - Consolidated recall cards: **10**
-- Category labels represented in the mind-map hierarchy: **71**
-- Distractors are drawn from the question options; explanations are drawn from the question bank.
+- Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
 ---
-
-# 🚀 NestJS – Complete Interview & Architecture Guide (2026)
-![17856392711787349495618933068711](assets/Nestjs.png)
-<img width="1024" height="1536" alt="17856392711787349495618933068711" src="../assets/Nestjs.png" />
 
 NestJS has become a dominant force in the Node.js ecosystem because it solves the **"Wild West" problem** of backend development.
 
@@ -773,4 +777,3 @@ export class Record {
 
 
 ---
-

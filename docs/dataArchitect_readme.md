@@ -1,8 +1,16 @@
-# Data Arch — Exam Recall & Decision Guide
+# 🚀 Data Architect Interview & Architecture README
 
-> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+![Data Arch Quick Recall Mind Map](../assets/Data_Arch_quick_recall_mind_map.png)
 
-## Consolidated mind map
+[Open the answer PDF](Data_Arch_answers.pdf)
+
+
+![17856370983708256568542791092844](./assets/data%20Architect.png)
+<img width="1024" height="1536" alt="17856370983708256568542791092844" src="../assets/data Architect.png" />
+
+---
+
+## Consolidated Mind Map
 
 ```text
 DATA ARCH
@@ -26,7 +34,8 @@ DATA ARCH
       ├─ Trigger: identify the scenario constraint
       ├─ Answer: recall the source-backed technical choice
       ├─ Reason: connect choice to behavior or requirement
-      └─ Trap: reject a plausible distractor and its mismatch
+      └─ Trap: reject a distractor that conflicts with the requirement
+```
 
 ## Four-keyword recall cards
 
@@ -44,25 +53,18 @@ DATA ARCH
 ## How to use this map
 
 1. Read the trigger and identify the requirement or failure mode in the scenario.
-2. Recall the answer keywords before looking at the full explanation.
-3. State the decision rule in your own words; the reason column gives the source explanation.
-4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+2. Recall the answer keywords before looking at the explanation.
+3. State why the answer works using the reason column.
+4. Eliminate the trap because it conflicts with the scenario or source explanation.
 
 ## Source coverage
 
 - Question bank: `questionBank_Data_Arch.js`
 - Questions in source bank: **128**
 - Consolidated recall cards: **8**
-- Category labels represented in the mind-map hierarchy: **22**
-- Distractors are drawn from the question options; explanations are drawn from the question bank.
+- Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
 ---
-
-# 🚀 Data Architect Interview & Architecture README
-
-![17856370983708256568542791092844](./assets/data%20Architect.png)
-
-<img width="1024" height="1536" alt="17856370983708256568542791092844" src="../assets/data Architect.png" />
 
 ### 📘 Quick Reference (The Data Lifecycle)
 

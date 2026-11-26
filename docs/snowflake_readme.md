@@ -1,8 +1,16 @@
-# snowflake — Exam Recall & Decision Guide
+# ❄️ Snowflake Interview & Architecture README
 
-> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+![snowflake Quick Recall Mind Map](../assets/snowflake_quick_recall_mind_map.png)
 
-## Consolidated mind map
+[Open the answer PDF](snowflake_answers.pdf)
+
+
+![17856041843561348245958413267050](./assets/Snowflake.png)
+<img width="1024" height="1536" alt="17856041843561348245958413267050" src="../assets/Snowflake.png" />
+
+---
+
+## Consolidated Mind Map
 
 ```text
 SNOWFLAKE
@@ -26,7 +34,8 @@ SNOWFLAKE
       ├─ Trigger: identify the scenario constraint
       ├─ Answer: recall the source-backed technical choice
       ├─ Reason: connect choice to behavior or requirement
-      └─ Trap: reject a plausible distractor and its mismatch
+      └─ Trap: reject a distractor that conflicts with the requirement
+```
 
 ## Four-keyword recall cards
 
@@ -44,25 +53,18 @@ SNOWFLAKE
 ## How to use this map
 
 1. Read the trigger and identify the requirement or failure mode in the scenario.
-2. Recall the answer keywords before looking at the full explanation.
-3. State the decision rule in your own words; the reason column gives the source explanation.
-4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+2. Recall the answer keywords before looking at the explanation.
+3. State why the answer works using the reason column.
+4. Eliminate the trap because it conflicts with the scenario or source explanation.
 
 ## Source coverage
 
 - Question bank: `questionBank_snowflake.js`
 - Questions in source bank: **285**
 - Consolidated recall cards: **8**
-- Category labels represented in the mind-map hierarchy: **39**
-- Distractors are drawn from the question options; explanations are drawn from the question bank.
+- Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
 ---
-
-# ❄️ Snowflake Interview & Architecture README
-
-![17856041843561348245958413267050](./assets/Snowflake.png)
-
-<img width="1024" height="1536" alt="17856041843561348245958413267050" src="../assets/Snowflake.png" />
 
 ### 📘 Quick Reference (Cloud Data Warehouse + Elastic Scaling + Separation of Compute/Storage)
 

@@ -1,8 +1,16 @@
-# DevOps — Exam Recall & Decision Guide
+# 🚨 **Sr. DevOps + Observability Architect — Real Failure Scenarios**
 
-> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+![DevOps Quick Recall Mind Map](../assets/devOps_quick_recall_mind_map.png)
 
-## Consolidated mind map
+[Open the answer PDF](devOps_answers.pdf)
+
+
+![17856049524256395563944712381193](/assets/DevOps%20and%20Observability.png)
+<img width="1024" height="1536" alt="17856049524256395563944712381193" src="assets/DevOps and Observability.png" />
+
+---
+
+## Consolidated Mind Map
 
 ```text
 DEVOPS
@@ -26,7 +34,8 @@ DEVOPS
       ├─ Trigger: identify the scenario constraint
       ├─ Answer: recall the source-backed technical choice
       ├─ Reason: connect choice to behavior or requirement
-      └─ Trap: reject a plausible distractor and its mismatch
+      └─ Trap: reject a distractor that conflicts with the requirement
+```
 
 ## Four-keyword recall cards
 
@@ -44,24 +53,18 @@ DEVOPS
 ## How to use this map
 
 1. Read the trigger and identify the requirement or failure mode in the scenario.
-2. Recall the answer keywords before looking at the full explanation.
-3. State the decision rule in your own words; the reason column gives the source explanation.
-4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+2. Recall the answer keywords before looking at the explanation.
+3. State why the answer works using the reason column.
+4. Eliminate the trap because it conflicts with the scenario or source explanation.
 
 ## Source coverage
 
 - Question bank: `questionBank_devOps.js`
 - Questions in source bank: **180**
 - Consolidated recall cards: **8**
-- Category labels represented in the mind-map hierarchy: **90**
-- Distractors are drawn from the question options; explanations are drawn from the question bank.
+- Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
 ---
-
-# 🚨 **Sr. DevOps + Observability Architect — Real Failure Scenarios**
-![17856049524256395563944712381193](/assets/DevOps%20and%20Observability.png)
-
-<img width="1024" height="1536" alt="17856049524256395563944712381193" src="assets/DevOps and Observability.png" />
 
 This is structured like:
 👉 **Symptom → Signals → Root Cause → Fix → Prevention (Architect answer)**
