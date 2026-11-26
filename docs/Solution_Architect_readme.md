@@ -1,3 +1,63 @@
+# SA AI Data Technologies — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+SA AI DATA TECHNOLOGIES
+  ├─ Question domains
+  │   ├─ architecture
+  │   ├─ databricks
+  │   ├─ spark
+  │   ├─ aws
+  │   ├─ sql
+  │   ├─ monitoring
+  │   ├─ azure
+  │   ├─ security
+  │   ├─ rag
+  │   ├─ python
+  │   ├─ data modelling
+  │   ├─ ai
+  │   ├─ agentic ai
+  │   ├─ vector db
+  │   └─ + 44 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Databricks | Databricks · cloud-based · Lakehouse · unify | A Databricks solution is primarily used to unify an organization's data engineering, data science, machine learning, and business intelligence workloads onto a single cloud-based data lakehouse platform, thereby eliminating data silos and enabling teams to collaboratively build, scale, and govern everything from traditional analytics to advanced artificial i | Trap: Support analytics and reporting |
+| Databricks · ETL · job · cluster | Enable · cluster · pools · job | Cluster Pools keep pre-warmed VM instances available, significantly reducing cluster startup time while retaining the cost benefits of ephemeral job clusters. | Trap: Use an always-on all-purpose cluster |
+| Spark · GB · daily · job | MB | Spark generally performs best when partitions are around 128-256 MB, balancing parallelism and scheduling overhead. | Trap: 5 MB |
+| LLM · Amazon · Bedrock · biggest | Managed · scaling · security · hosting | Bedrock eliminates infrastructure management while providing secure managed AI services. | Trap: Unlimited GPU |
+| Spark · SQL · optimization · reduces | Predicate · Pushdown | Predicate pushdown filters data at the source, minimizing data transfer. | Trap: SELECT * |
+| API · CPU · low · production | Distributed · traces · dependency · latency | Distributed tracing often reveals downstream dependency bottlenecks that are not visible from CPU metrics alone. | Trap: Restart the database |
+| Azure · ETL/ELT · primarily · orchestrating | Azure · Factory | Azure Data Factory (ADF) is Microsoft's managed data integration and orchestration service. | Trap: Azure DevOps |
+| PCI · DSS · principle · violated | Secure · Credential · Management | Credentials should be stored in secure secret management solutions such as Key Vault or AWS Secrets Manager. | Trap: Encryption |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_SA_AI_Data_Technologies.js`
+- Questions in source bank: **240**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **58**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚀 Senior Architect Interview & System Design README
 ![17856021259072579510415346777665](assets/SrArchitect.png)
 <img width="1024" height="1536" alt="17856021259072579510415346777665" src="../assets/SrArchitect.png" />

@@ -1,3 +1,63 @@
+# DevOps — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+DEVOPS
+  ├─ Question domains
+  │   ├─ sre concepts
+  │   ├─ cloud networking
+  │   ├─ cicd gitops
+  │   ├─ k8s security
+  │   ├─ k8s architecture
+  │   ├─ iac management
+  │   ├─ observability concepts
+  │   ├─ iac terraform
+  │   ├─ finops
+  │   ├─ k8s networking
+  │   ├─ k8s scheduling
+  │   ├─ devsecops
+  │   ├─ azure networking
+  │   ├─ sre resilience
+  │   └─ + 76 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| objective · SLI · SLO · availability | SLI · SLO · measured · availability | SLI/SLO: indicators measure behavior and objectives set targets. Error Budgets turn the gap into a release-velocity decision: when it is spent, reliability work takes priority. | Trap: The SLO is measured and the SLI is the target |
+| hybrid-cloud · VPN · fine · MTU | Enable · MSS · Clamping · MTU | VPN headers take up space. If the packet + VPN header exceeds the 1500-byte MTU of the underlying internet, the packet is dropped or fragmented. | Trap: Increase the MTU to 9000 (Jumbo Frames) |
+| ArgoCD-managed · OutOfSync · Git · state | ArgoCD · ignoreDifferences · spec · fields | Since the cluster is modifying the resource post-submission (mutating), ArgoCD sees a difference. 'ignoreDifferences' tells ArgoCD to overlook specific fields during the comparison. | Trap: Disable the ArgoCD sync process |
+| EKS · user · organization · requires | Kyverno · OPA · Gatekeeper · MustRunAsNonRoot | Policy engines like Kyverno or Gatekeeper act as admission controllers, intercepting requests to the Kubernetes API and rejecting YAML that violates security constraints. | Trap: NetworkPolicies and Calico CNI |
+| high-traffic · AKS · scale-up · events | Implementing · readinessProbe · initialDelaySeconds | The readinessProbe determines when a pod is ready to accept traffic. If missing or misconfigured, the Service might route traffic to a pod that is still initializing, leading to 503s. | Trap: Implementing a 'livenessProbe' to restart the container |
+| Terraform · file · time · large | State · Locking · e.g · DynamoDB | Remote backends (S3/GCS/Azure) support state locking. When one user starts an operation, Terraform creates a 'lock' to prevent others from modifying the state simultaneously. | Trap: The Cloud Provider's API will reject the second request |
+| Structured · Logging · Plain · Text | Logging · machine-readable · JSON · RegEx | Structured logs (JSON) turn logs into data. Instead of searching 'Error occurred for user 123', you can query 'user_id: 123 AND level: ERROR' instantly. | Trap: Logging only on weekends |
+| Terraform · CI/CD · pipeline · preempted | Identify · Lock · ID · force-unlock | When using a remote backend with locking (like DynamoDB), Terraform creates a lock to prevent concurrent writes. If a process crashes, the lock remains. | Trap: Delete the Terraform state file and start over |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_devOps.js`
+- Questions in source bank: **180**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **90**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚨 **Sr. DevOps + Observability Architect — Real Failure Scenarios**
 ![17856049524256395563944712381193](/assets/DevOps%20and%20Observability.png)
 

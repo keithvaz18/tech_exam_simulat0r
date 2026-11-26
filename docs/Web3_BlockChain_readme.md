@@ -1,3 +1,64 @@
+# Web3 & Blockchain — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+WEB3 & BLOCKCHAIN
+  ├─ Question domains
+  │   ├─ security
+  │   ├─ architecture
+  │   ├─ governance
+  │   ├─ interoperability
+  │   ├─ mev
+  │   ├─ cryptography
+  │   ├─ zkp
+  │   ├─ rwa
+  │   ├─ oracles
+  │   ├─ integration
+  │   ├─ fintech
+  │   ├─ compliance
+  │   ├─ alt vm
+  │   ├─ tooling
+  │   └─ + 39 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Reentrancy · Solana · Ethereum · risk | Solana · rarer · runtime · prevents | Solana's architecture prevents a program from calling itself in a way that allows typical Solidity-style reentrancy, though logic errors can still occur. | Trap: Solana is immune to reentrancy |
+| Technical · Architect · Core · Banking | single · private · authoritative · ledger | Web3 replaces the central authority (bank's DB) with a shared state machine where every state transition is verified by consensus and linked via hashes. | Trap: From ACID-compliant relational databases to eventually consistent NoSQL clusters |
+| Delegation · Fatigue | decision-making · tendency · delegates · inactive | Fatigue is a major hurdle for 'Liquid Democracy,' necessitating better governance tooling and incentive structures for delegates. | Trap: When a voter changes their delegate too often |
+| cross-chain · Arbitrary · Messaging · Bridges | Bridge · Hack · rely · decentralized | Lock-and-mint bridges are notorious single points of failure. AMBs use varied security models (like decentralized validation or ZK proofs) to move state, not just tokens, across chains. | Trap: They eliminate the need for gas on the destination chain |
+| JIT · Just-In-Time · Liquidity | LP · strategy · adds · liquidity | JIT liquidity can actually benefit the trader by providing better execution, even if it 'snatches' fees from passive LPs. | Trap: Liquidity that arrives late |
+| ZK-Rollup · Zero-Knowledge · Virtual · Machine | general-purpose · Rust/C++ · programs · generate | zkVMs like RISC Zero or SP1 allow developers to write logic in standard languages and prove the execution, bridging the gap between Web2 developers and ZK-powered privacy/scaling. | Trap: To store user data off-chain |
+| zk-SNARK · zk-STARK · difference · enterprise | STARKs · Trusted · Setup · post-quantum | Architects prefer STARKs for long-term security as they don't rely on a 'toxic waste' ceremony and are resistant to future quantum computing attacks. | Trap: STARKs require a centralized server |
+| SPV · Special · Vehicle · RWA | bankruptcy-remote · underlying · asset · parent | An SPV is a legal entity created to isolate financial risk. If the issuer goes bust, the asset inside the SPV remains protected for the token holders. | Trap: To provide liquidity on Uniswap |
+| Pull-Based · Oracle · Push-Based | Push-based · Pull-based · updates · prices | Pull-based oracles (like Pyth or Chainlink Low Latency) save gas because they don't update on-chain unless someone actually needs the price. | Trap: Pull-based is for Bitcoin; Push-based is for Ethereum |
+| Technical · Architect · on-chain · Java-based | Reliable · Webhook · Event · Indexer | Direct RPC polling is unreliable. Architects use indexers to capture events, then push to Kafka/RabbitMQ to ensure the Web2 database eventually matches the Web3 state. | Trap: Hardcoding the transaction IDs in the Java source |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_web3Blockchain.js`
+- Questions in source bank: **354**
+- Consolidated recall cards: **10**
+- Category labels represented in the mind-map hierarchy: **53**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
 
 # Technical Architect’s Guide: Web2 to Web3 Transition
 ![17856395500817673884429703301636](assets/Web3_BlockChain.png)

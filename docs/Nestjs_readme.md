@@ -1,3 +1,65 @@
+# typescript nestjs — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+TYPESCRIPT NESTJS
+  ├─ Question domains
+  │   ├─ typescript advanced: Assertion · Functions (cluster 2)
+  │   ├─ typescript advanced: Ambient · Declaration (cluster 1)
+  │   ├─ nestjs advanced: DiscoveryService · NestJS (cluster 1)
+  │   ├─ nestjs advanced: app.use · app.connectMicroservice (cluster 2)
+  │   ├─ angular basics
+  │   ├─ integration scenarios
+  │   ├─ comparison
+  │   ├─ typescript basics
+  │   ├─ typescript utility
+  │   ├─ testing
+  │   ├─ auth rbac
+  │   ├─ nestjs controllers
+  │   ├─ nestjs basics
+  │   ├─ angular evolution
+  │   └─ + 57 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Assertion · Functions · TypeScript · asserts | Functions · throw · error · condition | Assertion functions (e.g., function assert(val: any): asserts val is string) inform the compiler that if the function returns without throwing, the variable is of the specified type. | Trap: Functions that return a boolean to indicate type safety |
+| Ambient · Declaration · TypeScript | TS · d.ts · way · tell | Ambient declarations (using the 'declare' keyword) describe the 'shape' of existing variables or libraries that are available at runtime but not defined in the current TS context. | Trap: A declaration that changes based on the environment |
+| DiscoveryService · NestJS | utility · scan · modules · controllers | It allows developers to 'discover' all registered components in the Nest container, often used to find methods decorated with custom metadata. | Trap: A way to find database tables |
+| app.use · app.connectMicroservice · difference | HTTP · non-HTTP · middleware · connectMicroservice | app.use() is for standard HTTP middleware, while connectMicroservice() sets up a 'Hybrid' application that handles both HTTP and Microservice protocols. | Trap: use() is only for Express |
+| ElementRef · Renderer2 · DOM · difference | Renderer2 · platform-agnostic · DOM · SSR | Renderer2 is preferred because it works correctly in environments like Server-Side Rendering (Universal) where the DOM doesn't exist. | Trap: ElementRef is safer; Renderer2 is faster |
+| request-response · fashion · NestJS · microservices | Redis · Pub/Sub | Standard Redis Pub/Sub is fire-and-forget. While Nest can simulate request-response, dedicated brokers like NATS or RabbitMQ are usually preferred for reliable request-response. | Trap: NATS |
+| Angular · Interceptors · HTTP · requests | before/after · transform · response · mapping | Angular interceptors focus on the 'client' side of a request; NestJS interceptors focus on the 'server' handling of a request. | Trap: To connect to a database |
+| TypeScript · difference · interface · type | Interfaces · merged · declaration · merging | Interfaces support declaration merging (defining the same interface name multiple times results in a single merged interface). Type aliases do not support this. | Trap: Types can be merged (declaration merging), but interfaces cannot |
+| Awaited · utility · type | Recursively · Promises · unwrap · underlying | Awaited<T> is used to model operations like 'await' in async functions, or the '.then()' method on Promises, specifically recursively unwrapping them. | Trap: Convert a type to a Promise |
+| Jest · jest.spyOn · jest.fn · difference | spyOn · tracks · calls · existing | spyOn is useful when you want to verify a method was called but still let it execute its real logic (unless you chain .mockImplementation). | Trap: spyOn is faster than fn() |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_typescript_nestjs.js`
+- Questions in source bank: **517**
+- Consolidated recall cards: **10**
+- Category labels represented in the mind-map hierarchy: **71**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚀 NestJS – Complete Interview & Architecture Guide (2026)
 ![17856392711787349495618933068711](assets/Nestjs.png)
 <img width="1024" height="1536" alt="17856392711787349495618933068711" src="../assets/Nestjs.png" />

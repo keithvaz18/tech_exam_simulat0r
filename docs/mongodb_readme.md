@@ -1,3 +1,63 @@
+# MongoDB — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+MONGODB
+  ├─ Question domains
+  │   ├─ scenarios
+  │   ├─ aggregation
+  │   ├─ performance
+  │   ├─ sharding
+  │   ├─ security
+  │   ├─ replication
+  │   ├─ crud
+  │   ├─ storage
+  │   ├─ basics
+  │   ├─ indexing
+  │   ├─ operations
+  │   ├─ atlas
+  │   ├─ architecture
+  │   ├─ schema design
+  │   └─ + 13 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Read · Concern · want · perform | local | readConcern: 'local' returns the most recent data on the specific member being queried, without ensuring it's durable across the set. | Trap: linearizable |
+| merge · stage · introduced | Writes · aggregation · collection · updates | $merge is more powerful than $out because it can update existing documents rather than just replacing the whole collection. | Trap: Merges shards |
+| COLLSCAN · output · explain · plan | MongoDB · perform · collection · scan | COLLSCAN stands for Collection Scan. It is generally inefficient for large datasets as MongoDB must inspect every document. | Trap: The query used a collection-level index |
+| command · run · shard · collection | Correct · Implementation | To shard a collection, you must first enable sharding on the database, ensure an index exists on the shard key, and then run shardCollection. | Trap: sh.shardCollection() |
+| MongoDB · role-based · RBAC · mechanism | Users · Roles | MongoDB uses roles (like readWrite, dbAdmin) assigned to users to determine what actions they can perform on specific databases. | Trap: IP Whitelisting |
+| Rollback · Replica · Set · happens | reverts · write · operations · replicated | Rollbacks occur when a member rejoins a set after an election and finds it has writes that the current Primary does not have. | Trap: The cluster switches to a different version of MongoDB |
+| difference · operators | comparison · operator · inequality · logical | $ne is used to find values not equal to a specific value. $not is a logical operator used to negate a query expression (e.g., matching documents that do not match a regex or range). | Trap: $not can only be used with regular expressions |
+| WiredTiger · handle · disk · space | keeps · space · marks · available | Deleted space is reused internally. To shrink the physical file size, you usually need to run the 'compact' command or resync. | Trap: It deletes the collection file |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_mongoDB.js`
+- Questions in source bank: **263**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **27**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚀 MongoDB Interview & Architecture README
 
 ![17856386555678528180101880048401](./assets/MongoDB.png)

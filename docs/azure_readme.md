@@ -1,3 +1,65 @@
+# Azure — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+AZURE
+  ├─ Question domains
+  │   ├─ networking
+  │   ├─ security
+  │   ├─ compute
+  │   ├─ scenarios: Azure · IoT (cluster 1)
+  │   ├─ governance
+  │   ├─ identity
+  │   ├─ scenarios: access · company (cluster 2)
+  │   ├─ storage
+  │   ├─ databases
+  │   ├─ monitoring
+  │   ├─ cost
+  │   ├─ analytics
+  │   ├─ availability
+  │   ├─ ai ml
+  │   └─ + 20 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| on-premises · Azure · internet · connect | Azure · ExpressRoute | ExpressRoute provides a private connection to Microsoft services with higher security, reliability, and speeds than typical internet-based connections. | Trap: Azure Virtual WAN |
+| Microsoft · cloud-native · SIEM · SOAR | Microsoft · Sentinel | Microsoft Sentinel is a scalable, cloud-native security information and event management (SIEM) and security orchestration, automation, and response (SOAR) solution. | Trap: Microsoft Defender for Cloud |
+| SLA · Virtual · Machine · Azure | Correct · Implementation | For any Single Instance Virtual Machine using premium SSD for all operating system disks and data disks, Microsoft guarantees connectivity of at least 99.9%. | Trap: 99.0% |
+| Azure · IoT · connect · monitor | Azure · IoT · Hub | IoT Hub is a managed service that acts as a central message hub for bi-directional communication between an IoT application and the devices it manages. | Trap: Azure Stream Analytics |
+| AWS · Control · Tower · Azure | Azure · Landing · Zones · Enterprise-Scale | Azure Landing Zones provide the architectural framework (using Management Groups and Azure Policy) to implement a 'Control Tower' equivalent for centralized governance. | Trap: Azure Lighthouse |
+| AWS · IAM · Role · Trust | Azure · Managed · Identity | Azure Managed Identities (User-assigned or System-assigned) allow resources to authenticate without credentials, similar to how IAM Roles work for EC2 or Lambda. | Trap: Azure Subscription |
+| access · company · wants · local | Azure · File · Sync | Azure File Sync centralizes your organization's file shares in Azure Files, while keeping the flexibility, performance, and compatibility of an on-premises file server. | Trap: Azure Files |
+| AWS · Azure · S3 · Lake | Azure · Storage · Mover | Azure Storage Mover is a fully managed migration service specifically designed to migrate files and folders (including S3 data) to Azure Storage. | Trap: Azure Import/Export |
+| Azure · Cosmos · DB · Analytical | column-oriented · real-time · Azure · Synapse | It enables HTAP (Hybrid Transactional/Analytical Processing) by separating the row-based transactional data from column-based analytical data. | Trap: A tool for SQL developers |
+| Azure · Monitor · Log · Analytics | Azure · Storage · Event · Hub | This is useful for long-term data retention beyond the standard Log Analytics limits or for external SIEM integration. | Trap: Printing logs |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_Azure.js`
+- Questions in source bank: **523**
+- Consolidated recall cards: **10**
+- Category labels represented in the mind-map hierarchy: **34**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # ☁️ Azure Cloud Interview & Architecture README
 ![17856033139527974498568225612623](assets/Azure_SrArchitect.png)
 <img width="1024" height="1536" alt="17856033139527974498568225612623" src="../assets/Azure_SrArchitect.png" />

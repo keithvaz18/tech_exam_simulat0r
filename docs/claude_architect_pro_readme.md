@@ -1,3 +1,64 @@
+# Claude architect professional — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+CLAUDE ARCHITECT PROFESSIONAL
+  ├─ Question domains
+  │   ├─ tool design and mcp integration
+  │   ├─ prompt engineering and structured output
+  │   ├─ context management and reliability
+  │   ├─ claude code configuration and workflows
+  │   ├─ agentic architecture and orchestration
+  │   ├─ integration
+  │   ├─ stakeholder communication and lifecycle management
+  │   ├─ solution design and architecture
+  │   ├─ governance safety and risk management
+  │   ├─ evaluation testing and optimization
+  │   ├─ developer productivity and operational management
+  │   ├─ claude models prompting and context
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| absent · production · design · review | Return · structured · validation · error | Return a structured validation error that identifies the missing field and is not marked retryable. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Solve the symptom locally without defining ownership, boundaries or recovery behavior |
+| instruction-like · documents · delivery · validating | Treat · document · content · isolate | Treat document content as data, isolate it with delimiters and enforce sensitive actions outside the model. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Increase model capacity and assume the architectural risk is resolved |
+| structure · delivery · validating · finds | Inspect · stop_reason · token · usage | Inspect stop_reason and token usage; increase output budget or continue safely when truncation is confirmed. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Increase model capacity and assume the architectural risk is resolved |
+| guidance · platform · encounters · situation | Commit · project-level · CLAUDE.md · claude/CLAUDE.md | Commit project-level CLAUDE.md or .claude/CLAUDE.md and keep personal guidance separate. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Make the entire design autonomous and remove deterministic application controls |
+| step · production · design · review | orchestration · deterministic · bounded · classification | Keep orchestration deterministic and use the model only for the bounded classification with validated output. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Increase model capacity and assume the architectural risk is resolved |
+| Claude · Code · Desktop · IDE | Build · MCP · Streamable · HTTP | Four different hosts needing the same capability with one place to manage it is exactly what MCP standardizes — discovery, primitives, and a single security boundary, with Streamable HTTP for remote multi- client access and OAuth for token acquisition. A duplicates the surface four times. | Trap: Define the tools separately in each of the four applications. |
+| answers · stakeholder · wants · contractual | Commitments · human-review · SLA · residual | Probabilistic systems can carry meaningful commitments on availability, latency, and accuracy over a defined distribution with a defined measurement method, provided exclusions and the escalation path for failures are explicit. A invents a number without defining the distribution or the measurement, which is the same trap in a more precise-sounding form. | Trap: A commitment to 99.9% accuracy, which is close enough to be defensible. |
+| Tuesday · operations · leader · says | Rainbow · execution · deployments · checkpointed | Stateful long-running agents need traffic shifted gradually with both versions live (rainbow) so in-flight sessions survive, and checkpoints with resumption so a late failure does not discard the run. B addresses cost, not statefulness. | Trap: Prompt caching and batch processing. |
+| Claude-based · discharge-summary · tool · PHI | Business · Associate · Agreement · processing | HIPAA requires the BAA before processing, audit controls over PHI access and use, and — because output influences clinical records — human validation before the output becomes consequential. C confuses capability with compliance. | Trap: Selecting the largest available model to maximize accuracy. |
+| shipping · wants · prove · prompt | held-out · prompt · LLM-as-judge · instance | Validity requires held-out data, a defined and independent grading method, and guardrails so a quality gain does not silently trade away latency or cost. C is a misconception — early effect sizes are large enough that ~20 well-chosen cases discriminate, and scale is invested when gains shrink. | Trap: Reporting the mean judge score on the cases that were used to iterate. |
+| load · production · integration · begins | Retry · retry-after · requests · responses | The first triage question is retriable versus terminal. 429 is transient rate limiting and calls for jittered, capped backoff honoring retry-after . | Trap: Retry both with exponential backoff and jitter. |
+| API · chart-generation · script · wants | Agent · Skill · SKILL.md · Level | Skills are filesystem-based, workspace-shared on the API, and use progressive disclosure — the brand reference costs nothing until read, and the script's body never enters context, only its output. A pays for 40 pages on every request. | Trap: Append the brand reference and script source to the system prompt on every request. |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_claude_architect_professional.js`
+- Questions in source bank: **172**
+- Consolidated recall cards: **12**
+- Category labels represented in the mind-map hierarchy: **12**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # Claude Certified Architect — Professional (CCAR-P)
 
 ![Claude Certified Architect Foundation reference one-pager](../assets/claude_architect_detailed_one_pager.png)

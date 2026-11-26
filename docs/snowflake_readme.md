@@ -1,3 +1,63 @@
+# snowflake — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+SNOWFLAKE
+  ├─ Question domains
+  │   ├─ architecture
+  │   ├─ security
+  │   ├─ cost
+  │   ├─ performance
+  │   ├─ architecture design
+  │   ├─ query optimization
+  │   ├─ governance
+  │   ├─ dynamic tables
+  │   ├─ snowpark
+  │   ├─ iceberg
+  │   ├─ tasks
+  │   ├─ streams
+  │   ├─ security architecture
+  │   ├─ cost optimization
+  │   └─ + 25 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Snowflake · Zero-copy · clone | Creates · metadata-only · copy · sharing | Zero-copy cloning: instant clone of tables, schemas or databases; only changed micro-partitions use extra storage. | Trap: Exports to S3 |
+| Snowflake · capability · secure · sharing | Secure · Sharing | Secure Data Sharing allows live data access without replication. | Trap: Streams |
+| table · shows · compute · credit | WAREHOUSE_METERING_HISTORY | Warehouse metering history shows compute credit usage. | Trap: ACCOUNT_HISTORY |
+| Snowflake · feature · automatically · accelerates | Query · Acceleration | Query Acceleration Service allocates additional compute resources for large scan queries. | Trap: Materialized views |
+| Provider · Consumer · feature · share | Secure · Sharing | Secure Data Sharing uses Snowflake's unique multi-cluster shared data architecture to give consumers access to the provider's metadata/storage directly. | Trap: Data Mirroring |
+| micro-partition · factor · affects · pruning | Clustering · keys | Clustering keys improve pruning by organizing micro-partition metadata. | Trap: User roles |
+| policy · dynamically · masks · sensitive | Masking · policy | Masking policies dynamically mask column values depending on user roles. | Trap: Task policy |
+| Dynamic · tables · replace · traditional | Streams · Tasks | Dynamic tables simplify pipelines by replacing streams and tasks. | Trap: Materialized views |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_snowflake.js`
+- Questions in source bank: **285**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **39**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # ❄️ Snowflake Interview & Architecture README
 
 ![17856041843561348245958413267050](./assets/Snowflake.png)

@@ -1,0 +1,210 @@
+[
+  {
+    "bank": "questionBank_AI.js",
+    "questions": 391,
+    "categories": 5,
+    "cards": 5,
+    "readme": "AI_readme.md",
+    "pdf": "AI_answers.pdf"
+  },
+  {
+    "bank": "questionBank_AI_Arch.js",
+    "questions": 571,
+    "categories": 44,
+    "cards": 10,
+    "readme": "AI_Architecture_readme.md",
+    "pdf": "AI_Arch_answers.pdf"
+  },
+  {
+    "bank": "questionBank_AWS.js",
+    "questions": 466,
+    "categories": 32,
+    "cards": 10,
+    "readme": "aws_readme.md",
+    "pdf": "AWS_answers.pdf"
+  },
+  {
+    "bank": "questionBank_Azure.js",
+    "questions": 523,
+    "categories": 34,
+    "cards": 10,
+    "readme": "azure_readme.md",
+    "pdf": "Azure_answers.pdf"
+  },
+  {
+    "bank": "questionBank_Data_Arch.js",
+    "questions": 128,
+    "categories": 22,
+    "cards": 8,
+    "readme": "dataArchitect_readme.md",
+    "pdf": "Data_Arch_answers.pdf"
+  },
+  {
+    "bank": "questionBank_EA.js",
+    "questions": 553,
+    "categories": 8,
+    "cards": 8,
+    "readme": "enterpriseArchitect_readme.md",
+    "pdf": "EA_answers.pdf"
+  },
+  {
+    "bank": "questionBank_HL7.js",
+    "questions": 260,
+    "categories": 18,
+    "cards": 8,
+    "readme": "HL7_readme.md",
+    "pdf": "HL7_answers.pdf"
+  },
+  {
+    "bank": "questionBank_Java.js",
+    "questions": 443,
+    "categories": 36,
+    "cards": 10,
+    "readme": "java_Springboot_readme.md",
+    "pdf": "Java_answers.pdf"
+  },
+  {
+    "bank": "questionBank_JavaScript.js",
+    "questions": 261,
+    "categories": 22,
+    "cards": 8,
+    "readme": "JavaScript_readme.md",
+    "pdf": "JavaScript_answers.pdf"
+  },
+  {
+    "bank": "questionBank_SA_AI_Data_Technologies.js",
+    "questions": 240,
+    "categories": 58,
+    "cards": 8,
+    "readme": "Solution_Architect_readme.md",
+    "pdf": "SA_AI_Data_Technologies_answers.pdf"
+  },
+  {
+    "bank": "questionBank_SQL.js",
+    "questions": 270,
+    "categories": 19,
+    "cards": 8,
+    "readme": "sql_readme.md",
+    "pdf": "SQL_answers.pdf"
+  },
+  {
+    "bank": "questionBank_claude_architect.js",
+    "questions": 211,
+    "categories": 5,
+    "cards": 5,
+    "readme": "claude_architect_readme.md",
+    "pdf": "claude_architect_answers.pdf"
+  },
+  {
+    "bank": "questionBank_claude_architect_professional.js",
+    "questions": 172,
+    "categories": 12,
+    "cards": 12,
+    "readme": "claude_architect_pro_readme.md",
+    "pdf": "claude_architect_professional_answers.pdf"
+  },
+  {
+    "bank": "questionBank_claude_developer.js",
+    "questions": 195,
+    "categories": 8,
+    "cards": 8,
+    "readme": "claude_developer_readme.md",
+    "pdf": "claude_developer_answers.pdf"
+  },
+  {
+    "bank": "questionBank_claude_developer_professional.js",
+    "questions": 150,
+    "categories": 6,
+    "cards": 6,
+    "readme": "claude_developer_pro_readme.md",
+    "pdf": "claude_developer_professional_answers.pdf"
+  },
+  {
+    "bank": "questionBank_databricks.js",
+    "questions": 452,
+    "categories": 51,
+    "cards": 10,
+    "readme": "Databricks_pySpark_readme.md",
+    "pdf": "databricks_answers.pdf"
+  },
+  {
+    "bank": "questionBank_devOps.js",
+    "questions": 180,
+    "categories": 90,
+    "cards": 8,
+    "readme": "Devops_And_Observability_readme.md",
+    "pdf": "devOps_answers.pdf"
+  },
+  {
+    "bank": "questionBank_dotnet.js",
+    "questions": 357,
+    "categories": 38,
+    "cards": 10,
+    "readme": "dotnet_readme.md",
+    "pdf": "dotnet_answers.pdf"
+  },
+  {
+    "bank": "questionBank_kafka.js",
+    "questions": 271,
+    "categories": 28,
+    "cards": 8,
+    "readme": "kafka_readme.md",
+    "pdf": "kafka_answers.pdf"
+  },
+  {
+    "bank": "questionBank_mongoDB.js",
+    "questions": 263,
+    "categories": 27,
+    "cards": 8,
+    "readme": "mongodb_readme.md",
+    "pdf": "mongoDB_answers.pdf"
+  },
+  {
+    "bank": "questionBank_nodeJS.js",
+    "questions": 206,
+    "categories": 29,
+    "cards": 8,
+    "readme": "nodejs_readme.md",
+    "pdf": "nodeJS_answers.pdf"
+  },
+  {
+    "bank": "questionBank_python_pySpark.js",
+    "questions": 435,
+    "categories": 9,
+    "cards": 9,
+    "readme": "python_test_readme.md",
+    "pdf": "python_pySpark_answers.pdf"
+  },
+  {
+    "bank": "questionBank_react.js",
+    "questions": 264,
+    "categories": 26,
+    "cards": 8,
+    "readme": "react_readme.md",
+    "pdf": "react_answers.pdf"
+  },
+  {
+    "bank": "questionBank_snowflake.js",
+    "questions": 285,
+    "categories": 39,
+    "cards": 8,
+    "readme": "snowflake_readme.md",
+    "pdf": "snowflake_answers.pdf"
+  },
+  {
+    "bank": "questionBank_typescript_nestjs.js",
+    "questions": 517,
+    "categories": 71,
+    "cards": 10,
+    "readme": "Nestjs_readme.md",
+    "pdf": "typescript_nestjs_answers.pdf"
+  },
+  {
+    "bank": "questionBank_web3Blockchain.js",
+    "questions": 354,
+    "categories": 53,
+    "cards": 10,
+    "readme": "Web3_BlockChain_readme.md",
+    "pdf": "web3Blockchain_answers.pdf"
+  }
+]

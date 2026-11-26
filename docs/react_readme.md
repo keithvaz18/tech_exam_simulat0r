@@ -1,3 +1,63 @@
+# react — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+REACT
+  ├─ Question domains
+  │   ├─ scenarios
+  │   ├─ hooks
+  │   ├─ optimization
+  │   ├─ state
+  │   ├─ testing
+  │   ├─ redux
+  │   ├─ basics
+  │   ├─ styling
+  │   ├─ routing
+  │   ├─ effect
+  │   ├─ performance
+  │   ├─ components
+  │   ├─ typescript
+  │   ├─ ecosystem
+  │   └─ + 12 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| detect · component · mounted · updating | useRef · track · mount · status | While React 18 has improved this, checking mount status prevents 'can't perform a React state update on an unmounted component' warnings. | Trap: Use 'this.isMounted()' |
+| sub-values · hook · handle · complex | useReducer | useReducer is usually preferable to useState when you have complex state logic that involves multiple sub-values or when the next state depends on the previous one. | Trap: useMemo |
+| Windowing · List · Virtualization · React | technique · renders · items · currently | Libraries like 'react-window' or 'react-virtualized' help render lists with thousands of rows by only keeping a small subset of DOM nodes active. | Trap: Opening multiple browser windows |
+| State · Snapshotting · React · context | concept · state · constant · value | When state updates, React re-renders with a new 'snapshot' of state. Existing code inside the old render still sees the old value. | Trap: A way to save state to a file |
+| User-Event · FireEvent · library | user-event · built · fireEvent · realistic | user-event simulates things like focus and keydown events that happen when a user actually types, whereas fireEvent just triggers the change event. | Trap: user-event is for servers only |
+| Redux · Toolkit · createAsyncThunk · handle | automatically · dispatches · pending · fulfilled | AsyncThunk simplifies side-effect logic by providing standard action types for the start, success, and failure of promises. | Trap: It deletes the state on error |
+| Virtual · DOM · React | React · DOM · blueprint · uses | React creates a lightweight copy of the DOM. When state changes, it compares the Virtual DOM with a snapshot taken before the update (diffing) and updates only the changed parts in the real DOM. | Trap: To directly manipulate the browser's DOM for speed |
+| React · apply · inline · styles | style · color · red | Inline styles are passed as a JavaScript object. The outer braces indicate a JS expression, the inner ones define the object. | Trap: style='color: red' |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_react.js`
+- Questions in source bank: **264**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **26**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚀 React Interview & Frontend Prep README
 <img width="1024" height="1536" alt="17856391050791465258704092431306" src="../assets/React.png" />
 

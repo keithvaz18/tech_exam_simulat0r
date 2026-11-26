@@ -1,3 +1,65 @@
+# AWS — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+AWS
+  ├─ Question domains
+  │   ├─ scenarios: traffic · scale (cluster 2)
+  │   ├─ scenarios: VPC · subnet (cluster 1)
+  │   ├─ security
+  │   ├─ databases
+  │   ├─ networking
+  │   ├─ compute
+  │   ├─ analytics
+  │   ├─ ai ml
+  │   ├─ storage
+  │   ├─ governance
+  │   ├─ integration
+  │   ├─ well architected
+  │   ├─ management
+  │   ├─ iam
+  │   └─ + 18 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| traffic · scale · quickly · response | Step · Scaling | Step scaling allows you to define multiple 'steps' or adjustments based on the size of the metric breach (e.g., add 1 instance at 60%, add 3 at 80%). | Trap: Manual Scaling |
+| VPC · subnet · designing · public | Deploy · NAT · Gateway · public | A NAT Gateway must reside in a public subnet (with a route to the IGW) to allow private instances to reach the internet without being exposed to inbound connections. | Trap: Deploy a NAT Gateway in the private subnet |
+| AWS · standards · company · continuously | AWS · Audit · Manager | Audit Manager helps you continuously audit your AWS usage to simplify how you assess risk and compliance with regulations and industry standards. | Trap: AWS Artifact |
+| sub-millisecond · latency · requires · database | Amazon · DynamoDB · DAX | DynamoDB is built for massive scale, and DAX (DynamoDB Accelerator) provides in-memory caching for microsecond latency. | Trap: Amazon Redshift |
+| Amazon · CloudFront · AWS · Global | CloudFront · Global · Accelerator · IP | CloudFront is a CDN for web content (HTTP/S). Global Accelerator uses the AWS network to improve performance for TCP/UDP traffic using Anycast IPs. | Trap: CloudFront uses Anycast IPs; Global Accelerator does not |
+| Reserved · Concurrency · AWS · Lambda | guarantee · maximum · number · concurrent | Reserved concurrency ensures that a function always has capacity and also acts as a ceiling to prevent run-away costs. | Trap: To save money on long-running tasks |
+| AWS · Amazon · S3 · SQL | Amazon · Athena | Athena allows you to query S3 data directly (CSV, JSON, Parquet) using Presto/Trino without loading it into a database. | Trap: Amazon Redshift |
+| ML · machine · learning · build | Amazon · SageMaker | SageMaker is a fully managed service that provides every developer and data scientist with the ability to build, train, and deploy ML models quickly. | Trap: Amazon Rekognition |
+| S3 · storage · class · deleted | S3 · Standard | S3 Standard has no minimum storage duration. Other classes (like IA or Glacier) charge a minimum of 30, 90, or 180 days even if deleted early. | Trap: S3 Standard-IA |
+| concept · ability · track · movement | Lineage | Data Lineage provides visibility into the data's lifecycle, which is critical for compliance, auditing, and troubleshooting in complex pipelines. | Trap: Data Partitioning |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_AWS.js`
+- Questions in source bank: **466**
+- Consolidated recall cards: **10**
+- Category labels represented in the mind-map hierarchy: **32**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚀 AWS Senior Architect & DevOps README
 ![178560287058285490286687875830](assets/AWS_SrArchitect.png)
 <img width="1024" height="1536" alt="178560287058285490286687875830" src="../assets/AWS_SrArchitect.png" />

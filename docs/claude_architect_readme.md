@@ -1,3 +1,50 @@
+# Claude architect — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+CLAUDE ARCHITECT
+  ├─ Question domains
+  │   ├─ agentic architecture
+  │   ├─ prompt structured output
+  │   ├─ context reliability
+  │   ├─ tool design mcp
+  │   ├─ claude code
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Claude · Agent · SDK · agentic | stop_reason · tool_use · tools | The documented control flow is: continue while stop_reason is "tool_use", terminate when it is "end_turn". Parsing natural-language phrases, relying on arbitrary caps as the primary stop, or checking for text blocks are listed anti-patterns. | Trap: The assistant message contains any text content block |
+| ISO · extraction · fails · validation | Resend · original · document · failed | Retry with Feedback: appending the specific validation error guides the model to correct format or structural mistakes, but it cannot fix information absent from the source. | Trap: Increase max_tokens |
+| subagent · web · search · times | Structured · error · context · failure | Error Propagation: structured context enables intelligent coordinator recovery. Generic statuses hide information; swallowing errors or aborting the whole workflow are both anti-patterns. | Trap: "search unavailable" |
+| MCP · GitHub · teammate · personal | mcp.json · user-level · claude.json · shared | ~/.claude.json: user-scoped configuration for personal or experimental MCP servers. Project-scoped .mcp.json is version-controlled for shared tooling, using ${ENV_VAR} expansion for tokens. | Trap: The shared server in ~/.claude.json and the personal one in .mcp.json |
+| CI · comments · job · emit | output-format · json-schema · tool_use · json | --json-schema: constrains CI output to a defined structure. A tool_use Schema in API-based extraction gives the same syntactic guarantee, though semantic checks remain your job. | Trap: Parsing the terminal colors |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_claude_architect.js`
+- Questions in source bank: **211**
+- Consolidated recall cards: **5**
+- Category labels represented in the mind-map hierarchy: **5**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🏛️ Claude Certified Architect – Foundations (CCAR-F)
 ![Claude Certified Architect Detailed One Pager](/assets/claude_architect_detailed_one_pager.png)
 

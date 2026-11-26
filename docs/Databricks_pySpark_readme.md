@@ -1,3 +1,65 @@
+# Databricks — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+DATABRICKS
+  ├─ Question domains
+  │   ├─ governance
+  │   ├─ delta lake
+  │   ├─ architecture
+  │   ├─ spark performance
+  │   ├─ infrastructure
+  │   ├─ spark ui
+  │   ├─ scenarios
+  │   ├─ performance
+  │   ├─ dlt
+  │   ├─ db sql
+  │   ├─ streaming
+  │   ├─ idempotency
+  │   ├─ ADF vs Databricks
+  │   ├─ security
+  │   └─ + 37 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| UK · dashboard · global · organization | Implement · Row-Level · Security · RLS | Row-Level Security (RLS) filters data at the database level based on the user's identity. This ensures security is maintained regardless of which tool is used to access the data. | Trap: Hardcode filters into the dashboard for each user |
+| Z-ORDER · Delta · apply · table | Z-ORDER · write-time · Z-ordering · expensive | Z-ORDER is a 'write-heavy' optimization. For high-frequency inserts, you should use Auto-Compaction/Optimized Writes and only run Z-ORDER during low-traffic maintenance windows. | Trap: Yes, because Z-ORDER replaces the need for partitioning |
+| Enterprise · Warehouse · EDW · units | Conformed · Dimensions | Conformed dimensions (like a standard 'Date' or 'Product' dimension used by all departments) are the 'bus' of the data warehouse. They allow for 'drilling across' facts from different business processes. | Trap: Shared Staging Areas |
+| Spark · Spill · Disk · aggregation | Execution · exceeded · executor · memory | Disk Spilling: when sort, join or aggregation state does not fit in executor memory, Spark writes it to disk, slowing the stage. Smaller partitions, reducing skew or larger executors reduce spilling. | Trap: The driver crashed; restart the cluster |
+| Egress · multi-cloud · Databricks · e.g | Cloud · Egress · cross-cloud · providers | Data gravity is real; you should always run your Databricks clusters in the same cloud and region where your data resides to avoid massive egress bills. | Trap: Egress is faster than Ingress |
+| Spark · UI · Event · Timeline | Significant · Driver · Executors · e.g | High serialization/deserialization times suggest that the 'shipped' code or the 'returned' results are too bulky for the Spark framework to handle efficiently. | Trap: The cluster has too many workers |
+| GDPR · Right · Forgotten · Delta | Run · DELETE · VACUUM · RETAIN | A simple DELETE removes the row from the current version. To remove it from history/backups for legal compliance, you must VACUUM with a zero-retention period (after ensuring no active queries are running). | Trap: Run DELETE FROM table WHERE user_id = X |
+| Databricks · UDF · execution · engineer | Enable · Predictive · I/O · Unity | Broadcast hints eliminate shuffles for small tables, Native Spark functions avoid Python serialization overhead (unlike UDFs), and Predictive I/O automates data skipping and file management. | Trap: Use Python UDFs for complex logic and increase cluster worker nodes to 100 |
+| SCD · Type · DLT · implementing | EXCEPT_COLUMN_LIST | While not a direct keyword, in DLT SCD2 logic, you typically track changes on all columns unless specified otherwise, or use specific logic to identify the 'keys' vs 'attributes'. | Trap: TRACK HISTORY ON |
+| Standard · SQL · Warehouse · Pro | Pro · Python · UDFs · I/O | Pro and Serverless warehouses include advanced features like improved performance via Predictive I/O and support for Python-based workflows. | Trap: Pro is only for PowerBI |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_databricks.js`
+- Questions in source bank: **452**
+- Consolidated recall cards: **10**
+- Category labels represented in the mind-map hierarchy: **51**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚀 Databricks Medallion Architecture (Bronze → Silver → Gold)
 
 ![17856018188417685215415841884740](/assets/Databricks%20Medallion%20Architecture.png)

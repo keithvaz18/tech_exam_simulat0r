@@ -1,3 +1,65 @@
+# Java — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+JAVA
+  ├─ Question domains
+  │   ├─ Java Core: ConcurrentHashMap · Collections.synchronizedMap (cluster 2)
+  │   ├─ Microservices
+  │   ├─ Java Core: According · Liskov (cluster 1)
+  │   ├─ Spring Boot: Spring · Framework (cluster 2)
+  │   ├─ Spring Boot: Transactional · effect (cluster 1)
+  │   ├─ Security
+  │   ├─ ORM/Hibernate
+  │   ├─ REST API
+  │   ├─ Message Queues
+  │   ├─ Testing
+  │   ├─ WebFlux
+  │   ├─ Performance
+  │   ├─ JPA/Hibernate
+  │   ├─ Docker
+  │   └─ + 22 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| ConcurrentHashMap · Collections.synchronizedMap · difference | ConcurrentHashMap · fine-grained · CAS · reads/writes | ConcurrentHashMap allows multiple threads to access different parts of the map simultaneously without blocking each other, whereas synchronizedMap requires every thread to wait for a single global lock. | Trap: ConcurrentHashMap locks the entire map; synchronizedMap locks segments |
+| Async · Spring · Boot · Self-Invocation | Calling · Async · method · class | Spring uses AOP proxies for @Async. If you call the method from within the same class (this.method()), you bypass the proxy, and the task will not be executed in a separate thread. | Trap: It requires the method to be static |
+| According · Liskov · Substitution · Principle | subclass · able · replace · parent | LSP states that objects of a superclass should be replaceable with objects of its subclasses without affecting the functionality from the client's perspective. | Trap: A subclass should have more methods than the parent |
+| Spring · Framework · IoC · Container | creates · wires · manages · lifecycle | IoC Container: the ApplicationContext instantiates and wires Spring Beans, inverting control of object creation from your code to the framework. Spring Framework is the base on which Spring Boot is built. | Trap: It replaces the JVM garbage collector |
+| Transactional · effect · method · calls | Spring · AOP · Proxy-based · calls | Spring AOP: implemented with JDK dynamic or CGLIB proxies, so self-invocation skips advice. Proxy-based AOP only intercepts calls arriving through the proxy. | Trap: The JVM ignores annotations |
+| RBAC · ABAC | Role-Based · Access · Control · Attribute-Based | RBAC limits access by user roles (e.g., ADMIN). ABAC is more complex, limiting access by attributes (e.g., 'User can edit if they are the owner AND it is during business hours'). | Trap: Encryption algorithms |
+| Hibernate · Level · Cache · L1 | L1 · session-scoped · L2 · session-factory | L1 cache is local to a specific Session. L2 cache is a global cache for the application (e.g., Ehcache/Redis) and reduces database hits for frequently read data across different sessions. | Trap: L1 is managed by the developer; L2 is managed by the OS |
+| DTOs · REST · API · map | DTO · MapStruct · avoid · exposing | DTO Mapping: decouples API contracts from persistence models and prevents over-posting and lazy-loading problems. MapStruct generates the mappers at compile time. | Trap: It removes the need for validation |
+| Spring · Kafka · project · simplifies | Spring · Kafka · KafkaTemplate · KafkaListener | Spring Kafka: integrates Kafka producers and consumers with the Spring programming model. Kafka Streams is a separate stream-processing library that can run inside a Spring app. | Trap: Spring Security |
+| MockBean · Spring · Boot · tests | Spring · ApplicationContext · adds · mock | @MockBean is used for integration tests where you want to mock one specific service while keeping the rest of the Spring context real. | Trap: A way to create a mock database |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_Java.js`
+- Questions in source bank: **443**
+- Consolidated recall cards: **10**
+- Category labels represented in the mind-map hierarchy: **36**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚀 Java Spring Boot Interview & Coding Prep README
 
 ![17856023393923422545792866419127](./assets/java%20Springboot.png)

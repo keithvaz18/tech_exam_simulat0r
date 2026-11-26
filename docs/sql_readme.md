@@ -1,3 +1,63 @@
+# SQL — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+SQL
+  ├─ Question domains
+  │   ├─ basics
+  │   ├─ performance
+  │   ├─ scenarios
+  │   ├─ architecture
+  │   ├─ window functions
+  │   ├─ optimization
+  │   ├─ joins
+  │   ├─ aggregation
+  │   ├─ subqueries
+  │   ├─ cte
+  │   ├─ transactions
+  │   ├─ indexes
+  │   ├─ filtering
+  │   ├─ views
+  │   └─ + 5 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| SQL · GRANT · REVOKE · component | DCL · Control · Language | DCL (Data Control Language) is used to control access to data in the database, primarily through granting and revoking permissions. | Trap: TCL (Transaction Control Language) |
+| EXISTS · comparing · large · subquery | EXISTS · Short-circuiting · stops · scanning | EXISTS performs a 'semi-join' and returns TRUE immediately upon finding a match, whereas IN typically requires the subquery to be fully materialized first. | Trap: EXISTS uses more memory |
+| DELETE · TRUNCATE · difference | DELETE · row-by-row · TRUNCATE · clause | DELETE is a DML command that can target specific rows and is fully logged. TRUNCATE is a DDL command that resets the table (and identity seeds) much faster because it doesn't log individual row deletions. | Trap: DELETE is DDL; TRUNCATE is DML |
+| ACID · compliance · database · transactions | Atomicity · Consistency · Isolation · Durability | ACID properties ensure that database transactions are processed reliably and maintain data integrity even in the event of errors or crashes. | Trap: Access, Control, Integration, Delivery |
+| LAST_VALUE · col · works · correctly | e.g · RANGE · UNBOUNDED · PRECEDING | Because the default frame ends at the current row, LAST_VALUE will just return the current row unless the frame is expanded. | Trap: A WHERE clause |
+| Parameter · Sniffing · benefit | optimizer · creates · execution · plan | While usually helpful, it can cause 'Parameter Sniffing issues' if a plan for a 'rare' value is used for a 'common' value. | Trap: It speeds up network traffic |
+| want · employees · projects · assigned | LEFT · JOIN | A LEFT JOIN ensures all records from the 'left' table (Employees) are kept, with matching data from the 'right' table (Projects) added if it exists. | Trap: INNER JOIN |
+| Median · SQL · calculate · standard | MEDIAN · PERCENTILE_CONT · standard · function | Median calculation varies greatly by dialect (Oracle has MEDIAN, but SQL Server and PostgreSQL often use window functions). | Trap: Using the MEDIAN() function |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_SQL.js`
+- Questions in source bank: **270**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **19**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🗄️ SQL Interview & Exam Quick Reference
 
 ### 📘 Joins • CTEs • Window Functions • Indexing • Transactions • Modeling

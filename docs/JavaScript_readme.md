@@ -1,3 +1,63 @@
+# JavaScript — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+JAVASCRIPT
+  ├─ Question domains
+  │   ├─ performance
+  │   ├─ data structures
+  │   ├─ rest api
+  │   ├─ versioning
+  │   ├─ functions
+  │   ├─ objects
+  │   ├─ logic
+  │   ├─ troubleshooting
+  │   ├─ axios
+  │   ├─ async
+  │   ├─ security
+  │   ├─ scenarios
+  │   ├─ scalability
+  │   ├─ cdn
+  │   └─ + 8 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Concatenating · small · strings · loop | Strings · immutable · concatenation · creates | Modern engines optimize this, but for massive operations, using an array and .join('') is often safer. | Trap: Strings are limited to 100 characters |
+| Map · WeakMap · difference | WeakMap · keys · objects · weakly | WeakMap keys must be objects. If there are no other references to the key object, it can be garbage collected even if it is in the WeakMap. | Trap: WeakMaps are faster for iteration |
+| HTTP · Idempotent · method · considered | Correct · Implementation | GET, PUT, and DELETE are idempotent, meaning multiple identical requests should have the same effect as a single request. POST is not. | Trap: CONNECT |
+| ECMAScript · Arrow · Functions · version | ES6 | ES6, also known as ES2015, was a major update that introduced modern syntax like block-scoped variables and arrow functions. | Trap: ES2017 |
+| difference · function · declaration · expression | Declarations · hoisted · expressions | Function declarations are available throughout the scope, while expressions only exist after the line they are defined. | Trap: Declarations cannot have arguments |
+| operator · check · property · exists | Correct · Implementation | The 'in' operator returns true if the specified property is in the specified object or its prototype chain. | Trap: exists |
+| Scenario · Requirement | Object | Array is coerced to empty string, Object is coerced to string '[object Object]'. Sum is the concatenated string. | Trap: undefined |
+| Gateway · Timeout · error · indicate | server · acting · proxy · did | This often happens in microservice architectures when a load balancer/gateway waits too long for a service. | Trap: The page does not exist |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_JavaScript.js`
+- Questions in source bank: **261**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **22**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🟨 JavaScript Interview & Exam Quick Reference
 
 ### 📘 Language Core • Async • Functional Patterns • Browser & API Concepts

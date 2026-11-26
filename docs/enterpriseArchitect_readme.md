@@ -1,3 +1,56 @@
+# EA — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+EA
+  ├─ Question domains
+  │   ├─ pmp: Grade · Quality (cluster 1)
+  │   ├─ btabok: Business · Technology (cluster 1)
+  │   ├─ scenarios: pattern · prevent (cluster 2)
+  │   ├─ togaf: project · deviates (cluster 1)
+  │   ├─ togaf: ADM · Architecture (cluster 2)
+  │   ├─ scenarios: On Premises · SQL (cluster 1)
+  │   ├─ btabok: According · BTABoK (cluster 2)
+  │   ├─ pmp: MVP · stand (cluster 2)
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Grade · Quality · context · management | Grade · Quality · requirements · features | High Quality means meeting requirements. High Grade means having many fancy features. | Trap: Quality is about features; Grade is about fulfilling requirements. |
+| Business · Technology · considered · competency | Financial · Management · ROI · NPV | Architects must understand financial metrics like Return on Investment (ROI) and Total Cost of Ownership (TCO) to justify solutions. | Trap: Photoshop design |
+| pattern · prevent · failure · cascading | Circuit · Breaker | The Circuit Breaker pattern detects failures and encapsulates the logic of preventing a failure from constantly recurring during maintenance or temporary external system failure. | Trap: Sidecar Pattern |
+| project · deviates · defined · architecture | Architecture · Dispensation | An Architecture Dispensation is the formal mechanism to grant a project a 'pass' or waiver from complying with specific architecture standards. | Trap: Architecture Contract |
+| ADM · Architecture · Definition · Document | Phase | The Architecture Definition Document is the companion to the Architecture Requirements Specification and is built incrementally during Phases B, C, and D. | Trap: Phase A |
+| On-Premises · SQL · Server · Azure | ETL · Extract · Transform · Load | ETL is preferred when the data needs to be cleansed or transformed *before* it reaches the destination, often to save on storage processing or to meet target schema requirements. | Trap: ELT (Extract, Load, Transform) |
+| According · BTABoK · Functional · Quality | Functional · Quality · Attribute | Functional requirements define behavior (e.g., 'process payment'), while Quality Attributes define characteristics (e.g., 'securely', 'quickly'). | Trap: Functional is for business; Quality Attribute is for IT. |
+| MVP · stand · product · development | Minimum · Viable · Product | An MVP is the version of a new product that allows a team to collect the maximum amount of validated learning about customers with the least effort. | Trap: Most Valuable Player |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_EA.js`
+- Questions in source bank: **553**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **8**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🏛️ Enterprise Architecture (EA) Strategy README
 
 ![17856388798141204581767461686674](./assets/Enterprise%20Architect.png)

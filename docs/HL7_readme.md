@@ -1,3 +1,63 @@
+# HL7 — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+HL7
+  ├─ Question domains
+  │   ├─ structure
+  │   ├─ fhir
+  │   ├─ results
+  │   ├─ rest api
+  │   ├─ scheduling
+  │   ├─ adt
+  │   ├─ orders
+  │   ├─ cda
+  │   ├─ billing
+  │   ├─ performance
+  │   ├─ ack
+  │   ├─ troubleshooting
+  │   ├─ scenarios
+  │   ├─ insurance
+  │   └─ + 4 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| v2.x · null · values · explicitly | Sending · characters | Two double quotes ("") is the 'delete' indicator in HL7, meaning 'clear this field'. An empty pipe (//) means 'no change/ignore'. | Trap: Sending a zero |
+| Extension · FHIR | FHIR · standard · way · add | FHIR follows the 80/20 rule; 20% of data needs extensions, and the standard provides a strictly defined way to add them. | Trap: A larger hard drive |
+| ORU · e.g · Glucose · Sodium | Correct · Implementation | Usually, if they belong to the same order (e.g., a Basic Metabolic Panel), they are grouped under one OBR with three OBXs. | Trap: None |
+| FHIR · API · HTTP · Header | Accept · application/fhir+json | The 'Accept' header tells the server which content type the client is prepared to handle. FHIR uses 'application/fhir+json'. | Trap: Format: json |
+| SCH · segment | Schedule · Activity · Information · Header | The SCH segment contains the high-level details of the appointment, such as the Placer/Filler ID and the overall status. | Trap: Security Check Header |
+| ADT-A08 · Update · PID · message | Send · available · patient | While technically possible to send partials, standard practice is to send the full current state of the patient record. | Trap: Only the patient ID |
+| ORM · HL7 · v2.3 · message | Order · Message | ORM is the general Order Message used in older HL7 versions to request tests, procedures, or supplies. | Trap: Order Response Management |
+| Narrative · Block · CDA · document | HTML-like · meant · human · reading | The narrative block ensures that a human can always read the document even if the receiving system can't parse the discrete data. | Trap: The document's title |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_HL7.js`
+- Questions in source bank: **260**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **18**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🏥 HL7 v2 & FHIR Interview & Exam Quick Reference
 
 ### 📘 Messages • Segments • MLLP • FHIR • Terminology • Interfaces • Compliance

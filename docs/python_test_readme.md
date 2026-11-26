@@ -1,3 +1,58 @@
+# python PySpark — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+PYTHON PYSPARK
+  ├─ Question domains
+  │   ├─ General: typing.List · typing.Sequence (cluster 2)
+  │   ├─ General: Delta · S3 (cluster 1)
+  │   ├─ General: Memory · Overdrive (cluster 4)
+  │   ├─ General: Liquid · Clustering (cluster 3)
+  │   ├─ python core
+  │   ├─ algorithms
+  │   ├─ pythonic
+  │   ├─ oop
+  │   ├─ comprehensions
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| typing.List · typing.Sequence · difference | List · Sequence · immutable/read-only · mutable | Sequence is a covariant type that covers lists, tuples, and strings. It is preferred for function arguments when you only need to iterate/index but not modify. | Trap: List is faster |
+| Delta · S3 · script · RESTORE | RESTORE · Parquet · works · underlying | RESTORE reverts the metadata (the Delta Log), but if the physical .parquet files are deleted from the cloud storage (S3/ADLS), the data is lost unless you have cloud-level backups (like S3 Versioning). | Trap: Only if you are using CSV format |
+| Memory · Overdrive · Overhead · Spark | Non-heap · JVM · OS-level · memory | Executor memory overhead is typically 10% of the executor memory or 384MB (whichever is larger) and is crucial for stability in containerized environments like YARN or K8s. | Trap: Memory used for caching only |
+| Liquid · Clustering · Delta · Lake | worker-managed · over-partitioning · flexible · layout | Liquid Clustering eliminates the need for fixed partitions (like /year/month/day), allowing the engine to cluster data dynamically based on the columns specified, which solves the 'small file' problem caused by high-cardinality partitions. | Trap: It converts all data to JSON for better indexing |
+| Python · memory · management · primarily | Reference · counting · cyclic · garbage | Python primarily uses reference counting to track objects. When an object's reference count drops to zero, it is deallocated. | Trap: It never deletes objects during execution |
+| Time · Complexity · Fibonacci · iterative | Iterative · Recursive | Iteration visits each number once (linear), while naive recursion branches twice at each level (exponential). | Trap: Iterative: O(1), Recursive: O(n log n) |
+| one-liner · Python · correctly · merges | Correct · Implementation | Using the double-asterisk 'unpacking' operator inside a dictionary literal is a common way to merge dictionaries, with d2's keys overwriting d1's in case of duplicates. | Trap: d3 = d1 + d2 |
+| Python · OOP · difference · classmethod | classmethod · takes · cls · argument | @classmethod is bound to the class and receives the class as an implicit first argument (cls), making it useful for factory methods. @staticmethod is not bound to the class or instance. | Trap: @staticmethod can modify class state, while @classmethod cannot |
+| Pythonic · one-liner · flatten · nested | nested_list · sublist | In a nested list comprehension, the outer loop comes first. The syntax follows: [item for sublist in main_list for item in sublist]. | Trap: [sublist[x] for x in nested_list] |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_python_pySpark.js`
+- Questions in source bank: **435**
+- Consolidated recall cards: **9**
+- Category labels represented in the mind-map hierarchy: **9**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # Algorithm Complexity Analysis (Python Solutions Guide)
 
 ![17856035100463924647405069389957](./assets/Python_exam.png)

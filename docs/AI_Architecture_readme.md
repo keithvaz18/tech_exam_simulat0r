@@ -1,3 +1,65 @@
+# AI Arch — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+AI ARCH
+  ├─ Question domains
+  │   ├─ architecture
+  │   ├─ cloud native
+  │   ├─ security
+  │   ├─ resilience
+  │   ├─ operations
+  │   ├─ kubernetes
+  │   ├─ networking
+  │   ├─ microservices
+  │   ├─ cloud cost
+  │   ├─ finops
+  │   ├─ ai engineering: EU · AI (cluster 1)
+  │   ├─ scalability
+  │   ├─ compliance
+  │   ├─ governance
+  │   └─ + 30 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Ambassador · pattern | out-of-process · specialized · sidecar · container | Similar to a sidecar, but specifically focused on network communication. The app talks to 'localhost', and the Ambassador handles the complex network calls. | Trap: A way to name your servers |
+| AWS · Lambda · Azure · Functions | Provisioned · Concurrency · AWS · Premium/Dedicated | Provisioned Concurrency keeps a specified number of execution environments warm and ready to respond immediately. Azure's Premium plan provides 'Always On' instances and pre-warmed workers. | Trap: AWS S3 and Azure Blob Storage |
+| SSO · Federation | e.g · Google · non-Google · identity | Federation allows a user to be authenticated by their 'Home' system (like a corporate AD) and then access 'External' systems (like AWS or Slack). | Trap: A group of people using the same password |
+| Anti-Corruption · Layer · ACL · architectural | APIs · prevent · corrupted · legacy | The ACL acts as a translator. When a modern microservice talks to a 20-year-old monolith, the ACL ensures the monolith's messy domain model doesn't leak into the new service. | Trap: To automate the deletion of old logs |
+| Shadow | information · technology · systems · devices | Shadow IT (like a team using their own Trello board) creates security risks because it's not monitored by the company's security team. | Trap: A way to name your servers |
+| Node · Anti-Affinity | rule · prevents · certain · pods | If you have two replicas of a database, you use anti-affinity to ensure they are on different nodes, so a single node failure doesn't take down both. | Trap: A method for encrypting traffic |
+| SD-WAN · Software-Defined · Wide · Area | architectural · approach · uses · software | SD-WAN allows businesses to securely connect branch offices to the cloud and each other using any combination of transport services (like MPLS, LTE, and broadband). | Trap: A very large network |
+| Transactional · Outbox · pattern · solve | saving · event · dedicated · table | Since most databases and message brokers do not support distributed transactions (2PC) efficiently, the Outbox pattern uses a local DB transaction to ensure the event is saved if and only if the business data is saved. | Trap: By using a 2-phase commit (XA) across the DB and Broker |
+| Egress · Architects · cloud · cost | cost · leaving · cloud · region | Most cloud providers (AWS/Azure) do not charge for 'Ingress' (data coming in), but charge per GB for 'Egress' (data going out). This can become massive for high-traffic public APIs or cross-region replication. | Trap: The cost of uploading data to the cloud |
+| Unit · Economics · Cloud · FinOps | e.g · Cost · practice · measuring | Unit economics helps determine if cloud costs are scaling efficiently. If your total bill doubles but your users triple, your unit cost is actually improving. | Trap: The cost of one computer |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_AI_Arch.js`
+- Questions in source bank: **571**
+- Consolidated recall cards: **10**
+- Category labels represented in the mind-map hierarchy: **44**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🤖 AI Architecture Interview & Exam Quick Reference
 
 ### 📘 RAG • LLM Serving • Platform • Resilience • Security • Observability

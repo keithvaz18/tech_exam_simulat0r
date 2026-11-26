@@ -1,3 +1,52 @@
+# Claude developer professional — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+CLAUDE DEVELOPER PROFESSIONAL
+  ├─ Question domains
+  │   ├─ software engineering and application design
+  │   ├─ claude api mechanics and integration
+  │   ├─ agents and workflow implementation
+  │   ├─ security, safety and evaluation
+  │   ├─ prompt, context and output handling
+  │   ├─ claude code engineering workflows
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| change · API · control · engineering | Revoke · rotate · remove · active | Revoke and rotate it, remove it from active history where possible, and move secrets to managed configuration. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Rely on a prompt-only instruction and leave enforcement or validation to the model |
+| change · provider · engineering · lead | Verify · provider-specific · identifiers · feature | Verify provider-specific model identifiers, feature support, limits, authentication and operational behavior. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Rely on a prompt-only instruction and leave enforcement or validation to the model |
+| change · tool_use · blocks · engineering | Validate · permitted · correlate · preserve | Validate and execute each permitted call, correlate each result and preserve the protocol sequence. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Skip instrumentation and accept the result if the response appears plausible |
+| test · senior · engineer · reviewing | Isolate · cause · output · bad | Isolate whether the cause is model output, bad tool data, incorrect parameters, truncation or orchestration. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Rely on a prompt-only instruction and leave enforcement or validation to the model |
+| test · behavior · senior · engineer | explicit · constraints · evaluation · set | Use examples, explicit constraints and an evaluation set that covers representative edge cases. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Rely on a prompt-only instruction and leave enforcement or validation to the model |
+| test · vague · senior · engineer | Ask · targeted · questions · reproduce | Ask targeted questions, reproduce, inspect traces and isolate the smallest failing layer. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Retry or repeat the operation without classifying the failure or checking side effects |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_claude_developer_professional.js`
+- Questions in source bank: **150**
+- Consolidated recall cards: **6**
+- Category labels represented in the mind-map hierarchy: **6**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # Claude Certified Developer — Professional (CCDV-P)
 
 ![Claude Certified Developer Foundation reference one-pager](../assets/claude_developer_detailed_one_pager.png)

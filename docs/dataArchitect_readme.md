@@ -1,3 +1,63 @@
+# Data Arch — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+DATA ARCH
+  ├─ Question domains
+  │   ├─ architecture
+  │   ├─ performance
+  │   ├─ streaming
+  │   ├─ governance
+  │   ├─ data modelling
+  │   ├─ analytics
+  │   ├─ modelling
+  │   ├─ scale
+  │   ├─ lakehouse
+  │   ├─ ingestion
+  │   ├─ security
+  │   ├─ no sql
+  │   ├─ mlops
+  │   ├─ dataops
+  │   └─ + 8 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Late · Arriving · Medallion · Architecture | In-place · Silver · Delta/Iceberg · MERGE | Modern table formats like Iceberg and Delta Lake support ACID MERGE operations, allowing late-arriving data to be integrated into existing partitions without full table rewrites. | Trap: Drop the late records |
+| Write · Amplification · Apache · Iceberg | overhead · updating · metadata · rewriting | Write amplification occurs when a small data change requires rewriting a large underlying file or significant metadata updates, a common challenge in Copy-on-Write (CoW) strategies. | Trap: The speed of disk writes |
+| Kafka · Zombie · Instance · Transactions | producer · instance · thought · dead | Zombie instances occur when a producer times out and is replaced, but the original producer recovers and attempts to send data. Kafka uses 'Epochs' to fence these out. | Trap: A message that cannot be deleted |
+| EU · regulation · primarily · governs | GDPR | GDPR (General Data Protection Regulation) requires features like the 'Right to be Forgotten,' which necessitates efficient record-level deletion in data lakes. | Trap: HIPAA |
+| Logical · Physical · NoSQL · HBase | Modelling · tables · query · access | Unlike relational databases, NoSQL physical models are 'query-first,' meaning tables are structured specifically to optimize for the exact queries the application will run. | Trap: Ensuring all tables are in 5th Normal Form |
+| Metric · Store | e.g · Gross · Margin · centralized | A Metric Store (or Semantic Layer) ensures that 'Revenue' is calculated the same way across every dashboard and application in the company. | Trap: A place to buy rulers |
+| Kimball · Dimensional · Modelling · Conformed | dimension · shared · multiple · fact | Conformed dimensions ensure consistency by using the same reference data across different business processes. | Trap: A dimension with no attributes |
+| Petabyte · Scale · drawback · vertical | Hardware · limits · extreme · cost | Scaling up (bigger RAM/CPU) hits a physical ceiling and becomes exponentially expensive compared to horizontal scaling. | Trap: It is too fast |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_Data_Arch.js`
+- Questions in source bank: **128**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **22**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚀 Data Architect Interview & Architecture README
 
 ![17856370983708256568542791092844](./assets/data%20Architect.png)

@@ -1,3 +1,63 @@
+# kafka — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+KAFKA
+  ├─ Question domains
+  │   ├─ architecture
+  │   ├─ security
+  │   ├─ performance
+  │   ├─ administration
+  │   ├─ consumer
+  │   ├─ troubleshooting
+  │   ├─ kafka streams
+  │   ├─ producer
+  │   ├─ kafka connect
+  │   ├─ fundamentals
+  │   ├─ ksqldb
+  │   ├─ storage
+  │   ├─ serialization
+  │   ├─ Deployment Strategy
+  │   └─ + 14 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| Unclean · Leader · Election · Kafka | Electing · ISR · leader · replicas | Unclean leader election allows a non-ISR replica to become leader. This favors availability over consistency, but can lead to the loss of messages that weren't replicated to the new leader. | Trap: Electing a leader from the set of in-sync replicas (ISR) |
+| Kafka · Access · Control · Lists | users · access · authorizer · configured | If an authorizer is not configured, Kafka defaults to no security. Once an authorizer is enabled, the default changes to 'deny' unless an explicit ACL or super-user status exists. | Trap: All users are denied access |
+| JVM · Kafka · Page · Cache | Moderate · Heap · e.g · GB | Kafka doesn't store data in its own RAM; it relies on the OS. A heap that is too large can lead to long GC pauses and leave less room for the Page Cache. | Trap: Zero Heap size |
+| IP/hostname · broker · setting · external | advertised.listeners | If Kafka is behind a NAT or in Docker, the 'listeners' might be an internal IP, but 'advertised.listeners' tells clients how to find it from the outside. | Trap: listeners |
+| Static · Membership · Kafka · Consumer | reduces · unnecessary · rebalances · consumer | By assigning a 'group.instance.id', a consumer becomes a static member. If it restarts, it keeps its partitions without triggering a group-wide rebalance, provided it returns before the session timeout. | Trap: It allows consumers to share the same partition |
+| Disk · I/O · Wait · Kafka | Increasing · number · partitions | Increasing partitions actually increases the number of open file handles and can sometimes worsen I/O contention if not handled carefully. The other options directly reduce or speed up I/O. | Trap: Switching to faster SSDs |
+| GlobalKTable · KTable · differ · regular | GlobalKTable · re-partitioning · stored · instance | A regular KTable is partitioned like a topic. A GlobalKTable is replicated in full to every application instance, making 'Broadcast Joins' possible. | Trap: GlobalKTable is stored in the cloud; KTable is local |
+| buffer.memory · Kafka · setting · producer | total · bytes · memory · producer | If the application sends messages faster than the producer can transmit them, they fill up this buffer. If it's full, the producer blocks for max.block.ms. | Trap: The disk space used by the producer |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_kafka.js`
+- Questions in source bank: **271**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **28**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🚀 Kafka Interview & Architecture README
 
 ![17856040057501196294325712630112](./assets/kafka.png)

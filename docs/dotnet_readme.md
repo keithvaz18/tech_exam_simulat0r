@@ -1,3 +1,65 @@
+# .NET — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+.NET
+  ├─ Question domains
+  │   ├─ C# Language: ValueTask · Task (cluster 2)
+  │   ├─ Microservices
+  │   ├─ C# Language: C# · Task.Run (cluster 1)
+  │   ├─ ASP.NET Core
+  │   ├─ Performance
+  │   ├─ ORM (EF Core)
+  │   ├─ Security
+  │   ├─ Architecture
+  │   ├─ Troubleshooting
+  │   ├─ Security (OAuth)
+  │   ├─ Security (JWT)
+  │   ├─ Design Patterns
+  │   ├─ Testing
+  │   ├─ Swagger
+  │   └─ + 24 additional bank categories
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| ValueTask · Task | value · type · reduce · allocations | ValueTask<T> is a struct. If an async method returns a result immediately (synchronously) most of the time, using ValueTask can prevent the allocation of a Task object on the heap. | Trap: It is used for storing data in the database |
+| Eventual · Consistency · distributed · microservices | guarantee · updates · accesses · eventually | Due to network latency and distributed data, it takes time for an update in Service A to reflect in Service B. The system is 'eventually' consistent rather than 'strongly' consistent. | Trap: When the server is always in sync with the client |
+| C# · Task.Run · Task.Factory.StartNew · difference | Task.Run · StartNew · async/await · shorthand | Task.Run is the modern standard for offloading work to the thread pool. StartNew is more complex and can lead to issues if not used with 'Unwrap()' when calling async methods. | Trap: Task.Run is only for console apps |
+| API · Keys · Database · Connection | Secret · Manager · Secrets.json | The Secret Manager tool is used to store sensitive data during development. Unlike appsettings.json, the secrets.json file is stored outside the project folder and isn't checked into source control. | Trap: appsettings.json |
+| NET · Core · high-performance · feature | Span | Span<T> is a ref struct that allows you to point to contiguous memory (on the stack or heap) without the overhead of additional allocations, significantly improving performance for slicing and buffer management. | Trap: MemoryCache |
+| EF · Core · Shadow · Properties | Properties · C# · exist · database | Shadow properties are properties that are not defined in your .NET entity class but are defined for that entity type in the EF Core model. They are often used for metadata like 'LastUpdated' or 'ForeignKey' IDs. | Trap: Properties that are encrypted in the database |
+| Unauthorized · Forbidden · difference | don · know · permission | 401 indicates authentication failure (missing or invalid token). 403 indicates authorization failure (the user is logged in but lacks the required role/claim). | Trap: 401 is for databases; 403 is for files |
+| CQRS · Event · Sourcing | pattern · state · stored · single | Instead of storing 'Balance = 100', you store 'Deposited 50', 'Deposited 50'. This provides a perfect audit log and the ability to reconstruct state at any point in time. | Trap: A type of database backup |
+| CPU · GC · Overhead · Limit | Visual · Studio · Profiler · dotMemory | dotMemory and the Visual Studio Memory Profiler allow you to take snapshots of the heap to identify objects that are staying alive unexpectedly and roots preventing Garbage Collection. | Trap: Ping |
+| Proof · Code · Exchange · PKCE | OAuth · SPAs · Mobile · extension | PKCE adds a dynamically created secret (code_verifier) to the exchange process, ensuring the client that requested the code is the same one that swaps it for a token. | Trap: A physical security key (YubiKey) |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_dotnet.js`
+- Questions in source bank: **357**
+- Consolidated recall cards: **10**
+- Category labels represented in the mind-map hierarchy: **38**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🟣 .NET / C# / ASP.NET Core Interview & Exam Quick Reference
 
 ### 📘 C# Language • Runtime • ASP.NET Core • Data • Architecture

@@ -1,3 +1,56 @@
+# Claude developer — Exam Recall & Decision Guide
+
+> Source-grounded revision aid built from this simulator question bank. Recall cards use representative questions and their supplied correct answers, explanations, and distractors; they are not an official exam blueprint.
+
+## Consolidated mind map
+
+```text
+CLAUDE DEVELOPER
+  ├─ Question domains
+  │   ├─ applications integration
+  │   ├─ model optimization
+  │   ├─ agents workflows
+  │   ├─ tools mcp
+  │   ├─ prompt context
+  │   ├─ security safety
+  │   ├─ eval debugging
+  │   ├─ claude code
+  └─ Decision loop
+      ├─ Trigger: identify the scenario constraint
+      ├─ Answer: recall the source-backed technical choice
+      ├─ Reason: connect choice to behavior or requirement
+      └─ Trap: reject a plausible distractor and its mismatch
+
+## Four-keyword recall cards
+
+| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|
+| API · chat · client · sends | malicious · client · forge · assistant | Because the Messages API is stateless you resend history, but untrusted clients must not be allowed to define roles or inject fabricated assistant turns. Keep canonical history server-side. | Trap: The history will always be too long to send |
+| per-request · prompt · contains · stable | Tools · per-request · guidelines · cache | Cache Breakpoint: stable prefix before volatile content. System vs User placement also matters, since system content is typically stable while user content varies. | Trap: Question first |
+| Python · outputs · choosing · agent | LangGraph · Strands · PydanticAI | LangGraph: graph-based, stateful orchestration. Strands: a model-driven agent SDK. | Trap: Terraform, Ansible and Chef |
+| MCP · server · runs · local | HTTP-based · stdio · local · subprocess | stdio vs HTTP: stdio launches a local process; HTTP serves remote, multi-client servers. MCP Resources expose readable data such as catalogs, while tools perform actions. | Trap: stdio for remote |
+| ignored · agent · tool · outputs | Context · engineering · prune · tool | Context Engineering: curate what enters the window. Context Drift: stale or bloated content degrades behavior. | Trap: Add more tools |
+| agent · summarizes · web · pages | Treat · page · content · untrusted | Prompt Injection: untrusted content must never be able to command the agent. Jailbreak Defense: filter inputs and outputs and layer controls rather than trusting one. | Trap: Politely ask the model to ignore malicious text |
+| answers · returns · wrong · isolate | Inspect · traces · check · exact | Trace analysis separates integration bugs (bad prompt assembly, truncated tool output, parsing errors) from genuine model failures. | Trap: Swap to a larger model first |
+| Claude · Code · set · lists | Rules · Skills · Commands · Agents | Claude Code is customized through CLAUDE.md, settings.json, rules, skills, slash commands and subagents, with memory persisting useful context. | Trap: Browser cookies and local storage |
+
+## How to use this map
+
+1. Read the trigger and identify the requirement or failure mode in the scenario.
+2. Recall the answer keywords before looking at the full explanation.
+3. State the decision rule in your own words; the reason column gives the source explanation.
+4. Eliminate the trap because it conflicts with the question constraint or the supplied explanation.
+
+## Source coverage
+
+- Question bank: `questionBank_claude_developer.js`
+- Questions in source bank: **195**
+- Consolidated recall cards: **8**
+- Category labels represented in the mind-map hierarchy: **8**
+- Distractors are drawn from the question options; explanations are drawn from the question bank.
+
+---
+
 # 🛠️ Claude Certified Developer – Foundations (CCDV-F)
 
 ![Claude Certified Developer Detailed One Pager](/assets/claude_developer_detailed_one_pager.png)
