@@ -203,9 +203,9 @@ function pickNextAdaptiveQuestion() {
         const lastIndex = current - 1;
         const secondLastIndex = current - 2;
 
-        const lastCorrect = answers[lastIndex] === examQuestions[lastIndex].answer;
-        const secondLastCorrect = secondLastIndex >= 0 ? 
-            (answers[secondLastIndex] === examQuestions[secondLastIndex].answer) : false;
+        const lastCorrect = isAnswerCorrect(answers[lastIndex], examQuestions[lastIndex].answer);
+        const secondLastCorrect = secondLastIndex >= 0 ?
+            isAnswerCorrect(answers[secondLastIndex], examQuestions[secondLastIndex].answer) : false;
 
         if (!lastCorrect) {
             if (currentDifficulty === "hard") currentDifficulty = "medium";
@@ -232,7 +232,7 @@ function updateRunningScore() {
     examQuestions.forEach((q, i) => {
         if (answers[i] !== undefined) {
             stats.answered++;
-            if (answers[i] === q.answer) {
+            if (isAnswerCorrect(answers[i], q.answer)) {
                 stats.correct++;
                 if (q.difficulty === "hard") stats.hard++;
                 else if (q.difficulty === "medium") stats.medium++;
@@ -266,13 +266,29 @@ function loadQuestion() {
     }
 }
 
+function isMultiSelectQuestion(q) { return Array.isArray(q.answer); }
+
+function isAnswerCorrect(selected, correct) {
+    if (Array.isArray(correct)) {
+        if (!Array.isArray(selected) || selected.length !== correct.length) return false;
+        return [...selected].sort((a,b) => a-b).every((v,i) => v === [...correct].sort((a,b) => a-b)[i]);
+    }
+    return selected === correct;
+}
+
 function renderOptions(q) {
     let html = "";
+    const multi = isMultiSelectQuestion(q);
+    const selected = Array.isArray(answers[current]) ? answers[current] : (answers[current] === undefined ? [] : [answers[current]]);
+    if (multi) {
+        const required = q.answer.length;
+        html += `<p style="margin:0 0 8px;color:#475569;font-size:.9rem"><b>Select ${required} answers.</b></p>`;
+    }
     q.options.forEach((opt, i) => {
-        let checked = answers[current] === i ? "checked" : "";
+        let checked = multi ? (selected.includes(i) ? "checked" : "") : (answers[current] === i ? "checked" : "");
         html += `
             <label class="option" style="display:block; margin-bottom:10px; cursor:pointer; padding:10px; border:1px solid #eee; border-radius:5px;">
-                <input type="radio" name="opt" value="${i}" ${checked} onclick="saveAnswer(${i})">
+                <input type="${multi ? 'checkbox' : 'radio'}" name="opt" value="${i}" ${checked} ${multi ? `onchange="toggleMultiAnswer(${i}, this.checked)"` : `onclick="saveAnswer(${i})"`}>
                 ${opt}
             </label>
         `;
@@ -285,13 +301,29 @@ function saveAnswer(value) {
     updateRunningScore();
 }
 
+function toggleMultiAnswer(value, checked) {
+    const q = examQuestions[current];
+    const selected = Array.isArray(answers[current]) ? [...answers[current]] : [];
+    if (checked && !selected.includes(value)) selected.push(value);
+    if (!checked) { const i = selected.indexOf(value); if (i >= 0) selected.splice(i, 1); }
+    // The answer key is known to the scoring engine, but do not allow more selections than required.
+    if (selected.length > q.answer.length) {
+        const el = document.querySelector(`input[name="opt"][value="${value}"]`);
+        if (el) el.checked = false;
+        alert(`Select exactly ${q.answer.length} answers.`);
+        return;
+    }
+    answers[current] = selected;
+    updateRunningScore();
+}
+
 /* ======================================================
    NAVIGATION & UI
    ====================================================== */
 
 function nextQuestion() {
-    if (answers[current] === undefined) {
-        alert("Selection required for adaptive calculation.");
+    if (answers[current] === undefined || (Array.isArray(answers[current]) && answers[current].length !== examQuestions[current].answer.length)) {
+        alert("Please complete the required selection before continuing.");
         return;
     }
 
@@ -355,7 +387,7 @@ function submitExam() {
         if (!levelBreakdown[diff]) levelBreakdown[diff] = { correct: 0, total: 0 };
         levelBreakdown[diff].total++;
 
-        const isCorrect = answers[i] === q.answer;
+        const isCorrect = isAnswerCorrect(answers[i], q.answer);
         if (isCorrect) {
             score++;
             levelBreakdown[diff].correct++;
@@ -365,9 +397,9 @@ function submitExam() {
             <div class="review-item" style="margin-bottom:20px; padding:15px; border:1px solid #ddd; border-radius:8px;">
                 <b>Q${i + 1} [${diff.toUpperCase()}]:</b> ${q.question}<br>
                 <span style="color: ${isCorrect ? 'green' : 'red'}">
-                    Your answer: ${q.options[answers[i]] || "<i>Not answered</i>"}
+                    Your answer: ${Array.isArray(answers[i]) ? answers[i].map(v => q.options[v]).join("; ") : (q.options[answers[i]] || "<i>Not answered</i>")}
                 </span><br>
-                <span style="color: green">Correct answer: ${q.options[q.answer]}</span><br>
+                <span style="color: green">Correct answer: ${Array.isArray(q.answer) ? q.answer.map(v => q.options[v]).join("; ") : q.options[q.answer]}</span><br>
                 <p style="font-size:0.9em; background:#f9f9f9; padding:10px; margin-top:10px; border-radius:5px;">
                     <i>${q.explanation || ""}</i>
                 </p>
