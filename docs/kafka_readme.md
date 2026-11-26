@@ -1,6 +1,6 @@
 # 🚀 Kafka Interview & Architecture README
 
-![kafka Quick Recall Mind Map](../assets/kafka_quick_recall_mind_map.png)
+![kafka Quick Recall Mind Map](assets/kafka_quick_recall_mind_map.png)
 <img width="1024" height="983" alt="kafka Quick Recall Mind Map" src="../assets/kafka_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/kafka_answers.pdf)

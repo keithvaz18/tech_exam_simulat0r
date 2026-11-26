@@ -1,6 +1,6 @@
 # 🚀 MongoDB Interview & Architecture README
 
-![MongoDB Quick Recall Mind Map](../assets/mongoDB_quick_recall_mind_map.png)
+![MongoDB Quick Recall Mind Map](assets/mongoDB_quick_recall_mind_map.png)
 <img width="1024" height="983" alt="MongoDB Quick Recall Mind Map" src="../assets/mongoDB_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/mongoDB_answers.pdf)

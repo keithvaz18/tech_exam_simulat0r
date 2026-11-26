@@ -1,6 +1,6 @@
 # 🚀 Senior Architect Interview & System Design README
 
-![SA AI Data Technologies Quick Recall Mind Map](../assets/SA_AI_Data_Technologies_quick_recall_mind_map.png)
+![SA AI Data Technologies Quick Recall Mind Map](assets/SA_AI_Data_Technologies_quick_recall_mind_map.png)
 <img width="1024" height="983" alt="SA AI Data Technologies Quick Recall Mind Map" src="../assets/SA_AI_Data_Technologies_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/SA_AI_Data_Technologies_answers.pdf)

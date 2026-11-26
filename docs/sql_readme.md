@@ -1,6 +1,6 @@
 # 🗄️ SQL Interview & Exam Quick Reference
 
-![SQL Quick Recall Mind Map](../assets/SQL_quick_recall_mind_map.png)
+![SQL Quick Recall Mind Map](assets/SQL_quick_recall_mind_map.png)
 <img width="1024" height="983" alt="SQL Quick Recall Mind Map" src="../assets/SQL_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/SQL_answers.pdf)

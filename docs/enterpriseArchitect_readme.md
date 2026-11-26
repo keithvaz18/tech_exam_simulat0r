@@ -1,6 +1,6 @@
 # 🏛️ Enterprise Architecture (EA) Strategy README
 
-![EA Quick Recall Mind Map](../assets/EA_quick_recall_mind_map.png)
+![EA Quick Recall Mind Map](assets/EA_quick_recall_mind_map.png)
 <img width="1024" height="983" alt="EA Quick Recall Mind Map" src="../assets/EA_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/EA_answers.pdf)

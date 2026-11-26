@@ -1,6 +1,6 @@
 # 🚀 AWS Senior Architect & DevOps README
 
-![AWS Quick Recall Mind Map](../assets/AWS_quick_recall_mind_map.png)
+![AWS Quick Recall Mind Map](assets/AWS_quick_recall_mind_map.png)
 <img width="1024" height="1161" alt="AWS Quick Recall Mind Map" src="../assets/AWS_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/AWS_answers.pdf)

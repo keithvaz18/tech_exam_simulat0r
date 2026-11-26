@@ -1,6 +1,6 @@
 # Algorithm Complexity Analysis (Python Solutions Guide)
 
-![python PySpark Quick Recall Mind Map](../assets/python_pySpark_quick_recall_mind_map.png)
+![python PySpark Quick Recall Mind Map](assets/python_pySpark_quick_recall_mind_map.png)
 <img width="1024" height="1072" alt="python PySpark Quick Recall Mind Map" src="../assets/python_pySpark_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/python_pySpark_answers.pdf)

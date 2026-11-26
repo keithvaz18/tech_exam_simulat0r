@@ -1,6 +1,6 @@
 # 🚀 NestJS – Complete Interview & Architecture Guide (2026)
 
-![typescript nestjs Quick Recall Mind Map](../assets/typescript_nestjs_quick_recall_mind_map.png)
+![typescript nestjs Quick Recall Mind Map](assets/typescript_nestjs_quick_recall_mind_map.png)
 <img width="1024" height="1161" alt="typescript nestjs Quick Recall Mind Map" src="../assets/typescript_nestjs_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/typescript_nestjs_answers.pdf)

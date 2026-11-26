@@ -1,6 +1,6 @@
 # 🤖 AI Architecture Interview & Exam Quick Reference
 
-![AI Arch Quick Recall Mind Map](../assets/AI_Arch_quick_recall_mind_map.png)
+![AI Arch Quick Recall Mind Map](assets/AI_Arch_quick_recall_mind_map.png)
 <img width="1024" height="1161" alt="AI Arch Quick Recall Mind Map" src="../assets/AI_Arch_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/AI_Arch_answers.pdf)

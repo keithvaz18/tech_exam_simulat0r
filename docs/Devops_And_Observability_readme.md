@@ -1,6 +1,6 @@
 # 🚨 **Sr. DevOps + Observability Architect — Real Failure Scenarios**
 
-![DevOps Quick Recall Mind Map](../assets/devOps_quick_recall_mind_map.png)
+![DevOps Quick Recall Mind Map](assets/devOps_quick_recall_mind_map.png)
 <img width="1024" height="983" alt="DevOps Quick Recall Mind Map" src="../assets/devOps_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/devOps_answers.pdf)

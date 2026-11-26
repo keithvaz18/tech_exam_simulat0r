@@ -1,6 +1,6 @@
 # 🛠️ Claude Certified Developer – Foundations (CCDV-F)
 
-![Claude developer Quick Recall Mind Map](../assets/claude_developer_quick_recall_mind_map.png)
+![Claude developer Quick Recall Mind Map](assets/claude_developer_quick_recall_mind_map.png)
 <img width="1024" height="983" alt="Claude developer Quick Recall Mind Map" src="../assets/claude_developer_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/claude_developer_answers.pdf)

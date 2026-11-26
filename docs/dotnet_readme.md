@@ -1,6 +1,6 @@
 # 🟣 .NET / C# / ASP.NET Core Interview & Exam Quick Reference
 
-![.NET Quick Recall Mind Map](../assets/dotnet_quick_recall_mind_map.png)
+![.NET Quick Recall Mind Map](assets/dotnet_quick_recall_mind_map.png)
 <img width="1024" height="1161" alt=".NET Quick Recall Mind Map" src="../assets/dotnet_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/dotnet_answers.pdf)

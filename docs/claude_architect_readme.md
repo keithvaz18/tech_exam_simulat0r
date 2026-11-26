@@ -1,6 +1,6 @@
 # 🏛️ Claude Certified Architect – Foundations (CCAR-F)
 
-![Claude architect Quick Recall Mind Map](../assets/claude_architect_quick_recall_mind_map.png)
+![Claude architect Quick Recall Mind Map](assets/claude_architect_quick_recall_mind_map.png)
 <img width="1024" height="717" alt="Claude architect Quick Recall Mind Map" src="../assets/claude_architect_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/claude_architect_answers.pdf)

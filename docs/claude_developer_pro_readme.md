@@ -1,6 +1,6 @@
 # Claude Certified Developer — Professional (CCDV-P)
 
-![Claude developer professional Quick Recall Mind Map](../assets/claude_developer_professional_quick_recall_mind_map.png)
+![Claude developer professional Quick Recall Mind Map](assets/claude_developer_professional_quick_recall_mind_map.png)
 <img width="1024" height="806" alt="Claude developer professional Quick Recall Mind Map" src="../assets/claude_developer_professional_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/claude_developer_professional_answers.pdf)
