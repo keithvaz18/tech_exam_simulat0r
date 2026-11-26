@@ -7,7 +7,6 @@
 
 ![Claude Certified Developer Foundation reference one-pager](../assets/claude_developer_detailed_one_pager.png)
 
----
 
 ## Consolidated Mind Map
 

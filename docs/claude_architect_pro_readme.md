@@ -7,7 +7,6 @@
 
 ![Claude Certified Architect Foundation reference one-pager](../assets/claude_architect_detailed_one_pager.png)
 
----
 
 ## Consolidated Mind Map
 

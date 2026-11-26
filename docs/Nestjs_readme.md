@@ -8,7 +8,6 @@
 ![17856392711787349495618933068711](assets/Nestjs.png)
 <img width="1024" height="1536" alt="17856392711787349495618933068711" src="../assets/Nestjs.png" />
 
----
 
 ## Consolidated Mind Map
 

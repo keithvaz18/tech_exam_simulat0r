@@ -8,7 +8,6 @@
 ![17856395500817673884429703301636](assets/Web3_BlockChain.png)
 <img width="1024" height="1536" alt="17856395500817673884429703301636" src="../assets/Web3_BlockChain.png" />
 
----
 
 ## Consolidated Mind Map
 

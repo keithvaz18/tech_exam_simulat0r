@@ -4,7 +4,6 @@
 
 [Open the answer PDF](SQL_answers.pdf)
 
----
 
 ## Consolidated Mind Map
 

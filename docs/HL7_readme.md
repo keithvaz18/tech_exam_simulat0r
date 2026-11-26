@@ -4,7 +4,6 @@
 
 [Open the answer PDF](HL7_answers.pdf)
 
----
 
 ## Consolidated Mind Map
 

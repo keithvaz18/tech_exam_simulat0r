@@ -8,7 +8,6 @@
 ![17856049524256395563944712381193](/assets/DevOps%20and%20Observability.png)
 <img width="1024" height="1536" alt="17856049524256395563944712381193" src="assets/DevOps and Observability.png" />
 
----
 
 ## Consolidated Mind Map
 

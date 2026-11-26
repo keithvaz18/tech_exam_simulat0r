@@ -4,7 +4,6 @@
 
 [Open the answer PDF](JavaScript_answers.pdf)
 
----
 
 ## Consolidated Mind Map
 

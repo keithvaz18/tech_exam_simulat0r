@@ -8,7 +8,6 @@
 ![17856035100463924647405069389957](./assets/Python_exam.png)
 <img width="1024" height="1536" alt="17856035100463924647405069389957" src="../assets/Python_exam.png" />
 
----
 
 ## Consolidated Mind Map
 

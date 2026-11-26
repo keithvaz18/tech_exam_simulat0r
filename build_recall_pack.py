@@ -166,9 +166,25 @@ for path in sorted(BANK_DIR.glob('questionBank_*.js')):
     # Replace prior quick-recall table block if present; preserve the remainder of README.
     old=re.sub(r'(?is)^\s*## Quick recall mind map.*?(?=\n\[Open the answer PDF\]|\n# |\Z)','',old, count=1)
     old=re.sub(r'(?is)^\s*## (?:Four-keyword recall cards|Consolidated mind map).*?(?=\n# |\Z)','',old, count=1)
-    # avoid stacking generated guides when rerun
-    old=re.sub(r'(?is)^# .*?\n\n> Source-grounded revision aid.*?## Source coverage.*?(?=\n# |\Z)','',old, count=1)
-    readme.write_text(md+'\n---\n\n'+old.lstrip(),encoding='utf-8')
+    # Preserve the repository's original README title + image/PDF header block.
+    # Replace only the generated recall section, leaving the legacy study material intact.
+    old_lines=old.splitlines()
+    header=[]
+    if old_lines and old_lines[0].startswith('# '):
+        header.append(old_lines[0])
+    for ln in old_lines[1:]:
+        if ln.strip() == '---' or ln.startswith('## Consolidated Mind Map'):
+            break
+        if (ln.startswith('![') or ln.startswith('[Open the answer PDF]') or ln.strip().startswith('<img ')):
+            header.append(ln)
+    # Remove a previously generated recall guide block, but retain all later original content.
+    match=re.search(r'(?is)^## Consolidated mind map.*?^- Distractors are drawn from the question options; explanations are drawn from the question bank\.\s*',old,re.M)
+    if match:
+        remainder=old[match.end():]
+    else:
+        remainder=old
+    md_body='\n'.join(lines[2:])
+    readme.write_text('\n'.join(header)+'\n\n'+md_body+'\n\n---\n\n'+remainder.lstrip(),encoding='utf-8')
     # PDF appendix using readable compact cards, appended to existing answer PDF.
     pdfname=stem+'_answers.pdf'; pdf=DOCS/pdfname
     # Source filenames use these exact mappings.
@@ -191,9 +207,18 @@ for path in sorted(BANK_DIR.glob('questionBank_*.js')):
         from pypdf import PdfReader, PdfWriter
     except ImportError:
         from PyPDF2 import PdfReader, PdfWriter
+    # Idempotent rebuild: remove any prior appended recall/memory appendix before adding one.
+    existing=PdfReader(str(pdf))
+    base_pages=[]
+    appendix_markers=('Quick Memory Map — Unique Correct Answers','Quick Recall & Decision Map','Revision Appendix','Consolidated Mind Map')
+    for page in existing.pages:
+        page_text=page.extract_text() or ''
+        if any(marker.lower() in page_text.lower() for marker in appendix_markers):
+            break
+        base_pages.append(page)
     writer=PdfWriter()
-    for source in (pdf,appendix):
-        for page in PdfReader(str(source)).pages: writer.add_page(page)
+    for page in base_pages: writer.add_page(page)
+    for page in PdfReader(str(appendix)).pages: writer.add_page(page)
     tmp=pdf.with_suffix('.tmp.pdf')
     with tmp.open('wb') as f: writer.write(f)
     tmp.replace(pdf); appendix.unlink()

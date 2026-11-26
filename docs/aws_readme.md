@@ -8,7 +8,6 @@
 ![178560287058285490286687875830](assets/AWS_SrArchitect.png)
 <img width="1024" height="1536" alt="178560287058285490286687875830" src="../assets/AWS_SrArchitect.png" />
 
----
 
 ## Consolidated Mind Map
 

@@ -4,7 +4,6 @@
 
 [Open the answer PDF](nodeJS_answers.pdf)
 
----
 
 ## Consolidated Mind Map
 

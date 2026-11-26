@@ -4,7 +4,6 @@
 
 [Open the answer PDF](AI_Arch_answers.pdf)
 
----
 
 ## Consolidated Mind Map
 

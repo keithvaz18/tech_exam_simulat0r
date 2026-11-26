@@ -8,7 +8,6 @@
 ![17856023393923422545792866419127](./assets/java%20Springboot.png)
 <img width="1024" height="1536" alt="17856023393923422545792866419127" src="../assets/java Springboot.png" />
 
----
 
 ## Consolidated Mind Map
 

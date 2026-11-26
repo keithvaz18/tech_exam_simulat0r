@@ -8,7 +8,6 @@
 ![Claude Certified Developer Detailed One Pager](/assets/claude_developer_detailed_one_pager.png)
 <img width="1024" height="1536" alt="claude_developer_detailed_one_pager" src="assets/claude_developer_detailed_one_pager.png" />
 
----
 
 ## Consolidated Mind Map
 

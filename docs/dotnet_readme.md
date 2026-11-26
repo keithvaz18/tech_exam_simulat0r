@@ -4,7 +4,6 @@
 
 [Open the answer PDF](dotnet_answers.pdf)
 
----
 
 ## Consolidated Mind Map
 

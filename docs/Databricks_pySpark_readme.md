@@ -7,7 +7,6 @@
 
 ![17856018188417685215415841884740](/assets/Databricks%20Medallion%20Architecture.png)
 
----
 
 ## Consolidated Mind Map
 

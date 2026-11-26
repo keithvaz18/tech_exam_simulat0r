@@ -7,7 +7,6 @@
 
 <img width="1024" height="1536" alt="17856391050791465258704092431306" src="../assets/React.png" />
 
----
 
 ## Consolidated Mind Map
 
