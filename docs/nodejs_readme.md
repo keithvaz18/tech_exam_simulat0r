@@ -1,8 +1,9 @@
 # 🟢 Node.js Interview & Exam Quick Reference
 
 ![Node.js Quick Recall Mind Map](../assets/nodeJS_quick_recall_mind_map.png)
+<img width="1024" height="983" alt="Node.js Quick Recall Mind Map" src="../assets/nodeJS_quick_recall_mind_map.png" />
 
-[Open the answer PDF](nodeJS_answers.pdf)
+[Open the answer PDF](docs/nodeJS_answers.pdf)
 
 
 ## Consolidated Mind Map

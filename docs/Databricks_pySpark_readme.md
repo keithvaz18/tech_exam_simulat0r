@@ -1,11 +1,13 @@
 # 🚀 Databricks Medallion Architecture (Bronze → Silver → Gold)
 
 ![Databricks Quick Recall Mind Map](../assets/databricks_quick_recall_mind_map.png)
+<img width="1024" height="1161" alt="Databricks Quick Recall Mind Map" src="../assets/databricks_quick_recall_mind_map.png" />
 
-[Open the answer PDF](databricks_answers.pdf)
+[Open the answer PDF](docs/databricks_answers.pdf)
 
 
 ![17856018188417685215415841884740](/assets/Databricks%20Medallion%20Architecture.png)
+<img width="1024" height="1536" alt="17856018188417685215415841884740" src="../assets/Databricks Medallion Architecture.png" />
 
 
 ## Consolidated Mind Map

@@ -1,8 +1,9 @@
 # 🟨 JavaScript Interview & Exam Quick Reference
 
 ![JavaScript Quick Recall Mind Map](../assets/JavaScript_quick_recall_mind_map.png)
+<img width="1024" height="983" alt="JavaScript Quick Recall Mind Map" src="../assets/JavaScript_quick_recall_mind_map.png" />
 
-[Open the answer PDF](JavaScript_answers.pdf)
+[Open the answer PDF](docs/JavaScript_answers.pdf)
 
 
 ## Consolidated Mind Map

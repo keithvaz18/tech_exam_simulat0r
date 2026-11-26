@@ -1,8 +1,9 @@
 # ☁️ Azure Cloud Interview & Architecture README
 
 ![Azure Quick Recall Mind Map](../assets/Azure_quick_recall_mind_map.png)
+<img width="1024" height="1161" alt="Azure Quick Recall Mind Map" src="../assets/Azure_quick_recall_mind_map.png" />
 
-[Open the answer PDF](Azure_answers.pdf)
+[Open the answer PDF](docs/Azure_answers.pdf)
 
 
 ![17856033139527974498568225612623](assets/Azure_SrArchitect.png)

@@ -1,8 +1,9 @@
 # 🚀 React Interview & Frontend Prep README
 
 ![react Quick Recall Mind Map](../assets/react_quick_recall_mind_map.png)
+<img width="1024" height="983" alt="react Quick Recall Mind Map" src="../assets/react_quick_recall_mind_map.png" />
 
-[Open the answer PDF](react_answers.pdf)
+[Open the answer PDF](docs/react_answers.pdf)
 
 
 <img width="1024" height="1536" alt="17856391050791465258704092431306" src="../assets/React.png" />

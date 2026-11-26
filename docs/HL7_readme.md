@@ -1,8 +1,9 @@
 # 🏥 HL7 v2 & FHIR Interview & Exam Quick Reference
 
 ![HL7 Quick Recall Mind Map](../assets/HL7_quick_recall_mind_map.png)
+<img width="1024" height="983" alt="HL7 Quick Recall Mind Map" src="../assets/HL7_quick_recall_mind_map.png" />
 
-[Open the answer PDF](HL7_answers.pdf)
+[Open the answer PDF](docs/HL7_answers.pdf)
 
 
 ## Consolidated Mind Map

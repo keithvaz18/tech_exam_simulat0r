@@ -1,8 +1,9 @@
 # 🚀 Data Architect Interview & Architecture README
 
 ![Data Arch Quick Recall Mind Map](../assets/Data_Arch_quick_recall_mind_map.png)
+<img width="1024" height="983" alt="Data Arch Quick Recall Mind Map" src="../assets/Data_Arch_quick_recall_mind_map.png" />
 
-[Open the answer PDF](Data_Arch_answers.pdf)
+[Open the answer PDF](docs/Data_Arch_answers.pdf)
 
 
 ![17856370983708256568542791092844](./assets/data%20Architect.png)

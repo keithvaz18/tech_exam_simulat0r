@@ -1,8 +1,9 @@
 # 🚀 Java Spring Boot Interview & Coding Prep README
 
 ![Java Quick Recall Mind Map](../assets/Java_quick_recall_mind_map.png)
+<img width="1024" height="1161" alt="Java Quick Recall Mind Map" src="../assets/Java_quick_recall_mind_map.png" />
 
-[Open the answer PDF](Java_answers.pdf)
+[Open the answer PDF](docs/Java_answers.pdf)
 
 
 ![17856023393923422545792866419127](./assets/java%20Springboot.png)

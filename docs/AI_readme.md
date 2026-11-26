@@ -1,8 +1,9 @@
 # AI
 
 ![AI Quick Recall Mind Map](../assets/AI_quick_recall_mind_map.png)
+<img width="1024" height="717" alt="AI Quick Recall Mind Map" src="../assets/AI_quick_recall_mind_map.png" />
 
-[Open the answer PDF](AI_answers.pdf)
+[Open the answer PDF](docs/AI_answers.pdf)
 
 
 ## Consolidated Mind Map

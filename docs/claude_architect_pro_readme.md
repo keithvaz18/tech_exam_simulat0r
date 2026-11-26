@@ -1,11 +1,13 @@
 # Claude Certified Architect — Professional (CCAR-P)
 
 ![Claude architect professional Quick Recall Mind Map](../assets/claude_architect_professional_quick_recall_mind_map.png)
+<img width="1024" height="1338" alt="Claude architect professional Quick Recall Mind Map" src="../assets/claude_architect_professional_quick_recall_mind_map.png" />
 
-[Open the answer PDF](claude_architect_professional_answers.pdf)
+[Open the answer PDF](docs/claude_architect_professional_answers.pdf)
 
 
 ![Claude Certified Architect Foundation reference one-pager](../assets/claude_architect_detailed_one_pager.png)
+<img width="1024" height="1536" alt="Claude Certified Architect Foundation reference one-pager" src="../assets/claude_architect_detailed_one_pager.png" />
 
 
 ## Consolidated Mind Map

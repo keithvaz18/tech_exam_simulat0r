@@ -1,8 +1,9 @@
 # ❄️ Snowflake Interview & Architecture README
 
 ![snowflake Quick Recall Mind Map](../assets/snowflake_quick_recall_mind_map.png)
+<img width="1024" height="983" alt="snowflake Quick Recall Mind Map" src="../assets/snowflake_quick_recall_mind_map.png" />
 
-[Open the answer PDF](snowflake_answers.pdf)
+[Open the answer PDF](docs/snowflake_answers.pdf)
 
 
 ![17856041843561348245958413267050](./assets/Snowflake.png)
