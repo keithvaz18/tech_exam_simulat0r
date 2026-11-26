@@ -1,6 +1,6 @@
 # Technical Architect’s Guide: Web2 to Web3 Transition
 
-![Web3 & Blockchain Quick Recall Mind Map](../assets/web3Blockchain_quick_recall_mind_map.png)
+![Web3 & Blockchain Quick Recall Mind Map](assets/web3Blockchain_quick_recall_mind_map.png)
 <img width="1024" height="1161" alt="Web3 &amp; Blockchain Quick Recall Mind Map" src="../assets/web3Blockchain_quick_recall_mind_map.png" />
 
 [Open the answer PDF](docs/web3Blockchain_answers.pdf)
