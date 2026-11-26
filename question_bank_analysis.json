@@ -1,0 +1,184 @@
+[
+  {
+    "bank": "js/questionBank_AI.js",
+    "pdf": "AI_answers.pdf",
+    "questions": 391,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_AI_Arch.js",
+    "pdf": "AI_Arch_answers.pdf",
+    "questions": 571,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_AWS.js",
+    "pdf": "AWS_answers.pdf",
+    "questions": 466,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_Azure.js",
+    "pdf": "Azure_answers.pdf",
+    "questions": 523,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_Data_Arch.js",
+    "pdf": "Data_Arch_answers.pdf",
+    "questions": 128,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_EA.js",
+    "pdf": "EA_answers.pdf",
+    "questions": 553,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_HL7.js",
+    "pdf": "HL7_answers.pdf",
+    "questions": 260,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_Java.js",
+    "pdf": "Java_answers.pdf",
+    "questions": 443,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_JavaScript.js",
+    "pdf": "JavaScript_answers.pdf",
+    "questions": 261,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_SA_AI_Data_Technologies.js",
+    "pdf": "SA_AI_Data_Technologies_answers.pdf",
+    "questions": 240,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_SQL.js",
+    "pdf": "SQL_answers.pdf",
+    "questions": 270,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_claude_architect.js",
+    "pdf": "claude_architect_answers.pdf",
+    "questions": 211,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_claude_architect_professional.js",
+    "pdf": "claude_architect_professional_answers.pdf",
+    "questions": 150,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_claude_developer.js",
+    "pdf": "claude_developer_answers.pdf",
+    "questions": 195,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_claude_developer_professional.js",
+    "pdf": "claude_developer_professional_answers.pdf",
+    "questions": 150,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_databricks.js",
+    "pdf": "databricks_answers.pdf",
+    "questions": 452,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_devOps.js",
+    "pdf": "devOps_answers.pdf",
+    "questions": 180,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_dotnet.js",
+    "pdf": "dotnet_answers.pdf",
+    "questions": 357,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_kafka.js",
+    "pdf": "kafka_answers.pdf",
+    "questions": 271,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_mongoDB.js",
+    "pdf": "mongoDB_answers.pdf",
+    "questions": 263,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_nodeJS.js",
+    "pdf": "nodeJS_answers.pdf",
+    "questions": 206,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_python_pySpark.js",
+    "pdf": "python_pySpark_answers.pdf",
+    "questions": 435,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_react.js",
+    "pdf": "react_answers.pdf",
+    "questions": 264,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_snowflake.js",
+    "pdf": "snowflake_answers.pdf",
+    "questions": 285,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_typescript_nestjs.js",
+    "pdf": "typescript_nestjs_answers.pdf",
+    "questions": 517,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  },
+  {
+    "bank": "js/questionBank_web3Blockchain.js",
+    "pdf": "web3Blockchain_answers.pdf",
+    "questions": 354,
+    "duplicate_ids": [],
+    "invalid_questions": []
+  }
+]

@@ -1,0 +1,29 @@
+Question bank files found: 26
+PDFs generated: 26
+Total questions included: 8396
+questionBank_AI.js: 391 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_AI_Arch.js: 571 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_AWS.js: 466 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_Azure.js: 523 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_Data_Arch.js: 128 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_EA.js: 553 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_HL7.js: 260 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_Java.js: 443 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_JavaScript.js: 261 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_SA_AI_Data_Technologies.js: 240 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_SQL.js: 270 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_claude_architect.js: 211 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_claude_architect_professional.js: 150 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_claude_developer.js: 195 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_claude_developer_professional.js: 150 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_databricks.js: 452 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_devOps.js: 180 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_dotnet.js: 357 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_kafka.js: 271 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_mongoDB.js: 263 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_nodeJS.js: 206 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_python_pySpark.js: 435 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_react.js: 264 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_snowflake.js: 285 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_typescript_nestjs.js: 517 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_web3Blockchain.js: 354 questions; duplicate IDs: 0; invalid entries: 0
