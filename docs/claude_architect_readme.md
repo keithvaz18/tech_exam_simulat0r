@@ -279,6 +279,58 @@ claude -p "Review this PR" --output-format json --json-schema schema.json
 
 ---
 
+
+Task statements per domain, condensed from section 6 of the guide:
+
+**Domain 1: Agentic Architecture & Orchestration (27%)**
+
+1.1 Design and implement agentic loops for autonomous task execution. 1.2 Orchestrate multi-agent systems with coordinator and subagent patterns. 1.3 Configure subagent invocation, context passing, and spawning. 1.4 Implement multi-step workflows with enforcement and handoff. 1.5 Apply Agent SDK hooks for tool call interception. 1.6 Design task decomposition strategies. 1.7 Manage session state, resumption, and forking.
+
+**Domain 2: Tool Design & MCP Integration (18%)**
+
+2.1 Design tool interfaces with clear descriptions. 2.2 Implement structured error responses for MCP tools. 2.3 Distribute tools across agents and configure tool access. 2.4 Integrate MCP servers into Claude Code and agent workflows. 2.5 Select and apply the built-in tools (Read, Write, Edit, Bash, Grep, Glob).
+
+**Domain 3: Claude Code Configuration & Workflows (20%)**
+
+3.1 Configure CLAUDE.md hierarchy and scoping. 3.2 Create custom slash commands and skills. 3.3 Apply path-specific rules for conditional convention loading. 3.4 Choose between plan mode and direct execution. 3.5 Apply iterative refinement techniques. 3.6 Integrate Claude Code into CI/CD pipelines.
+
+**Domain 4: Prompt Engineering & Structured Output (20%)**
+
+4.1 Design prompts with explicit criteria. 4.2 Apply few-shot prompting for consistency. 4.3 Enforce structured output using tool use and JSON schemas. 4.4 Implement validation, retry, and feedback loops for extraction. 4.5 Design batch processing strategies. 4.6 Design multi-instance and multi-pass review architectures.
+
+**Domain 5: Context Management & Reliability (15%)**
+
+5.1 Manage conversation context to preserve critical information. 5.2 Design escalation and ambiguity resolution patterns. 5.3 Implement error propagation across multi-agent systems. 5.4 Manage context in large codebase exploration. 5.5 Design human review workflows and confidence calibration. 5.6 Preserve information provenance and handle uncertainty.
+
+## The six exam scenarios
+
+> [!TIP]
+> This is the largest preparation advantage available on any of the four exams: the scenarios are published in advance, and four of these six frame every question you will see. Rehearse each one until its likely questions are predictable.
+
+Four of these six published scenarios appear on each exam sitting, selected at random. Knowing them in advance is an unusual and significant preparation advantage.
+
+| # | Scenario | Primary domains |
+| :---: | --- | --- |
+| 1 | Customer support resolution agent built on the Agent SDK, with MCP tools such as get_customer, lookup_order, process_refund, and escalate_to_human, targeting 80%+ first-contact resolution | 1, 2, 5 |
+| 2 | Code generation with Claude Code: slash commands, CLAUDE.md configuration, plan mode versus direct execution | 3, 5 |
+| 3 | Multi-agent research system: a coordinator delegating to search, analysis, synthesis, and report subagents producing cited reports | 1, 2, 5 |
+| 4 | Developer productivity tooling on the Agent SDK using the built-in tools and MCP servers for codebase exploration and automation | 2, 3, 1 |
+| 5 | Claude Code in CI/CD: automated code review, test generation, and pull request feedback with low false-positive prompting | 3, 4 |
+| 6 | Structured data extraction from unstructured documents with JSON schema validation and downstream integration | 4, 5 |
+
+## Technologies named in the appendix
+
+The guide's appendix lists what may appear on the exam. Highlights worth studying deliberately:
+
+- **Agent SDK:** agentic loops, stop_reason handling ("tool_use" versus "end_turn"), PostToolUse hooks, subagent spawning via the Task tool, allowedTools configuration
+- **MCP:** servers, tools, resources, the isError flag, tool descriptions and distribution, .mcp.json, environment variable expansion
+- **Claude Code:** the CLAUDE.md hierarchy (user, project, directory), .claude/rules/ with YAML frontmatter path scoping, .claude/commands/, .claude/skills/ with SKILL.md frontmatter (context: fork, allowed-tools, argument-hint), plan mode, /memory, /compact, --resume, fork_session, the Explore subagent
+- **Claude Code CLI:** -p or --print for non-interactive use, --output-format json, --json-schema for structured CI output
+- **API:** tool_use with JSON schemas, tool_choice options, max_tokens, system prompts
+- **Message Batches API:** 50% cost savings, up to 24-hour window, custom_id correlation, no multi-turn tool calling
+- **Supporting concepts:** JSON Schema design (required versus optional, enums, nullable fields, "other" plus detail patterns, strict mode), Pydantic validation-retry loops, few-shot prompting, prompt chaining, token budgets and lost-in-the-middle effects, scratchpad files, session management, and confidence scoring with calibration
+
+
 # 🚫 Out of Scope (don't over-study)
 
 Fine-tuning · API auth/billing · MCP hosting/infra · Claude internals · RLHF/Constitutional AI · embeddings/vector DBs · computer use · vision · streaming/SSE · rate limits & pricing math · cloud-provider specifics · prompt caching internals · tokenization.
