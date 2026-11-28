@@ -2737,7 +2737,7 @@ const questionBank = [
 
 // --- TOP 100 INTERVIEW INDICES ---
 // ZERO-BASED ARRAY INDICES (not question IDs), priority ordered.
-// 150-question bank. First 20 are MUST-KNOW; remaining items are weighted by the official exam blueprint.
+// 195-question bank. First 20 are MUST-KNOW; remaining items are weighted by the official exam blueprint.
 const hotsQuestions = [
     // TIER 1 - MUST KNOW
     103, // agents-workflows

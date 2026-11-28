@@ -17,22 +17,22 @@ The objectives most worth drilling, with the practice questions that cover each.
 
 | Objective | Key recall | Practice question IDs |
 |---|---|---|
-| Orchestration safeguards: every session ends resolved or escalated | Wrap the loop in orchestration code; every exit path (end_turn, iteration cap, max_tokens, tool failure, timeout, exception) ends in a resolution or a human escalation with a handoff package. The cap is a safety net, not the primary stop. | 272-276 |
-| Iterative refinement workflows | Concrete input/output examples beat prose; test-first then feed specific failures; batch interacting issues in one message, fix independent ones sequentially; interview pattern for unclear requirements. | 285-289 |
-| Enforce via settings/hooks vs advise in CLAUDE.md | CLAUDE.md is advisory context; settings permissions (deny rules) and hooks are deterministic. Anything that must always or never happen goes in hooks/permissions; conventions go in CLAUDE.md. | 290-293 |
-| Project context: @ references vs CLAUDE.md vs inline | Reusable cross-session, team-wide → CLAUDE.md (import files with @). Specific file for this task → @ reference in the prompt. One-off detail → inline. Keep CLAUDE.md modular with @ imports or path-scoped rules. | 299-302 |
-| Escalation decision criteria | Explicit human request → escalate immediately (no investigation first). Frustration alone → acknowledge and offer help, escalate if reiterated. Policy gap or no progress → escalate. Multiple matches → ask for identifiers. Sentiment and self-reported confidence are unreliable triggers. | 303-307 |
-| Structured output method; tool_use + tool_choice guarantee | tool_use + JSON schema = strongest compliance (syntax, not semantics). tool_choice: auto (may reply in text) · any (must call a tool, model chooses) · {type:tool,name} (that tool) · none. Forced choice = no preamble. | 312-318 |
-| tool_choice and multi-tool sequencing | Prerequisite order for consequential workflows is enforced programmatically (gate or hook), optionally forcing the first tool via tool_choice then returning to auto. Prompt order is probabilistic. | 319-321 |
-| Extraction schemas: optional, nullable, enums | Required fields force fabrication → make fields optional/nullable. Enums get 'other' + detail and 'unclear'. Schemas fix syntax, not semantics. | 308-311 |
-| Codebase exploration with Grep, Glob, Read | Grep = search contents (callers, error strings); Glob = match file paths; Read = open a file. Build understanding incrementally: Grep entry points → Read → follow imports; subagents for verbose discovery; scratchpad notes. | 322-324 |
-| Stateless API and conversation history | Messages API is stateless: send the full relevant history every request. Keep canonical history server-side; append assistant tool_use turn then user tool_result turn; never let clients forge roles. | 325-327 |
-| Tool descriptions and MCP integration | Descriptions are the selection mechanism: purpose, input formats, examples, edge cases, when to use vs similar tools. MCP: project .mcp.json with ${ENV_VAR}, personal ~/.claude.json, verify discovery with /mcp. | 328-330 |
-| Session resumption and re-analysis | --resume a named session, then tell the agent exactly which files changed for targeted re-analysis; if tool results are stale, start fresh with an injected summary; fork_session to branch from a baseline. | 278-280 |
-| Configuration mechanism, commands and plan mode | CLAUDE.md = always-on standards; .claude/rules + paths glob = file-type conventions; skills = on-demand workflows; hooks = deterministic; settings = access. Commands: .claude/commands (shared) vs ~/.claude/commands (personal). Plan mode for big/ambiguous/multi-approach; direct for small, clear, reversible. | 294-298 |
-| Dynamic task decomposition | Open-ended work: generate subtasks adaptively (map structure, prioritise, revise as findings arrive). Fixed chains only when steps are predictable. | 281-282 |
-| Structured handoff packages | Handoff = customer ID, root cause, actions taken, amounts, authorization state, recommended next action. The human has no transcript. | 277-277 |
-| PreToolUse / PostToolUse hooks for business rules | PreToolUse blocks or redirects before the call (refund limits); PostToolUse transforms or checks after (normalise data, format, lint, tests). Deterministic, not model discretion. | 283-284 |
+| Orchestration safeguards: every session ends resolved or escalated | Wrap the loop in orchestration code; every exit path (end_turn, iteration cap, max_tokens, tool failure, timeout, exception) ends in a resolution or a human escalation with a handoff package. The cap is a safety net, not the primary stop. | 265-269 |
+| Iterative refinement workflows | Concrete input/output examples beat prose; test-first then feed specific failures; batch interacting issues in one message, fix independent ones sequentially; interview pattern for unclear requirements. | 278-282 |
+| Enforce via settings/hooks vs advise in CLAUDE.md | CLAUDE.md is advisory context; settings permissions (deny rules) and hooks are deterministic. Anything that must always or never happen goes in hooks/permissions; conventions go in CLAUDE.md. | 283-286 |
+| Project context: @ references vs CLAUDE.md vs inline | Reusable cross-session, team-wide → CLAUDE.md (import files with @). Specific file for this task → @ reference in the prompt. One-off detail → inline. Keep CLAUDE.md modular with @ imports or path-scoped rules. | 292-295 |
+| Escalation decision criteria | Explicit human request → escalate immediately (no investigation first). Frustration alone → acknowledge and offer help, escalate if reiterated. Policy gap or no progress → escalate. Multiple matches → ask for identifiers. Sentiment and self-reported confidence are unreliable triggers. | 296-300 |
+| Structured output method; tool_use + tool_choice guarantee | tool_use + JSON schema = strongest compliance (syntax, not semantics). tool_choice: auto (may reply in text) · any (must call a tool, model chooses) · {type:tool,name} (that tool) · none. Forced choice = no preamble. | 305-310 |
+| tool_choice and multi-tool sequencing | Prerequisite order for consequential workflows is enforced programmatically (gate or hook), optionally forcing the first tool via tool_choice then returning to auto. Prompt order is probabilistic. | 311-313 |
+| Extraction schemas: optional, nullable, enums | Required fields force fabrication → make fields optional/nullable. Enums get 'other' + detail and 'unclear'. Schemas fix syntax, not semantics. | 301-304 |
+| Codebase exploration with Grep, Glob, Read | Grep = search contents (callers, error strings); Glob = match file paths; Read = open a file. Build understanding incrementally: Grep entry points → Read → follow imports; subagents for verbose discovery; scratchpad notes. | 314-315 |
+| Stateless API and conversation history | Messages API is stateless: send the full relevant history every request. Keep canonical history server-side; append assistant tool_use turn then user tool_result turn; never let clients forge roles. | 316-318 |
+| Tool descriptions and MCP integration | Descriptions are the selection mechanism: purpose, input formats, examples, edge cases, when to use vs similar tools. MCP: project .mcp.json with ${ENV_VAR}, personal ~/.claude.json, verify discovery with /mcp. | 319-321 |
+| Session resumption and re-analysis | --resume a named session, then tell the agent exactly which files changed for targeted re-analysis; if tool results are stale, start fresh with an injected summary; fork_session to branch from a baseline. | 271-273 |
+| Configuration mechanism, commands and plan mode | CLAUDE.md = always-on standards; .claude/rules + paths glob = file-type conventions; skills = on-demand workflows; hooks = deterministic; settings = access. Commands: .claude/commands (shared) vs ~/.claude/commands (personal). Plan mode for big/ambiguous/multi-approach; direct for small, clear, reversible. | 287-291 |
+| Dynamic task decomposition | Open-ended work: generate subtasks adaptively (map structure, prioritise, revise as findings arrive). Fixed chains only when steps are predictable. | 274-275 |
+| Structured handoff packages | Handoff = customer ID, root cause, actions taken, amounts, authorization state, recommended next action. The human has no transcript. | 270-270 |
+| PreToolUse / PostToolUse hooks for business rules | PreToolUse blocks or redirects before the call (refund limits); PostToolUse transforms or checks after (normalise data, format, lint, tests). Deterministic, not model discretion. | 276-277 |
 
 <!-- REVISION-PRIORITIES:END -->
 
@@ -110,7 +110,7 @@ CLAUDE ARCHITECT — FOUNDATIONS
 ## Source coverage
 
 - Question bank: `questionBank_claude_architect.js`
-- Questions in source bank: **331**
+- Questions in source bank: **322**
 - Consolidated recall cards: **32**
 - Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
@@ -121,7 +121,7 @@ CLAUDE ARCHITECT — FOUNDATIONS
 **Exam facts:** 60 items · 4 scenarios drawn from a bank of 6 · 120 min · pass = scaled **720 / 1000** · $125 · valid 12 months.
 The exam rewards **judgment about tradeoffs**: pick the *proportionate, root-cause* fix, and prefer **deterministic enforcement** over hopeful prompting.
 
-**Practice simulator coverage:** expanded to 331 curated questions (211 core + 40 API/SDK/MCP recall + 21 CI/CD onboarding and repo config + 59 score-report revision) plus a refreshed 100-question priority set (`hotsQuestions`). The Hot 100 follows the official blueprint: Agentic Architecture 27, Tool Design & MCP 18, Claude Code 20, Prompt & Structured Output 20, and Context & Reliability 15. This is a preparation bank, not a representation of the live exam item count.
+**Practice simulator coverage:** expanded to 322 curated questions (204 core + 40 API/SDK/MCP recall + 21 CI/CD onboarding and repo config + 57 score-report revision; 9 paraphrase duplicates removed) plus a refreshed 100-question priority set (`hotsQuestions`). The Hot 100 follows the official blueprint: Agentic Architecture 27, Tool Design & MCP 18, Claude Code 20, Prompt & Structured Output 20, and Context & Reliability 15. This is a preparation bank, not a representation of the live exam item count.
 
 | # | Domain | Weight |
 | - | ------ | ------ |
@@ -379,7 +379,7 @@ Task statements per domain, condensed from section 6 of the guide:
 
 ## Supplemental recall notes (API, SDK and MCP client basics)
 
-Added from the AI Mode recall transcript; practice questions 211-250 cover these; questions 251-271 cover CI/CD onboarding and repo configuration (below); questions 272-330 are score-report revision drills.
+Added from the AI Mode recall transcript; practice questions 204-243 cover these; questions 244-264 cover CI/CD onboarding and repo configuration (below); questions 265-321 are score-report revision drills.
 
 | Topic | Remember |
 |---|---|
@@ -570,9 +570,9 @@ Fine-tuning · API auth/billing · MCP hosting/infra · Claude internals · RLHF
 
 ## Practice bank and simulator files
 
-- `questionBank_claude_architect.js` contains 331 multiple-choice questions with stable zero-based IDs, difficulty, official blueprint category, four options, answer index, and rationale.
+- `questionBank_claude_architect.js` contains 322 multiple-choice questions with stable zero-based IDs, difficulty, official blueprint category, four options, answer index, and rationale.
 - `hotsQuestions` contains 100 unique zero-based indices, weighted to the five official domains and ordered by priority. Keep these as array indices; if the bank is reordered, regenerate the list.
 - `claude_architect_detailed_one_pager.png` is the companion visual quick reference for the five domains, scenario patterns, and root-cause fixes.
-- The exam guide states 60 live exam items, four scenarios selected from a bank of six, 120 minutes, and a scaled passing score of 720/1000. The 331-question bank is supplemental practice content.
+- The exam guide states 60 live exam items, four scenarios selected from a bank of six, 120 minutes, and a scaled passing score of 720/1000. The 322-question bank is supplemental practice content.
 
 **Preparation approach:** prioritize the Hot 100, explain why each distractor is wrong, and practice selecting the smallest deterministic fix that addresses the actual failure. Then complete all remaining questions and review scenario-based questions by domain. The current official exam guide remains authoritative if exam details change.

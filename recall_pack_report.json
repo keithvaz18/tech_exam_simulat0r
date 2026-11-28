@@ -89,16 +89,16 @@
   },
   {
     "bank": "questionBank_claude_architect.js",
-    "questions": 211,
-    "cards": 5,
+    "questions": 322,
+    "cards": 32,
     "pdf": "claude_architect_answers.pdf",
     "readme": "claude_architect_readme.md",
     "mind_map_png": "assets/claude_architect_quick_recall_mind_map.png"
   },
   {
     "bank": "questionBank_claude_architect_professional.js",
-    "questions": 172,
-    "cards": 12,
+    "questions": 153,
+    "cards": 31,
     "pdf": "claude_architect_professional_answers.pdf",
     "readme": "claude_architect_pro_readme.md",
     "mind_map_png": "assets/claude_architect_professional_quick_recall_mind_map.png"
@@ -113,8 +113,8 @@
   },
   {
     "bank": "questionBank_claude_developer_professional.js",
-    "questions": 150,
-    "cards": 6,
+    "questions": 113,
+    "cards": 17,
     "pdf": "claude_developer_professional_answers.pdf",
     "readme": "claude_developer_pro_readme.md",
     "mind_map_png": "assets/claude_developer_professional_quick_recall_mind_map.png"

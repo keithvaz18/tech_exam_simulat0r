@@ -12,10 +12,10 @@ questionBank_Java.js: 443 questions; duplicate IDs: 0; invalid entries: 0
 questionBank_JavaScript.js: 261 questions; duplicate IDs: 0; invalid entries: 0
 questionBank_SA_AI_Data_Technologies.js: 240 questions; duplicate IDs: 0; invalid entries: 0
 questionBank_SQL.js: 270 questions; duplicate IDs: 0; invalid entries: 0
-questionBank_claude_architect.js: 211 questions; duplicate IDs: 0; invalid entries: 0
-questionBank_claude_architect_professional.js: 150 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_claude_architect.js: 322 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_claude_architect_professional.js: 153 questions; duplicate IDs: 0; invalid entries: 0
 questionBank_claude_developer.js: 195 questions; duplicate IDs: 0; invalid entries: 0
-questionBank_claude_developer_professional.js: 150 questions; duplicate IDs: 0; invalid entries: 0
+questionBank_claude_developer_professional.js: 113 questions; duplicate IDs: 0; invalid entries: 0
 questionBank_databricks.js: 452 questions; duplicate IDs: 0; invalid entries: 0
 questionBank_devOps.js: 180 questions; duplicate IDs: 0; invalid entries: 0
 questionBank_dotnet.js: 357 questions; duplicate IDs: 0; invalid entries: 0

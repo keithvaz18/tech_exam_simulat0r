@@ -13,22 +13,22 @@
 <!-- REVISION-PRIORITIES:START -->
 ## Revision priorities
 
-The objectives most worth drilling, with the practice questions (173–212) that cover each. Work from the top; revisit the rest lightly.
+The objectives most worth drilling, with the practice questions (73–112) that cover each. Work from the top; revisit the rest lightly.
 
 | Objective | Key recall | Practice question IDs |
 |---|---|---|
-| Orchestration safeguards: every session ends resolved or escalated | One orchestration layer owns every exit path (end_turn, cap, max_tokens, tool failure/timeout, refusal, exception) and a watchdog catches dead sessions. Never execute a truncated tool_use. | 173-177 |
-| Iterative refinement workflows | Concrete input/output examples; tests first, then specific failures; batch interacting issues, fix independent ones sequentially. | 178-180 |
-| Enforce via settings/hooks vs advise in CLAUDE.md | CLAUDE.md is advisory; deny rules, hooks and managed settings are deterministic; PostToolUse for formatting/tests after every edit. | 181-184 |
-| Project context: @ references vs CLAUDE.md vs inline | Cross-session team context → project CLAUDE.md (+ @imports, path-scoped rules); this-task file → @ reference; one-off → inline. | 185-187 |
-| Escalation decision criteria | Explicit request → immediate; frustration alone → acknowledge and offer help; policy gap/no progress → escalate; multiple matches → ask identifier; sentiment/confidence unreliable. | 188-192 |
-| Structured output via tool use; tool_choice and sequencing | auto / any / named tool / none; forced calls guarantee shape not meaning; thinking allows only auto/none; gate prerequisite tools in code. | 193-197 |
-| Extraction schemas: optional, nullable, enums | Required fields force fabrication; use nullable/optional, 'other' + detail, 'unclear'; normalise formats with few-shot examples. | 198-200 |
-| Codebase exploration with Grep, Glob, Read | Grep contents, Glob paths, Read files; search first, read incrementally. | 201-202 |
-| Stateless API and conversation history | Resend history every request; keep canonical history server-side. | 203-204 |
-| Tool descriptions and MCP integration | Descriptions drive selection; shared MCP in .mcp.json with ${ENV_VAR}; typed errors. | 205-206, 211 |
-| Session resumption, plan mode, decomposition | Name changed files after --resume; persist and inject findings; plan mode for broad/uncertain work; adaptive subtasks for open-ended work. | 207-210 |
-| Structured handoff packages | Customer ID, root cause, actions, amounts, authorisation state, next action. | 212 |
+| Orchestration safeguards: every session ends resolved or escalated | One orchestration layer owns every exit path (end_turn, cap, max_tokens, tool failure/timeout, refusal, exception) and a watchdog catches dead sessions. Never execute a truncated tool_use. | 73-77 |
+| Iterative refinement workflows | Concrete input/output examples; tests first, then specific failures; batch interacting issues, fix independent ones sequentially. | 78-80 |
+| Enforce via settings/hooks vs advise in CLAUDE.md | CLAUDE.md is advisory; deny rules, hooks and managed settings are deterministic; PostToolUse for formatting/tests after every edit. | 81-84 |
+| Project context: @ references vs CLAUDE.md vs inline | Cross-session team context → project CLAUDE.md (+ @imports, path-scoped rules); this-task file → @ reference; one-off → inline. | 85-87 |
+| Escalation decision criteria | Explicit request → immediate; frustration alone → acknowledge and offer help; policy gap/no progress → escalate; multiple matches → ask identifier; sentiment/confidence unreliable. | 88-92 |
+| Structured output via tool use; tool_choice and sequencing | auto / any / named tool / none; forced calls guarantee shape not meaning; thinking allows only auto/none; gate prerequisite tools in code. | 93-97 |
+| Extraction schemas: optional, nullable, enums | Required fields force fabrication; use nullable/optional, 'other' + detail, 'unclear'; normalise formats with few-shot examples. | 98-100 |
+| Codebase exploration with Grep, Glob, Read | Grep contents, Glob paths, Read files; search first, read incrementally. | 101-102 |
+| Stateless API and conversation history | Resend history every request; keep canonical history server-side. | 103-104 |
+| Tool descriptions and MCP integration | Descriptions drive selection; shared MCP in .mcp.json with ${ENV_VAR}; typed errors. | 105-106, 111 |
+| Session resumption, plan mode, decomposition | Name changed files after --resume; persist and inject findings; plan mode for broad/uncertain work; adaptive subtasks for open-ended work. | 107-110 |
+| Structured handoff packages | Customer ID, root cause, actions, amounts, authorisation state, next action. | 112 |
 
 <!-- REVISION-PRIORITIES:END -->
 
@@ -74,6 +74,13 @@ CLAUDE ARCHITECT PROFESSIONAL
 | ★ required · invented · missing · unreadable | nullable · optional · other · unclear | Required fields force fabrication. Make absent-able fields nullable/optional, give enums 'other' + detail and 'unclear', add normalisation rules and varied few-shot examples. Valid JSON is not correct JSON: validate semantics and retry with the error. | Trap: 'don't make things up' on a required field. |
 | ★ forgets · history · resume · changed-files | stateless · resend · server-side · re-analyse | The Messages API keeps no state: resend relevant history, held canonically server-side. After --resume, name the changed files for targeted re-analysis; persist findings and inject them rather than repeating work; fork_session to branch. | Trap: trusting model memory or client-held history. |
 | ★ callers · confused-tools · errors · handoff | Grep · descriptions · isError · package | Grep searches content, Glob matches paths, Read opens files; explore incrementally. Fix confused tools with fuller descriptions first. MCP errors: category, retryable, message, next action. Handoff: customer ID, root cause, actions, amounts, authorisation, next step. | Trap: reading every file, adding a router, or returning 'failed'. |
+| ◆ Vertex · Azure · Bedrock · region | verify · model-IDs · features · adapter | Deployment surface is an architecture decision. Existing cloud governance points to Bedrock, Vertex AI or Azure (Microsoft Foundry), but model IDs, regions, auth and features differ: verify first, isolate differences behind an adapter with per-platform contract tests. | Trap: assume parity with the first-party API, or call it from a VM and ignore platform governance. |
+| ◆ chunks · wrong-clause · rank-7 · RAG | structure · overlap · rerank · recall@k | Chunk along document structure and keep headings/IDs as context; retrieve wide, rerank, pass the best few. Evaluate retrieval (recall@k) separately from generation (faithfulness). | Trap: bigger chunks, lower temperature, or a larger model. |
+| ◆ A/B · 40-sessions · thumbs-up · ship | metric · guardrails · power · segments | Fix the primary metric and guardrails in advance, randomise exposure, run to adequate sample size and check segments before promoting. Build eval sets that are representative, labelled and held out. | Trap: ship on an early positive trend. |
+| ◆ GDPR · erasure · FedRAMP · EU | data-map · minimise · boundary · retention | GDPR: map personal data across transcripts, logs and vector indexes; minimise, set retention, define a deletion path and processor terms. FedRAMP: confirm the deployment surface, region and features sit inside an authorised boundary at the required level. | Trap: 'tell the model to forget', or treat authorisation as late paperwork. |
+| ◆ agents · tools · CLI · 120-tools | MCP · agent-to-agent · CLI · discovery | MCP connects agents to tools and data; agent-to-agent protocols handle discovery and delegation between independent agents; familiar CLIs suit local work. Large catalogues: small core set plus on-demand tool discovery. | Trap: wrap everything in MCP, or load all 120 definitions every request. |
+| ◆ 300-engineers · approved · override | managed · settings · marketplace · plugins | Managed settings enforce what lower scopes cannot override; an organisation-controlled plugin marketplace distributes approved skills, agents, hooks and MCP servers. | Trap: wiki guidance, per-repo settings, or quarterly audits. |
+| ◆ sponsor · discovery · trade-offs · ADR | baseline · targets · options · records | Turn vague asks into measurable requirements with a baseline; present trade-offs (e.g. tiered routing) and agree ranked priorities in writing; keep architecture decision records. | Trap: promise latency, accuracy and cost all at once. |
 | absent · production · design · review | Return · structured · validation · error | Return a structured validation error that identifies the missing field and is not marked retryable. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Solve the symptom locally without defining ownership, boundaries or recovery behavior |
 | instruction-like · documents · delivery · validating | Treat · document · content · isolate | Treat document content as data, isolate it with delimiters and enforce sensitive actions outside the model. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Increase model capacity and assume the architectural risk is resolved |
 | structure · delivery · validating · finds | Inspect · stop_reason · token · usage | Inspect stop_reason and token usage; increase output budget or continue safely when truncation is confirmed. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Increase model capacity and assume the architectural risk is resolved |
@@ -97,16 +104,16 @@ CLAUDE ARCHITECT PROFESSIONAL
 ## Source coverage
 
 - Question bank: `questionBank_claude_architect_professional.js`
-- Questions in source bank: **228**
-- Consolidated recall cards: **24**
+- Questions in source bank: **153**
+- Consolidated recall cards: **31**
 - Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
 ---
 
-This professional practice guide extends the simulator's **Claude Certified Architect – Foundations** guide. The image above intentionally reuses the foundation reference graphic; the professional assessment is a separate, deeper 212-question practice bank.
+This professional practice guide extends the simulator's **Claude Certified Architect – Foundations** guide. The image above intentionally reuses the foundation reference graphic; the professional assessment is a separate, deeper 153-question practice bank.
 
 ## Practice exam format
-- **228 professional-level practice MCQs** in the simulator bank.
+- **153 professional-level practice MCQs** in the simulator bank.
 - Questions emphasize architecture decisions, trade-offs, failure modes, operational controls and scenario-based judgment.
 - This is a preparation resource, not an official Anthropic exam or a claim about live exam item count, scoring, price or blueprint.
 
@@ -117,7 +124,7 @@ This professional practice guide extends the simulator's **Claude Certified Arch
 4. Evaluation, Testing & Optimization — 16%.
 5. Governance, Safety & Risk Management — 14%.
 6. Stakeholder Communication & Lifecycle Management — 14%.
-7. Developer Productivity & Operational Management — 7%.
+7. Developer Productivity & Operational Enablement — 7%.
 
 ## Quick Notes 
 Most design questions reduce to picking the cheapest reliable structure:
@@ -191,7 +198,7 @@ every other tool slightly harder to choose correctly.
 
 ---
 
-The original 150 simulator questions are retained. The 22 scenario questions from the attached study guide's seven domain sample-question sections have been added as questions 151–172. Multi-select items preserve their multiple correct answers and are rendered as checkbox questions.
+The original simulator scenarios are retained as questions 1–50. The earlier 150-question set repeated each of those 50 scenarios three times, so the 100 repeats were removed and ids renumbered. The 22 scenario questions from the attached study guide's seven domain sample-question sections have been added as questions 51–72. Multi-select items preserve their multiple correct answers and are rendered as checkbox questions.
 
 ## Professional exam approach
 - Identify the requirement and the failure mode before selecting a solution.
@@ -201,15 +208,20 @@ The original 150 simulator questions are retained. The 22 scenario questions fro
 - Evaluate changes using representative scenarios and measurable quality, safety, latency and cost.
 
 ## Added study-guide questions
-The 22 sample questions in the attached study guide have been added verbatim to the practice bank as questions 151–172, distributed across all seven blueprint domains. Seven are multiple-response questions; the exam interface presents checkboxes and scores the complete answer set.
+The 22 sample questions in the attached study guide have been added verbatim to the practice bank as questions 51–72, distributed across all seven blueprint domains. Seven are multiple-response questions; the exam interface presents checkboxes and scores the complete answer set.
 
 ## Revision questions
-Questions 173–212 were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.
+Questions 73–112 were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.
 
 ## Additional scenario questions
-Questions 213–228 are extra scenario questions on topics the earlier bank covered thinly: coordinator state ownership, external scratchpads, LLM-judge bias, deployment surface, circuit breakers, context management for long runs, model version pinning, MCP token passthrough and supply-chain risk, canary releases, PII-safe logging and citations. They are original practice questions, not live exam items.
+Questions 113–128 are extra scenario questions on topics the earlier bank covered thinly: coordinator state ownership, external scratchpads, LLM-judge bias, deployment surface, circuit breakers, context management for long runs, model version pinning, MCP token passthrough and supply-chain risk, canary releases, PII-safe logging and citations. They are original practice questions, not live exam items.
+
+## Blueprint-coverage questions
+Questions 129–153 fill gaps against the seven CCAR-P domains (deployment surface on Bedrock, Vertex AI and Azure, RAG chunking and reranking, A/B testing and retrieval-vs-generation evaluation, GDPR and FedRAMP, agent-to-agent vs MCP vs CLI, progressive tool discovery, managed settings and plugin marketplaces, discovery and decision records). The bank is still weighted towards the five foundation-style domains, so treat per-domain counts as a study aid rather than a blueprint match. Original practice questions, not live exam items.
 
 ## Simulator
+
+
 Select **Claude Certified Architect – Professional** from the portal. The bank uses the simulator question schema, including an answer-index array for multi-select items and is loaded by `exam.html` through `js/questionBank_claude_architect_professional.js`.
 
 ## Relationship to Foundations

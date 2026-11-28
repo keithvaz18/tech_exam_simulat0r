@@ -13,19 +13,19 @@
 <!-- REVISION-PRIORITIES:START -->
 ## Revision priorities
 
-The objectives most worth drilling, with the practice questions (151–188) that cover each. Work from the top; revisit the rest lightly.
+The objectives most worth drilling, with the practice questions (61–98) that cover each. Work from the top; revisit the rest lightly.
 
 | Objective | Key recall | Practice question IDs |
 |---|---|---|
-| Orchestration safeguards: every session ends resolved or escalated | Bounded loop + deadline, try/finally around tools, one finalise(); correct stop_reason handling; never execute a cut-off tool_use. | 151-155 |
-| Iterative refinement workflows | Example pairs; tests first; group related failures, fix once, re-run whole eval set. | 156-158 |
-| Enforce via settings/hooks vs advise in CLAUDE.md | Deny rules and hooks are deterministic (PreToolUse exit 2 blocks); CLAUDE.md advisory; PostToolUse formatter. | 159-162 |
-| Project context: @ references vs CLAUDE.md vs inline | Project CLAUDE.md + @imports for shared; rules paths for file types; @ file for this task. | 163-165 |
-| Escalation decision criteria | Escalate on explicit request, policy gap, repeated failure; ask identifier for multiple matches; no sentiment/confidence triggers. | 166-169 |
-| Structured output via tool use; tool_choice and sequencing | {type:tool,name} forces a tool; any forces some tool; no forcing with extended thinking; executor guard for prerequisites; validate semantics. | 170-174 |
-| Extraction schemas: optional, nullable, enums | Nullable/optional fields, 'other'+detail, 'unclear', normalisation + varied few-shot. | 175-177 |
-| Stateless API, exploration, descriptions, MCP, resume | Resend history (server-side); Grep→Read; description contrast; .mcp.json with ${ENV_VAR}; re-analyse changed files; plan mode; adaptive decomposition. | 178-187 |
-| Structured handoff packages | ID, root cause, actions, amounts, authorisation state, next action. | 188 |
+| Orchestration safeguards: every session ends resolved or escalated | Bounded loop + deadline, try/finally around tools, one finalise(); correct stop_reason handling; never execute a cut-off tool_use. | 61-65 |
+| Iterative refinement workflows | Example pairs; tests first; group related failures, fix once, re-run whole eval set. | 66-68 |
+| Enforce via settings/hooks vs advise in CLAUDE.md | Deny rules and hooks are deterministic (PreToolUse exit 2 blocks); CLAUDE.md advisory; PostToolUse formatter. | 69-72 |
+| Project context: @ references vs CLAUDE.md vs inline | Project CLAUDE.md + @imports for shared; rules paths for file types; @ file for this task. | 73-75 |
+| Escalation decision criteria | Escalate on explicit request, policy gap, repeated failure; ask identifier for multiple matches; no sentiment/confidence triggers. | 76-79 |
+| Structured output via tool use; tool_choice and sequencing | {type:tool,name} forces a tool; any forces some tool; no forcing with extended thinking; executor guard for prerequisites; validate semantics. | 80-84 |
+| Extraction schemas: optional, nullable, enums | Nullable/optional fields, 'other'+detail, 'unclear', normalisation + varied few-shot. | 85-87 |
+| Stateless API, exploration, descriptions, MCP, resume | Resend history (server-side); Grep→Read; description contrast; .mcp.json with ${ENV_VAR}; re-analyse changed files; plan mode; adaptive decomposition. | 88-97 |
+| Structured handoff packages | ID, root cause, actions, amounts, authorisation state, next action. | 98 |
 
 <!-- REVISION-PRIORITIES:END -->
 
@@ -81,16 +81,16 @@ CLAUDE DEVELOPER PROFESSIONAL
 ## Source coverage
 
 - Question bank: `questionBank_claude_developer_professional.js`
-- Questions in source bank: **203**
+- Questions in source bank: **113**
 - Consolidated recall cards: **17**
 - Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
 ---
 
-This professional practice guide extends the simulator's **Claude Certified Developer – Foundations** guide. The image above intentionally reuses the foundation reference graphic; the professional assessment is a separate, deeper 150-question practice bank.
+This professional practice guide extends the simulator's **Claude Certified Developer – Foundations** guide. The image above intentionally reuses the foundation reference graphic; the professional assessment is a separate, deeper 113-question practice bank.
 
 ## Practice exam format
-- **203 professional-level practice MCQs** in the simulator bank.
+- **113 professional-level practice MCQs** in the simulator bank.
 - Questions emphasize API integration, production software engineering, agent-loop implementation, Claude Code workflows, context/output handling, security and evaluation.
 - This is a preparation resource, not an official Anthropic exam or a claim about live exam item count, scoring, price or blueprint.
 
@@ -109,11 +109,14 @@ This professional practice guide extends the simulator's **Claude Certified Deve
 - Inspect stop reasons, tool-use correlation, truncation and usage metadata.
 - Test realistic edge cases and operational failure paths, not only happy-path prompts.
 
+## Original simulator questions
+Questions 1–60 are the original simulator scenarios. The earlier 150-question set repeated them (60 distinct scenarios, 90 repeats), so the repeats were removed and ids renumbered.
+
 ## Revision questions
-Questions 151–188 were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.
+Questions 61–98 were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.
 
 ## Additional scenario questions
-Questions 189–203 are extra scenario questions on topics the earlier bank covered thinly: coordinator state ownership, external scratchpads, LLM-judge bias, deployment surface, circuit breakers, context management for long runs, model version pinning, MCP token passthrough and supply-chain risk, canary releases, PII-safe logging and citations. They are original practice questions, not live exam items.
+Questions 99–113 are extra scenario questions on topics the earlier bank covered thinly: coordinator state ownership, external scratchpads, LLM-judge bias, deployment surface, circuit breakers, context management for long runs, model version pinning, MCP token passthrough and supply-chain risk, canary releases, PII-safe logging and citations. They are original practice questions, not live exam items.
 
 ## Simulator
 Select **Claude Certified Developer – Professional** from the portal. The bank uses the existing simulator question schema and is loaded by `exam.html` through `js/questionBank_claude_developer_professional.js`.

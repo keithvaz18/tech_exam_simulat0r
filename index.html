@@ -456,9 +456,9 @@ document.body.classList.add("loading");
         <select id="examPicker">
             <option value="ai_data">SA - AI and Data Technologies</option>
             <option value="claude_architect">Claude Certified Architect - Foundations</option>
-            <option value="claude_architect_professional">Claude Certified Architect - Professional (228 MCQs)</option>
+            <option value="claude_architect_professional">Claude Certified Architect - Professional (153 MCQs)</option>
             <option value="claude_developer">Claude Certified Developer - Foundations</option>
-            <option value="claude_developer_professional">Claude Certified Developer - Professional (203 MCQs)</option>
+            <option value="claude_developer_professional">Claude Certified Developer - Professional (113 MCQs)</option>
             <option value="snowflake">SnowPro Core/Assoc./Pro Certification</option>
             <option value="databricks">Databricks Data Engineer</option>
             <option value="python_pySpark">Python & PySpark Engineering</option>
@@ -1610,11 +1610,11 @@ const claudeArchitectKeywords = [
 {word:"Text + tool_use Block", freq:3, domain:"ca-agentic", desc:"Normal message shape; check stop_reason, keep full content in history"},
 {word:"Parallel tool_result", freq:3, domain:"ca-agentic", desc:"One tool_result per tool_use_id in a single user turn"},
 {word:"Batch Tool Pattern", freq:2, domain:"ca-agentic", desc:"Concurrent independent calls in a live loop; not the Batches API"},
-{word:"4Ds AI Fluency", freq:3, domain:"ca-agentic", desc:"Delegation, Description, Discernment, Diligence"},
+{word:"Delegation", freq:3, domain:"ca-agentic", desc:"Delegation, Description, Discernment, Diligence"},
 {word:"MCP Client", freq:4, domain:"ca-tools", desc:"MCP SDK + transport + initialize + list_tools + call_tool loop"},
 {word:"stdio vs Streamable HTTP", freq:3, domain:"ca-tools", desc:"Local subprocess vs remote server transports"},
 {word:"MCP Inspector", freq:3, domain:"ca-tools", desc:"npx @modelcontextprotocol/inspector or mcp dev server.py"},
-{word:"No print() on stdio", freq:3, domain:"ca-tools", desc:"Stdout carries JSON-RPC; log to stderr"},
+{word:"stdio", freq:3, domain:"ca-tools", desc:"Stdout carries JSON-RPC; log to stderr"},
 {word:"MCP Primitives", freq:5, domain:"ca-tools", desc:"Prompt user-controlled, Tool model-controlled, Resource app-controlled"},
 {word:"Resource Template", freq:3, domain:"ca-tools", desc:"docs://documents/{doc_id} resolved via read_resource"},
 {word:"Path Traversal Guard", freq:3, domain:"ca-tools", desc:"Resolve path and enforce base directory in file tools"},
@@ -1624,10 +1624,10 @@ const claudeArchitectKeywords = [
 {word:"Environment Inspection", freq:3, domain:"ca-context", desc:"Read-only look-before-you-leap; mask secrets; bound output"},
 {word:"Computer Use", freq:2, domain:"ca-context", desc:"Screenshot-action loop; sandbox and watch prompt injection"},
 {word:"Temperature", freq:3, domain:"ca-prompt", desc:"Low for extraction and evals; 0.8-1.0 for creative"},
-{word:"Eval Graders", freq:4, domain:"ca-prompt", desc:"Code first, LLM judge binary with reasoning, human calibration"},
-{word:"LLM-as-Judge", freq:3, domain:"ca-prompt", desc:"Distinct model, narrow scale, reasoning before score"},
+{word:"Grader", freq:4, domain:"ca-prompt", desc:"Code first, LLM judge binary with reasoning, human calibration"},
+{word:"Judge", freq:3, domain:"ca-prompt", desc:"Distinct model, narrow scale, reasoning before score"},
 {word:"Eval Test Set", freq:3, domain:"ca-prompt", desc:"10-20 balanced routine, edge, out-of-scope cases"},
-{word:"CI/CD Onboarding", freq:4, domain:"ca-code", desc:"Static, security, AI review, tests, then human gate"},
+{word:"Onboarding", freq:4, domain:"ca-code", desc:"Static, security, AI review, tests, then human gate"},
 {word:"Risk-Based Approval", freq:4, domain:"ca-code", desc:"Docs automated; new MCP security review; prod mandatory human"},
 {word:"Claude Code Action", freq:3, domain:"ca-code", desc:"Anthropic GitHub Action for AI review in CI"},
 {word:"Gitleaks", freq:2, domain:"ca-code", desc:"Secret detection in the pipeline"},
@@ -1635,12 +1635,12 @@ const claudeArchitectKeywords = [
 {word:"actionlint / yamllint", freq:2, domain:"ca-code", desc:"Static validation of workflows and YAML"},
 {word:"PR Prompt Injection", freq:4, domain:"ca-code", desc:"Outsider PR text is untrusted data"},
 {word:"Independent Reviewer", freq:3, domain:"ca-code", desc:"Authoring instance must not self-approve"},
-{word:"Agent Behavior Tests", freq:3, domain:"ca-prompt", desc:"Assert tool calls and schema; rubric-grade quality"},
-{word:"Orchestration Safeguards", freq:5, domain:"ca-agentic", desc:"Every exit path ends resolved or escalated"},
+{word:"Behaviour", freq:3, domain:"ca-prompt", desc:"Assert tool calls and schema; rubric-grade quality"},
+{word:"Safeguard", freq:5, domain:"ca-agentic", desc:"Every exit path ends resolved or escalated"},
 {word:"Escalation Criteria", freq:5, domain:"ca-context", desc:"Explicit request escalates immediately; policy gap; no progress"},
 {word:"tool_choice Forced", freq:5, domain:"ca-prompt", desc:"auto, any, named tool, none; forced means a guaranteed call"},
-{word:"Tool Sequencing Gate", freq:4, domain:"ca-tools", desc:"Enforce prerequisite order programmatically"},
-{word:"Enforce vs Advise", freq:5, domain:"ca-code", desc:"Hooks and permissions deterministic; CLAUDE.md advisory"},
+{word:"Prerequisite", freq:4, domain:"ca-tools", desc:"Enforce prerequisite order programmatically"},
+{word:"Enforce", freq:5, domain:"ca-code", desc:"Hooks and permissions deterministic; CLAUDE.md advisory"},
 {word:"@ Reference vs CLAUDE.md", freq:4, domain:"ca-code", desc:"Reusable cross-session vs one-off file or inline"},
 {word:"Iterative Refinement", freq:4, domain:"ca-code", desc:"Examples, tests first, batch interacting issues"},
 {word:"Nullable Fields", freq:4, domain:"ca-prompt", desc:"Optional or nullable fields stop fabrication"},
@@ -1716,30 +1716,41 @@ const claudeDeveloperKeywords = [
 ];
 
 const claudeArchitectProfessionalKeywords = [
-{word:"Orchestration Safeguards", freq:5, domain:"ca-agentic", desc:"Every exit path ends resolved or escalated; watchdog for dead sessions"},
+{word:"Orchestration Code", freq:5, domain:"ca-agentic", desc:"Every exit path ends resolved or escalated; watchdog for dead sessions"},
 {word:"Truncated tool_use", freq:4, domain:"ca-agentic", desc:"max_tokens mid tool call: never execute, retry or escalate"},
-{word:"Escalation Triggers", freq:5, domain:"ca-context", desc:"Explicit request, policy gap, no progress; not sentiment or confidence"},
-{word:"Enforce vs Advise", freq:5, domain:"ca-code", desc:"Deny rules, hooks, managed settings vs advisory CLAUDE.md"},
+{word:"Escalation Trigger", freq:5, domain:"ca-context", desc:"Explicit request, policy gap, no progress; not sentiment or confidence"},
+{word:"Enforce", freq:5, domain:"ca-code", desc:"Deny rules, hooks, managed settings vs advisory CLAUDE.md"},
 {word:"Managed Settings", freq:3, domain:"ca-code", desc:"Org-level deny rules lower scopes cannot override"},
 {word:"@ Import vs @ File", freq:4, domain:"ca-code", desc:"CLAUDE.md imports for shared context; @ file for this task"},
 {word:"Iterative Refinement", freq:4, domain:"ca-code", desc:"Examples, tests first, batch interacting failures"},
 {word:"tool_choice", freq:5, domain:"ca-prompt", desc:"auto, any, named tool, none; forcing guarantees shape not meaning"},
 {word:"Thinking + tool_choice", freq:3, domain:"ca-prompt", desc:"Extended thinking allows only auto or none"},
-{word:"Tool Sequencing Gate", freq:4, domain:"ca-tools", desc:"Reject dependent tools until verified prerequisite exists"},
-{word:"Nullable Schemas", freq:4, domain:"ca-prompt", desc:"Nullable or optional fields; other + unclear enums"},
+{word:"Prerequisite", freq:4, domain:"ca-tools", desc:"Reject dependent tools until verified prerequisite exists"},
+{word:"Nullable", freq:4, domain:"ca-prompt", desc:"Nullable or optional fields; other + unclear enums"},
 {word:"Semantic Validation", freq:3, domain:"ca-prompt", desc:"Valid JSON is not correct JSON; validate and retry with error"},
 {word:"Stateless API", freq:4, domain:"ca-context", desc:"Resend history; keep canonical history server-side"},
 {word:"Targeted Re-analysis", freq:3, domain:"ca-context", desc:"After resume, name changed files; inject persisted findings"},
 {word:"Tool Descriptions", freq:4, domain:"ca-tools", desc:"Purpose, formats, examples and contrast between similar tools"},
 {word:"Structured Handoff", freq:3, domain:"ca-context", desc:"ID, root cause, actions, amounts, authorisation, next step"},
+{word:"Vertex AI", freq:4, domain:"ca-tools", desc:"Claude on Google Cloud: verify region, model IDs, features and IAM before committing"},
+{word:"Microsoft Foundry", freq:3, domain:"ca-tools", desc:"Claude on Azure: verify availability, Entra access control and data terms"},
+{word:"RAG Chunking", freq:4, domain:"ca-tools", desc:"Chunk along document structure; keep headings and IDs with each chunk"},
+{word:"Reranking", freq:3, domain:"ca-tools", desc:"Retrieve wide, rerank, pass the best few chunks"},
+{word:"Agent-to-Agent", freq:3, domain:"ca-agentic", desc:"MCP for tools and data; agent-to-agent for delegation between independent agents"},
+{word:"Tool Discovery", freq:3, domain:"ca-tools", desc:"Small core tool set plus on-demand discovery for large catalogues"},
+{word:"A/B Test", freq:4, domain:"ca-prompt", desc:"Fix metric and guardrails first; randomise; adequate sample; check segments"},
+{word:"GDPR", freq:4, domain:"ca-context", desc:"Data map, minimisation, retention and a deletion path across logs and indexes"},
+{word:"FedRAMP", freq:3, domain:"ca-context", desc:"Confirm surface, region and features sit inside an authorised boundary"},
+{word:"Plugin Marketplace", freq:3, domain:"ca-code", desc:"Managed settings enforce; an org marketplace distributes approved extensions"},
+{word:"Decision Records", freq:3, domain:"ca-context", desc:"Capture context, options, trade-offs and the decision for later teams"},
 ];
 
 const claudeDeveloperProfessionalKeywords = [
 {word:"Bounded Agent Loop", freq:5, domain:"cd-agents", desc:"Iteration cap, deadline, try/finally, one finalise()"},
 {word:"stop_reason Handling", freq:5, domain:"cd-agents", desc:"tool_use continue, end_turn finish, max_tokens incomplete, refusal surface"},
 {word:"tool_result + is_error", freq:4, domain:"cd-agents", desc:"Answer every tool_use_id; structured error detail"},
-{word:"Escalation Rules", freq:5, domain:"cd-agents", desc:"Explicit request, policy gap, repeated failure; ask identifier on multiple matches"},
-{word:"Deny Rules vs CLAUDE.md", freq:5, domain:"cd-security", desc:"Permissions and hooks enforce; CLAUDE.md advises"},
+{word:"Escalation", freq:5, domain:"cd-agents", desc:"Explicit request, policy gap, repeated failure; ask identifier on multiple matches"},
+{word:"Permissions", freq:5, domain:"cd-security", desc:"Permissions and hooks enforce; CLAUDE.md advises"},
 {word:"PreToolUse Exit 2", freq:3, domain:"cd-agents", desc:"Blocks the call and returns stderr to Claude"},
 {word:"PostToolUse Formatter", freq:3, domain:"cd-agents", desc:"Deterministic formatting and tests after every edit"},
 {word:"tool_choice Named Tool", freq:5, domain:"cd-apps", desc:"{type:tool,name} forces a tool; any forces some tool"},
@@ -1748,8 +1759,8 @@ const claudeDeveloperProfessionalKeywords = [
 {word:"Nullable Fields", freq:4, domain:"cd-prompt", desc:"[string,null]; other + unclear enums; stop fabrication"},
 {word:"Semantic Validation Retry", freq:4, domain:"cd-eval", desc:"Sum checks and retry with exact validation error"},
 {word:"Stateless Messages API", freq:4, domain:"cd-apps", desc:"Resend history; server-side authoritative roles"},
-{word:"@ Imports & Rules Paths", freq:3, domain:"cd-prompt", desc:"Modular CLAUDE.md; path-scoped rules; @ file per task"},
-{word:"Tests-first Refinement", freq:4, domain:"cd-eval", desc:"Example pairs, group failures, re-run whole eval set"},
+{word:"Path-scoped", freq:3, domain:"cd-prompt", desc:"Modular CLAUDE.md; path-scoped rules; @ file per task"},
+{word:"Refinement", freq:4, domain:"cd-eval", desc:"Example pairs, group failures, re-run whole eval set"},
 {word:"${ENV_VAR} in .mcp.json", freq:3, domain:"cd-tools", desc:"Shared MCP config without committed secrets"},
 ];
 

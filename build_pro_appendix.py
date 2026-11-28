@@ -36,6 +36,15 @@ ARCH_CARDS = [
  ("★ forgets · history · resume · changed-files", "stateless · resend · server-side · re-analyse", "The Messages API keeps no state: resend relevant history, held canonically server-side. After --resume, name the changed files for targeted re-analysis; persist findings and inject them rather than repeating work; fork_session to branch.", "Trap: trusting model memory or client-held history."),
  ("★ callers · confused-tools · errors · handoff", "Grep · descriptions · isError · package", "Grep searches content, Glob matches paths, Read opens files; explore incrementally. Fix confused tools with fuller descriptions first. MCP errors: category, retryable, message, next action. Handoff: customer ID, root cause, actions, amounts, authorisation, next step.", "Trap: reading every file, adding a router, or returning 'failed'."),
 ]
+ARCH_COV_CARDS = [
+ ("◆ Vertex · Azure · Bedrock · region", "verify · model-IDs · features · adapter", "Deployment surface is an architecture decision. Existing cloud governance points to Bedrock, Vertex AI or Azure (Microsoft Foundry), but model IDs, regions, auth and features differ: verify first, isolate differences behind an adapter with per-platform contract tests.", "Trap: assume parity with the first-party API, or call it from a VM and ignore platform governance."),
+ ("◆ chunks · wrong-clause · rank-7 · RAG", "structure · overlap · rerank · recall@k", "Chunk along document structure and keep headings/IDs as context; retrieve wide, rerank, pass the best few. Evaluate retrieval (recall@k) separately from generation (faithfulness).", "Trap: bigger chunks, lower temperature, or a larger model."),
+ ("◆ A/B · 40-sessions · thumbs-up · ship", "metric · guardrails · power · segments", "Fix the primary metric and guardrails in advance, randomise exposure, run to adequate sample size and check segments before promoting. Build eval sets that are representative, labelled and held out.", "Trap: ship on an early positive trend."),
+ ("◆ GDPR · erasure · FedRAMP · EU", "data-map · minimise · boundary · retention", "GDPR: map personal data across transcripts, logs and vector indexes; minimise, set retention, define a deletion path and processor terms. FedRAMP: confirm the deployment surface, region and features sit inside an authorised boundary at the required level.", "Trap: 'tell the model to forget', or treat authorisation as late paperwork."),
+ ("◆ agents · tools · CLI · 120-tools", "MCP · agent-to-agent · CLI · discovery", "MCP connects agents to tools and data; agent-to-agent protocols handle discovery and delegation between independent agents; familiar CLIs suit local work. Large catalogues: small core set plus on-demand tool discovery.", "Trap: wrap everything in MCP, or load all 120 definitions every request."),
+ ("◆ 300-engineers · approved · override", "managed · settings · marketplace · plugins", "Managed settings enforce what lower scopes cannot override; an organisation-controlled plugin marketplace distributes approved skills, agents, hooks and MCP servers.", "Trap: wiki guidance, per-repo settings, or quarterly audits."),
+ ("◆ sponsor · discovery · trade-offs · ADR", "baseline · targets · options · records", "Turn vague asks into measurable requirements with a baseline; present trade-offs (e.g. tiered routing) and agree ranked priorities in writing; keep architecture decision records.", "Trap: promise latency, accuracy and cost all at once."),
+]
 DEV_CARDS = [
  ("★ while-True · hang · crash · half-processed", "bounded · try/finally · finalise · escalate", "Bound the loop (iteration cap + deadline), wrap tool execution in try/finally, and call one finalise() that always records resolved or escalated; add a watchdog for dead processes.", "Trap: prompt says 'stop after 10 steps', or swallow exceptions and continue."),
  ("★ stop_reason · max_tokens · refusal · parse", "tool_use · end_turn · incomplete · retry", "tool_use: execute and continue; end_turn: done; max_tokens: incomplete, never execute a cut-off tool_use; refusal: surface or escalate. Always answer each tool_use_id with a tool_result (is_error + structured detail on failure).", "Trap: json.loads the partial input, or search the text for 'done'."),
@@ -50,29 +59,29 @@ DEV_CARDS = [
  ("★ explore · descriptions · MCP · handoff", "Grep · contrast · ${ENV_VAR} · package", "Grep then Read incrementally; fix tool confusion with purpose/format/examples/contrast in descriptions; shared MCP in committed .mcp.json with ${ENV_VAR}; typed errors; handoff carries ID, root cause, actions, amounts, authorisation, next step.", "Trap: read every file, add a classifier router, hard-code the token."),
 ]
 ARCH_ROWS = [
- ("Orchestration safeguards: every session ends resolved or escalated","0%","CRITICAL","One orchestration layer owns every exit path (end_turn, cap, max_tokens, tool failure/timeout, refusal, exception) and a watchdog catches dead sessions. Never execute a truncated tool_use.","173-177"),
- ("Iterative refinement workflows","0%","CRITICAL","Concrete input/output examples; tests first, then specific failures; batch interacting issues, fix independent ones sequentially.","178-180"),
- ("Enforce via settings/hooks vs advise in CLAUDE.md","0%","CRITICAL","CLAUDE.md is advisory; deny rules, hooks and managed settings are deterministic; PostToolUse for formatting/tests after every edit.","181-184"),
- ("Project context: @ references vs CLAUDE.md vs inline","0%","CRITICAL","Cross-session team context → project CLAUDE.md (+ @imports, path-scoped rules); this-task file → @ reference; one-off → inline.","185-187"),
- ("Escalation decision criteria","0%","CRITICAL","Explicit request → immediate; frustration alone → acknowledge and offer help; policy gap/no progress → escalate; multiple matches → ask identifier; sentiment/confidence unreliable.","188-192"),
- ("Structured output via tool use; tool_choice and sequencing","0%","CRITICAL","auto / any / named tool / none; forced calls guarantee shape not meaning; thinking allows only auto/none; gate prerequisite tools in code.","193-197"),
- ("Extraction schemas: optional, nullable, enums","33%","CRITICAL","Required fields force fabrication; use nullable/optional, 'other' + detail, 'unclear'; normalise formats with few-shot examples.","198-200"),
- ("Codebase exploration with Grep, Glob, Read","50%","Reinforce","Grep contents, Glob paths, Read files; search first, read incrementally.","201-202"),
- ("Stateless API and conversation history","50%","Reinforce","Resend history every request; keep canonical history server-side.","203-204"),
- ("Tool descriptions and MCP integration","50%","Reinforce","Descriptions drive selection; shared MCP in .mcp.json with ${ENV_VAR}; typed errors.","205-206, 211"),
- ("Session resumption, plan mode, decomposition","67-75%","Reinforce","Name changed files after --resume; persist and inject findings; plan mode for broad/uncertain work; adaptive subtasks for open-ended work.","207-210"),
- ("Structured handoff packages","100%","Maintain","Customer ID, root cause, actions, amounts, authorisation state, next action.","212"),
+ ("Orchestration safeguards: every session ends resolved or escalated","0%","CRITICAL","One orchestration layer owns every exit path (end_turn, cap, max_tokens, tool failure/timeout, refusal, exception) and a watchdog catches dead sessions. Never execute a truncated tool_use.","73-77"),
+ ("Iterative refinement workflows","0%","CRITICAL","Concrete input/output examples; tests first, then specific failures; batch interacting issues, fix independent ones sequentially.","78-80"),
+ ("Enforce via settings/hooks vs advise in CLAUDE.md","0%","CRITICAL","CLAUDE.md is advisory; deny rules, hooks and managed settings are deterministic; PostToolUse for formatting/tests after every edit.","81-84"),
+ ("Project context: @ references vs CLAUDE.md vs inline","0%","CRITICAL","Cross-session team context → project CLAUDE.md (+ @imports, path-scoped rules); this-task file → @ reference; one-off → inline.","85-87"),
+ ("Escalation decision criteria","0%","CRITICAL","Explicit request → immediate; frustration alone → acknowledge and offer help; policy gap/no progress → escalate; multiple matches → ask identifier; sentiment/confidence unreliable.","88-92"),
+ ("Structured output via tool use; tool_choice and sequencing","0%","CRITICAL","auto / any / named tool / none; forced calls guarantee shape not meaning; thinking allows only auto/none; gate prerequisite tools in code.","93-97"),
+ ("Extraction schemas: optional, nullable, enums","33%","CRITICAL","Required fields force fabrication; use nullable/optional, 'other' + detail, 'unclear'; normalise formats with few-shot examples.","98-100"),
+ ("Codebase exploration with Grep, Glob, Read","50%","Reinforce","Grep contents, Glob paths, Read files; search first, read incrementally.","101-102"),
+ ("Stateless API and conversation history","50%","Reinforce","Resend history every request; keep canonical history server-side.","103-104"),
+ ("Tool descriptions and MCP integration","50%","Reinforce","Descriptions drive selection; shared MCP in .mcp.json with ${ENV_VAR}; typed errors.","105-106, 111"),
+ ("Session resumption, plan mode, decomposition","67-75%","Reinforce","Name changed files after --resume; persist and inject findings; plan mode for broad/uncertain work; adaptive subtasks for open-ended work.","107-110"),
+ ("Structured handoff packages","100%","Maintain","Customer ID, root cause, actions, amounts, authorisation state, next action.","112"),
 ]
 DEV_ROWS = [
- ("Orchestration safeguards: every session ends resolved or escalated","0%","CRITICAL","Bounded loop + deadline, try/finally around tools, one finalise(); correct stop_reason handling; never execute a cut-off tool_use.","151-155"),
- ("Iterative refinement workflows","0%","CRITICAL","Example pairs; tests first; group related failures, fix once, re-run whole eval set.","156-158"),
- ("Enforce via settings/hooks vs advise in CLAUDE.md","0%","CRITICAL","Deny rules and hooks are deterministic (PreToolUse exit 2 blocks); CLAUDE.md advisory; PostToolUse formatter.","159-162"),
- ("Project context: @ references vs CLAUDE.md vs inline","0%","CRITICAL","Project CLAUDE.md + @imports for shared; rules paths for file types; @ file for this task.","163-165"),
- ("Escalation decision criteria","0%","CRITICAL","Escalate on explicit request, policy gap, repeated failure; ask identifier for multiple matches; no sentiment/confidence triggers.","166-169"),
- ("Structured output via tool use; tool_choice and sequencing","0%","CRITICAL","{type:tool,name} forces a tool; any forces some tool; no forcing with extended thinking; executor guard for prerequisites; validate semantics.","170-174"),
- ("Extraction schemas: optional, nullable, enums","33%","CRITICAL","Nullable/optional fields, 'other'+detail, 'unclear', normalisation + varied few-shot.","175-177"),
- ("Stateless API, exploration, descriptions, MCP, resume","50-75%","Reinforce","Resend history (server-side); Grep→Read; description contrast; .mcp.json with ${ENV_VAR}; re-analyse changed files; plan mode; adaptive decomposition.","178-187"),
- ("Structured handoff packages","100%","Maintain","ID, root cause, actions, amounts, authorisation state, next action.","188"),
+ ("Orchestration safeguards: every session ends resolved or escalated","0%","CRITICAL","Bounded loop + deadline, try/finally around tools, one finalise(); correct stop_reason handling; never execute a cut-off tool_use.","61-65"),
+ ("Iterative refinement workflows","0%","CRITICAL","Example pairs; tests first; group related failures, fix once, re-run whole eval set.","66-68"),
+ ("Enforce via settings/hooks vs advise in CLAUDE.md","0%","CRITICAL","Deny rules and hooks are deterministic (PreToolUse exit 2 blocks); CLAUDE.md advisory; PostToolUse formatter.","69-72"),
+ ("Project context: @ references vs CLAUDE.md vs inline","0%","CRITICAL","Project CLAUDE.md + @imports for shared; rules paths for file types; @ file for this task.","73-75"),
+ ("Escalation decision criteria","0%","CRITICAL","Escalate on explicit request, policy gap, repeated failure; ask identifier for multiple matches; no sentiment/confidence triggers.","76-79"),
+ ("Structured output via tool use; tool_choice and sequencing","0%","CRITICAL","{type:tool,name} forces a tool; any forces some tool; no forcing with extended thinking; executor guard for prerequisites; validate semantics.","80-84"),
+ ("Extraction schemas: optional, nullable, enums","33%","CRITICAL","Nullable/optional fields, 'other'+detail, 'unclear', normalisation + varied few-shot.","85-87"),
+ ("Stateless API, exploration, descriptions, MCP, resume","50-75%","Reinforce","Resend history (server-side); Grep→Read; description contrast; .mcp.json with ${ENV_VAR}; re-analyse changed files; plan mode; adaptive decomposition.","88-97"),
+ ("Structured handoff packages","100%","Maintain","ID, root cause, actions, amounts, authorisation state, next action.","98"),
 ]
 ARCH_BR = [("Agentic Architecture & Orchestration","1","#4f46e5","bounded loops • stop_reason • orchestration safeguards • multi-agent coordination • state & recovery"),
  ("Tool Design & MCP","2","#0d9488","descriptions • typed errors • scopes • tool_choice • sequencing gates"),
@@ -90,10 +99,10 @@ DEV_BR = [("Claude API Mechanics","1","#4f46e5","stateless history • stop_reas
  (SR,"★","#b91c1c","safeguards • escalation • tool_choice • sequencing • enforce vs advise • project context • refinement • nullable schemas")]
 
 CFG = {
- 'claude_architect_professional': dict(title='Claude Architect Professional', centre=['CLAUDE','ARCHITECT','PROFESSIONAL'], cards=ARCH_CARDS, rows=ARCH_ROWS, br=ARCH_BR,
-      readme='claude_architect_pro_readme.md', first_new=173, last=212, extra=(213, 228), label='CCAR-P', area='Architect'),
+ 'claude_architect_professional': dict(title='Claude Architect Professional', centre=['CLAUDE','ARCHITECT','PROFESSIONAL'], cards=ARCH_CARDS+ARCH_COV_CARDS, rows=ARCH_ROWS, br=ARCH_BR,
+      readme='claude_architect_pro_readme.md', first_new=73, last=112, extra=(113, 128), cov=(129, 153), label='CCAR-P', area='Architect'),
  'claude_developer_professional': dict(title='Claude Developer Professional', centre=['CLAUDE','DEVELOPER','PROFESSIONAL'], cards=DEV_CARDS, rows=DEV_ROWS, br=DEV_BR,
-      readme='claude_developer_pro_readme.md', first_new=151, last=188, extra=(189, 203), label='CCDV-P', area='Developer'),
+      readme='claude_developer_pro_readme.md', first_new=61, last=98, extra=(99, 113), label='CCDV-P', area='Developer'),
 }
 S = ns['styles']
 
@@ -128,7 +137,7 @@ def parse_old_cards(readme_text):
     for ln in m.group(1).splitlines():
         if ln.startswith('|') and not ln.startswith('|---') and 'Question trigger' not in ln:
             cells = [c.strip() for c in ln.strip().strip('|').split(' | ')]
-            if len(cells) == 4 and not cells[0].startswith('★'): rows.append(tuple(cells))
+            if len(cells) == 4 and not cells[0].startswith(('★','◆')): rows.append(tuple(cells))
     return rows
 
 for stem, cfg in CFG.items():
@@ -154,7 +163,7 @@ for stem, cfg in CFG.items():
     H = ParagraphStyle('H', parent=st['Heading3'], fontSize=10, spaceBefore=4, spaceAfter=3)
     B = ParagraphStyle('B', parent=st['BodyText'], fontSize=7.4, leading=9.2)
     s = [Paragraph(f"{cfg['title']} — Quick Recall &amp; Decision Map", T),
-         Paragraph('Four-keyword trigger → answer → reason → trap. ★ cards target the objectives scored 0–75% on the Architect Foundations report; remaining cards are representative study aids derived from this bank, not an official blueprint.', Sub),
+         Paragraph('Four-keyword trigger → answer → reason → trap. ★ cards target the objectives scored 0–75% on the Architect Foundations report; ' + ('◆ cards cover official-blueprint topics that were thin or missing. ' if cfg.get('cov') else '') + 'Remaining cards are representative study aids derived from this bank, not an official blueprint.', Sub),
          Paragraph('Consolidated Mind Map', H), mindmap(cfg['br'], cfg['centre']), PageBreak(), Paragraph('Four-keyword recall cards', H)]
     rows = [[Paragraph(f'<b>{h}</b>', B) for h in ('Question trigger (max 4)', 'Answer recall (max 4)', 'Reason', 'Common exam trap')]]
     for c in allcards: rows.append([Paragraph(escape(x), B) for x in c])
@@ -189,10 +198,13 @@ for stem, cfg in CFG.items():
     t = re.sub(r'Consolidated recall cards: \*\*\d+\*\*', f'Consolidated recall cards: **{len(allcards)}**', t)
     t = re.sub(r'Questions in source bank: \*\*\d+\*\*', f'Questions in source bank: **{len(bank)}**', t)
     t = re.sub(r'\*\*\d+ professional-level practice MCQs\*\*', f'**{len(bank)} professional-level practice MCQs**', t)
-    t = t.replace('172-question practice bank', f'{len(bank)}-question practice bank')
+    t = re.sub(r'\d+-question practice bank', f'{len(bank)}-question practice bank', t)
     if 'Revision questions' not in t:
         t = t.replace('## Simulator', f"## Revision questions\nQuestions {cfg['first_new']}–{cfg['last']} were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.\n\n## Simulator", 1)
     if 'Additional scenario questions' not in t:
         t = t.replace('## Simulator', f"## Additional scenario questions\nQuestions {cfg['extra'][0]}–{cfg['extra'][1]} are extra scenario questions on topics the earlier bank covered thinly: coordinator state ownership, external scratchpads, LLM-judge bias, deployment surface, circuit breakers, context management for long runs, model version pinning, MCP token passthrough and supply-chain risk, canary releases, PII-safe logging and citations. They are original practice questions, not live exam items.\n\n## Simulator", 1)
+    if cfg.get('cov'):
+        t = re.sub(r'## Blueprint-coverage questions\n.*?\n\n(?=## Simulator)', '', t, flags=re.S)
+        t = t.replace('## Simulator', f"## Blueprint-coverage questions\nQuestions {cfg['cov'][0]}–{cfg['cov'][1]} fill gaps against the seven CCAR-P domains (deployment surface on Bedrock, Vertex AI and Azure, RAG chunking and reranking, A/B testing and retrieval-vs-generation evaluation, GDPR and FedRAMP, agent-to-agent vs MCP vs CLI, progressive tool discovery, managed settings and plugin marketplaces, discovery and decision records). The bank is still weighted towards the five foundation-style domains, so treat per-domain counts as a study aid rather than a blueprint match. Original practice questions, not live exam items.\n\n## Simulator\n", 1)
     rp.write_text(t, encoding='utf-8')
     print(stem, len(bank), 'questions;', len(allcards), 'cards;', len(PdfReader(str(DOCS/f'{stem}_answers.pdf')).pages), 'pdf pages')

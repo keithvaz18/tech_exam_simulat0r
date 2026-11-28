@@ -133,7 +133,7 @@ Skip and keep moving. One hard item costs one mark; stalling costs several. On t
 **Exam facts:** 53 items · 120 min · pass = scaled **720 / 1000** · $125 · valid 12 months · for engineers with 1-5 yrs SWE and 6+ months Claude experience.
 Breadth exam: **API mechanics and engineering fundamentals carry a third of the score.**
 
-**Practice simulator coverage:** 150 curated questions plus a refreshed 100-question priority set (`hotsQuestions`). The Hot 100 is weighted to the official domain blueprint: Applications & Integration 33, Model Selection 17, Agents & Workflows 15, Prompt & Context 11, Tools & MCP 10, Security & Safety 8, Claude Code 3, and Eval/Debugging 3. This is a preparation bank, not a representation of the live exam item count.
+**Practice simulator coverage:** 195 curated questions plus a refreshed 100-question priority set (`hotsQuestions`). The Hot 100 is weighted to the official domain blueprint: Applications & Integration 33, Model Selection 17, Agents & Workflows 15, Prompt & Context 11, Tools & MCP 10, Security & Safety 8, Claude Code 3, and Eval/Debugging 3. This is a preparation bank, not a representation of the live exam item count.
 
 | # | Domain | Weight |
 | - | ------ | ------ |
@@ -438,9 +438,9 @@ The exam's model answer for prompt injection, worth memorizing as a pattern: tre
 
 ## Practice bank and simulator files
 
-- `questionBank_claude_developer.js` contains 150 multiple-choice questions with stable zero-based IDs, difficulty, blueprint category, four options, answer index, and rationale.
+- `questionBank_claude_developer.js` contains 195 multiple-choice questions with stable zero-based IDs, difficulty, blueprint category, four options, answer index, and rationale.
 - `hotsQuestions` contains 100 unique zero-based question indices, ordered from high-priority applied questions through foundational coverage. Keep it as an index list; do not treat its values as question IDs if the bank is later reordered.
 - `claude_developer_detailed_one_pager.png` is the visual revision sheet covering all eight official domains, high-value API and engineering patterns, problem-to-fix mappings, and an interview one-liner.
-- The exam guide states 53 live exam items, 120 minutes, and a scaled passing score of 720/1000. The 150-question bank is supplemental practice content.
+- The exam guide states 53 live exam items, 120 minutes, and a scaled passing score of 720/1000. The 195-question bank is supplemental practice content.
 
 **Preparation approach:** learn the domain fundamentals, complete the Hot 100 under timed conditions, review every explanation (including correct answers), then complete the remaining bank and revisit weak domains. The official exam may change; use the current exam guide as the authority.

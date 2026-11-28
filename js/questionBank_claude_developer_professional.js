@@ -1,4 +1,4 @@
-/* CLAUDE CERTIFIED DEVELOPER — PROFESSIONAL (CCDV-P) — 203 professional-level practice MCQs. */
+/* CLAUDE CERTIFIED DEVELOPER — PROFESSIONAL (CCDV-P) — 113 professional-level practice MCQs. */
 const questionBank = [
   {
     "id": 1,
@@ -842,1266 +842,6 @@ const questionBank = [
   },
   {
     "id": 61,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a service needs to preserve multi-turn conversation state with the Messages API. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Resend the relevant conversation history on each request because the Messages API is stateless",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Resend the relevant conversation history on each request because the Messages API is stateless. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 62,
-    "difficulty": "hard",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: a user-facing application needs lower perceived response latency. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Use streaming and render validated incremental content appropriately",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 1,
-    "explanation": "Use streaming and render validated incremental content appropriately. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 63,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a bulk classification job can complete asynchronously. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use the Batch API when its asynchronous completion model fits the deadline"
-    ],
-    "answer": 3,
-    "explanation": "Use the Batch API when its asynchronous completion model fits the deadline. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 64,
-    "difficulty": "hard",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a response ends with max_tokens-related truncation. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Inspect stop_reason and usage, then continue or resize the output budget safely",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 1,
-    "explanation": "Inspect stop_reason and usage, then continue or resize the output budget safely. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 65,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: an application must accept image and text input. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Construct supported multimodal content blocks and validate input size/type before sending",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 0,
-    "explanation": "Construct supported multimodal content blocks and validate input size/type before sending. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 66,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a team deploys through a cloud model provider. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Verify provider-specific model identifiers, feature support, limits, authentication and operational behavior",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 1,
-    "explanation": "Verify provider-specific model identifiers, feature support, limits, authentication and operational behavior. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 67,
-    "difficulty": "hard",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: a long-running request must be cancelled or timed out. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Implement application-level deadlines, cancellation handling and cleanup"
-    ],
-    "answer": 3,
-    "explanation": "Implement application-level deadlines, cancellation handling and cleanup. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 68,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a service needs to correlate API usage to customers and features. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Capture request identifiers and token usage securely with appropriate tenant attribution"
-    ],
-    "answer": 3,
-    "explanation": "Capture request identifiers and token usage securely with appropriate tenant attribution. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 69,
-    "difficulty": "hard",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a system prompt must remain separate from user input. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Pass trusted system instructions through the system field and user content as message data",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Pass trusted system instructions through the system field and user content as message data. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 70,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: an integration must handle evolving API schemas. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use typed request/response models, contract tests and deliberate SDK/API version management"
-    ],
-    "answer": 3,
-    "explanation": "Use typed request/response models, contract tests and deliberate SDK/API version management. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 71,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a network request fails transiently with HTTP 503. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Retry with bounded exponential backoff and jitter, respecting retry guidance",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 0,
-    "explanation": "Retry with bounded exponential backoff and jitter, respecting retry guidance. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 72,
-    "difficulty": "hard",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: a request fails with HTTP 422. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Surface actionable validation feedback and correct the request rather than retrying unchanged input",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Surface actionable validation feedback and correct the request rather than retrying unchanged input. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 73,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a payment-like action may be repeated after a timeout. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Use idempotency keys and a durable operation record to prevent duplicate side effects",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 0,
-    "explanation": "Use idempotency keys and a durable operation record to prevent duplicate side effects. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 74,
-    "difficulty": "hard",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a model output is used to update a database. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Validate schema, authorization, business invariants and transaction boundaries in trusted application code",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Validate schema, authorization, business invariants and transaction boundaries in trusted application code. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 75,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a production deployment changes prompt behavior. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Version prompts, evaluate representative cases and support rollback"
-    ],
-    "answer": 3,
-    "explanation": "Version prompts, evaluate representative cases and support rollback. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 76,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a service must handle many concurrent requests. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use bounded concurrency, queueing, backpressure and explicit timeout budgets",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 1,
-    "explanation": "Use bounded concurrency, queueing, backpressure and explicit timeout budgets. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 77,
-    "difficulty": "hard",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: an API key is committed to source control. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Revoke and rotate it, remove it from active history where possible, and move secrets to managed configuration",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 2,
-    "explanation": "Revoke and rotate it, remove it from active history where possible, and move secrets to managed configuration. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 78,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a system needs an auditable business action. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Record actor, authorization decision, action, target, timestamp, outcome and correlation identifiers",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 0,
-    "explanation": "Record actor, authorization decision, action, target, timestamp, outcome and correlation identifiers. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 79,
-    "difficulty": "hard",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a new integration has no stable contract tests. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Add request/response fixtures and tests for success, validation, rate limit and transient failures"
-    ],
-    "answer": 3,
-    "explanation": "Add request/response fixtures and tests for success, validation, rate limit and transient failures. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 80,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a client request is retried by a load balancer. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Make retry semantics explicit and safe for each operation; use idempotency for writes",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 2,
-    "explanation": "Make retry semantics explicit and safe for each operation; use idempotency for writes. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 81,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: an agent receives stop_reason tool_use. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Execute the requested tool calls, append matching results and continue the loop",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 1,
-    "explanation": "Execute the requested tool calls, append matching results and continue the loop. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 82,
-    "difficulty": "hard",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: an agent receives stop_reason end_turn. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "End the current assistant turn and return the final response",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 0,
-    "explanation": "End the current assistant turn and return the final response. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 83,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a tool call contains multiple tool_use blocks. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Validate and execute each permitted call, correlate each result and preserve the protocol sequence"
-    ],
-    "answer": 3,
-    "explanation": "Validate and execute each permitted call, correlate each result and preserve the protocol sequence. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 84,
-    "difficulty": "hard",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, an agent must perform a high-risk operation. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Insert a human approval step and enforce authorization in the tool implementation",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 1,
-    "explanation": "Insert a human approval step and enforce authorization in the tool implementation. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 85,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a deterministic workflow has fixed stages. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Implement explicit state transitions and use model calls only where they add value"
-    ],
-    "answer": 3,
-    "explanation": "Implement explicit state transitions and use model calls only where they add value. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 86,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: an agent's tool output is large. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Filter, summarize or paginate the result while preserving relevant evidence and provenance",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 0,
-    "explanation": "Filter, summarize or paginate the result while preserving relevant evidence and provenance. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 87,
-    "difficulty": "hard",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: a task needs independent specialist work. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use bounded subagents or parallel tasks and validate their synthesized output"
-    ],
-    "answer": 3,
-    "explanation": "Use bounded subagents or parallel tasks and validate their synthesized output. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 88,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that an agent tool returns a permission error. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Surface the permission failure and stop or request an authorized path; do not retry blindly"
-    ],
-    "answer": 3,
-    "explanation": "Surface the permission failure and stop or request an authorized path; do not retry blindly. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 89,
-    "difficulty": "hard",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, an agent loop can run indefinitely. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Set maximum iterations, deadlines, budget limits and explicit terminal conditions",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 0,
-    "explanation": "Set maximum iterations, deadlines, budget limits and explicit terminal conditions. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 90,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a workflow needs a durable checkpoint. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Persist explicit task state and completed side effects with idempotent recovery semantics",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Persist explicit task state and completed side effects with idempotent recovery semantics. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 91,
-    "difficulty": "medium",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a repository needs onboarding context. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Use a project-level CLAUDE.md and keep it concise, version-controlled and actionable",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 1,
-    "explanation": "Use a project-level CLAUDE.md and keep it concise, version-controlled and actionable. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 92,
-    "difficulty": "hard",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: a CI pipeline must run Claude Code unattended. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Use claude -p/--print with explicit input, output format and exit handling",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 1,
-    "explanation": "Use claude -p/--print with explicit input, output format and exit handling. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 93,
-    "difficulty": "medium",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a coding task spans many files with architectural choices. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use Plan mode or a discovery phase before applying changes",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 1,
-    "explanation": "Use Plan mode or a discovery phase before applying changes. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 94,
-    "difficulty": "hard",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a task is a one-line deterministic fix. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use a focused direct edit and run the relevant verification",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 1,
-    "explanation": "Use a focused direct edit and run the relevant verification. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 95,
-    "difficulty": "medium",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a procedure is reusable but only occasionally needed. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Create a Skill with scoped instructions and metadata",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 2,
-    "explanation": "Create a Skill with scoped instructions and metadata. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 96,
-    "difficulty": "medium",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a rule applies only to matching source paths. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Use path-scoped rules with globs and verify the matching paths"
-    ],
-    "answer": 3,
-    "explanation": "Use path-scoped rules with globs and verify the matching paths. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 97,
-    "difficulty": "hard",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: a generated patch must be reviewed. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Inspect the diff, run focused tests, lint/type checks and relevant integration checks",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 0,
-    "explanation": "Inspect the diff, run focused tests, lint/type checks and relevant integration checks. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 98,
-    "difficulty": "medium",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a command might change production data. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Constrain allowed tools and require explicit approval or a safe environment",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Constrain allowed tools and require explicit approval or a safe environment. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 99,
-    "difficulty": "hard",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a team wants shared slash commands. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Commit them in the project command directory"
-    ],
-    "answer": 3,
-    "explanation": "Commit them in the project command directory. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 100,
-    "difficulty": "medium",
-    "category": "claude-code-engineering-workflows",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a bug report is vague. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Ask targeted questions, reproduce, inspect traces and isolate the smallest failing layer"
-    ],
-    "answer": 3,
-    "explanation": "Ask targeted questions, reproduce, inspect traces and isolate the smallest failing layer. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 101,
-    "difficulty": "medium",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a parser consumes model-generated JSON. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Validate against a schema and reject or repair invalid data through a bounded path",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 1,
-    "explanation": "Validate against a schema and reject or repair invalid data through a bounded path. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 102,
-    "difficulty": "hard",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: a prompt includes user-supplied document text. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Mark the document as untrusted data and prevent it from overriding instructions",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 0,
-    "explanation": "Mark the document as untrusted data and prevent it from overriding instructions. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 103,
-    "difficulty": "medium",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a task has strict classification labels. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Enumerate allowed labels, define boundary cases and validate the returned value"
-    ],
-    "answer": 3,
-    "explanation": "Enumerate allowed labels, define boundary cases and validate the returned value. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 104,
-    "difficulty": "hard",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a context window is nearing capacity. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Prune irrelevant tool output and compact older context while preserving task state"
-    ],
-    "answer": 3,
-    "explanation": "Prune irrelevant tool output and compact older context while preserving task state. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 105,
-    "difficulty": "medium",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a response may contain unsupported claims. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Require evidence or source references and validate claims against trusted data",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 1,
-    "explanation": "Require evidence or source references and validate claims against trusted data. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 106,
-    "difficulty": "medium",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a prompt needs repeatable behavior. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Use examples, explicit constraints and an evaluation set that covers representative edge cases"
-    ],
-    "answer": 3,
-    "explanation": "Use examples, explicit constraints and an evaluation set that covers representative edge cases. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 107,
-    "difficulty": "hard",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: a model may return an unknown value. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Define null/unknown handling and ensure downstream code supports it"
-    ],
-    "answer": 3,
-    "explanation": "Define null/unknown handling and ensure downstream code supports it. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 108,
-    "difficulty": "medium",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that static prompt content is reused across calls. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Place stable prefixes consistently and use prompt caching where supported"
-    ],
-    "answer": 3,
-    "explanation": "Place stable prefixes consistently and use prompt caching where supported. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 109,
-    "difficulty": "hard",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a tool result contains instruction-like text. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Treat it as untrusted output and keep it separate from trusted instructions",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 0,
-    "explanation": "Treat it as untrusted output and keep it separate from trusted instructions. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 110,
-    "difficulty": "medium",
-    "category": "prompt,-context-and-output-handling",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a model output drives a UI action. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Use typed validation, safe rendering and explicit user confirmation for consequential actions",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 1,
-    "explanation": "Use typed validation, safe rendering and explicit user confirmation for consequential actions. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 111,
-    "difficulty": "medium",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a prompt injection attempts to exfiltrate secrets. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Keep secrets out of model context and enforce access controls outside the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 1,
-    "explanation": "Keep secrets out of model context and enforce access controls outside the model. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 112,
-    "difficulty": "hard",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: a user can request a restricted tool. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Enforce authorization server-side for every call, regardless of model intent",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Enforce authorization server-side for every call, regardless of model intent. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 113,
-    "difficulty": "medium",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a log pipeline captures sensitive content. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Minimize, redact and restrict access to sensitive fields with retention controls",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Minimize, redact and restrict access to sensitive fields with retention controls. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 114,
-    "difficulty": "hard",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a tool can delete customer data. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Use least privilege, scoped access, approval, audit and reversible safeguards where possible"
-    ],
-    "answer": 3,
-    "explanation": "Use least privilege, scoped access, approval, audit and reversible safeguards where possible. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 115,
-    "difficulty": "medium",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a prompt change is ready for release. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Run regression evals and compare quality, safety and operational metrics"
-    ],
-    "answer": 3,
-    "explanation": "Run regression evals and compare quality, safety and operational metrics. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 116,
-    "difficulty": "medium",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. A platform team encounters this situation: a production trace shows a wrong final answer. Which implementation choice is most appropriate? What should the team do to address the requirement?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Isolate whether the cause is model output, bad tool data, incorrect parameters, truncation or orchestration",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 2,
-    "explanation": "Isolate whether the cause is model output, bad tool data, incorrect parameters, truncation or orchestration. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 117,
-    "difficulty": "hard",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. During a production design review, the team observes: an evaluator dataset leaks into prompt examples. What should the engineer recommend? What should the team do to address the requirement?",
-    "options": [
-      "Separate evaluation data from tuning examples and protect holdout integrity",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 0,
-    "explanation": "Separate evaluation data from tuning examples and protect holdout integrity. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 118,
-    "difficulty": "medium",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. A delivery team is validating its solution and finds that a service needs robust error recovery. Which response best addresses the requirement? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Classify transient, validation, permission and business errors and apply category-specific handling"
-    ],
-    "answer": 3,
-    "explanation": "Classify transient, validation, permission and business errors and apply category-specific handling. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 119,
-    "difficulty": "hard",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. In a scenario-based assessment, a tool is granted more permissions than required. Which action is the strongest engineering choice? What should the team do to address the requirement?",
-    "options": [
-      "Reduce scopes to the minimum needed and isolate credentials by function",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 0,
-    "explanation": "Reduce scopes to the minimum needed and isolate credentials by function. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 120,
-    "difficulty": "medium",
-    "category": "security,-safety-and-evaluation",
-    "question": "A senior engineer is reviewing a failed integration test. A service owner asks how to handle this case: a model appears accurate in aggregate but fails a critical subgroup. What is the most reliable approach? What should the team do to address the requirement?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Slice evaluations by scenario, risk and user segment and add targeted cases",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 1,
-    "explanation": "Slice evaluations by scenario, risk and user segment and add targeted cases. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 121,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. A platform team encounters this situation: a service needs to preserve multi-turn conversation state with the Messages API. Which implementation choice is most appropriate? Which response best controls the identified risk?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Resend the relevant conversation history on each request because the Messages API is stateless",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Resend the relevant conversation history on each request because the Messages API is stateless. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 122,
-    "difficulty": "hard",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. During a production design review, the team observes: a user-facing application needs lower perceived response latency. What should the engineer recommend? Which response best controls the identified risk?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Use streaming and render validated incremental content appropriately",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 1,
-    "explanation": "Use streaming and render validated incremental content appropriately. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 123,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. A delivery team is validating its solution and finds that a bulk classification job can complete asynchronously. Which response best addresses the requirement? Which response best controls the identified risk?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use the Batch API when its asynchronous completion model fits the deadline"
-    ],
-    "answer": 3,
-    "explanation": "Use the Batch API when its asynchronous completion model fits the deadline. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 124,
-    "difficulty": "hard",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. In a scenario-based assessment, a response ends with max_tokens-related truncation. Which action is the strongest engineering choice? Which response best controls the identified risk?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Inspect stop_reason and usage, then continue or resize the output budget safely",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 1,
-    "explanation": "Inspect stop_reason and usage, then continue or resize the output budget safely. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 125,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. A service owner asks how to handle this case: an application must accept image and text input. What is the most reliable approach? Which response best controls the identified risk?",
-    "options": [
-      "Construct supported multimodal content blocks and validate input size/type before sending",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 0,
-    "explanation": "Construct supported multimodal content blocks and validate input size/type before sending. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 126,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. A platform team encounters this situation: a team deploys through a cloud model provider. Which implementation choice is most appropriate? Which response best controls the identified risk?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Verify provider-specific model identifiers, feature support, limits, authentication and operational behavior",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 1,
-    "explanation": "Verify provider-specific model identifiers, feature support, limits, authentication and operational behavior. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 127,
-    "difficulty": "hard",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. During a production design review, the team observes: a long-running request must be cancelled or timed out. What should the engineer recommend? Which response best controls the identified risk?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Implement application-level deadlines, cancellation handling and cleanup"
-    ],
-    "answer": 3,
-    "explanation": "Implement application-level deadlines, cancellation handling and cleanup. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 128,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. A delivery team is validating its solution and finds that a service needs to correlate API usage to customers and features. Which response best addresses the requirement? Which response best controls the identified risk?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Capture request identifiers and token usage securely with appropriate tenant attribution"
-    ],
-    "answer": 3,
-    "explanation": "Capture request identifiers and token usage securely with appropriate tenant attribution. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 129,
-    "difficulty": "hard",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. In a scenario-based assessment, a system prompt must remain separate from user input. Which action is the strongest engineering choice? Which response best controls the identified risk?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Pass trusted system instructions through the system field and user content as message data",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Pass trusted system instructions through the system field and user content as message data. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 130,
-    "difficulty": "medium",
-    "category": "claude-api-mechanics-and-integration",
-    "question": "An engineering lead is assessing a proposed system change. A service owner asks how to handle this case: an integration must handle evolving API schemas. What is the most reliable approach? Which response best controls the identified risk?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use typed request/response models, contract tests and deliberate SDK/API version management"
-    ],
-    "answer": 3,
-    "explanation": "Use typed request/response models, contract tests and deliberate SDK/API version management. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 131,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. A platform team encounters this situation: a network request fails transiently with HTTP 503. Which implementation choice is most appropriate? Which response best controls the identified risk?",
-    "options": [
-      "Retry with bounded exponential backoff and jitter, respecting retry guidance",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 0,
-    "explanation": "Retry with bounded exponential backoff and jitter, respecting retry guidance. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 132,
-    "difficulty": "hard",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. During a production design review, the team observes: a request fails with HTTP 422. What should the engineer recommend? Which response best controls the identified risk?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Surface actionable validation feedback and correct the request rather than retrying unchanged input",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Surface actionable validation feedback and correct the request rather than retrying unchanged input. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 133,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. A delivery team is validating its solution and finds that a payment-like action may be repeated after a timeout. Which response best addresses the requirement? Which response best controls the identified risk?",
-    "options": [
-      "Use idempotency keys and a durable operation record to prevent duplicate side effects",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 0,
-    "explanation": "Use idempotency keys and a durable operation record to prevent duplicate side effects. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 134,
-    "difficulty": "hard",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. In a scenario-based assessment, a model output is used to update a database. Which action is the strongest engineering choice? Which response best controls the identified risk?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Validate schema, authorization, business invariants and transaction boundaries in trusted application code",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Validate schema, authorization, business invariants and transaction boundaries in trusted application code. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 135,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. A service owner asks how to handle this case: a production deployment changes prompt behavior. What is the most reliable approach? Which response best controls the identified risk?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Version prompts, evaluate representative cases and support rollback"
-    ],
-    "answer": 3,
-    "explanation": "Version prompts, evaluate representative cases and support rollback. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 136,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. A platform team encounters this situation: a service must handle many concurrent requests. Which implementation choice is most appropriate? Which response best controls the identified risk?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use bounded concurrency, queueing, backpressure and explicit timeout budgets",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 1,
-    "explanation": "Use bounded concurrency, queueing, backpressure and explicit timeout budgets. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 137,
-    "difficulty": "hard",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. During a production design review, the team observes: an API key is committed to source control. What should the engineer recommend? Which response best controls the identified risk?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Revoke and rotate it, remove it from active history where possible, and move secrets to managed configuration",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 2,
-    "explanation": "Revoke and rotate it, remove it from active history where possible, and move secrets to managed configuration. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 138,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. A delivery team is validating its solution and finds that a system needs an auditable business action. Which response best addresses the requirement? Which response best controls the identified risk?",
-    "options": [
-      "Record actor, authorization decision, action, target, timestamp, outcome and correlation identifiers",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible"
-    ],
-    "answer": 0,
-    "explanation": "Record actor, authorization decision, action, target, timestamp, outcome and correlation identifiers. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 139,
-    "difficulty": "hard",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. In a scenario-based assessment, a new integration has no stable contract tests. Which action is the strongest engineering choice? Which response best controls the identified risk?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Add request/response fixtures and tests for success, validation, rate limit and transient failures"
-    ],
-    "answer": 3,
-    "explanation": "Add request/response fixtures and tests for success, validation, rate limit and transient failures. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 140,
-    "difficulty": "medium",
-    "category": "software-engineering-and-application-design",
-    "question": "An engineering lead is assessing a proposed system change. A service owner asks how to handle this case: a client request is retried by a load balancer. What is the most reliable approach? Which response best controls the identified risk?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Make retry semantics explicit and safe for each operation; use idempotency for writes",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 2,
-    "explanation": "Make retry semantics explicit and safe for each operation; use idempotency for writes. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 141,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. A platform team encounters this situation: an agent receives stop_reason tool_use. Which implementation choice is most appropriate? Which response best controls the identified risk?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Execute the requested tool calls, append matching results and continue the loop",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 1,
-    "explanation": "Execute the requested tool calls, append matching results and continue the loop. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 142,
-    "difficulty": "hard",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. During a production design review, the team observes: an agent receives stop_reason end_turn. What should the engineer recommend? Which response best controls the identified risk?",
-    "options": [
-      "End the current assistant turn and return the final response",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 0,
-    "explanation": "End the current assistant turn and return the final response. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 143,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. A delivery team is validating its solution and finds that a tool call contains multiple tool_use blocks. Which response best addresses the requirement? Which response best controls the identified risk?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Validate and execute each permitted call, correlate each result and preserve the protocol sequence"
-    ],
-    "answer": 3,
-    "explanation": "Validate and execute each permitted call, correlate each result and preserve the protocol sequence. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 144,
-    "difficulty": "hard",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. In a scenario-based assessment, an agent must perform a high-risk operation. Which action is the strongest engineering choice? Which response best controls the identified risk?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Insert a human approval step and enforce authorization in the tool implementation",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 1,
-    "explanation": "Insert a human approval step and enforce authorization in the tool implementation. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 145,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. A service owner asks how to handle this case: a deterministic workflow has fixed stages. What is the most reliable approach? Which response best controls the identified risk?",
-    "options": [
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Implement explicit state transitions and use model calls only where they add value"
-    ],
-    "answer": 3,
-    "explanation": "Implement explicit state transitions and use model calls only where they add value. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 146,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. A platform team encounters this situation: an agent's tool output is large. Which implementation choice is most appropriate? Which response best controls the identified risk?",
-    "options": [
-      "Filter, summarize or paginate the result while preserving relevant evidence and provenance",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 0,
-    "explanation": "Filter, summarize or paginate the result while preserving relevant evidence and provenance. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 147,
-    "difficulty": "hard",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. During a production design review, the team observes: a task needs independent specialist work. What should the engineer recommend? Which response best controls the identified risk?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Use bounded subagents or parallel tasks and validate their synthesized output"
-    ],
-    "answer": 3,
-    "explanation": "Use bounded subagents or parallel tasks and validate their synthesized output. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 148,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. A delivery team is validating its solution and finds that an agent tool returns a permission error. Which response best addresses the requirement? Which response best controls the identified risk?",
-    "options": [
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Surface the permission failure and stop or request an authorized path; do not retry blindly"
-    ],
-    "answer": 3,
-    "explanation": "Surface the permission failure and stop or request an authorized path; do not retry blindly. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 149,
-    "difficulty": "hard",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. In a scenario-based assessment, an agent loop can run indefinitely. Which action is the strongest engineering choice? Which response best controls the identified risk?",
-    "options": [
-      "Set maximum iterations, deadlines, budget limits and explicit terminal conditions",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model",
-      "Retry or repeat the operation without classifying the failure or checking side effects"
-    ],
-    "answer": 0,
-    "explanation": "Set maximum iterations, deadlines, budget limits and explicit terminal conditions. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 150,
-    "difficulty": "medium",
-    "category": "agents-and-workflow-implementation",
-    "question": "An engineering lead is assessing a proposed system change. A service owner asks how to handle this case: a workflow needs a durable checkpoint. What is the most reliable approach? Which response best controls the identified risk?",
-    "options": [
-      "Retry or repeat the operation without classifying the failure or checking side effects",
-      "Skip instrumentation and accept the result if the response appears plausible",
-      "Persist explicit task state and completed side effects with idempotent recovery semantics",
-      "Rely on a prompt-only instruction and leave enforcement or validation to the model"
-    ],
-    "answer": 2,
-    "explanation": "Persist explicit task state and completed side effects with idempotent recovery semantics. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
-  },
-  {
-    "id": 151,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "Your agent loop is `while True:` calling the API until stop_reason == 'end_turn'. In production some runs never terminate and one crashed on a tool exception, leaving a paid order half-processed. What is the right implementation?",
@@ -2115,7 +855,7 @@ const questionBank = [
     "explanation": "Termination and outcome recording must be enforced by code on every exit path. Prompt instructions and swallowed exceptions leave the same gaps."
   },
   {
-    "id": 152,
+    "id": 62,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "Which stop_reason handling is correct inside an agent loop?",
@@ -2129,7 +869,7 @@ const questionBank = [
     "explanation": "Each stop_reason has distinct semantics. Truncation and refusal are not successful completions."
   },
   {
-    "id": 153,
+    "id": 63,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "A tool_use block is cut off by max_tokens. Your code json.loads the partial input and executes the tool. What is wrong?",
@@ -2143,7 +883,7 @@ const questionBank = [
     "explanation": "A parse that happens to succeed on a truncated input still may omit fields. Side-effecting tools must not run on incomplete calls."
   },
   {
-    "id": 154,
+    "id": 64,
     "difficulty": "medium",
     "category": "agents-and-workflow-implementation",
     "question": "A tool call raises a timeout. How should the loop report it to the model?",
@@ -2157,7 +897,7 @@ const questionBank = [
     "explanation": "Every tool_use needs a matching tool_result. is_error with structured information lets the model reason about retry or escalation."
   },
   {
-    "id": 155,
+    "id": 65,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "Where should the 'every session ends resolved or escalated' guarantee be implemented?",
@@ -2171,7 +911,7 @@ const questionBank = [
     "explanation": "Only application code sees all failure modes, including process death. The model cannot guarantee it."
   },
   {
-    "id": 156,
+    "id": 66,
     "difficulty": "medium",
     "category": "prompt,-context-and-output-handling",
     "question": "A prompt that converts messy addresses to a normalised format fails on edge cases. Which refinement is most effective?",
@@ -2185,7 +925,7 @@ const questionBank = [
     "explanation": "Concrete examples of the transformation outperform prose and are measurable against an eval set."
   },
   {
-    "id": 157,
+    "id": 67,
     "difficulty": "hard",
     "category": "prompt,-context-and-output-handling",
     "question": "You have 6 failing cases that all stem from one ambiguous instruction about currency symbols. How should you iterate?",
@@ -2199,7 +939,7 @@ const questionBank = [
     "explanation": "Group related failures into one targeted change, then evaluate everything to catch regressions."
   },
   {
-    "id": 158,
+    "id": 68,
     "difficulty": "medium",
     "category": "claude-code-engineering-workflows",
     "question": "For a new utility with clear acceptance criteria, which Claude Code workflow gives the most dependable refinement?",
@@ -2213,7 +953,7 @@ const questionBank = [
     "explanation": "Tests give objective, specific feedback for each iteration."
   },
   {
-    "id": 159,
+    "id": 69,
     "difficulty": "hard",
     "category": "claude-code-engineering-workflows",
     "question": "CLAUDE.md forbids reading .env, yet a log shows it was read once. How do you make the rule reliable?",
@@ -2227,7 +967,7 @@ const questionBank = [
     "explanation": "Permissions are enforced by the tool layer. CLAUDE.md is context the model may weigh against other instructions."
   },
   {
-    "id": 160,
+    "id": 70,
     "difficulty": "hard",
     "category": "claude-code-engineering-workflows",
     "question": "You need code formatted on every Claude edit regardless of model behaviour. Which mechanism?",
@@ -2241,7 +981,7 @@ const questionBank = [
     "explanation": "Hooks run deterministically as part of the tool lifecycle."
   },
   {
-    "id": 161,
+    "id": 71,
     "difficulty": "medium",
     "category": "claude-code-engineering-workflows",
     "question": "Which belongs in a .claude/rules file with a paths glob?",
@@ -2255,7 +995,7 @@ const questionBank = [
     "explanation": "Path-scoped rules load conditionally for matching files. Permissions and workflows belong elsewhere."
   },
   {
-    "id": 162,
+    "id": 72,
     "difficulty": "hard",
     "category": "claude-code-engineering-workflows",
     "question": "A PreToolUse hook is meant to block writes to a protected directory. What must it do to block the call?",
@@ -2269,7 +1009,7 @@ const questionBank = [
     "explanation": "A blocking exit code stops the tool call and returns the message to the model; exit 0 allows it."
   },
   {
-    "id": 163,
+    "id": 73,
     "difficulty": "medium",
     "category": "claude-code-engineering-workflows",
     "question": "Which is the correct place for conventions every teammate's session should follow?",
@@ -2283,7 +1023,7 @@ const questionBank = [
     "explanation": "Project CLAUDE.md is shared via version control. User files and pasted text are not."
   },
   {
-    "id": 164,
+    "id": 74,
     "difficulty": "medium",
     "category": "claude-code-engineering-workflows",
     "question": "You need Claude to read one specific design doc for this task only. What is the best approach?",
@@ -2297,7 +1037,7 @@ const questionBank = [
     "explanation": "@ references pull a specific file into this request without permanent context cost."
   },
   {
-    "id": 165,
+    "id": 75,
     "difficulty": "hard",
     "category": "claude-code-engineering-workflows",
     "question": "A CLAUDE.md has grown to 1,100 lines. Which change keeps always-on context small without losing guidance?",
@@ -2311,7 +1051,7 @@ const questionBank = [
     "explanation": "Modular imports plus conditional loading reduce always-on tokens while preserving coverage."
   },
   {
-    "id": 166,
+    "id": 76,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "Implement escalation for a customer-service agent. Which rule set is correct?",
@@ -2325,7 +1065,7 @@ const questionBank = [
     "explanation": "Observable, explicit triggers are reliable. Sentiment and self-reported confidence are weak proxies."
   },
   {
-    "id": 167,
+    "id": 77,
     "difficulty": "medium",
     "category": "agents-and-workflow-implementation",
     "question": "A user types 'I want to talk to a person.' What should the code path do?",
@@ -2339,7 +1079,7 @@ const questionBank = [
     "explanation": "An explicit request is honoured at once; investigation first overrides the user."
   },
   {
-    "id": 168,
+    "id": 78,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "A lookup tool returns multiple matching customers. The code picks results[0]. What is the safer design?",
@@ -2353,7 +1093,7 @@ const questionBank = [
     "explanation": "Guessing acts on potentially the wrong person. Asking for an identifier resolves ambiguity safely."
   },
   {
-    "id": 169,
+    "id": 79,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "A request falls outside every documented policy (competitor price matching). What should the implementation do?",
@@ -2367,7 +1107,7 @@ const questionBank = [
     "explanation": "A policy gap is a legitimate escalation trigger."
   },
   {
-    "id": 170,
+    "id": 80,
     "difficulty": "medium",
     "category": "claude-api-mechanics-and-integration",
     "question": "In the Python SDK, which parameter value forces Claude to call a tool named extract_invoice?",
@@ -2381,7 +1121,7 @@ const questionBank = [
     "explanation": "A forced named tool uses type tool plus the name. auto lets the model answer in text."
   },
   {
-    "id": 171,
+    "id": 81,
     "difficulty": "hard",
     "category": "claude-api-mechanics-and-integration",
     "question": "A response parser fails because about 3% of replies contain prose and no tool_use block. The request uses tool_choice auto. What is the most reliable fix?",
@@ -2395,7 +1135,7 @@ const questionBank = [
     "explanation": "Forcing removes the text-only option at the API level; prompts and retries do not guarantee it."
   },
   {
-    "id": 172,
+    "id": 82,
     "difficulty": "hard",
     "category": "claude-api-mechanics-and-integration",
     "question": "Extended thinking is enabled and the request sets a forced tool_choice. What happens?",
@@ -2409,7 +1149,7 @@ const questionBank = [
     "explanation": "Forced tool choice and extended thinking are incompatible, so choose one or use auto with validation."
   },
   {
-    "id": 173,
+    "id": 83,
     "difficulty": "hard",
     "category": "software-engineering-and-application-design",
     "question": "An agent must call lookup_customer before issue_refund. Which implementation prevents a refund with an unverified customer?",
@@ -2423,7 +1163,7 @@ const questionBank = [
     "explanation": "Order on a consequential action must be enforced in code. The model's compliance with prompt order is probabilistic."
   },
   {
-    "id": 174,
+    "id": 84,
     "difficulty": "hard",
     "category": "prompt,-context-and-output-handling",
     "question": "tool use with a JSON schema returns valid JSON but 'total' differs from the sum of 'line_items'. What is the correct response?",
@@ -2437,7 +1177,7 @@ const questionBank = [
     "explanation": "Schemas guarantee shape, not meaning. Validate semantics in code and feed back the exact error."
   },
   {
-    "id": 175,
+    "id": 85,
     "difficulty": "hard",
     "category": "prompt,-context-and-output-handling",
     "question": "A required field 'tax_id' causes fabricated values for documents that have none. What is the fix?",
@@ -2451,7 +1191,7 @@ const questionBank = [
     "explanation": "A required field cannot represent absence honestly. Nullable fields can."
   },
   {
-    "id": 176,
+    "id": 86,
     "difficulty": "medium",
     "category": "prompt,-context-and-output-handling",
     "question": "Which enum design best handles categories you cannot fully enumerate and ambiguous documents?",
@@ -2465,7 +1205,7 @@ const questionBank = [
     "explanation": "Escape values avoid forced misclassification and keep the output structured."
   },
   {
-    "id": 177,
+    "id": 87,
     "difficulty": "hard",
     "category": "prompt,-context-and-output-handling",
     "question": "Extraction accuracy varies widely across invoice layouts. Which combination best improves consistency?",
@@ -2479,7 +1219,7 @@ const questionBank = [
     "explanation": "Normalisation rules plus varied few-shot examples reduce layout sensitivity."
   },
   {
-    "id": 178,
+    "id": 88,
     "difficulty": "medium",
     "category": "claude-api-mechanics-and-integration",
     "question": "Your chat service forwards only the newest user message and the model loses context. What is the root cause?",
@@ -2493,7 +1233,7 @@ const questionBank = [
     "explanation": "Conversation state belongs to the caller."
   },
   {
-    "id": 179,
+    "id": 89,
     "difficulty": "hard",
     "category": "security,-safety-and-evaluation",
     "question": "Where should conversation history be authoritative in a multi-tenant app?",
@@ -2507,7 +1247,7 @@ const questionBank = [
     "explanation": "Client-supplied history can be forged, including fake assistant or tool_result turns."
   },
   {
-    "id": 180,
+    "id": 90,
     "difficulty": "medium",
     "category": "claude-code-engineering-workflows",
     "question": "Which approach explores an unfamiliar codebase efficiently in Claude Code?",
@@ -2521,7 +1261,7 @@ const questionBank = [
     "explanation": "Incremental search-then-read manages context while building understanding."
   },
   {
-    "id": 181,
+    "id": 91,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "Two tools, search_tickets and get_ticket, are confused by the model. What is the first thing to try?",
@@ -2535,7 +1275,7 @@ const questionBank = [
     "explanation": "Descriptions drive selection. Fix them before adding routing layers."
   },
   {
-    "id": 182,
+    "id": 92,
     "difficulty": "medium",
     "category": "software-engineering-and-application-design",
     "question": "Where does a shared MCP server configuration with a secret belong?",
@@ -2549,7 +1289,7 @@ const questionBank = [
     "explanation": "Project scope shares the configuration; environment expansion keeps secrets out of version control."
   },
   {
-    "id": 183,
+    "id": 93,
     "difficulty": "hard",
     "category": "claude-code-engineering-workflows",
     "question": "After resuming a long session, two files were changed by a colleague. What is the best action?",
@@ -2563,7 +1303,7 @@ const questionBank = [
     "explanation": "Targeted re-analysis preserves valid findings."
   },
   {
-    "id": 184,
+    "id": 94,
     "difficulty": "medium",
     "category": "claude-code-engineering-workflows",
     "question": "Which task is best suited to plan mode?",
@@ -2577,7 +1317,7 @@ const questionBank = [
     "explanation": "Plan mode fits uncertainty, scope and review needs."
   },
   {
-    "id": 185,
+    "id": 95,
     "difficulty": "medium",
     "category": "agents-and-workflow-implementation",
     "question": "For open-ended 'improve reliability of this service', which decomposition is best?",
@@ -2591,7 +1331,7 @@ const questionBank = [
     "explanation": "Unpredictable work needs adaptive planning."
   },
   {
-    "id": 186,
+    "id": 96,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "A resumed agent repeats expensive lookups. What fixes it?",
@@ -2605,7 +1345,7 @@ const questionBank = [
     "explanation": "Durable state, not model memory, preserves prior work."
   },
   {
-    "id": 187,
+    "id": 97,
     "difficulty": "hard",
     "category": "software-engineering-and-application-design",
     "question": "An MCP tool returns only 'failed' for all errors, causing retry storms. What should change?",
@@ -2619,7 +1359,7 @@ const questionBank = [
     "explanation": "The agent needs typed, actionable error information to choose retry, reroute or escalate."
   },
   {
-    "id": 188,
+    "id": 98,
     "difficulty": "hard",
     "category": "security,-safety-and-evaluation",
     "question": "When handing a case to a human reviewer, which package is required?",
@@ -2633,7 +1373,7 @@ const questionBank = [
     "explanation": "The reviewer has no transcript, so the package must carry facts and authority state."
   },
   {
-    "id": 189,
+    "id": 99,
     "difficulty": "hard",
     "category": "agents-and-workflow-implementation",
     "question": "In your refund workflow, specialist agents decide their own next step and the run drifts into invalid states (refund issued before compliance check). Which implementation best prevents this?",
@@ -2647,7 +1387,7 @@ const questionBank = [
     "explanation": "State ownership and legal transitions belong in code. Prompts and parallel first-wins are not enforcement."
   },
   {
-    "id": 190,
+    "id": 100,
     "difficulty": "hard",
     "category": "prompt,-context-and-output-handling",
     "question": "After ~30 turns your agent forgets the verified customer ID. Which implementation is best?",
@@ -2661,7 +1401,7 @@ const questionBank = [
     "explanation": "Authoritative business state is written by deterministic code, not summarised freely by the model."
   },
   {
-    "id": 191,
+    "id": 101,
     "difficulty": "hard",
     "category": "security,-safety-and-evaluation",
     "question": "Your pairwise LLM-judge harness always prefers response A. What is the correct fix?",
@@ -2675,7 +1415,7 @@ const questionBank = [
     "explanation": "This is position bias. Counterbalance order and calibrate against humans; temperature and context do not address it."
   },
   {
-    "id": 192,
+    "id": 102,
     "difficulty": "hard",
     "category": "claude-api-mechanics-and-integration",
     "question": "Prompt caching works in staging but cache reads are near zero in production. The system prompt begins with the current timestamp. What is the likely cause and fix?",
@@ -2689,7 +1429,7 @@ const questionBank = [
     "explanation": "Caching matches an exact prefix. Anything that varies before the breakpoint invalidates it, so keep stable content first."
   },
   {
-    "id": 193,
+    "id": 103,
     "difficulty": "hard",
     "category": "software-engineering-and-application-design",
     "question": "A tool wrapper retries a hanging downstream service 5 times with 60-second timeouts and exhausts workers. Which pattern is best?",
@@ -2703,7 +1443,7 @@ const questionBank = [
     "explanation": "Fail fast and protect capacity. Long timeouts and unlimited retries increase pile-up; an empty result hides the failure."
   },
   {
-    "id": 194,
+    "id": 104,
     "difficulty": "hard",
     "category": "claude-api-mechanics-and-integration",
     "question": "While streaming, your code executes a tool as soon as the first input_json_delta arrives and sometimes runs with malformed arguments. What is the fix?",
@@ -2717,7 +1457,7 @@ const questionBank = [
     "explanation": "Tool input arrives as partial JSON. Wait for block completion, and never run a call from a truncated stream."
   },
   {
-    "id": 195,
+    "id": 105,
     "difficulty": "medium",
     "category": "claude-api-mechanics-and-integration",
     "question": "Before sending a long document plus history, you need to know whether the request will fit within the context window. What should you use?",
@@ -2731,7 +1471,7 @@ const questionBank = [
     "explanation": "Count tokens with the provided endpoint rather than estimating. Handle overflows by design, not by surprise errors."
   },
   {
-    "id": 196,
+    "id": 106,
     "difficulty": "hard",
     "category": "prompt,-context-and-output-handling",
     "question": "A long agent run accumulates large tool outputs that crowd out instructions. Which is the best remedy?",
@@ -2745,7 +1485,7 @@ const questionBank = [
     "explanation": "Stale tool results are the cheapest thing to drop. Keep what the next step needs."
   },
   {
-    "id": 197,
+    "id": 107,
     "difficulty": "hard",
     "category": "claude-api-mechanics-and-integration",
     "question": "The model returns two tool_use blocks in one assistant turn. Your code sends two separate user messages, one tool_result each, and the next call errors. What is correct?",
@@ -2759,7 +1499,7 @@ const questionBank = [
     "explanation": "Each tool_use needs a result with its ID in the next user turn, and parallel calls are answered together."
   },
   {
-    "id": 198,
+    "id": 108,
     "difficulty": "hard",
     "category": "security,-safety-and-evaluation",
     "question": "A remote MCP server you build uses the access token supplied by the client to call a billing API on the user's behalf. A reviewer rejects it. Why?",
@@ -2773,7 +1513,7 @@ const questionBank = [
     "explanation": "Token passthrough lets a server act with authority it was not issued. Use scoped credentials and authorise each request."
   },
   {
-    "id": 199,
+    "id": 109,
     "difficulty": "hard",
     "category": "security,-safety-and-evaluation",
     "question": "A CI pipeline should block a release if a prompt change degrades quality. Outputs vary between runs. What is the best design?",
@@ -2787,7 +1527,7 @@ const questionBank = [
     "explanation": "Handle non-determinism statistically; do not require identical text."
   },
   {
-    "id": 200,
+    "id": 110,
     "difficulty": "medium",
     "category": "software-engineering-and-application-design",
     "question": "Your production code calls a moving 'latest' model alias and a nightly job began failing after a provider update. What is the best practice?",
@@ -2801,7 +1541,7 @@ const questionBank = [
     "explanation": "Pinning and testing protects against silent behaviour changes."
   },
   {
-    "id": 201,
+    "id": 111,
     "difficulty": "medium",
     "category": "claude-code-engineering-workflows",
     "question": "Two developers want Claude Code sessions to work on different features of the same repository at the same time without clobbering each other's files. What is the clean approach?",
@@ -2815,7 +1555,7 @@ const questionBank = [
     "explanation": "Worktrees isolate working directories and branches, which prevents overlapping edits."
   },
   {
-    "id": 202,
+    "id": 112,
     "difficulty": "hard",
     "category": "security,-safety-and-evaluation",
     "question": "A support tool logs full prompts for debugging, and they contain customer PII. Which change best satisfies privacy rules while keeping debuggability?",
@@ -2829,7 +1569,7 @@ const questionBank = [
     "explanation": "Minimise the data you store and retain structured traces for observability."
   },
   {
-    "id": 203,
+    "id": 113,
     "difficulty": "hard",
     "category": "prompt,-context-and-output-handling",
     "question": "A compliance bot needs to show the source passage for each claim. Which API-level approach is most reliable?",

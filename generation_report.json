@@ -79,14 +79,14 @@
   {
     "bank": "js/questionBank_claude_architect.js",
     "pdf": "claude_architect_answers.pdf",
-    "questions": 211,
+    "questions": 322,
     "duplicate_ids": [],
     "invalid_questions": []
   },
   {
     "bank": "js/questionBank_claude_architect_professional.js",
     "pdf": "claude_architect_professional_answers.pdf",
-    "questions": 150,
+    "questions": 153,
     "duplicate_ids": [],
     "invalid_questions": []
   },
@@ -100,7 +100,7 @@
   {
     "bank": "js/questionBank_claude_developer_professional.js",
     "pdf": "claude_developer_professional_answers.pdf",
-    "questions": 150,
+    "questions": 113,
     "duplicate_ids": [],
     "invalid_questions": []
   },

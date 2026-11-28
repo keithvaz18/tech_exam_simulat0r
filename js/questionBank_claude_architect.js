@@ -2343,20 +2343,6 @@ const questionBank = [
   },
   {
     "id": 167,
-    "difficulty": "hard",
-    "category": "tool-design-mcp",
-    "question": "Edit fails because the text you want to change appears more than once. What is the reliable fallback?",
-    "options": [
-      "Use Glob to locate the text",
-      "Delete the file and recreate it from memory",
-      "Retry Edit until it succeeds",
-      "Read the whole file, then Write the modified full contents"
-    ],
-    "answer": 3,
-    "explanation": "Edit Fallback: when Edit cannot find a unique anchor, use Read plus Write so the full file is changed reliably."
-  },
-  {
-    "id": 168,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A large CLAUDE.md mixes testing, API and deployment standards. How do you keep it modular?",
@@ -2370,7 +2356,7 @@ const questionBank = [
     "explanation": "@import: the import syntax references external files so each package's CLAUDE.md can include only the standards relevant to it."
   },
   {
-    "id": 169,
+    "id": 168,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "Test files live next to source across dozens of directories, and all must follow one convention. What loads those rules automatically?",
@@ -2384,7 +2370,7 @@ const questionBank = [
     "explanation": "Path-Specific Rules: glob patterns activate conventions by file type regardless of directory, and the rules load only when editing matching files."
   },
   {
-    "id": 170,
+    "id": 169,
     "difficulty": "easy",
     "category": "claude-code",
     "question": "You want a /review command every teammate gets after cloning. Where do slash commands for the whole team live?",
@@ -2398,21 +2384,7 @@ const questionBank = [
     "explanation": "Slash Commands: project-scoped commands in .claude/commands/ are shared through version control, while ~/.claude/commands/ holds personal ones."
   },
   {
-    "id": 171,
-    "difficulty": "medium",
-    "category": "claude-code",
-    "question": "A skill that analyzes the whole codebase floods the main conversation with output. Which SKILL.md option isolates it?",
-    "options": [
-      "context: fork, which runs the skill in an isolated sub-agent context",
-      "argument-hint: verbose",
-      "allowed-tools: Read",
-      "Placing it in ~/.claude/skills/"
-    ],
-    "answer": 0,
-    "explanation": "context: fork: runs a skill in an isolated context so verbose or exploratory output does not pollute the main session; combine with allowed-tools to restrict actions."
-  },
-  {
-    "id": 172,
+    "id": 170,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "During a library migration affecting 45 files, discovery output keeps filling the context. Which feature helps?",
@@ -2426,7 +2398,7 @@ const questionBank = [
     "explanation": "Explore Subagent: delegating discovery to it preserves main-conversation context during multi-phase tasks by returning only summaries."
   },
   {
-    "id": 173,
+    "id": 171,
     "difficulty": "easy",
     "category": "claude-code",
     "question": "A CI step runs claude \"Analyze this PR\" and hangs. What is the documented fix?",
@@ -2440,7 +2412,7 @@ const questionBank = [
     "explanation": "-p / --print: processes the prompt, prints to stdout and exits without waiting for interactive input, which is what automated pipelines require."
   },
   {
-    "id": 174,
+    "id": 172,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A CI job must post findings as inline pull request comments automatically. Which output configuration makes that reliable?",
@@ -2454,7 +2426,7 @@ const questionBank = [
     "explanation": "--json-schema: with --output-format json it yields machine-parseable structured findings that can be mapped to inline comments."
   },
   {
-    "id": 175,
+    "id": 173,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "The session that generated a change is also asked to review it, and it rarely finds problems. What is more effective?",
@@ -2468,7 +2440,7 @@ const questionBank = [
     "explanation": "Independent Review: a model keeps its reasoning context from generation and is less likely to question its own decisions; a fresh instance catches subtler issues."
   },
   {
-    "id": 176,
+    "id": 174,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "A code-review prompt generates many findings that developers dismiss, and trust is eroding. Which action targets the cause?",
@@ -2482,7 +2454,7 @@ const questionBank = [
     "explanation": "False Positives: high false-positive categories undermine confidence in accurate ones. Specific categorical criteria and disabling noisy categories restore developer trust."
   },
   {
-    "id": 177,
+    "id": 175,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "Reviewers label severity inconsistently across runs. What produces consistent classification?",
@@ -2496,7 +2468,7 @@ const questionBank = [
     "explanation": "Severity Criteria: defining each level with concrete code examples gives the model stable decision boundaries."
   },
   {
-    "id": 178,
+    "id": 176,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "You need guaranteed schema-compliant JSON from Claude for downstream systems. Which technique is the most reliable?",
@@ -2510,7 +2482,7 @@ const questionBank = [
     "explanation": "tool_use Schema: tool use with JSON schemas eliminates syntax errors. It does not guarantee semantic correctness, so validation is still needed."
   },
   {
-    "id": 179,
+    "id": 177,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "Some invoices have no tax ID, yet the schema marks tax_id required and the model sometimes invents one. What should change?",
@@ -2524,7 +2496,7 @@ const questionBank = [
     "explanation": "Nullable Fields: optional/nullable schema fields prevent the model from fabricating values just to satisfy required fields."
   },
   {
-    "id": 180,
+    "id": 178,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "A category field might encounter types you did not anticipate. Which schema design is recommended?",
@@ -2538,7 +2510,7 @@ const questionBank = [
     "explanation": "Enum + other: extensible categorization uses an \"other\" value with a detail string, and \"unclear\" for ambiguity, instead of forcing wrong categories."
   },
   {
-    "id": 181,
+    "id": 179,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "An extraction fails validation because a date came back as \"3rd of May\" instead of ISO 8601. What retry works best?",
@@ -2552,7 +2524,7 @@ const questionBank = [
     "explanation": "Retry with Feedback: appending the specific validation error guides the model to correct format or structural mistakes, but it cannot fix information absent from the source."
   },
   {
-    "id": 182,
+    "id": 180,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "Which extra fields help catch an invoice whose line items do not add up to the stated total?",
@@ -2566,7 +2538,7 @@ const questionBank = [
     "explanation": "calculated_total: comparing it against stated_total is a self-correction validation pattern that flags semantic discrepancies a schema cannot catch."
   },
   {
-    "id": 183,
+    "id": 181,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "Developers dismiss many automated review findings. How do you analyze dismissal patterns systematically?",
@@ -2580,7 +2552,7 @@ const questionBank = [
     "explanation": "detected_pattern: tracking which constructs trigger findings lets you analyze false-positive and dismissal patterns and improve the prompt."
   },
   {
-    "id": 184,
+    "id": 182,
     "difficulty": "easy",
     "category": "prompt-structured-output",
     "question": "A weekly audit of 10,000 documents has no urgency and the team wants lower cost. Which API fits?",
@@ -2594,7 +2566,7 @@ const questionBank = [
     "explanation": "Message Batches API: ideal for latency-tolerant work, unsuitable for blocking workflows, and it cannot run multi-turn tool calls inside one request."
   },
   {
-    "id": 185,
+    "id": 183,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "After a batch of 100 documents completes, 7 results failed. How do you identify and resubmit only those?",
@@ -2608,7 +2580,7 @@ const questionBank = [
     "explanation": "custom_id: the identifier you assign to each batch request, used to correlate responses and to resubmit only failed items."
   },
   {
-    "id": 186,
+    "id": 184,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "A 14-file PR review produces contradictory comments about the same pattern in different files. Which structure fixes it?",
@@ -2622,21 +2594,7 @@ const questionBank = [
     "explanation": "Multi-Pass Review: splitting work avoids attention dilution; majority-voting on full-PR runs would suppress real bugs found only intermittently."
   },
   {
-    "id": 187,
-    "difficulty": "hard",
-    "category": "context-reliability",
-    "question": "A long support chat is summarized repeatedly, and the final summary says \"customer wants a refund\" while dropping $84.50 and order 7731. What should have been done?",
-    "options": [
-      "Drop numeric details to save tokens",
-      "Summarize even more aggressively",
-      "Extract transactional facts into a persistent case facts block included in every prompt, outside the summarized history",
-      "Ask the customer to repeat the facts"
-    ],
-    "answer": 2,
-    "explanation": "Case Facts Block: amounts, dates, order numbers and statuses are persisted verbatim so progressive summarization cannot erase them."
-  },
-  {
-    "id": 188,
+    "id": 185,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "A synthesis agent drops findings that sit in the middle of a very long aggregated input. What mitigates this?",
@@ -2650,21 +2608,7 @@ const questionBank = [
     "explanation": "Lost in the Middle: models process the beginning and end of long inputs most reliably, so put key summaries up front and use headers to counter position effects."
   },
   {
-    "id": 189,
-    "difficulty": "medium",
-    "category": "context-reliability",
-    "question": "A 40-field order lookup is called repeatedly, but only 5 fields matter for returns. What should you do?",
-    "options": [
-      "Increase max_tokens",
-      "Pass all 40 fields and rely on the model to ignore the rest",
-      "Trim tool output to the relevant fields before it accumulates in context",
-      "Disable the tool"
-    ],
-    "answer": 2,
-    "explanation": "Trim Tool Output: verbose tool results consume tokens disproportionate to their relevance; keep only the fields needed."
-  },
-  {
-    "id": 190,
+    "id": 186,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "An agent escalates easy damage-replacement cases but tries to handle policy exceptions alone. First fix?",
@@ -2678,7 +2622,7 @@ const questionBank = [
     "explanation": "Escalation Criteria: human request, policy exception or gap, and inability to progress. Self-Reported Confidence and sentiment are poor proxies for case complexity."
   },
   {
-    "id": 191,
+    "id": 187,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "A subagent's web search times out. What should it send the coordinator?",
@@ -2692,49 +2636,7 @@ const questionBank = [
     "explanation": "Error Propagation: structured context enables intelligent coordinator recovery. Generic statuses hide information; swallowing errors or aborting the whole workflow are both anti-patterns."
   },
   {
-    "id": 192,
-    "difficulty": "medium",
-    "category": "context-reliability",
-    "question": "A subagent hits a transient timeout. What is the right division of responsibility?",
-    "options": [
-      "The subagent retries locally, and only unresolved errors with partial results propagate to the coordinator",
-      "Terminate the whole workflow",
-      "Propagate every transient failure to the user",
-      "Never retry"
-    ],
-    "answer": 0,
-    "explanation": "Local Recovery: transient failures are handled within the subagent first; only errors that cannot be resolved locally are propagated, with what was attempted."
-  },
-  {
-    "id": 193,
-    "difficulty": "medium",
-    "category": "context-reliability",
-    "question": "In a long codebase exploration the agent starts citing \"typical patterns\" instead of specific classes found earlier. What helps?",
-    "options": [
-      "Ignore it, since summaries are lossless",
-      "Maintain scratchpad files with key findings, reference them, and run /compact when context fills",
-      "Raise the temperature",
-      "Restart without any notes"
-    ],
-    "answer": 1,
-    "explanation": "Scratchpad Files: persist key findings across context boundaries. /compact reduces context usage during extended sessions when verbose discovery output piles up."
-  },
-  {
-    "id": 194,
-    "difficulty": "hard",
-    "category": "context-reliability",
-    "question": "A multi-agent pipeline crashes mid-run. How should recovery work?",
-    "options": [
-      "Each agent exports state to a known location and the coordinator loads a manifest on resume and injects it into prompts",
-      "Restart from scratch",
-      "Ask the user to re-enter everything",
-      "Rely on in-memory state"
-    ],
-    "answer": 0,
-    "explanation": "Crash Recovery Manifest: structured state exports let the coordinator resume instead of repeating completed work."
-  },
-  {
-    "id": 195,
+    "id": 188,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "Overall extraction accuracy is 97%, and the team wants to automate review for high-confidence results. What should come first?",
@@ -2748,7 +2650,7 @@ const questionBank = [
     "explanation": "Stratified Sampling: aggregate accuracy can mask poor performance on specific document types or fields, so measure error rates per segment and detect novel error patterns."
   },
   {
-    "id": 196,
+    "id": 189,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "Two credible sources report different market-size figures for the same year, and the synthesis agent silently picks one. What is the correct handling?",
@@ -2762,7 +2664,7 @@ const questionBank = [
     "explanation": "Conflict Annotation: keep both values with sources and publication dates. Claim-Source Mapping must survive summarization so provenance is not lost in synthesis."
   },
   {
-    "id": 197,
+    "id": 190,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "A synthesis step compresses findings and the report loses which source supported which claim. What should subagents provide?",
@@ -2776,7 +2678,7 @@ const questionBank = [
     "explanation": "Claim-Source Mapping: structured mappings preserve attribution through summarization and synthesis; reports should separate well-established from contested findings."
   },
   {
-    "id": 198,
+    "id": 191,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "A new agent keeps asking the model for a 1-10 confidence score before deciding to escalate. Why is this a weak design?",
@@ -2790,7 +2692,7 @@ const questionBank = [
     "explanation": "Self-Reported Confidence: not a reliable proxy for complexity. Field-level confidence is useful only when calibrated with labeled validation sets."
   },
   {
-    "id": 199,
+    "id": 192,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "Summaries of a multi-turn session keep losing customer-stated expectations such as \"by Friday\". Which risk is this?",
@@ -2804,7 +2706,7 @@ const questionBank = [
     "explanation": "Progressive Summarization: repeated condensing drops numerical values, percentages, dates and customer expectations, so keep them in a case facts block."
   },
   {
-    "id": 200,
+    "id": 193,
     "difficulty": "hard",
     "category": "tool-design-mcp",
     "question": "A lookup tool is returning a 503 and, separately, a 400 for a malformed order number. How should the agent treat them differently?",
@@ -2818,7 +2720,7 @@ const questionBank = [
     "explanation": "Error Categories: transient, validation, business and permission errors need different handling. isRetryable metadata tells the agent which failures are worth retrying."
   },
   {
-    "id": 201,
+    "id": 194,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "Your research coordinator exposes 18 tools to every subagent and tool misuse is rising. Which pair of changes best applies least privilege?",
@@ -2832,7 +2734,7 @@ const questionBank = [
     "explanation": "Scoped Tools: role-limited sets improve selection reliability. A cross-role verify_fact tool is the sanctioned exception for high-frequency simple needs."
   },
   {
-    "id": 202,
+    "id": 195,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "An engineer needs all files named *.test.tsx, then all usages of a hook called useCart. Which tools, in order?",
@@ -2846,7 +2748,7 @@ const questionBank = [
     "explanation": "Grep vs Glob: Glob finds files by path pattern, Grep finds content. If an Edit later fails on non-unique text, the Edit Fallback is Read plus Write."
   },
   {
-    "id": 203,
+    "id": 196,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A CI job should emit findings that a script can post as inline comments. Which two elements make the output dependable?",
@@ -2860,7 +2762,7 @@ const questionBank = [
     "explanation": "--json-schema: constrains CI output to a defined structure. A tool_use Schema in API-based extraction gives the same syntactic guarantee, though semantic checks remain your job."
   },
   {
-    "id": 204,
+    "id": 197,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "Reviewers disagree on severity and developers keep dismissing one finding category. Which two practices address both problems?",
@@ -2874,7 +2776,7 @@ const questionBank = [
     "explanation": "Severity Criteria: examples per level standardize classification. detected_pattern: lets you trace dismissed findings back to constructs and refine prompts."
   },
   {
-    "id": 205,
+    "id": 198,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "An extraction schema has a category enum and a total field. Which design handles unexpected categories and arithmetic mistakes?",
@@ -2888,7 +2790,7 @@ const questionBank = [
     "explanation": "Enum + other: lets categories extend without forcing wrong values. calculated_total: lets validation flag semantic discrepancies that a schema alone cannot detect."
   },
   {
-    "id": 206,
+    "id": 199,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "Some documents in a batch fail validation because of format errors, others because the data is simply missing. Which workflow is right?",
@@ -2902,7 +2804,7 @@ const questionBank = [
     "explanation": "custom_id: correlates batch results to requests. Retry with Feedback: fixes format and structure errors but cannot invent information absent from the source."
   },
   {
-    "id": 207,
+    "id": 200,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "A very large pull request is reviewed in one pass and the agent also pulls 40-field records into context. Which two changes help most?",
@@ -2916,7 +2818,7 @@ const questionBank = [
     "explanation": "Multi-Pass Review: avoids attention dilution. Trim Tool Output: stops irrelevant fields from consuming context."
   },
   {
-    "id": 208,
+    "id": 201,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "Customer asks for a policy exception that the written policy does not mention, and a downstream lookup times out. What should the agent do for each?",
@@ -2930,7 +2832,7 @@ const questionBank = [
     "explanation": "Escalation Criteria: a policy gap is a valid trigger. Error Propagation: pass failure type, attempted query, partial results and alternatives instead of a generic status."
   },
   {
-    "id": 209,
+    "id": 202,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "A day-long exploration session is running out of context and the process may crash. Which two safeguards apply?",
@@ -2944,7 +2846,7 @@ const questionBank = [
     "explanation": "/compact: reduces context during extended exploration. Crash Recovery Manifest: persisted state lets the coordinator reload and continue rather than redo work."
   },
   {
-    "id": 210,
+    "id": 203,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "A report cites two different growth rates for the same sector from two reputable publications published in different years. What is the best presentation?",
@@ -2958,7 +2860,7 @@ const questionBank = [
     "explanation": "Conflict Annotation: structured reports separate well-established from contested findings, keeping source attribution and dates so temporal differences are not misread as contradictions."
   },
   {
-    "id": 211,
+    "id": 204,
     "difficulty": "easy",
     "category": "tool-design-mcp",
     "question": "An app needs to call Claude without blocking an event loop while many requests run concurrently. Which Python SDK client fits?",
@@ -2972,7 +2874,7 @@ const questionBank = [
     "explanation": "The Python SDK ships both Anthropic and AsyncAnthropic. The async client supports await-based calls and streaming. The Agent SDK query() is itself async and yields messages as an async iterator."
   },
   {
-    "id": 212,
+    "id": 205,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "The Claude Agent SDK query() function is consumed how?",
@@ -2986,7 +2888,7 @@ const questionBank = [
     "explanation": "query() returns an async iterable of messages, so the caller streams agent progress (assistant turns, tool use, results) rather than waiting for one final value."
   },
   {
-    "id": 213,
+    "id": 206,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "What does an MCP client need in order to connect to an MCP server and let Claude use its tools?",
@@ -3000,7 +2902,7 @@ const questionBank = [
     "explanation": "A client uses the MCP SDK (JSON-RPC framing), a transport (stdio or Streamable HTTP), ClientSession.initialize(), then list_tools() and a loop forwarding Claude's tool_use requests to call_tool()."
   },
   {
-    "id": 214,
+    "id": 207,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "A local MCP server is started by the client as a subprocess and talks over standard input/output. Which transport is this?",
@@ -3014,7 +2916,7 @@ const questionBank = [
     "explanation": "stdio is for local servers the client spawns. Remote servers use Streamable HTTP (with SSE support) and typically need auth headers or OAuth."
   },
   {
-    "id": 215,
+    "id": 208,
     "difficulty": "hard",
     "category": "tool-design-mcp",
     "question": "A stdio MCP server randomly drops its connection after a developer adds print() debugging. What is the most likely cause and fix?",
@@ -3028,7 +2930,7 @@ const questionBank = [
     "explanation": "In stdio servers, stdout carries JSON-RPC messages. Any stray print or console.log breaks framing. Logging goes to stderr or a file."
   },
   {
-    "id": 216,
+    "id": 209,
     "difficulty": "easy",
     "category": "tool-design-mcp",
     "question": "Which command is the quickest way to interactively test an MCP server's tools, resources and prompts without writing client code?",
@@ -3042,7 +2944,7 @@ const questionBank = [
     "explanation": "MCP Inspector opens a local UI to invoke tools, inspect schemas and view raw JSON-RPC logs. mcp dev wraps it for Python FastMCP servers and requires Node.js/npx."
   },
   {
-    "id": 217,
+    "id": 210,
     "difficulty": "hard",
     "category": "tool-design-mcp",
     "question": "A team wants automated regression tests for an MCP server that verify initialize(), list_tools() schemas and call_tool() error flags in CI. What is the best approach?",
@@ -3056,7 +2958,7 @@ const questionBank = [
     "explanation": "In-memory transports let tests run the real MCP protocol deterministically. Tool business logic is also tested directly. End-to-end testing with an AI client then checks that descriptions lead to correct tool choice."
   },
   {
-    "id": 218,
+    "id": 211,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "A chat app lets users ask Claude about GitHub data. Without MCP, what is the main problem?",
@@ -3070,7 +2972,7 @@ const questionBank = [
     "explanation": "Without MCP the app owns every wrapper and schema and must be changed whenever an API changes. With MCP, a server owns tool definitions and the client discovers them at runtime."
   },
   {
-    "id": 219,
+    "id": 212,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "An MCP server needs a 'Summarize document' button users click in the UI. Which MCP primitive fits?",
@@ -3084,7 +2986,7 @@ const questionBank = [
     "explanation": "Prompts are user-controlled (buttons, slash commands). Tools are model-controlled. Resources are application-controlled read-only context."
   },
   {
-    "id": 220,
+    "id": 213,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "Which pairing of MCP primitive and controller is correct?",
@@ -3098,7 +3000,7 @@ const questionBank = [
     "explanation": "The three primitives differ by who triggers them: model (tools), application (resources) and user (prompts)."
   },
   {
-    "id": 221,
+    "id": 214,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "A developer wants Claude to autonomously decide to read a file during a conversation. How should the file read be exposed on the MCP server?",
@@ -3112,7 +3014,7 @@ const questionBank = [
     "explanation": "Autonomous, model-initiated actions are tools. A resource suits content the user or app attaches as context."
   },
   {
-    "id": 222,
+    "id": 215,
     "difficulty": "hard",
     "category": "tool-design-mcp",
     "question": "A file-reading MCP tool takes a filename argument. Which safeguard is essential?",
@@ -3126,7 +3028,7 @@ const questionBank = [
     "explanation": "Resolve the path and reject anything outside the base directory (for example with is_relative_to). Otherwise ../ sequences can expose arbitrary files."
   },
   {
-    "id": 223,
+    "id": 216,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "In Python FastMCP, how do you expose documents fetched by ID as a parameterised resource?",
@@ -3140,7 +3042,7 @@ const questionBank = [
     "explanation": "A URI containing {doc_id} is registered as a resource template. Placeholder names must match the function parameters, and the client reads a concrete URI such as docs://documents/101."
   },
   {
-    "id": 224,
+    "id": 217,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "How does a client discover URI-template resources, and how does it fetch one document?",
@@ -3154,7 +3056,7 @@ const questionBank = [
     "explanation": "Templates are listed separately from static resources. The client substitutes the ID and calls read_resource."
   },
   {
-    "id": 225,
+    "id": 218,
     "difficulty": "hard",
     "category": "tool-design-mcp",
     "question": "A tool returns a PDF. How should a Python MCP tool return binary content safely?",
@@ -3168,7 +3070,7 @@ const questionBank = [
     "explanation": "Text files can be returned as strings. Binary data can be returned as bytes, which FastMCP wraps as a base64 blob, or converted to text before returning."
   },
   {
-    "id": 226,
+    "id": 219,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "What is a 'tool function' in Claude's tool use system?",
@@ -3182,7 +3084,7 @@ const questionBank = [
     "explanation": "The definition (name, description, input_schema) tells Claude what is available. The function is your code that runs, and its output returns as a tool_result."
   },
   {
-    "id": 227,
+    "id": 220,
     "difficulty": "easy",
     "category": "agentic-architecture",
     "question": "What is the primary purpose of tool use in Claude?",
@@ -3196,7 +3098,7 @@ const questionBank = [
     "explanation": "Tool use connects Claude to databases, APIs, files and actions. Your code executes the tool and returns results."
   },
   {
-    "id": 228,
+    "id": 221,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "A Claude response contains a text block followed by a tool_use block. What does this mean?",
@@ -3210,7 +3112,7 @@ const questionBank = [
     "explanation": "Preambles before tool_use are normal. Do not infer completion from a text block. Loop on stop_reason == tool_use."
   },
   {
-    "id": 229,
+    "id": 222,
     "difficulty": "hard",
     "category": "agentic-architecture",
     "question": "When appending the assistant turn to history before sending tool_result, what should be passed?",
@@ -3224,7 +3126,7 @@ const questionBank = [
     "explanation": "Preserve the complete assistant content so tool_use IDs match the tool_result blocks. Dropping blocks can cause validation errors."
   },
   {
-    "id": 230,
+    "id": 223,
     "difficulty": "hard",
     "category": "agentic-architecture",
     "question": "Response content contains three tool_use blocks. How should an agent loop handle them?",
@@ -3238,7 +3140,7 @@ const questionBank = [
     "explanation": "Claude can emit parallel tool calls. Return a matching tool_result for each tool_use_id, in a single user turn."
   },
   {
-    "id": 231,
+    "id": 224,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "An orchestrator wants Claude to skip preamble text and emit a tool call immediately. Which API setting helps?",
@@ -3252,7 +3154,7 @@ const questionBank = [
     "explanation": "tool_choice any forces a tool call, and a named tool forces that tool. auto lets Claude respond with text."
   },
   {
-    "id": 232,
+    "id": 225,
     "difficulty": "hard",
     "category": "agentic-architecture",
     "question": "Five independent file reads are slowing an agent because each takes a separate round trip. What pattern reduces latency?",
@@ -3266,7 +3168,7 @@ const questionBank = [
     "explanation": "Independent lookups can run in parallel. Do not batch calls where one depends on another's output. The Message Batches API is a separate offline feature."
   },
   {
-    "id": 233,
+    "id": 226,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "Claude API call returns 429. What do the official SDKs do by default?",
@@ -3280,7 +3182,7 @@ const questionBank = [
     "explanation": "SDKs retry 429, 408, 409, 5xx and connection errors. After retries are exhausted the error is raised for the app to handle."
   },
   {
-    "id": 234,
+    "id": 227,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "How can retry behaviour be customised in the Python SDK?",
@@ -3294,7 +3196,7 @@ const questionBank = [
     "explanation": "Set max_retries globally or per request, with 0 to disable. TypeScript uses maxRetries."
   },
   {
-    "id": 235,
+    "id": 228,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "A nightly job still gets RateLimitError after SDK retries. Which is the most appropriate architectural response?",
@@ -3308,7 +3210,7 @@ const questionBank = [
     "explanation": "Persistent rate limiting needs load management. Batches suit latency-tolerant work and caching reduces repeated input."
   },
   {
-    "id": 236,
+    "id": 229,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "Where does a prompt cache breakpoint (cache_control) cache content?",
@@ -3322,7 +3224,7 @@ const questionBank = [
     "explanation": "Caching covers the prefix in order tools, system, messages up to the marker. Up to 4 breakpoints are allowed per request."
   },
   {
-    "id": 237,
+    "id": 230,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "A cached long-document prompt never produces cache hits. The prompt starts with a current timestamp. What is wrong?",
@@ -3336,7 +3238,7 @@ const questionBank = [
     "explanation": "Cache hits require an exact prefix match, so place variable data (timestamps, user IDs) after the cached block. Verify via cache_creation_input_tokens and cache_read_input_tokens."
   },
   {
-    "id": 238,
+    "id": 231,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "Compared with normal input tokens, how is prompt caching priced?",
@@ -3350,7 +3252,7 @@ const questionBank = [
     "explanation": "A 5-minute-TTL cache write has a surcharge and each hit is about a 90% discount. Short prefixes below the minimum are silently not cached."
   },
   {
-    "id": 239,
+    "id": 232,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "For classification or JSON extraction where reproducibility matters, which temperature is most appropriate?",
@@ -3364,7 +3266,7 @@ const questionBank = [
     "explanation": "Low temperature favours the most likely token, which suits extraction, classification and tests. Higher values suit brainstorming and fiction."
   },
   {
-    "id": 240,
+    "id": 233,
     "difficulty": "easy",
     "category": "prompt-structured-output",
     "question": "Which temperature range suits open-ended creative fiction on Claude?",
@@ -3378,7 +3280,7 @@ const questionBank = [
     "explanation": "Claude's range is 0.0 to 1.0 with 1.0 default. Higher values give more varied word choice. Extended thinking requires temperature 1.0."
   },
   {
-    "id": 241,
+    "id": 234,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "A team builds eval test cases for a prompt that runs on Sonnet. Which approach avoids shared blind spots?",
@@ -3392,7 +3294,7 @@ const questionBank = [
     "explanation": "Separate generation from grading and prefer a distinct or stronger judge. Combine with deterministic checks where possible."
   },
   {
-    "id": 242,
+    "id": 235,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "A prompt must output valid JSON with a fixed intent label. Which grader should be tried first?",
@@ -3406,7 +3308,7 @@ const questionBank = [
     "explanation": "Code graders are fast, free and reproducible. Use LLM judges when quality is subjective, then calibrate them with human review."
   },
   {
-    "id": 243,
+    "id": 236,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "An LLM-as-a-judge grader gives noisy scores. Which two changes most improve reliability?",
@@ -3420,7 +3322,7 @@ const questionBank = [
     "explanation": "Narrow scales are more consistent, and reasoning-first acts like chain-of-thought. Randomise response order in pairwise comparisons to reduce position bias."
   },
   {
-    "id": 244,
+    "id": 237,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "What does a balanced starter eval set look like?",
@@ -3434,7 +3336,7 @@ const questionBank = [
     "explanation": "Start small but balanced (roughly routine 50%, edge 30%, out-of-scope 20%), then scale with generated cases."
   },
   {
-    "id": 245,
+    "id": 238,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "What does computer use let Claude do, and how is it run safely?",
@@ -3448,7 +3350,7 @@ const questionBank = [
     "explanation": "Computer use is a tool-use loop: screenshot, action, new screenshot. Run it isolated with minimal permissions and human confirmation for sensitive steps because of prompt injection risk."
   },
   {
-    "id": 246,
+    "id": 239,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "An agent starts in an unfamiliar repo and assumes Python 3.12 and a src/ directory. What practice avoids brittle assumptions?",
@@ -3462,7 +3364,7 @@ const questionBank = [
     "explanation": "Inspect first (ls, git status, version checks, list_tools), keep inspection read-only, mask secrets and bound output size."
   },
   {
-    "id": 247,
+    "id": 240,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "An agent logs environment variables into its context for debugging. What is the risk and mitigation?",
@@ -3476,7 +3378,7 @@ const questionBank = [
     "explanation": "Sanitise API keys and tokens before exposing environment details, and bound inspection output to avoid flooding the context window."
   },
   {
-    "id": 248,
+    "id": 241,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "In the 4D AI Fluency framework, which competency is the decision about whether and how to involve AI before writing any prompt?",
@@ -3490,7 +3392,7 @@ const questionBank = [
     "explanation": "Delegation covers problem awareness, platform awareness and task delegation. Description is communicating clearly, Discernment evaluates outputs, and Diligence covers responsible use."
   },
   {
-    "id": 249,
+    "id": 242,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "In the 4D framework, noticing that an output has hallucinated facts and sending it back with refined instructions uses which competencies?",
@@ -3504,7 +3406,7 @@ const questionBank = [
     "explanation": "Product discernment checks accuracy and completeness, and the description-discernment loop refines the prompt iteratively."
   },
   {
-    "id": 250,
+    "id": 243,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "A manager ships an AI-written report after only skimming it and does not disclose AI involvement. Which 4D competency is mainly violated?",
@@ -3518,7 +3420,7 @@ const questionBank = [
     "explanation": "Diligence includes creation, transparency and deployment responsibility: be honest about AI's role and own verification before release."
   },
   {
-    "id": 251,
+    "id": 244,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A team wants every new Claude workflow and agent definition to be onboarded through pull requests. Which overall model is most appropriate?",
@@ -3532,7 +3434,7 @@ const questionBank = [
     "explanation": "Automate the repeatable validation, and keep human accountability where risk is high (permissions, secrets, production access). Neither all-manual nor all-automatic is proportionate."
   },
   {
-    "id": 252,
+    "id": 245,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Which checks on a PR that adds an agent definition can be fully automated?",
@@ -3546,7 +3448,7 @@ const questionBank = [
     "explanation": "Syntax, schema, duplicates and secrets are deterministic checks. Granting production access, new external connections and policy changes need human judgement."
   },
   {
-    "id": 253,
+    "id": 246,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "Why should deterministic static validation and secret scanning run before the AI-powered review stage in an onboarding pipeline?",
@@ -3560,7 +3462,7 @@ const questionBank = [
     "explanation": "Order stages from cheapest and most deterministic to most expensive and probabilistic: static validation, security/compliance, AI review, tests, then human approval for high-risk changes."
   },
   {
-    "id": 254,
+    "id": 247,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A team wants policy-as-code such as 'no agent may combine unrestricted Bash with deployment credentials'. Which tool category fits?",
@@ -3574,7 +3476,7 @@ const questionBank = [
     "explanation": "yamllint checks YAML, actionlint checks GitHub Actions workflows, Gitleaks finds secrets, and OPA/Conftest enforces custom policy rules over configuration."
   },
   {
-    "id": 255,
+    "id": 248,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "Which change must always require mandatory human approval in a Claude agent onboarding process?",
@@ -3588,7 +3490,7 @@ const questionBank = [
     "explanation": "Agents with production access, write access to deployment environments, arbitrary shell execution, new MCP/external connections, or changed permission boundaries are high-risk and need human sign-off."
   },
   {
-    "id": 256,
+    "id": 249,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Under a risk-based approval model, how should a documentation-only change be handled?",
@@ -3602,7 +3504,7 @@ const questionBank = [
     "explanation": "Low-risk changes can pass on automated validation. New tools or MCP access need security review, and production permissions need mandatory human approval."
   },
   {
-    "id": 257,
+    "id": 250,
     "difficulty": "hard",
     "category": "tool-design-mcp",
     "question": "A PR adds a new MCP server connection to an existing agent. Which approval is most appropriate?",
@@ -3616,7 +3518,7 @@ const questionBank = [
     "explanation": "Validity of the file says nothing about what the new server can reach. New tools or MCP access warrant a security review with least-privilege and untrusted-input checks."
   },
   {
-    "id": 258,
+    "id": 251,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "A CI job asks Claude to review pull requests, and external contributors can write PR descriptions and code comments. What is the key risk and mitigation?",
@@ -3630,7 +3532,7 @@ const questionBank = [
     "explanation": "Content authored by outsiders can contain instructions. Limit what the reviewing agent can do, scope credentials narrowly and never rely on the prompt alone to refuse."
   },
   {
-    "id": 259,
+    "id": 252,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Which Anthropic-provided option integrates Claude into GitHub Actions pipelines for AI-powered review?",
@@ -3644,7 +3546,7 @@ const questionBank = [
     "explanation": "Claude Code Action runs Claude in GitHub workflows. Pair it with claude -p, --output-format json and --json-schema when machine-readable output is needed."
   },
   {
-    "id": 260,
+    "id": 253,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "Should the Claude instance that authored an agent configuration change also be the one that approves it in CI?",
@@ -3658,7 +3560,7 @@ const questionBank = [
     "explanation": "Independent review instances catch issues the generator is biased to overlook. Self-approval does not replace separation of duties."
   },
   {
-    "id": 261,
+    "id": 254,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "How should the behaviour of a changed agent be tested in CI given non-deterministic outputs?",
@@ -3672,7 +3574,7 @@ const questionBank = [
     "explanation": "Assert what can be checked exactly (which tools were called, schema validity, forbidden actions), grade subjective quality with a rubric, and calibrate with human review."
   },
   {
-    "id": 262,
+    "id": 255,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "A governance document says 'aim to automate 80-90% of routine validation'. How should that figure be read?",
@@ -3686,7 +3588,7 @@ const questionBank = [
     "explanation": "The number is an aspiration. Accountability for high-risk changes stays with people."
   },
   {
-    "id": 263,
+    "id": 256,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "All automated checks pass on a PR that gives a new agent unrestricted Bash and production deploy credentials. What should happen?",
@@ -3700,7 +3602,7 @@ const questionBank = [
     "explanation": "Automation validates form and known rules. Capability grants with production impact still need explicit human accountability."
   },
   {
-    "id": 264,
+    "id": 257,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Where should agent definitions, CLAUDE.md and workflow files live so changes can be reviewed and enforced by CI?",
@@ -3714,7 +3616,7 @@ const questionBank = [
     "explanation": "Version-controlled, PR-reviewed files give an audit trail and let CI validate every change. Personal user-level config is not shared with the team."
   },
   {
-    "id": 265,
+    "id": 258,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "In a Claude Code repository, where are tool permissions and related configuration defined?",
@@ -3728,7 +3630,7 @@ const questionBank = [
     "explanation": "settings.json holds permissions and configuration. CLAUDE.md carries instructions and guidance, so mentioning a tool there does not install, configure or authorise it."
   },
   {
-    "id": 266,
+    "id": 259,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "A SKILL.md and CLAUDE.md both tell Claude to use a deployment tool. What can a CI check safely conclude from that alone?",
@@ -3742,7 +3644,7 @@ const questionBank = [
     "explanation": "References are instructions, not configuration. Validate that referenced tools exist (settings.json, .mcp.json, allowed-tools) and that access is not excessive."
   },
   {
-    "id": 267,
+    "id": 260,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "Which file should a CI pipeline validate to review MCP server definitions and access for a Claude Code project?",
@@ -3756,7 +3658,7 @@ const questionBank = [
     "explanation": "Project-scoped MCP servers live in .mcp.json (with ${ENV_VAR} expansion for secrets). Validate server configuration, access scope and that no secrets are committed."
   },
   {
-    "id": 268,
+    "id": 261,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "Under a three-level approval model, which change needs Level 3 security approval?",
@@ -3770,7 +3672,7 @@ const questionBank = [
     "explanation": "Level 1 is auto-approve (docs, safe skill updates). Level 2 is PR review (new skills, agents, tool usage changes). Level 3 is security approval (new MCP, external integrations, shell execution, expanded permissions)."
   },
   {
-    "id": 269,
+    "id": 262,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A developer adds a new custom agent under .claude/agents/ and a new skill under .claude/skills/. Which approval level fits?",
@@ -3784,7 +3686,7 @@ const questionBank = [
     "explanation": "New skills and agents get PR review. They escalate to security approval only if they add MCP servers, shell execution or broader permissions."
   },
   {
-    "id": 270,
+    "id": 263,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "Which automated validation fits a SKILL.md and an agent definition respectively?",
@@ -3798,7 +3700,7 @@ const questionBank = [
     "explanation": "Skills use SKILL.md with frontmatter such as context: fork, allowed-tools and argument-hint. Agent definitions carry description, prompt and tool restrictions. Validate structure, referenced tools and least privilege, then add AI-assisted instruction review."
   },
   {
-    "id": 271,
+    "id": 264,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "How should a CI workflow be triggered so every onboarding-relevant change gets validated?",
@@ -3812,7 +3714,7 @@ const questionBank = [
     "explanation": "Validate at PR time, before merge. Path filters on CLAUDE.md, .claude/skills, .claude/agents, .claude/commands, .claude/settings.json and .mcp.json keep the check targeted."
   },
   {
-    "id": 272,
+    "id": 265,
     "difficulty": "hard",
     "category": "agentic-architecture",
     "question": "An agent loop stops because it hit the maximum-iteration cap while the customer's issue is still unresolved. What orchestration-layer safeguard should apply?",
@@ -3826,7 +3728,7 @@ const questionBank = [
     "explanation": "Every exit path must end in a completed resolution or a human escalation. A cap hit without resolution is an escalation trigger, not a final answer."
   },
   {
-    "id": 273,
+    "id": 266,
     "difficulty": "hard",
     "category": "agentic-architecture",
     "question": "Which termination paths must the orchestrator guarantee end in either a completed resolution or a human escalation?",
@@ -3840,7 +3742,7 @@ const questionBank = [
     "explanation": "The guarantee is about the session outcome regardless of how the loop terminates, so the wrapper must cover abnormal exits as well as the normal one."
   },
   {
-    "id": 274,
+    "id": 267,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "Where should the 'every session ends resolved or escalated' guarantee be implemented?",
@@ -3854,7 +3756,7 @@ const questionBank = [
     "explanation": "Prompt instructions are probabilistic. Exit-path guarantees belong in code that runs whether or not the model cooperates."
   },
   {
-    "id": 275,
+    "id": 268,
     "difficulty": "hard",
     "category": "agentic-architecture",
     "question": "A response arrives with stop_reason max_tokens in the middle of a tool_use block. What should the orchestrator do?",
@@ -3868,7 +3770,7 @@ const questionBank = [
     "explanation": "max_tokens means the response was cut off. Acting on a truncated tool call or treating it as an answer produces wrong outcomes."
   },
   {
-    "id": 276,
+    "id": 269,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "What is the proper role of a maximum-iteration cap in an agentic loop?",
@@ -3882,7 +3784,7 @@ const questionBank = [
     "explanation": "Primary control is stop_reason (tool_use continues, end_turn stops). The cap guards against loops that never converge and must hand off cleanly."
   },
   {
-    "id": 277,
+    "id": 270,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "A human agent takes over an escalated session and cannot see the transcript. What should the handoff package contain?",
@@ -3896,7 +3798,7 @@ const questionBank = [
     "explanation": "A structured, self-contained summary preserves accumulated context and authorisation state so the human does not repeat work."
   },
   {
-    "id": 278,
+    "id": 271,
     "difficulty": "hard",
     "category": "agentic-architecture",
     "question": "An engineer resumes a named session after teammates modified three files the agent analysed. Best approach?",
@@ -3910,7 +3812,7 @@ const questionBank = [
     "explanation": "Targeted re-analysis with context injection restores state accurately without repeating prior work."
   },
   {
-    "id": 279,
+    "id": 272,
     "difficulty": "hard",
     "category": "agentic-architecture",
     "question": "When is starting a new session with an injected structured summary better than resuming?",
@@ -3924,7 +3826,7 @@ const questionBank = [
     "explanation": "Resumption carries old tool output with it. If that output is outdated, a fresh session seeded with a verified summary is safer."
   },
   {
-    "id": 280,
+    "id": 273,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "Two engineers want to try different refactoring strategies from the same analysis baseline. Which technique fits?",
@@ -3938,7 +3840,7 @@ const questionBank = [
     "explanation": "Forking creates divergent branches from a common starting point without contaminating each other."
   },
   {
-    "id": 281,
+    "id": 274,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "Investigating an unfamiliar legacy codebase, the next steps depend on what is discovered. Which decomposition fits?",
@@ -3952,7 +3854,7 @@ const questionBank = [
     "explanation": "Adaptive decomposition responds to intermediate findings, which a fixed sequence cannot."
   },
   {
-    "id": 282,
+    "id": 275,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "When is a fixed prompt chain more appropriate than dynamic decomposition?",
@@ -3966,7 +3868,7 @@ const questionBank = [
     "explanation": "Use fixed chains for predictable workflows and adaptive plans for open-ended investigation."
   },
   {
-    "id": 283,
+    "id": 276,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "Refunds above $500 must never run without human approval. Which implementation is reliable?",
@@ -3980,7 +3882,7 @@ const questionBank = [
     "explanation": "Policy limits need deterministic enforcement before the action happens."
   },
   {
-    "id": 284,
+    "id": 277,
     "difficulty": "medium",
     "category": "agentic-architecture",
     "question": "Different MCP tools return dates as Unix timestamps and ISO strings. Which hook pattern normalises them before the model reasons over them?",
@@ -3994,7 +3896,7 @@ const questionBank = [
     "explanation": "PostToolUse can rewrite results so the model sees consistent data."
   },
   {
-    "id": 285,
+    "id": 278,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Claude keeps transforming data inconsistently even though your prose description is detailed. Which technique helps most?",
@@ -4008,7 +3910,7 @@ const questionBank = [
     "explanation": "Examples remove ambiguity that prose leaves open."
   },
   {
-    "id": 286,
+    "id": 279,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "You are implementing a function with precise edge-case behaviour. Which iterative workflow is most reliable?",
@@ -4022,7 +3924,7 @@ const questionBank = [
     "explanation": "Test-driven iteration gives objective, targeted feedback on specific failures."
   },
   {
-    "id": 287,
+    "id": 280,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "A reviewer reports five issues. Three interact (fixing one changes the others) and two are independent. How should feedback be given?",
@@ -4036,7 +3938,7 @@ const questionBank = [
     "explanation": "Interacting issues must be considered together. Independent ones can be fixed and verified one at a time."
   },
   {
-    "id": 288,
+    "id": 281,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Feedback on a failing output is 'make it better'. What makes feedback effective for refinement?",
@@ -4050,7 +3952,7 @@ const questionBank = [
     "explanation": "Specific failures plus expected outcomes let the next attempt converge."
   },
   {
-    "id": 289,
+    "id": 282,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Requirements are unclear before building a feature in Claude Code. Which technique surfaces design considerations early?",
@@ -4064,7 +3966,7 @@ const questionBank = [
     "explanation": "The interview pattern exposes hidden constraints before work begins."
   },
   {
-    "id": 290,
+    "id": 283,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "Tests must never run against the production database. Where should this be enforced?",
@@ -4078,7 +3980,7 @@ const questionBank = [
     "explanation": "Hard constraints require deterministic enforcement outside model discretion."
   },
   {
-    "id": 291,
+    "id": 284,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Which instruction belongs in CLAUDE.md rather than in a hook or permission?",
@@ -4092,7 +3994,7 @@ const questionBank = [
     "explanation": "Soft guidance suits CLAUDE.md. Must-never and must-always rules suit hooks and permissions."
   },
   {
-    "id": 292,
+    "id": 285,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "A team's CLAUDE.md says 'never edit files under /migrations', yet a migration was edited. How should the configuration be restructured?",
@@ -4106,7 +4008,7 @@ const questionBank = [
     "explanation": "Strengthening wording does not make advice enforceable. A permission or hook does."
   },
   {
-    "id": 293,
+    "id": 286,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Which characteristic separates enforcement mechanisms from CLAUDE.md?",
@@ -4120,7 +4022,7 @@ const questionBank = [
     "explanation": "The distinction is deterministic runtime enforcement versus probabilistic model compliance."
   },
   {
-    "id": 294,
+    "id": 287,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "Code must be auto-formatted after every file edit regardless of whether Claude remembers. Which mechanism?",
@@ -4134,7 +4036,7 @@ const questionBank = [
     "explanation": "Automatic, model-independent enforcement is what hooks provide."
   },
   {
-    "id": 295,
+    "id": 288,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A test convention applies only to files matching **/*.test.py across many directories and should load only when editing them. Which mechanism?",
@@ -4148,7 +4050,7 @@ const questionBank = [
     "explanation": "Path-scoped rules load conditionally for matching files, which suits conventions spread across directories."
   },
   {
-    "id": 296,
+    "id": 289,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A team wants a shared /review command via version control and a personal /scratch command for one developer. Where do they go?",
@@ -4162,7 +4064,7 @@ const questionBank = [
     "explanation": "Project commands are shared through the repo. User commands stay personal."
   },
   {
-    "id": 297,
+    "id": 290,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A task will modify 40 files, has several valid architectures and needs stakeholder review before implementation. Which mode fits?",
@@ -4176,7 +4078,7 @@ const questionBank = [
     "explanation": "Large scope, architectural uncertainty and review needs point to plan mode."
   },
   {
-    "id": 298,
+    "id": 291,
     "difficulty": "easy",
     "category": "claude-code",
     "question": "A stack trace points to a single-line null check in one file. Which approach is appropriate?",
@@ -4190,7 +4092,7 @@ const questionBank = [
     "explanation": "Plan mode is overhead for a clearly scoped fix."
   },
   {
-    "id": 299,
+    "id": 292,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "A set of API conventions should be available in every session for every team member. Best method?",
@@ -4204,7 +4106,7 @@ const questionBank = [
     "explanation": "Reusable, cross-session guidance belongs in CLAUDE.md."
   },
   {
-    "id": 300,
+    "id": 293,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "You want Claude to consider one specific existing file for this task only. Which method is most appropriate?",
@@ -4218,7 +4120,7 @@ const questionBank = [
     "explanation": "@ references target specific files without permanently loading them."
   },
   {
-    "id": 301,
+    "id": 294,
     "difficulty": "easy",
     "category": "claude-code",
     "question": "A short clarification applies only to this conversation ('the staging key was rotated today'). Which method?",
@@ -4232,7 +4134,7 @@ const questionBank = [
     "explanation": "One-off details do not warrant persistent configuration."
   },
   {
-    "id": 302,
+    "id": 295,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "CLAUDE.md is growing large with architecture documents that are only sometimes relevant. How can context stay modular?",
@@ -4246,7 +4148,7 @@ const questionBank = [
     "explanation": "Modular references and scoped rules keep always-on context lean."
   },
   {
-    "id": 303,
+    "id": 296,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "A customer writes 'I want to speak to a human'. What should the agent do?",
@@ -4260,7 +4162,7 @@ const questionBank = [
     "explanation": "An explicit request for a human is honoured immediately."
   },
   {
-    "id": 304,
+    "id": 297,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "A customer is frustrated but asks for an order status and has not asked for a human. Best handling?",
@@ -4274,7 +4176,7 @@ const questionBank = [
     "explanation": "Frustration alone is not an escalation trigger. An explicit request or a policy limit is."
   },
   {
-    "id": 305,
+    "id": 298,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "A customer's request falls outside any documented policy (for example a competitor price match). What should the agent do?",
@@ -4288,7 +4190,7 @@ const questionBank = [
     "explanation": "A policy gap is a legitimate escalation reason."
   },
   {
-    "id": 306,
+    "id": 299,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "A customer lookup returns three accounts matching the name. What should the agent do?",
@@ -4302,7 +4204,7 @@ const questionBank = [
     "explanation": "Heuristic selection risks acting on the wrong customer."
   },
   {
-    "id": 307,
+    "id": 300,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "Which is an unreliable trigger for escalation?",
@@ -4316,7 +4218,7 @@ const questionBank = [
     "explanation": "Confidence and sentiment are poor proxies. Explicit requests, policy gaps and stalled progress are reliable."
   },
   {
-    "id": 308,
+    "id": 301,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "A document often lacks a purchase-order number, yet the schema marks it required and Claude invents values. Fix?",
@@ -4330,7 +4232,7 @@ const questionBank = [
     "explanation": "A required field leaves the model no honest way to express absence."
   },
   {
-    "id": 309,
+    "id": 302,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "An extraction category is sometimes ambiguous or does not fit the listed enum values. Which design handles it?",
@@ -4344,7 +4246,7 @@ const questionBank = [
     "explanation": "Escape-hatch enum values capture ambiguity instead of forcing a wrong label."
   },
   {
-    "id": 310,
+    "id": 303,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "Why do nullable fields reduce hallucination?",
@@ -4358,7 +4260,7 @@ const questionBank = [
     "explanation": "Fabrication is often caused by a schema that demands a value."
   },
   {
-    "id": 311,
+    "id": 304,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "Documents vary in date and currency formats, causing inconsistent output. Which combination helps?",
@@ -4372,21 +4274,7 @@ const questionBank = [
     "explanation": "Normalisation rules plus examples and tolerant schemas improve consistency and reduce hallucination."
   },
   {
-    "id": 312,
-    "difficulty": "medium",
-    "category": "prompt-structured-output",
-    "question": "Which method gives the strongest guarantee of schema-compliant structured output?",
-    "options": [
-      "Tool use with a JSON schema",
-      "Prompt instructions describing the JSON format",
-      "A prefilled response starting with '{'",
-      "Asking Claude to double-check its JSON"
-    ],
-    "answer": 0,
-    "explanation": "Tool use with a schema is the most reliable route. Prompt-based formatting is least reliable and prefill only steers format."
-  },
-  {
-    "id": 313,
+    "id": 305,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "Tool use with a JSON schema is in place. Which error class can still occur?",
@@ -4400,7 +4288,7 @@ const questionBank = [
     "explanation": "Schemas prevent structural errors but cannot verify that values are correct."
   },
   {
-    "id": 314,
+    "id": 306,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "Claude sometimes answers conversationally instead of calling extract_invoice, breaking the pipeline. Which setting guarantees a call?",
@@ -4414,7 +4302,7 @@ const questionBank = [
     "explanation": "A forced tool_choice guarantees that tool is called, so conversational replies cannot break downstream parsing."
   },
   {
-    "id": 315,
+    "id": 307,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "What does tool_choice 'any' do?",
@@ -4428,7 +4316,7 @@ const questionBank = [
     "explanation": "any guarantees some tool call, while a named tool guarantees a specific one."
   },
   {
-    "id": 316,
+    "id": 308,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "Which tool_choice setting lets Claude decide between replying in text and calling a tool?",
@@ -4442,7 +4330,7 @@ const questionBank = [
     "explanation": "auto is the default. any and forced settings guarantee a call. none prevents tool use."
   },
   {
-    "id": 317,
+    "id": 309,
     "difficulty": "hard",
     "category": "prompt-structured-output",
     "question": "A document may be an invoice, receipt or contract, each with its own extraction tool, and structured output must always be produced. Which setting?",
@@ -4456,7 +4344,7 @@ const questionBank = [
     "explanation": "Unknown document type means the specific tool cannot be forced, but a tool call can be."
   },
   {
-    "id": 318,
+    "id": 310,
     "difficulty": "medium",
     "category": "prompt-structured-output",
     "question": "Which consequence should you expect when tool_choice forces a tool?",
@@ -4470,7 +4358,7 @@ const questionBank = [
     "explanation": "Forcing guarantees the call and its shape, not the correctness of the values."
   },
   {
-    "id": 319,
+    "id": 311,
     "difficulty": "hard",
     "category": "tool-design-mcp",
     "question": "A workflow needs get_customer before lookup_order and process_refund. How is the prerequisite order reliably enforced?",
@@ -4484,7 +4372,7 @@ const questionBank = [
     "explanation": "When order failures have consequences, enforce it deterministically."
   },
   {
-    "id": 320,
+    "id": 312,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "How can you guarantee extract_metadata runs before enrichment tools in a multi-step extraction?",
@@ -4498,7 +4386,7 @@ const questionBank = [
     "explanation": "Force the prerequisite once, then release control so later steps can choose normally."
   },
   {
-    "id": 321,
+    "id": 313,
     "difficulty": "hard",
     "category": "tool-design-mcp",
     "question": "Why not rely on prompt text alone for a tool prerequisite with financial impact?",
@@ -4512,7 +4400,7 @@ const questionBank = [
     "explanation": "Probabilistic compliance is not enough for rules that must always hold."
   },
   {
-    "id": 322,
+    "id": 314,
     "difficulty": "medium",
     "category": "claude-code",
     "question": "You need every caller of processRefund in an unfamiliar codebase. Which approach is best?",
@@ -4526,21 +4414,7 @@ const questionBank = [
     "explanation": "Grep locates content efficiently without loading everything."
   },
   {
-    "id": 323,
-    "difficulty": "easy",
-    "category": "claude-code",
-    "question": "Which tool finds files by name pattern such as **/*.test.tsx?",
-    "options": [
-      "Grep",
-      "Glob",
-      "Read",
-      "Edit"
-    ],
-    "answer": 1,
-    "explanation": "Glob matches paths. Grep searches contents."
-  },
-  {
-    "id": 324,
+    "id": 315,
     "difficulty": "hard",
     "category": "claude-code",
     "question": "How should exploration of a large codebase be structured to stay within the context window?",
@@ -4554,7 +4428,7 @@ const questionBank = [
     "explanation": "Incremental, targeted exploration manages context better than bulk reading."
   },
   {
-    "id": 325,
+    "id": 316,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "Why must every Messages API request include the conversation history?",
@@ -4568,7 +4442,7 @@ const questionBank = [
     "explanation": "State lives in the request you send."
   },
   {
-    "id": 326,
+    "id": 317,
     "difficulty": "hard",
     "category": "context-reliability",
     "question": "A chat app lets browsers send the whole messages array. What is the risk?",
@@ -4582,7 +4456,7 @@ const questionBank = [
     "explanation": "Whoever assembles the history controls what the model believes it said."
   },
   {
-    "id": 327,
+    "id": 318,
     "difficulty": "medium",
     "category": "context-reliability",
     "question": "In a tool loop, what must be appended to the messages list after Claude returns tool_use?",
@@ -4596,7 +4470,7 @@ const questionBank = [
     "explanation": "The loop continues by extending the history with the assistant turn and its results."
   },
   {
-    "id": 328,
+    "id": 319,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "Claude confuses search_orders and lookup_order. What is the first fix?",
@@ -4610,7 +4484,7 @@ const questionBank = [
     "explanation": "Fix the primary selection signal before adding machinery."
   },
   {
-    "id": 329,
+    "id": 320,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "Which information improves tool selection reliability most?",
@@ -4624,7 +4498,7 @@ const questionBank = [
     "explanation": "Descriptions need to say what the tool is for, how to call it and when not to."
   },
   {
-    "id": 330,
+    "id": 321,
     "difficulty": "medium",
     "category": "tool-design-mcp",
     "question": "A shared .mcp.json needs an API token without committing the secret. Which approach?",
@@ -4641,7 +4515,7 @@ const questionBank = [
 
 // --- TOP 100 INTERVIEW INDICES ---
 // ZERO-BASED ARRAY INDICES (not question IDs), priority ordered.
-// 331-question bank. First 20 are MUST-KNOW; remaining items are weighted by the official exam blueprint.
+// 322-question bank. First 20 are MUST-KNOW; remaining items are weighted by the official exam blueprint.
 const hotsQuestions = [
     // TIER 1 - MUST KNOW
     108, // agentic-architecture
