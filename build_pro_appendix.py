@@ -174,12 +174,12 @@ for stem, cfg in CFG.items():
     subprocess.run(['pdftoppm','-png','-r','170','-singlefile',str(mm_pdf),str(ASSETS/f'{stem}_quick_recall_mind_map')], check=True)
     # --- readme
     t = rt
-    t = re.sub(r'<!-- SCORE-REPORT:START -->.*?<!-- SCORE-REPORT:END -->\n*', '', t, flags=re.S)
-    sec = ["<!-- SCORE-REPORT:START -->", "## Score report revision priorities", "",
-      f"Built from the **Architect Foundations (CCAR-F)** score report (percent correct per objective). The Professional exams test the same habits at greater depth, so the objectives scored 0–75% are drilled here as scenario questions {cfg['first_new']}–{cfg['last']} (tagged *[Revision]* in the answer PDF). Work CRITICAL rows first. The report scores Foundations objectives, not this exam's blueprint, and 100% is not a guarantee of mastery.", "",
-      "| Objective (score report) | Foundations score | Priority | Key recall | Practice question IDs |", "|---|---|---|---|---|"]
-    sec += ["| " + " | ".join(x.replace('|','/') for x in r) + " |" for r in cfg['rows']]
-    sec += ["", "Also at 100% (light revision only): slash commands, PostToolUse quality hooks, MCP scope, context management, human review routing, sync vs Batches, feedback loops, MCP error handling.", "<!-- SCORE-REPORT:END -->", ""]
+    t = re.sub(r'<!-- REVISION-PRIORITIES:START -->.*?<!-- REVISION-PRIORITIES:END -->\n*', '', t, flags=re.S)
+    sec = ["<!-- REVISION-PRIORITIES:START -->", "## Revision priorities", "",
+      f"The objectives most worth drilling, with the practice questions ({cfg['first_new']}–{cfg['last']}) that cover each. Work from the top; revisit the rest lightly.", "",
+      "| Objective | Key recall | Practice question IDs |", "|---|---|---|"]
+    sec += [f"| {r[0]} | {r[3].replace('|','/')} | {r[4]} |" for r in cfg['rows']]
+    sec += ["", "<!-- REVISION-PRIORITIES:END -->", ""]
     t = t.replace("## Consolidated Mind Map", "\n".join(sec) + "\n## Consolidated Mind Map", 1)
     # mind map text
     t = re.sub(r'\n  ├─ ' + re.escape(SR) + r'.*?(?=\n  └─ Decision loop)', '', t, flags=re.S)
@@ -191,6 +191,6 @@ for stem, cfg in CFG.items():
     t = re.sub(r'\*\*\d+ professional-level practice MCQs\*\*', f'**{len(bank)} professional-level practice MCQs**', t)
     t = t.replace('172-question practice bank', f'{len(bank)}-question practice bank')
     if 'Revision questions' not in t:
-        t = t.replace('## Simulator', f"## Revision questions\nQuestions {cfg['first_new']}–{cfg['last']} were added from the Foundations score report (see the priorities table). They use the same schema as the rest of the bank.\n\n## Simulator", 1)
+        t = t.replace('## Simulator', f"## Revision questions\nQuestions {cfg['first_new']}–{cfg['last']} were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.\n\n## Simulator", 1)
     rp.write_text(t, encoding='utf-8')
     print(stem, len(bank), 'questions;', len(allcards), 'cards;', len(PdfReader(str(DOCS/f'{stem}_answers.pdf')).pages), 'pdf pages')
