@@ -10,25 +10,24 @@
 <img width="1024" height="1536" alt="Claude Certified Developer Foundation reference one-pager" src="../assets/claude_developer_detailed_one_pager.png" />
 
 
-<!-- SCORE-REPORT:START -->
-## Score report revision priorities
+<!-- REVISION-PRIORITIES:START -->
+## Revision priorities
 
-Built from the **Architect Foundations (CCAR-F)** score report (percent correct per objective). The Professional exams test the same habits at greater depth, so the objectives scored 0–75% are drilled here as scenario questions 151–188 (tagged *[Revision]* in the answer PDF). Work CRITICAL rows first. The report scores Foundations objectives, not this exam's blueprint, and 100% is not a guarantee of mastery.
+The objectives most worth drilling, with the practice questions (151–188) that cover each. Work from the top; revisit the rest lightly.
 
-| Objective (score report) | Foundations score | Priority | Key recall | Practice question IDs |
-|---|---|---|---|---|
-| Orchestration safeguards: every session ends resolved or escalated | 0% | CRITICAL | Bounded loop + deadline, try/finally around tools, one finalise(); correct stop_reason handling; never execute a cut-off tool_use. | 151-155 |
-| Iterative refinement workflows | 0% | CRITICAL | Example pairs; tests first; group related failures, fix once, re-run whole eval set. | 156-158 |
-| Enforce via settings/hooks vs advise in CLAUDE.md | 0% | CRITICAL | Deny rules and hooks are deterministic (PreToolUse exit 2 blocks); CLAUDE.md advisory; PostToolUse formatter. | 159-162 |
-| Project context: @ references vs CLAUDE.md vs inline | 0% | CRITICAL | Project CLAUDE.md + @imports for shared; rules paths for file types; @ file for this task. | 163-165 |
-| Escalation decision criteria | 0% | CRITICAL | Escalate on explicit request, policy gap, repeated failure; ask identifier for multiple matches; no sentiment/confidence triggers. | 166-169 |
-| Structured output via tool use; tool_choice and sequencing | 0% | CRITICAL | {type:tool,name} forces a tool; any forces some tool; no forcing with extended thinking; executor guard for prerequisites; validate semantics. | 170-174 |
-| Extraction schemas: optional, nullable, enums | 33% | CRITICAL | Nullable/optional fields, 'other'+detail, 'unclear', normalisation + varied few-shot. | 175-177 |
-| Stateless API, exploration, descriptions, MCP, resume | 50-75% | Reinforce | Resend history (server-side); Grep→Read; description contrast; .mcp.json with ${ENV_VAR}; re-analyse changed files; plan mode; adaptive decomposition. | 178-187 |
-| Structured handoff packages | 100% | Maintain | ID, root cause, actions, amounts, authorisation state, next action. | 188 |
+| Objective | Key recall | Practice question IDs |
+|---|---|---|
+| Orchestration safeguards: every session ends resolved or escalated | Bounded loop + deadline, try/finally around tools, one finalise(); correct stop_reason handling; never execute a cut-off tool_use. | 151-155 |
+| Iterative refinement workflows | Example pairs; tests first; group related failures, fix once, re-run whole eval set. | 156-158 |
+| Enforce via settings/hooks vs advise in CLAUDE.md | Deny rules and hooks are deterministic (PreToolUse exit 2 blocks); CLAUDE.md advisory; PostToolUse formatter. | 159-162 |
+| Project context: @ references vs CLAUDE.md vs inline | Project CLAUDE.md + @imports for shared; rules paths for file types; @ file for this task. | 163-165 |
+| Escalation decision criteria | Escalate on explicit request, policy gap, repeated failure; ask identifier for multiple matches; no sentiment/confidence triggers. | 166-169 |
+| Structured output via tool use; tool_choice and sequencing | {type:tool,name} forces a tool; any forces some tool; no forcing with extended thinking; executor guard for prerequisites; validate semantics. | 170-174 |
+| Extraction schemas: optional, nullable, enums | Nullable/optional fields, 'other'+detail, 'unclear', normalisation + varied few-shot. | 175-177 |
+| Stateless API, exploration, descriptions, MCP, resume | Resend history (server-side); Grep→Read; description contrast; .mcp.json with ${ENV_VAR}; re-analyse changed files; plan mode; adaptive decomposition. | 178-187 |
+| Structured handoff packages | ID, root cause, actions, amounts, authorisation state, next action. | 188 |
 
-Also at 100% (light revision only): slash commands, PostToolUse quality hooks, MCP scope, context management, human review routing, sync vs Batches, feedback loops, MCP error handling.
-<!-- SCORE-REPORT:END -->
+<!-- REVISION-PRIORITIES:END -->
 
 ## Consolidated Mind Map
 
@@ -111,7 +110,7 @@ This professional practice guide extends the simulator's **Claude Certified Deve
 - Test realistic edge cases and operational failure paths, not only happy-path prompts.
 
 ## Revision questions
-Questions 151–188 were added from the Foundations score report (see the priorities table). They use the same schema as the rest of the bank.
+Questions 151–188 were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.
 
 ## Simulator
 Select **Claude Certified Developer – Professional** from the portal. The bank uses the existing simulator question schema and is loaded by `exam.html` through `js/questionBank_claude_developer_professional.js`.

@@ -10,28 +10,27 @@
 <img width="1024" height="1536" alt="Claude Certified Architect Foundation reference one-pager" src="../assets/claude_architect_detailed_one_pager.png" />
 
 
-<!-- SCORE-REPORT:START -->
-## Score report revision priorities
+<!-- REVISION-PRIORITIES:START -->
+## Revision priorities
 
-Built from the **Architect Foundations (CCAR-F)** score report (percent correct per objective). The Professional exams test the same habits at greater depth, so the objectives scored 0–75% are drilled here as scenario questions 173–212 (tagged *[Revision]* in the answer PDF). Work CRITICAL rows first. The report scores Foundations objectives, not this exam's blueprint, and 100% is not a guarantee of mastery.
+The objectives most worth drilling, with the practice questions (173–212) that cover each. Work from the top; revisit the rest lightly.
 
-| Objective (score report) | Foundations score | Priority | Key recall | Practice question IDs |
-|---|---|---|---|---|
-| Orchestration safeguards: every session ends resolved or escalated | 0% | CRITICAL | One orchestration layer owns every exit path (end_turn, cap, max_tokens, tool failure/timeout, refusal, exception) and a watchdog catches dead sessions. Never execute a truncated tool_use. | 173-177 |
-| Iterative refinement workflows | 0% | CRITICAL | Concrete input/output examples; tests first, then specific failures; batch interacting issues, fix independent ones sequentially. | 178-180 |
-| Enforce via settings/hooks vs advise in CLAUDE.md | 0% | CRITICAL | CLAUDE.md is advisory; deny rules, hooks and managed settings are deterministic; PostToolUse for formatting/tests after every edit. | 181-184 |
-| Project context: @ references vs CLAUDE.md vs inline | 0% | CRITICAL | Cross-session team context → project CLAUDE.md (+ @imports, path-scoped rules); this-task file → @ reference; one-off → inline. | 185-187 |
-| Escalation decision criteria | 0% | CRITICAL | Explicit request → immediate; frustration alone → acknowledge and offer help; policy gap/no progress → escalate; multiple matches → ask identifier; sentiment/confidence unreliable. | 188-192 |
-| Structured output via tool use; tool_choice and sequencing | 0% | CRITICAL | auto / any / named tool / none; forced calls guarantee shape not meaning; thinking allows only auto/none; gate prerequisite tools in code. | 193-197 |
-| Extraction schemas: optional, nullable, enums | 33% | CRITICAL | Required fields force fabrication; use nullable/optional, 'other' + detail, 'unclear'; normalise formats with few-shot examples. | 198-200 |
-| Codebase exploration with Grep, Glob, Read | 50% | Reinforce | Grep contents, Glob paths, Read files; search first, read incrementally. | 201-202 |
-| Stateless API and conversation history | 50% | Reinforce | Resend history every request; keep canonical history server-side. | 203-204 |
-| Tool descriptions and MCP integration | 50% | Reinforce | Descriptions drive selection; shared MCP in .mcp.json with ${ENV_VAR}; typed errors. | 205-206, 211 |
-| Session resumption, plan mode, decomposition | 67-75% | Reinforce | Name changed files after --resume; persist and inject findings; plan mode for broad/uncertain work; adaptive subtasks for open-ended work. | 207-210 |
-| Structured handoff packages | 100% | Maintain | Customer ID, root cause, actions, amounts, authorisation state, next action. | 212 |
+| Objective | Key recall | Practice question IDs |
+|---|---|---|
+| Orchestration safeguards: every session ends resolved or escalated | One orchestration layer owns every exit path (end_turn, cap, max_tokens, tool failure/timeout, refusal, exception) and a watchdog catches dead sessions. Never execute a truncated tool_use. | 173-177 |
+| Iterative refinement workflows | Concrete input/output examples; tests first, then specific failures; batch interacting issues, fix independent ones sequentially. | 178-180 |
+| Enforce via settings/hooks vs advise in CLAUDE.md | CLAUDE.md is advisory; deny rules, hooks and managed settings are deterministic; PostToolUse for formatting/tests after every edit. | 181-184 |
+| Project context: @ references vs CLAUDE.md vs inline | Cross-session team context → project CLAUDE.md (+ @imports, path-scoped rules); this-task file → @ reference; one-off → inline. | 185-187 |
+| Escalation decision criteria | Explicit request → immediate; frustration alone → acknowledge and offer help; policy gap/no progress → escalate; multiple matches → ask identifier; sentiment/confidence unreliable. | 188-192 |
+| Structured output via tool use; tool_choice and sequencing | auto / any / named tool / none; forced calls guarantee shape not meaning; thinking allows only auto/none; gate prerequisite tools in code. | 193-197 |
+| Extraction schemas: optional, nullable, enums | Required fields force fabrication; use nullable/optional, 'other' + detail, 'unclear'; normalise formats with few-shot examples. | 198-200 |
+| Codebase exploration with Grep, Glob, Read | Grep contents, Glob paths, Read files; search first, read incrementally. | 201-202 |
+| Stateless API and conversation history | Resend history every request; keep canonical history server-side. | 203-204 |
+| Tool descriptions and MCP integration | Descriptions drive selection; shared MCP in .mcp.json with ${ENV_VAR}; typed errors. | 205-206, 211 |
+| Session resumption, plan mode, decomposition | Name changed files after --resume; persist and inject findings; plan mode for broad/uncertain work; adaptive subtasks for open-ended work. | 207-210 |
+| Structured handoff packages | Customer ID, root cause, actions, amounts, authorisation state, next action. | 212 |
 
-Also at 100% (light revision only): slash commands, PostToolUse quality hooks, MCP scope, context management, human review routing, sync vs Batches, feedback loops, MCP error handling.
-<!-- SCORE-REPORT:END -->
+<!-- REVISION-PRIORITIES:END -->
 
 ## Consolidated Mind Map
 
@@ -205,7 +204,7 @@ The original 150 simulator questions are retained. The 22 scenario questions fro
 The 22 sample questions in the attached study guide have been added verbatim to the practice bank as questions 151–172, distributed across all seven blueprint domains. Seven are multiple-response questions; the exam interface presents checkboxes and scores the complete answer set.
 
 ## Revision questions
-Questions 173–212 were added from the Foundations score report (see the priorities table). They use the same schema as the rest of the bank.
+Questions 173–212 were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.
 
 ## Simulator
 Select **Claude Certified Architect – Professional** from the portal. The bank uses the simulator question schema, including an answer-index array for multi-select items and is loaded by `exam.html` through `js/questionBank_claude_architect_professional.js`.

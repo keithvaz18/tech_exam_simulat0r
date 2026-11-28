@@ -10,32 +10,31 @@
 <img width="1024" height="1536" alt="claude_architect_detailed_one_pager" src="assets/claude_architect_detailed_one_pager.png" />
 
 
-<!-- SCORE-REPORT:START -->
-## Score report revision priorities
+<!-- REVISION-PRIORITIES:START -->
+## Revision priorities
 
-Built from the CCAR-F score report (percent correct per objective). Work the CRITICAL rows first, then Reinforce. Objectives already at 100% are kept for light revision only; scores of 100% are not a guarantee of mastery.
+The objectives most worth drilling, with the practice questions that cover each. Work from the top; revisit the rest lightly.
 
-| Objective (score report) | Score | Priority | Key recall | Practice question IDs |
-|---|---|---|---|---|
-| Orchestration safeguards: every session ends resolved or escalated | 0% | CRITICAL | Wrap the loop in orchestration code; every exit path (end_turn, iteration cap, max_tokens, tool failure, timeout, exception) ends in a resolution or a human escalation with a handoff package. The cap is a safety net, not the primary stop. | 272-276 |
-| Iterative refinement workflows | 0% | CRITICAL | Concrete input/output examples beat prose; test-first then feed specific failures; batch interacting issues in one message, fix independent ones sequentially; interview pattern for unclear requirements. | 285-289 |
-| Enforce via settings/hooks vs advise in CLAUDE.md | 0% | CRITICAL | CLAUDE.md is advisory context; settings permissions (deny rules) and hooks are deterministic. Anything that must always or never happen goes in hooks/permissions; conventions go in CLAUDE.md. | 290-293 |
-| Project context: @ references vs CLAUDE.md vs inline | 0% | CRITICAL | Reusable cross-session, team-wide → CLAUDE.md (import files with @). Specific file for this task → @ reference in the prompt. One-off detail → inline. Keep CLAUDE.md modular with @ imports or path-scoped rules. | 299-302 |
-| Escalation decision criteria | 0% | CRITICAL | Explicit human request → escalate immediately (no investigation first). Frustration alone → acknowledge and offer help, escalate if reiterated. Policy gap or no progress → escalate. Multiple matches → ask for identifiers. Sentiment and self-reported confidence are unreliable triggers. | 303-307 |
-| Structured output method; tool_use + tool_choice guarantee | 0% | CRITICAL | tool_use + JSON schema = strongest compliance (syntax, not semantics). tool_choice: auto (may reply in text) · any (must call a tool, model chooses) · {type:tool,name} (that tool) · none. Forced choice = no preamble. | 312-318 |
-| tool_choice and multi-tool sequencing | 0% | CRITICAL | Prerequisite order for consequential workflows is enforced programmatically (gate or hook), optionally forcing the first tool via tool_choice then returning to auto. Prompt order is probabilistic. | 319-321 |
-| Extraction schemas: optional, nullable, enums | 33% | CRITICAL | Required fields force fabrication → make fields optional/nullable. Enums get 'other' + detail and 'unclear'. Schemas fix syntax, not semantics. | 308-311 |
-| Codebase exploration with Grep, Glob, Read | 50% | Reinforce | Grep = search contents (callers, error strings); Glob = match file paths; Read = open a file. Build understanding incrementally: Grep entry points → Read → follow imports; subagents for verbose discovery; scratchpad notes. | 322-324 |
-| Stateless API and conversation history | 50% | Reinforce | Messages API is stateless: send the full relevant history every request. Keep canonical history server-side; append assistant tool_use turn then user tool_result turn; never let clients forge roles. | 325-327 |
-| Tool descriptions and MCP integration | 50% | Reinforce | Descriptions are the selection mechanism: purpose, input formats, examples, edge cases, when to use vs similar tools. MCP: project .mcp.json with ${ENV_VAR}, personal ~/.claude.json, verify discovery with /mcp. | 328-330 |
-| Session resumption and re-analysis | 67% | Reinforce | --resume a named session, then tell the agent exactly which files changed for targeted re-analysis; if tool results are stale, start fresh with an injected summary; fork_session to branch from a baseline. | 278-280 |
-| Configuration mechanism, commands and plan mode | 67% | Reinforce | CLAUDE.md = always-on standards; .claude/rules + paths glob = file-type conventions; skills = on-demand workflows; hooks = deterministic; settings = access. Commands: .claude/commands (shared) vs ~/.claude/commands (personal). Plan mode for big/ambiguous/multi-approach; direct for small, clear, reversible. | 294-298 |
-| Dynamic task decomposition | 75% | Maintain | Open-ended work: generate subtasks adaptively (map structure, prioritise, revise as findings arrive). Fixed chains only when steps are predictable. | 281-282 |
-| Structured handoff packages | 100% | Maintain | Handoff = customer ID, root cause, actions taken, amounts, authorization state, recommended next action. The human has no transcript. | 277-277 |
-| PreToolUse / PostToolUse hooks for business rules | 100% | Maintain | PreToolUse blocks or redirects before the call (refund limits); PostToolUse transforms or checks after (normalise data, format, lint, tests). Deterministic, not model discretion. | 283-284 |
+| Objective | Key recall | Practice question IDs |
+|---|---|---|
+| Orchestration safeguards: every session ends resolved or escalated | Wrap the loop in orchestration code; every exit path (end_turn, iteration cap, max_tokens, tool failure, timeout, exception) ends in a resolution or a human escalation with a handoff package. The cap is a safety net, not the primary stop. | 272-276 |
+| Iterative refinement workflows | Concrete input/output examples beat prose; test-first then feed specific failures; batch interacting issues in one message, fix independent ones sequentially; interview pattern for unclear requirements. | 285-289 |
+| Enforce via settings/hooks vs advise in CLAUDE.md | CLAUDE.md is advisory context; settings permissions (deny rules) and hooks are deterministic. Anything that must always or never happen goes in hooks/permissions; conventions go in CLAUDE.md. | 290-293 |
+| Project context: @ references vs CLAUDE.md vs inline | Reusable cross-session, team-wide → CLAUDE.md (import files with @). Specific file for this task → @ reference in the prompt. One-off detail → inline. Keep CLAUDE.md modular with @ imports or path-scoped rules. | 299-302 |
+| Escalation decision criteria | Explicit human request → escalate immediately (no investigation first). Frustration alone → acknowledge and offer help, escalate if reiterated. Policy gap or no progress → escalate. Multiple matches → ask for identifiers. Sentiment and self-reported confidence are unreliable triggers. | 303-307 |
+| Structured output method; tool_use + tool_choice guarantee | tool_use + JSON schema = strongest compliance (syntax, not semantics). tool_choice: auto (may reply in text) · any (must call a tool, model chooses) · {type:tool,name} (that tool) · none. Forced choice = no preamble. | 312-318 |
+| tool_choice and multi-tool sequencing | Prerequisite order for consequential workflows is enforced programmatically (gate or hook), optionally forcing the first tool via tool_choice then returning to auto. Prompt order is probabilistic. | 319-321 |
+| Extraction schemas: optional, nullable, enums | Required fields force fabrication → make fields optional/nullable. Enums get 'other' + detail and 'unclear'. Schemas fix syntax, not semantics. | 308-311 |
+| Codebase exploration with Grep, Glob, Read | Grep = search contents (callers, error strings); Glob = match file paths; Read = open a file. Build understanding incrementally: Grep entry points → Read → follow imports; subagents for verbose discovery; scratchpad notes. | 322-324 |
+| Stateless API and conversation history | Messages API is stateless: send the full relevant history every request. Keep canonical history server-side; append assistant tool_use turn then user tool_result turn; never let clients forge roles. | 325-327 |
+| Tool descriptions and MCP integration | Descriptions are the selection mechanism: purpose, input formats, examples, edge cases, when to use vs similar tools. MCP: project .mcp.json with ${ENV_VAR}, personal ~/.claude.json, verify discovery with /mcp. | 328-330 |
+| Session resumption and re-analysis | --resume a named session, then tell the agent exactly which files changed for targeted re-analysis; if tool results are stale, start fresh with an injected summary; fork_session to branch from a baseline. | 278-280 |
+| Configuration mechanism, commands and plan mode | CLAUDE.md = always-on standards; .claude/rules + paths glob = file-type conventions; skills = on-demand workflows; hooks = deterministic; settings = access. Commands: .claude/commands (shared) vs ~/.claude/commands (personal). Plan mode for big/ambiguous/multi-approach; direct for small, clear, reversible. | 294-298 |
+| Dynamic task decomposition | Open-ended work: generate subtasks adaptively (map structure, prioritise, revise as findings arrive). Fixed chains only when steps are predictable. | 281-282 |
+| Structured handoff packages | Handoff = customer ID, root cause, actions taken, amounts, authorization state, recommended next action. The human has no transcript. | 277-277 |
+| PreToolUse / PostToolUse hooks for business rules | PreToolUse blocks or redirects before the call (refund limits); PostToolUse transforms or checks after (normalise data, format, lint, tests). Deterministic, not model discretion. | 283-284 |
 
-Also at 100% on the report (no new drills needed): slash commands (project `.claude/commands/` vs user `~/.claude/commands/`), PostToolUse quality hooks, MCP server scope, long-session context management, human review routing, sync vs Batches, feedback loops, MCP structured error handling.
-<!-- SCORE-REPORT:END -->
+<!-- REVISION-PRIORITIES:END -->
 
 ## Consolidated Mind Map
 
