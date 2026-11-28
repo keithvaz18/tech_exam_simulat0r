@@ -2956,12 +2956,1692 @@ const questionBank = [
     ],
     "answer": 3,
     "explanation": "Conflict Annotation: structured reports separate well-established from contested findings, keeping source attribution and dates so temporal differences are not misread as contradictions."
+  },
+  {
+    "id": 211,
+    "difficulty": "easy",
+    "category": "tool-design-mcp",
+    "question": "An app needs to call Claude without blocking an event loop while many requests run concurrently. Which Python SDK client fits?",
+    "options": [
+      "The Claude Agent SDK query() function, which is only synchronous",
+      "Anthropic, called from several threads without awaiting",
+      "AsyncAnthropic, used with await for calls, streaming and batches",
+      "A synchronous client wrapped in time.sleep() loops"
+    ],
+    "answer": 2,
+    "explanation": "The Python SDK ships both Anthropic and AsyncAnthropic. The async client supports await-based calls and streaming. The Agent SDK query() is itself async and yields messages as an async iterator."
+  },
+  {
+    "id": 212,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "The Claude Agent SDK query() function is consumed how?",
+    "options": [
+      "As a single blocking string return value",
+      "Only through a webhook callback",
+      "Only through a synchronous generator in a separate process",
+      "As an async iterator of messages produced while the agent runs"
+    ],
+    "answer": 3,
+    "explanation": "query() returns an async iterable of messages, so the caller streams agent progress (assistant turns, tool use, results) rather than waiting for one final value."
+  },
+  {
+    "id": 213,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "What does an MCP client need in order to connect to an MCP server and let Claude use its tools?",
+    "options": [
+      "The MCP SDK, a transport matching the server, a session initialization handshake, and a tool-use loop to Claude",
+      "A fine-tuned Claude model for each server",
+      "A direct database connection to the server's data store",
+      "Only the server's source code copied into the client"
+    ],
+    "answer": 0,
+    "explanation": "A client uses the MCP SDK (JSON-RPC framing), a transport (stdio or Streamable HTTP), ClientSession.initialize(), then list_tools() and a loop forwarding Claude's tool_use requests to call_tool()."
+  },
+  {
+    "id": 214,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "A local MCP server is started by the client as a subprocess and talks over standard input/output. Which transport is this?",
+    "options": [
+      "WebSocket relay",
+      "stdio",
+      "Server-sent events only",
+      "Streamable HTTP"
+    ],
+    "answer": 1,
+    "explanation": "stdio is for local servers the client spawns. Remote servers use Streamable HTTP (with SSE support) and typically need auth headers or OAuth."
+  },
+  {
+    "id": 215,
+    "difficulty": "hard",
+    "category": "tool-design-mcp",
+    "question": "A stdio MCP server randomly drops its connection after a developer adds print() debugging. What is the most likely cause and fix?",
+    "options": [
+      "The server must be rewritten as an HTTP server",
+      "The model context window overflowed; enable /compact",
+      "Output on stdout corrupts the JSON-RPC stream; log to stderr or a file instead",
+      "print() is blocked by .mcp.json permissions; add allowedTools"
+    ],
+    "answer": 2,
+    "explanation": "In stdio servers, stdout carries JSON-RPC messages. Any stray print or console.log breaks framing. Logging goes to stderr or a file."
+  },
+  {
+    "id": 216,
+    "difficulty": "easy",
+    "category": "tool-design-mcp",
+    "question": "Which command is the quickest way to interactively test an MCP server's tools, resources and prompts without writing client code?",
+    "options": [
+      "A Message Batches API job",
+      "claude -p with --json-schema",
+      "A PostToolUse hook",
+      "The MCP Inspector (for example: npx @modelcontextprotocol/inspector, or mcp dev server.py)"
+    ],
+    "answer": 3,
+    "explanation": "MCP Inspector opens a local UI to invoke tools, inspect schemas and view raw JSON-RPC logs. mcp dev wraps it for Python FastMCP servers and requires Node.js/npx."
+  },
+  {
+    "id": 217,
+    "difficulty": "hard",
+    "category": "tool-design-mcp",
+    "question": "A team wants automated regression tests for an MCP server that verify initialize(), list_tools() schemas and call_tool() error flags in CI. What is the best approach?",
+    "options": [
+      "Use an in-memory client/server pair from the MCP SDK to exercise the real protocol, plus plain unit tests for tool logic",
+      "Assume schemas are valid because decorators generate them",
+      "Test only with an LLM and compare prose output",
+      "Manually click through Claude Desktop before each release"
+    ],
+    "answer": 0,
+    "explanation": "In-memory transports let tests run the real MCP protocol deterministically. Tool business logic is also tested directly. End-to-end testing with an AI client then checks that descriptions lead to correct tool choice."
+  },
+  {
+    "id": 218,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "A chat app lets users ask Claude about GitHub data. Without MCP, what is the main problem?",
+    "options": [
+      "Claude cannot call tools at all",
+      "Each integration (schemas, routing, auth, pagination) is hand-built and locked inside the app, with no reuse across apps (the M x N problem)",
+      "GitHub forbids API access from chat apps",
+      "Tool definitions cannot contain JSON Schema"
+    ],
+    "answer": 1,
+    "explanation": "Without MCP the app owns every wrapper and schema and must be changed whenever an API changes. With MCP, a server owns tool definitions and the client discovers them at runtime."
+  },
+  {
+    "id": 219,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "An MCP server needs a 'Summarize document' button users click in the UI. Which MCP primitive fits?",
+    "options": [
+      "A Tool, because the model decides when to call it",
+      "A Resource, because it holds the document text",
+      "A Prompt, because prompts are user-controlled templates surfaced as buttons or slash commands",
+      "A Root, because it defines the filesystem scope"
+    ],
+    "answer": 2,
+    "explanation": "Prompts are user-controlled (buttons, slash commands). Tools are model-controlled. Resources are application-controlled read-only context."
+  },
+  {
+    "id": 220,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "Which pairing of MCP primitive and controller is correct?",
+    "options": [
+      "Resources: model-controlled; Tools: application-controlled",
+      "All three are model-controlled",
+      "Tools: user-controlled; Prompts: model-controlled",
+      "Tools: model-controlled; Resources: application-controlled; Prompts: user-controlled"
+    ],
+    "answer": 3,
+    "explanation": "The three primitives differ by who triggers them: model (tools), application (resources) and user (prompts)."
+  },
+  {
+    "id": 221,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "A developer wants Claude to autonomously decide to read a file during a conversation. How should the file read be exposed on the MCP server?",
+    "options": [
+      "As a Tool",
+      "As a static Resource only",
+      "As an environment variable",
+      "As a Prompt"
+    ],
+    "answer": 0,
+    "explanation": "Autonomous, model-initiated actions are tools. A resource suits content the user or app attaches as context."
+  },
+  {
+    "id": 222,
+    "difficulty": "hard",
+    "category": "tool-design-mcp",
+    "question": "A file-reading MCP tool takes a filename argument. Which safeguard is essential?",
+    "options": [
+      "Mark the tool retryable",
+      "Resolve the path and verify it stays inside an allowed base directory to block path traversal",
+      "Increase max_tokens so long paths fit",
+      "Return files as base64 always"
+    ],
+    "answer": 1,
+    "explanation": "Resolve the path and reject anything outside the base directory (for example with is_relative_to). Otherwise ../ sequences can expose arbitrary files."
+  },
+  {
+    "id": 223,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "In Python FastMCP, how do you expose documents fetched by ID as a parameterised resource?",
+    "options": [
+      "Create one static resource per document at startup only",
+      "Write the IDs into CLAUDE.md",
+      "Use @mcp.resource(\"docs://documents/{doc_id}\") on a function with a doc_id parameter",
+      "Use @mcp.prompt with a doc_id field"
+    ],
+    "answer": 2,
+    "explanation": "A URI containing {doc_id} is registered as a resource template. Placeholder names must match the function parameters, and the client reads a concrete URI such as docs://documents/101."
+  },
+  {
+    "id": 224,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "How does a client discover URI-template resources, and how does it fetch one document?",
+    "options": [
+      "list_tools(), then call_tool()",
+      "get_prompt() only",
+      "initialize() returns every document",
+      "list_resource_templates(), then read_resource() with the concrete URI"
+    ],
+    "answer": 3,
+    "explanation": "Templates are listed separately from static resources. The client substitutes the ID and calls read_resource."
+  },
+  {
+    "id": 225,
+    "difficulty": "hard",
+    "category": "tool-design-mcp",
+    "question": "A tool returns a PDF. How should a Python MCP tool return binary content safely?",
+    "options": [
+      "Return bytes (FastMCP encodes as a blob), or extract text first and return a string",
+      "Return the file path only and hope Claude can open it",
+      "Print the bytes to stdout",
+      "Binary content cannot be returned from MCP"
+    ],
+    "answer": 0,
+    "explanation": "Text files can be returned as strings. Binary data can be returned as bytes, which FastMCP wraps as a base64 blob, or converted to text before returning."
+  },
+  {
+    "id": 226,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "What is a 'tool function' in Claude's tool use system?",
+    "options": [
+      "The JSON schema sent in the request",
+      "The application code that actually executes when Claude emits a tool_use request",
+      "A prompt template stored in CLAUDE.md",
+      "A server-side function Claude runs inside its own model"
+    ],
+    "answer": 1,
+    "explanation": "The definition (name, description, input_schema) tells Claude what is available. The function is your code that runs, and its output returns as a tool_result."
+  },
+  {
+    "id": 227,
+    "difficulty": "easy",
+    "category": "agentic-architecture",
+    "question": "What is the primary purpose of tool use in Claude?",
+    "options": [
+      "To reduce token pricing",
+      "To make Claude generate longer responses",
+      "To let Claude reach live or private data and trigger external actions beyond static text generation",
+      "To replace system prompts"
+    ],
+    "answer": 2,
+    "explanation": "Tool use connects Claude to databases, APIs, files and actions. Your code executes the tool and returns results."
+  },
+  {
+    "id": 228,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "A Claude response contains a text block followed by a tool_use block. What does this mean?",
+    "options": [
+      "The loop has finished because a text block exists",
+      "The model refused to use the tool",
+      "The response is malformed and should be discarded",
+      "It is normal: content is a list of blocks, so check stop_reason and process every tool_use block"
+    ],
+    "answer": 3,
+    "explanation": "Preambles before tool_use are normal. Do not infer completion from a text block. Loop on stop_reason == tool_use."
+  },
+  {
+    "id": 229,
+    "difficulty": "hard",
+    "category": "agentic-architecture",
+    "question": "When appending the assistant turn to history before sending tool_result, what should be passed?",
+    "options": [
+      "The full response.content array, including text and tool_use blocks",
+      "Only the text block",
+      "A natural-language summary of the turn",
+      "Only the tool_use block"
+    ],
+    "answer": 0,
+    "explanation": "Preserve the complete assistant content so tool_use IDs match the tool_result blocks. Dropping blocks can cause validation errors."
+  },
+  {
+    "id": 230,
+    "difficulty": "hard",
+    "category": "agentic-architecture",
+    "question": "Response content contains three tool_use blocks. How should an agent loop handle them?",
+    "options": [
+      "Execute only the first and ignore the rest",
+      "Execute all, optionally concurrently, and return one tool_result per tool_use_id in the next user message",
+      "Ask the user to choose one",
+      "Re-send the request until only one appears"
+    ],
+    "answer": 1,
+    "explanation": "Claude can emit parallel tool calls. Return a matching tool_result for each tool_use_id, in a single user turn."
+  },
+  {
+    "id": 231,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "An orchestrator wants Claude to skip preamble text and emit a tool call immediately. Which API setting helps?",
+    "options": [
+      "max_tokens=1",
+      "stop_sequences=[\"tool_use\"]",
+      "tool_choice set to any, or to a specific tool",
+      "temperature=0"
+    ],
+    "answer": 2,
+    "explanation": "tool_choice any forces a tool call, and a named tool forces that tool. auto lets Claude respond with text."
+  },
+  {
+    "id": 232,
+    "difficulty": "hard",
+    "category": "agentic-architecture",
+    "question": "Five independent file reads are slowing an agent because each takes a separate round trip. What pattern reduces latency?",
+    "options": [
+      "Make the calls sequential to be safe",
+      "Use the Message Batches API inside the live loop",
+      "Increase temperature",
+      "Rely on parallel tool_use blocks, or define a batch tool that runs independent calls concurrently (for example asyncio.gather)"
+    ],
+    "answer": 3,
+    "explanation": "Independent lookups can run in parallel. Do not batch calls where one depends on another's output. The Message Batches API is a separate offline feature."
+  },
+  {
+    "id": 233,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "Claude API call returns 429. What do the official SDKs do by default?",
+    "options": [
+      "Retry automatically (default 2 retries) with backoff, honouring retry-after, then raise RateLimitError",
+      "Switch model silently",
+      "Drop the request",
+      "Raise immediately and ask the user"
+    ],
+    "answer": 0,
+    "explanation": "SDKs retry 429, 408, 409, 5xx and connection errors. After retries are exhausted the error is raised for the app to handle."
+  },
+  {
+    "id": 234,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "How can retry behaviour be customised in the Python SDK?",
+    "options": [
+      "By editing CLAUDE.md",
+      "max_retries on the client, or client.with_options(max_retries=...) per request",
+      "Only through environment variables",
+      "It cannot be changed"
+    ],
+    "answer": 1,
+    "explanation": "Set max_retries globally or per request, with 0 to disable. TypeScript uses maxRetries."
+  },
+  {
+    "id": 235,
+    "difficulty": "hard",
+    "category": "context-reliability",
+    "question": "A nightly job still gets RateLimitError after SDK retries. Which is the most appropriate architectural response?",
+    "options": [
+      "Disable error handling",
+      "Raise max_tokens",
+      "Queue or throttle requests, use prompt caching to cut token load, and move offline work to the Message Batches API",
+      "Remove the retry logic"
+    ],
+    "answer": 2,
+    "explanation": "Persistent rate limiting needs load management. Batches suit latency-tolerant work and caching reduces repeated input."
+  },
+  {
+    "id": 236,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "Where does a prompt cache breakpoint (cache_control) cache content?",
+    "options": [
+      "Only the final user message",
+      "Content after the breakpoint",
+      "Only the block it is attached to",
+      "Everything from the start of the request (tools, system, messages) up to the breakpoint"
+    ],
+    "answer": 3,
+    "explanation": "Caching covers the prefix in order tools, system, messages up to the marker. Up to 4 breakpoints are allowed per request."
+  },
+  {
+    "id": 237,
+    "difficulty": "hard",
+    "category": "context-reliability",
+    "question": "A cached long-document prompt never produces cache hits. The prompt starts with a current timestamp. What is wrong?",
+    "options": [
+      "Dynamic content before the breakpoint changes the prefix, so it must come after the cached blocks",
+      "Caching needs temperature 0",
+      "Caching only works with batches",
+      "The document is too short to ever cache"
+    ],
+    "answer": 0,
+    "explanation": "Cache hits require an exact prefix match, so place variable data (timestamps, user IDs) after the cached block. Verify via cache_creation_input_tokens and cache_read_input_tokens."
+  },
+  {
+    "id": 238,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "Compared with normal input tokens, how is prompt caching priced?",
+    "options": [
+      "Same price but faster",
+      "Writes cost more (about 1.25x for 5-minute TTL) and hits cost far less (about 0.1x)",
+      "Both writes and reads are free",
+      "Writes cost 0.1x and reads 1.25x"
+    ],
+    "answer": 1,
+    "explanation": "A 5-minute-TTL cache write has a surcharge and each hit is about a 90% discount. Short prefixes below the minimum are silently not cached."
+  },
+  {
+    "id": 239,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "For classification or JSON extraction where reproducibility matters, which temperature is most appropriate?",
+    "options": [
+      "Above 1.0",
+      "Temperature has no effect",
+      "Low, near 0.0",
+      "1.0 for maximum variety"
+    ],
+    "answer": 2,
+    "explanation": "Low temperature favours the most likely token, which suits extraction, classification and tests. Higher values suit brainstorming and fiction."
+  },
+  {
+    "id": 240,
+    "difficulty": "easy",
+    "category": "prompt-structured-output",
+    "question": "Which temperature range suits open-ended creative fiction on Claude?",
+    "options": [
+      "Above 1.5",
+      "Temperature is unavailable for fiction",
+      "0.0 to 0.2",
+      "About 0.8 to 1.0"
+    ],
+    "answer": 3,
+    "explanation": "Claude's range is 0.0 to 1.0 with 1.0 default. Higher values give more varied word choice. Extended thinking requires temperature 1.0."
+  },
+  {
+    "id": 241,
+    "difficulty": "hard",
+    "category": "prompt-structured-output",
+    "question": "A team builds eval test cases for a prompt that runs on Sonnet. Which approach avoids shared blind spots?",
+    "options": [
+      "Generate bulk inputs cheaply (for example with Haiku), design edge cases with a stronger model, and grade with a different model or code checks",
+      "Use the same model and prompt for generation and grading",
+      "Use only five hand-picked examples",
+      "Skip edge cases"
+    ],
+    "answer": 0,
+    "explanation": "Separate generation from grading and prefer a distinct or stronger judge. Combine with deterministic checks where possible."
+  },
+  {
+    "id": 242,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "A prompt must output valid JSON with a fixed intent label. Which grader should be tried first?",
+    "options": [
+      "No grader",
+      "A code-based grader (json.loads, schema validation, exact match)",
+      "An LLM judge on a 1-10 scale",
+      "Human review of every output"
+    ],
+    "answer": 1,
+    "explanation": "Code graders are fast, free and reproducible. Use LLM judges when quality is subjective, then calibrate them with human review."
+  },
+  {
+    "id": 243,
+    "difficulty": "hard",
+    "category": "prompt-structured-output",
+    "question": "An LLM-as-a-judge grader gives noisy scores. Which two changes most improve reliability?",
+    "options": [
+      "Let the judge grade its own outputs",
+      "Use a 1-10 scale and hide reasoning",
+      "Use binary or 1-3 rubrics and request reasoning before the score",
+      "Use a higher temperature"
+    ],
+    "answer": 2,
+    "explanation": "Narrow scales are more consistent, and reasoning-first acts like chain-of-thought. Randomise response order in pairwise comparisons to reduce position bias."
+  },
+  {
+    "id": 244,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "What does a balanced starter eval set look like?",
+    "options": [
+      "One perfect example",
+      "Only adversarial inputs",
+      "Only the cases the prompt already passes",
+      "About 10-20 verified cases covering routine, edge and out-of-scope inputs, then expanded with synthetic data"
+    ],
+    "answer": 3,
+    "explanation": "Start small but balanced (roughly routine 50%, edge 30%, out-of-scope 20%), then scale with generated cases."
+  },
+  {
+    "id": 245,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "What does computer use let Claude do, and how is it run safely?",
+    "options": [
+      "Read screenshots and issue mouse and keyboard actions in a loop, ideally inside a sandboxed VM or container",
+      "Directly edit its own weights",
+      "Bypass tool schemas",
+      "Run only on the user's production laptop"
+    ],
+    "answer": 0,
+    "explanation": "Computer use is a tool-use loop: screenshot, action, new screenshot. Run it isolated with minimal permissions and human confirmation for sensitive steps because of prompt injection risk."
+  },
+  {
+    "id": 246,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "An agent starts in an unfamiliar repo and assumes Python 3.12 and a src/ directory. What practice avoids brittle assumptions?",
+    "options": [
+      "Disabling tools",
+      "Environment inspection: read-only checks of OS, versions, directory layout and available tools before mutating state",
+      "Guessing and correcting after failure",
+      "Giving the agent full write access first"
+    ],
+    "answer": 1,
+    "explanation": "Inspect first (ls, git status, version checks, list_tools), keep inspection read-only, mask secrets and bound output size."
+  },
+  {
+    "id": 247,
+    "difficulty": "hard",
+    "category": "context-reliability",
+    "question": "An agent logs environment variables into its context for debugging. What is the risk and mitigation?",
+    "options": [
+      "It only increases cost",
+      "It disables caching",
+      "Secrets can leak into logs or be exfiltrated via prompt injection; mask or filter sensitive variables",
+      "No risk, since the context is private"
+    ],
+    "answer": 2,
+    "explanation": "Sanitise API keys and tokens before exposing environment details, and bound inspection output to avoid flooding the context window."
+  },
+  {
+    "id": 248,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "In the 4D AI Fluency framework, which competency is the decision about whether and how to involve AI before writing any prompt?",
+    "options": [
+      "Description",
+      "Discernment",
+      "Diligence",
+      "Delegation"
+    ],
+    "answer": 3,
+    "explanation": "Delegation covers problem awareness, platform awareness and task delegation. Description is communicating clearly, Discernment evaluates outputs, and Diligence covers responsible use."
+  },
+  {
+    "id": 249,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "In the 4D framework, noticing that an output has hallucinated facts and sending it back with refined instructions uses which competencies?",
+    "options": [
+      "Discernment, feeding back into Description",
+      "Delegation only",
+      "Diligence only",
+      "None; reviewing outputs is not a competency"
+    ],
+    "answer": 0,
+    "explanation": "Product discernment checks accuracy and completeness, and the description-discernment loop refines the prompt iteratively."
+  },
+  {
+    "id": 250,
+    "difficulty": "hard",
+    "category": "context-reliability",
+    "question": "A manager ships an AI-written report after only skimming it and does not disclose AI involvement. Which 4D competency is mainly violated?",
+    "options": [
+      "None",
+      "Diligence (transparency and deployment accountability)",
+      "Delegation",
+      "Description"
+    ],
+    "answer": 1,
+    "explanation": "Diligence includes creation, transparency and deployment responsibility: be honest about AI's role and own verification before release."
+  },
+  {
+    "id": 251,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "A team wants every new Claude workflow and agent definition to be onboarded through pull requests. Which overall model is most appropriate?",
+    "options": [
+      "Manual review of every workflow and agent change by a human",
+      "Automated validation and testing for routine checks, plus risk-based human approval for high-risk changes",
+      "Fully autonomous merge and deploy once Claude approves its own change",
+      "Skip review for agents because prompts are only text"
+    ],
+    "answer": 1,
+    "explanation": "Automate the repeatable validation, and keep human accountability where risk is high (permissions, secrets, production access). Neither all-manual nor all-automatic is proportionate."
+  },
+  {
+    "id": 252,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Which checks on a PR that adds an agent definition can be fully automated?",
+    "options": [
+      "Deciding whether to grant the agent production write access",
+      "Approving a new external MCP integration",
+      "Accepting a change to the organisation's security policy",
+      "YAML and schema validation, duplicate configuration detection, and secret scanning"
+    ],
+    "answer": 3,
+    "explanation": "Syntax, schema, duplicates and secrets are deterministic checks. Granting production access, new external connections and policy changes need human judgement."
+  },
+  {
+    "id": 253,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "Why should deterministic static validation and secret scanning run before the AI-powered review stage in an onboarding pipeline?",
+    "options": [
+      "They are cheap, fast and reproducible, fail early on malformed or unsafe changes, and keep secrets and broken configs away from the model",
+      "Because the AI reviewer cannot read YAML",
+      "Because static checks are more creative than model review",
+      "Because the order has no effect on cost or risk"
+    ],
+    "answer": 0,
+    "explanation": "Order stages from cheapest and most deterministic to most expensive and probabilistic: static validation, security/compliance, AI review, tests, then human approval for high-risk changes."
+  },
+  {
+    "id": 254,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "A team wants policy-as-code such as 'no agent may combine unrestricted Bash with deployment credentials'. Which tool category fits?",
+    "options": [
+      "yamllint, which only checks YAML syntax",
+      "actionlint, which only lints GitHub Actions workflow syntax",
+      "A policy engine such as OPA with Conftest evaluating the agent configuration in CI",
+      "Gitleaks, which only detects secrets"
+    ],
+    "answer": 2,
+    "explanation": "yamllint checks YAML, actionlint checks GitHub Actions workflows, Gitleaks finds secrets, and OPA/Conftest enforces custom policy rules over configuration."
+  },
+  {
+    "id": 255,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "Which change must always require mandatory human approval in a Claude agent onboarding process?",
+    "options": [
+      "A typo fix in documentation",
+      "An agent that can write to production infrastructure or execute arbitrary shell commands",
+      "A reformatting of the workflow YAML with no behaviour change",
+      "A tweak to a code comment in a test file"
+    ],
+    "answer": 1,
+    "explanation": "Agents with production access, write access to deployment environments, arbitrary shell execution, new MCP/external connections, or changed permission boundaries are high-risk and need human sign-off."
+  },
+  {
+    "id": 256,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Under a risk-based approval model, how should a documentation-only change be handled?",
+    "options": [
+      "Mandatory security review",
+      "Production approval board",
+      "Rewrite it as an agent definition",
+      "Automated checks only"
+    ],
+    "answer": 3,
+    "explanation": "Low-risk changes can pass on automated validation. New tools or MCP access need security review, and production permissions need mandatory human approval."
+  },
+  {
+    "id": 257,
+    "difficulty": "hard",
+    "category": "tool-design-mcp",
+    "question": "A PR adds a new MCP server connection to an existing agent. Which approval is most appropriate?",
+    "options": [
+      "Security review, because new tools or external connections expand the agent's capabilities and attack surface",
+      "No review, since MCP servers are sandboxed by definition",
+      "Automatic approval if the YAML is valid",
+      "Approval from the agent itself"
+    ],
+    "answer": 0,
+    "explanation": "Validity of the file says nothing about what the new server can reach. New tools or MCP access warrant a security review with least-privilege and untrusted-input checks."
+  },
+  {
+    "id": 258,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "A CI job asks Claude to review pull requests, and external contributors can write PR descriptions and code comments. What is the key risk and mitigation?",
+    "options": [
+      "Context overflow; the fix is a bigger window",
+      "Token pricing; the fix is a cheaper model",
+      "Prompt injection through untrusted content; treat it as data, restrict tools and tokens to least privilege, and keep secrets out of the context",
+      "There is no risk because Claude ignores comments"
+    ],
+    "answer": 2,
+    "explanation": "Content authored by outsiders can contain instructions. Limit what the reviewing agent can do, scope credentials narrowly and never rely on the prompt alone to refuse."
+  },
+  {
+    "id": 259,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Which Anthropic-provided option integrates Claude into GitHub Actions pipelines for AI-powered review?",
+    "options": [
+      "A GitHub-hosted Message Batches runner",
+      "Claude Code Action, with configurable permissions",
+      "The yamllint action",
+      "A Dependabot plugin"
+    ],
+    "answer": 1,
+    "explanation": "Claude Code Action runs Claude in GitHub workflows. Pair it with claude -p, --output-format json and --json-schema when machine-readable output is needed."
+  },
+  {
+    "id": 260,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "Should the Claude instance that authored an agent configuration change also be the one that approves it in CI?",
+    "options": [
+      "Yes, because it knows the intent best",
+      "Yes, if its temperature is set to 0",
+      "Yes, if it writes a summary of why the change is safe",
+      "No; use an independent review instance (and human approval for high-risk changes), because the author retains its own reasoning context"
+    ],
+    "answer": 3,
+    "explanation": "Independent review instances catch issues the generator is biased to overlook. Self-approval does not replace separation of duties."
+  },
+  {
+    "id": 261,
+    "difficulty": "hard",
+    "category": "prompt-structured-output",
+    "question": "How should the behaviour of a changed agent be tested in CI given non-deterministic outputs?",
+    "options": [
+      "Run it against a labeled evaluation set with deterministic assertions on tool calls and structure, plus rubric or LLM grading and sampled human review for quality",
+      "Compare the full text output to a stored string",
+      "Run it once and trust the result",
+      "Skip tests because the model is non-deterministic"
+    ],
+    "answer": 0,
+    "explanation": "Assert what can be checked exactly (which tools were called, schema validity, forbidden actions), grade subjective quality with a rubric, and calibrate with human review."
+  },
+  {
+    "id": 262,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "A governance document says 'aim to automate 80-90% of routine validation'. How should that figure be read?",
+    "options": [
+      "As a guaranteed accuracy measured on production data",
+      "As a limit on how many reviewers may be used",
+      "As a target for routine checks, not a measured benchmark, and not a replacement for human accountability",
+      "As proof that approval gates can be removed"
+    ],
+    "answer": 2,
+    "explanation": "The number is an aspiration. Accountability for high-risk changes stays with people."
+  },
+  {
+    "id": 263,
+    "difficulty": "hard",
+    "category": "context-reliability",
+    "question": "All automated checks pass on a PR that gives a new agent unrestricted Bash and production deploy credentials. What should happen?",
+    "options": [
+      "Merge automatically because the checks are green",
+      "Require human security approval anyway; passing automation does not remove the risk of broad permissions",
+      "Ask the agent whether it is safe",
+      "Reduce the checks until the PR fails"
+    ],
+    "answer": 1,
+    "explanation": "Automation validates form and known rules. Capability grants with production impact still need explicit human accountability."
+  },
+  {
+    "id": 264,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Where should agent definitions, CLAUDE.md and workflow files live so changes can be reviewed and enforced by CI?",
+    "options": [
+      "In each developer's personal ~/.claude directory",
+      "Only in the Claude web UI",
+      "In a shared chat thread",
+      "In version control (for example .claude/agents/, CLAUDE.md and .github/workflows/), changed via pull requests, with required owners on sensitive paths"
+    ],
+    "answer": 3,
+    "explanation": "Version-controlled, PR-reviewed files give an audit trail and let CI validate every change. Personal user-level config is not shared with the team."
+  },
+  {
+    "id": 265,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "In a Claude Code repository, where are tool permissions and related configuration defined?",
+    "options": [
+      "CLAUDE.md, because tool names written there grant access",
+      "The body text of a SKILL.md file",
+      ".claude/settings.json",
+      "The repository README"
+    ],
+    "answer": 2,
+    "explanation": "settings.json holds permissions and configuration. CLAUDE.md carries instructions and guidance, so mentioning a tool there does not install, configure or authorise it."
+  },
+  {
+    "id": 266,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "A SKILL.md and CLAUDE.md both tell Claude to use a deployment tool. What can a CI check safely conclude from that alone?",
+    "options": [
+      "Nothing about availability or authorisation; CI must verify the referenced tool actually exists and is permitted in the configuration",
+      "The tool is installed and authorised",
+      "The tool is covered by least-privilege automatically",
+      "The tool can be skipped in security review"
+    ],
+    "answer": 0,
+    "explanation": "References are instructions, not configuration. Validate that referenced tools exist (settings.json, .mcp.json, allowed-tools) and that access is not excessive."
+  },
+  {
+    "id": 267,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "Which file should a CI pipeline validate to review MCP server definitions and access for a Claude Code project?",
+    "options": [
+      ".claude/commands/deploy.md",
+      "CLAUDE.md",
+      "package-lock.json",
+      ".mcp.json"
+    ],
+    "answer": 3,
+    "explanation": "Project-scoped MCP servers live in .mcp.json (with ${ENV_VAR} expansion for secrets). Validate server configuration, access scope and that no secrets are committed."
+  },
+  {
+    "id": 268,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "Under a three-level approval model, which change needs Level 3 security approval?",
+    "options": [
+      "A documentation-only change",
+      "Adding a new MCP server, an external integration, shell execution, or expanded permissions",
+      "A safe update to an existing skill's wording",
+      "A new skill that only reads files"
+    ],
+    "answer": 1,
+    "explanation": "Level 1 is auto-approve (docs, safe skill updates). Level 2 is PR review (new skills, agents, tool usage changes). Level 3 is security approval (new MCP, external integrations, shell execution, expanded permissions)."
+  },
+  {
+    "id": 269,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "A developer adds a new custom agent under .claude/agents/ and a new skill under .claude/skills/. Which approval level fits?",
+    "options": [
+      "Level 1: auto-approve because they are only Markdown",
+      "Level 3 for every agent, regardless of tools",
+      "Level 2: automated validation plus pull request review",
+      "No review because the files are not executable"
+    ],
+    "answer": 2,
+    "explanation": "New skills and agents get PR review. They escalate to security approval only if they add MCP servers, shell execution or broader permissions."
+  },
+  {
+    "id": 270,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "Which automated validation fits a SKILL.md and an agent definition respectively?",
+    "options": [
+      "SKILL.md structure and frontmatter metadata for skills; frontmatter, tool list and permission checks (detect excessive tool access) for agents",
+      "Only YAML syntax linting for both",
+      "Only an LLM read-through for both",
+      "No checks, because they are prose"
+    ],
+    "answer": 0,
+    "explanation": "Skills use SKILL.md with frontmatter such as context: fork, allowed-tools and argument-hint. Agent definitions carry description, prompt and tool restrictions. Validate structure, referenced tools and least privilege, then add AI-assisted instruction review."
+  },
+  {
+    "id": 271,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "How should a CI workflow be triggered so every onboarding-relevant change gets validated?",
+    "options": [
+      "Run only manually before releases",
+      "Run only when a deployment fails",
+      "Run nightly on the main branch only",
+      "Run on pull requests that touch CLAUDE.md, .claude/** or .mcp.json, using path filters"
+    ],
+    "answer": 3,
+    "explanation": "Validate at PR time, before merge. Path filters on CLAUDE.md, .claude/skills, .claude/agents, .claude/commands, .claude/settings.json and .mcp.json keep the check targeted."
+  },
+  {
+    "id": 272,
+    "difficulty": "hard",
+    "category": "agentic-architecture",
+    "question": "An agent loop stops because it hit the maximum-iteration cap while the customer's issue is still unresolved. What orchestration-layer safeguard should apply?",
+    "options": [
+      "Detect the abnormal termination in orchestration code and route the session to human escalation with a handoff package",
+      "Return the last assistant text to the customer as the resolution",
+      "Silently restart the loop with the cap removed",
+      "Rely on the system prompt telling Claude to always finish"
+    ],
+    "answer": 0,
+    "explanation": "Every exit path must end in a completed resolution or a human escalation. A cap hit without resolution is an escalation trigger, not a final answer."
+  },
+  {
+    "id": 273,
+    "difficulty": "hard",
+    "category": "agentic-architecture",
+    "question": "Which termination paths must the orchestrator guarantee end in either a completed resolution or a human escalation?",
+    "options": [
+      "Only end_turn, because other paths are bugs",
+      "Only paths where Claude reports it is stuck",
+      "All of them: end_turn, iteration cap, max_tokens, unrecoverable tool errors, timeouts and exceptions",
+      "Only paths that produce an error log"
+    ],
+    "answer": 2,
+    "explanation": "The guarantee is about the session outcome regardless of how the loop terminates, so the wrapper must cover abnormal exits as well as the normal one."
+  },
+  {
+    "id": 274,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "Where should the 'every session ends resolved or escalated' guarantee be implemented?",
+    "options": [
+      "In a CLAUDE.md sentence asking Claude to always escalate",
+      "In the tool descriptions",
+      "In the customer's first message",
+      "In deterministic orchestration code around the loop (for example a wrapper that always finalises the session), not in the prompt"
+    ],
+    "answer": 3,
+    "explanation": "Prompt instructions are probabilistic. Exit-path guarantees belong in code that runs whether or not the model cooperates."
+  },
+  {
+    "id": 275,
+    "difficulty": "hard",
+    "category": "agentic-architecture",
+    "question": "A response arrives with stop_reason max_tokens in the middle of a tool_use block. What should the orchestrator do?",
+    "options": [
+      "Execute the partial tool call",
+      "Treat it as incomplete: do not execute or present it as final; retry with a higher limit, or escalate if it cannot complete",
+      "Present the truncated text as the resolution",
+      "Ignore it, since the loop continues anyway"
+    ],
+    "answer": 1,
+    "explanation": "max_tokens means the response was cut off. Acting on a truncated tool call or treating it as an answer produces wrong outcomes."
+  },
+  {
+    "id": 276,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "What is the proper role of a maximum-iteration cap in an agentic loop?",
+    "options": [
+      "The primary mechanism that decides when the task is done",
+      "A way to reduce token cost only",
+      "A safety net against runaway loops: termination is driven by stop_reason, and the cap triggers an escalation path when it fires",
+      "Unnecessary if tool results are accurate"
+    ],
+    "answer": 2,
+    "explanation": "Primary control is stop_reason (tool_use continues, end_turn stops). The cap guards against loops that never converge and must hand off cleanly."
+  },
+  {
+    "id": 277,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "A human agent takes over an escalated session and cannot see the transcript. What should the handoff package contain?",
+    "options": [
+      "Customer identifier, root-cause findings, actions already taken, amounts and authorisation state, and a recommended next action",
+      "The full raw transcript only",
+      "A one-line 'customer is upset' note",
+      "Nothing; the human restarts the investigation"
+    ],
+    "answer": 0,
+    "explanation": "A structured, self-contained summary preserves accumulated context and authorisation state so the human does not repeat work."
+  },
+  {
+    "id": 278,
+    "difficulty": "hard",
+    "category": "agentic-architecture",
+    "question": "An engineer resumes a named session after teammates modified three files the agent analysed. Best approach?",
+    "options": [
+      "Resume silently; the agent will notice the changes",
+      "Resume and tell the agent exactly which files changed so it re-analyses only those, instead of re-exploring everything or trusting stale results",
+      "Start from scratch and repeat the full analysis",
+      "Delete the session history and rebuild from memory"
+    ],
+    "answer": 1,
+    "explanation": "Targeted re-analysis with context injection restores state accurately without repeating prior work."
+  },
+  {
+    "id": 279,
+    "difficulty": "hard",
+    "category": "agentic-architecture",
+    "question": "When is starting a new session with an injected structured summary better than resuming?",
+    "options": [
+      "Always, because resuming is unsupported",
+      "Never, because summaries lose all information",
+      "Only when the model version changes",
+      "When prior tool results are stale or bloated, so summarising the findings into a fresh session is more reliable than resuming"
+    ],
+    "answer": 3,
+    "explanation": "Resumption carries old tool output with it. If that output is outdated, a fresh session seeded with a verified summary is safer."
+  },
+  {
+    "id": 280,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "Two engineers want to try different refactoring strategies from the same analysis baseline. Which technique fits?",
+    "options": [
+      "fork_session to branch independent sessions from the shared baseline",
+      "Run both strategies in one session sequentially",
+      "Use --resume twice on the same session simultaneously",
+      "Copy CLAUDE.md into two directories"
+    ],
+    "answer": 0,
+    "explanation": "Forking creates divergent branches from a common starting point without contaminating each other."
+  },
+  {
+    "id": 281,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "Investigating an unfamiliar legacy codebase, the next steps depend on what is discovered. Which decomposition fits?",
+    "options": [
+      "A fixed pre-defined sequence of steps regardless of findings",
+      "One giant prompt reading every file",
+      "Dynamically generated subtasks that adapt as findings arrive (map structure, prioritise high-impact areas, revise the plan)",
+      "Random sampling of directories"
+    ],
+    "answer": 2,
+    "explanation": "Adaptive decomposition responds to intermediate findings, which a fixed sequence cannot."
+  },
+  {
+    "id": 282,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "When is a fixed prompt chain more appropriate than dynamic decomposition?",
+    "options": [
+      "When the task is open-ended exploration",
+      "When the subtasks cannot be known in advance",
+      "When findings change the plan",
+      "When the steps are predictable and the same for every input, such as per-file review followed by a cross-file pass"
+    ],
+    "answer": 3,
+    "explanation": "Use fixed chains for predictable workflows and adaptive plans for open-ended investigation."
+  },
+  {
+    "id": 283,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "Refunds above $500 must never run without human approval. Which implementation is reliable?",
+    "options": [
+      "A system-prompt rule telling Claude to ask first",
+      "A PreToolUse hook that blocks the call and redirects to escalation",
+      "A PostToolUse hook that reports the refund afterwards",
+      "A few-shot example of escalating large refunds"
+    ],
+    "answer": 1,
+    "explanation": "Policy limits need deterministic enforcement before the action happens."
+  },
+  {
+    "id": 284,
+    "difficulty": "medium",
+    "category": "agentic-architecture",
+    "question": "Different MCP tools return dates as Unix timestamps and ISO strings. Which hook pattern normalises them before the model reasons over them?",
+    "options": [
+      "A PreToolUse hook on the next tool",
+      "A CLAUDE.md note about date formats",
+      "A PostToolUse hook that transforms the tool result into one consistent format",
+      "A larger context window"
+    ],
+    "answer": 2,
+    "explanation": "PostToolUse can rewrite results so the model sees consistent data."
+  },
+  {
+    "id": 285,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Claude keeps transforming data inconsistently even though your prose description is detailed. Which technique helps most?",
+    "options": [
+      "Provide 2-3 concrete input-output examples showing the exact transformation",
+      "Add more adjectives to the description",
+      "Raise the temperature",
+      "Repeat the instruction in capitals"
+    ],
+    "answer": 0,
+    "explanation": "Examples remove ambiguity that prose leaves open."
+  },
+  {
+    "id": 286,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "You are implementing a function with precise edge-case behaviour. Which iterative workflow is most reliable?",
+    "options": [
+      "Ask for the whole module, then eyeball it",
+      "Write tests first, run them, and share the specific failures with Claude to drive the next iteration",
+      "Ask Claude to self-certify correctness",
+      "Rewrite the prompt without running anything"
+    ],
+    "answer": 1,
+    "explanation": "Test-driven iteration gives objective, targeted feedback on specific failures."
+  },
+  {
+    "id": 287,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "A reviewer reports five issues. Three interact (fixing one changes the others) and two are independent. How should feedback be given?",
+    "options": [
+      "Send all five separately in random order",
+      "Send only the first and discard the rest",
+      "Ask Claude to ignore the interacting ones",
+      "Batch the interacting issues in one message and address the independent ones sequentially"
+    ],
+    "answer": 3,
+    "explanation": "Interacting issues must be considered together. Independent ones can be fixed and verified one at a time."
+  },
+  {
+    "id": 288,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Feedback on a failing output is 'make it better'. What makes feedback effective for refinement?",
+    "options": [
+      "Targeted, specific descriptions of what failed, together with the expected result",
+      "Broad encouragement to try harder",
+      "A longer persona prompt",
+      "Switching models each round"
+    ],
+    "answer": 0,
+    "explanation": "Specific failures plus expected outcomes let the next attempt converge."
+  },
+  {
+    "id": 289,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Requirements are unclear before building a feature in Claude Code. Which technique surfaces design considerations early?",
+    "options": [
+      "Start coding and ask afterwards",
+      "Choose the most common design silently",
+      "Have Claude interview you with clarifying questions before implementing",
+      "Set temperature to 0"
+    ],
+    "answer": 2,
+    "explanation": "The interview pattern exposes hidden constraints before work begins."
+  },
+  {
+    "id": 290,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "Tests must never run against the production database. Where should this be enforced?",
+    "options": [
+      "As a bold sentence in CLAUDE.md",
+      "In the README",
+      "In a skill's description",
+      "In settings permissions or a PreToolUse hook, because CLAUDE.md guidance is advisory and may not be followed every time"
+    ],
+    "answer": 3,
+    "explanation": "Hard constraints require deterministic enforcement outside model discretion."
+  },
+  {
+    "id": 291,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Which instruction belongs in CLAUDE.md rather than in a hook or permission?",
+    "options": [
+      "Blocking writes to .env files",
+      "Preferred naming conventions and architectural guidance where occasional deviation is acceptable",
+      "Forbidding rm -rf",
+      "Requiring formatting after every edit"
+    ],
+    "answer": 1,
+    "explanation": "Soft guidance suits CLAUDE.md. Must-never and must-always rules suit hooks and permissions."
+  },
+  {
+    "id": 292,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "A team's CLAUDE.md says 'never edit files under /migrations', yet a migration was edited. How should the configuration be restructured?",
+    "options": [
+      "Make the CLAUDE.md sentence longer and bold",
+      "Move the sentence to the end of the file",
+      "Keep the guidance in CLAUDE.md but add a settings deny rule or PreToolUse hook that deterministically blocks the edit",
+      "Add the rule to a slash command"
+    ],
+    "answer": 2,
+    "explanation": "Strengthening wording does not make advice enforceable. A permission or hook does."
+  },
+  {
+    "id": 293,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Which characteristic separates enforcement mechanisms from CLAUDE.md?",
+    "options": [
+      "Hooks and permissions run deterministically outside the model's discretion, whereas CLAUDE.md is context the model usually follows",
+      "CLAUDE.md is applied by the runtime and hooks by the model",
+      "They are identical in strength",
+      "Hooks only apply to subagents"
+    ],
+    "answer": 0,
+    "explanation": "The distinction is deterministic runtime enforcement versus probabilistic model compliance."
+  },
+  {
+    "id": 294,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "Code must be auto-formatted after every file edit regardless of whether Claude remembers. Which mechanism?",
+    "options": [
+      "A CLAUDE.md reminder to format",
+      "A PostToolUse hook matched to the edit tools that runs the formatter",
+      "A slash command the user must remember",
+      "A skill named format"
+    ],
+    "answer": 1,
+    "explanation": "Automatic, model-independent enforcement is what hooks provide."
+  },
+  {
+    "id": 295,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "A test convention applies only to files matching **/*.test.py across many directories and should load only when editing them. Which mechanism?",
+    "options": [
+      "Root CLAUDE.md for everything",
+      "A hook",
+      "A user-level slash command",
+      "A .claude/rules/ file with a paths glob in its frontmatter"
+    ],
+    "answer": 3,
+    "explanation": "Path-scoped rules load conditionally for matching files, which suits conventions spread across directories."
+  },
+  {
+    "id": 296,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "A team wants a shared /review command via version control and a personal /scratch command for one developer. Where do they go?",
+    "options": [
+      ".claude/commands/ in the repo for /review; ~/.claude/commands/ for /scratch",
+      "Both in ~/.claude/commands/",
+      "Both in CLAUDE.md",
+      "/review in settings.json; /scratch in .mcp.json"
+    ],
+    "answer": 0,
+    "explanation": "Project commands are shared through the repo. User commands stay personal."
+  },
+  {
+    "id": 297,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "A task will modify 40 files, has several valid architectures and needs stakeholder review before implementation. Which mode fits?",
+    "options": [
+      "Direct execution to start quickly",
+      "The Message Batches API",
+      "Plan mode, to explore and agree an approach before implementing",
+      "A hook that skips planning"
+    ],
+    "answer": 2,
+    "explanation": "Large scope, architectural uncertainty and review needs point to plan mode."
+  },
+  {
+    "id": 298,
+    "difficulty": "easy",
+    "category": "claude-code",
+    "question": "A stack trace points to a single-line null check in one file. Which approach is appropriate?",
+    "options": [
+      "Full plan mode with an Explore subagent",
+      "A stakeholder-approved design document",
+      "Rewrite the module",
+      "Direct execution, since scope is small, well understood and reversible"
+    ],
+    "answer": 3,
+    "explanation": "Plan mode is overhead for a clearly scoped fix."
+  },
+  {
+    "id": 299,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "A set of API conventions should be available in every session for every team member. Best method?",
+    "options": [
+      "Paste them inline in each prompt",
+      "Put them in the project CLAUDE.md (optionally importing a file with @), since they are reusable across sessions",
+      "Mention them once in chat",
+      "Store them in a personal note"
+    ],
+    "answer": 1,
+    "explanation": "Reusable, cross-session guidance belongs in CLAUDE.md."
+  },
+  {
+    "id": 300,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "You want Claude to consider one specific existing file for this task only. Which method is most appropriate?",
+    "options": [
+      "Add it to CLAUDE.md permanently",
+      "Describe its contents from memory inline",
+      "An @ file reference in the prompt, which pulls that file in on demand",
+      "Create a hook"
+    ],
+    "answer": 2,
+    "explanation": "@ references target specific files without permanently loading them."
+  },
+  {
+    "id": 301,
+    "difficulty": "easy",
+    "category": "claude-code",
+    "question": "A short clarification applies only to this conversation ('the staging key was rotated today'). Which method?",
+    "options": [
+      "Inline description in the prompt, because it is specific and not needed across sessions",
+      "CLAUDE.md",
+      "A skill",
+      "settings.json"
+    ],
+    "answer": 0,
+    "explanation": "One-off details do not warrant persistent configuration."
+  },
+  {
+    "id": 302,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "CLAUDE.md is growing large with architecture documents that are only sometimes relevant. How can context stay modular?",
+    "options": [
+      "Paste everything into one file",
+      "Use @ imports from CLAUDE.md to reference separate files, or move file-type guidance into path-scoped .claude/rules/",
+      "Delete the documentation",
+      "Move all guidance into user-level memory"
+    ],
+    "answer": 1,
+    "explanation": "Modular references and scoped rules keep always-on context lean."
+  },
+  {
+    "id": 303,
+    "difficulty": "hard",
+    "category": "context-reliability",
+    "question": "A customer writes 'I want to speak to a human'. What should the agent do?",
+    "options": [
+      "Try to resolve with tools first and escalate only if it fails",
+      "Ask the customer to justify the request",
+      "Lower priority until sentiment is analysed",
+      "Honour the request immediately and escalate with a handoff summary, without first attempting investigation"
+    ],
+    "answer": 3,
+    "explanation": "An explicit request for a human is honoured immediately."
+  },
+  {
+    "id": 304,
+    "difficulty": "hard",
+    "category": "context-reliability",
+    "question": "A customer is frustrated but asks for an order status and has not asked for a human. Best handling?",
+    "options": [
+      "Acknowledge the frustration and offer resolution; escalate if they reiterate the request or the issue exceeds policy",
+      "Escalate immediately based on sentiment",
+      "Ignore the frustration",
+      "Refuse to answer until the customer is calm"
+    ],
+    "answer": 0,
+    "explanation": "Frustration alone is not an escalation trigger. An explicit request or a policy limit is."
+  },
+  {
+    "id": 305,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "A customer's request falls outside any documented policy (for example a competitor price match). What should the agent do?",
+    "options": [
+      "Invent a reasonable exception",
+      "Deny the request",
+      "Escalate because of a policy gap, rather than improvising policy",
+      "Retry tools until one works"
+    ],
+    "answer": 2,
+    "explanation": "A policy gap is a legitimate escalation reason."
+  },
+  {
+    "id": 306,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "A customer lookup returns three accounts matching the name. What should the agent do?",
+    "options": [
+      "Select the most recent account",
+      "Pick the highest-value account",
+      "Escalate every multi-match lookup",
+      "Ask for an additional identifier rather than picking one by heuristic"
+    ],
+    "answer": 3,
+    "explanation": "Heuristic selection risks acting on the wrong customer."
+  },
+  {
+    "id": 307,
+    "difficulty": "hard",
+    "category": "context-reliability",
+    "question": "Which is an unreliable trigger for escalation?",
+    "options": [
+      "An explicit human request",
+      "Self-reported model confidence scores or sentiment on their own",
+      "A policy gap",
+      "Inability to make progress"
+    ],
+    "answer": 1,
+    "explanation": "Confidence and sentiment are poor proxies. Explicit requests, policy gaps and stalled progress are reliable."
+  },
+  {
+    "id": 308,
+    "difficulty": "hard",
+    "category": "prompt-structured-output",
+    "question": "A document often lacks a purchase-order number, yet the schema marks it required and Claude invents values. Fix?",
+    "options": [
+      "Add a prompt line saying 'never lie'",
+      "Increase max_tokens",
+      "Make the field optional or nullable so the model can return null when the source lacks it",
+      "Mark every field required"
+    ],
+    "answer": 2,
+    "explanation": "A required field leaves the model no honest way to express absence."
+  },
+  {
+    "id": 309,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "An extraction category is sometimes ambiguous or does not fit the listed enum values. Which design handles it?",
+    "options": [
+      "Add an 'other' value (with a detail string) and an 'unclear' value to the enum",
+      "Force the nearest value",
+      "Remove the field",
+      "Use free text for every field"
+    ],
+    "answer": 0,
+    "explanation": "Escape-hatch enum values capture ambiguity instead of forcing a wrong label."
+  },
+  {
+    "id": 310,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "Why do nullable fields reduce hallucination?",
+    "options": [
+      "They make the output shorter",
+      "They give the model a legitimate way to express missing information instead of fabricating a value to satisfy a required field",
+      "They disable validation",
+      "They raise the effective temperature"
+    ],
+    "answer": 1,
+    "explanation": "Fabrication is often caused by a schema that demands a value."
+  },
+  {
+    "id": 311,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "Documents vary in date and currency formats, causing inconsistent output. Which combination helps?",
+    "options": [
+      "Temperature 1.0",
+      "A larger max_tokens",
+      "Removing the schema",
+      "Format normalisation instructions, a few few-shot examples, and a schema with optional fields"
+    ],
+    "answer": 3,
+    "explanation": "Normalisation rules plus examples and tolerant schemas improve consistency and reduce hallucination."
+  },
+  {
+    "id": 312,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "Which method gives the strongest guarantee of schema-compliant structured output?",
+    "options": [
+      "Tool use with a JSON schema",
+      "Prompt instructions describing the JSON format",
+      "A prefilled response starting with '{'",
+      "Asking Claude to double-check its JSON"
+    ],
+    "answer": 0,
+    "explanation": "Tool use with a schema is the most reliable route. Prompt-based formatting is least reliable and prefill only steers format."
+  },
+  {
+    "id": 313,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "Tool use with a JSON schema is in place. Which error class can still occur?",
+    "options": [
+      "Syntax errors in the JSON",
+      "Missing required keys",
+      "Semantic errors such as wrong values, misplaced fields or totals that do not add up",
+      "Unquoted strings"
+    ],
+    "answer": 2,
+    "explanation": "Schemas prevent structural errors but cannot verify that values are correct."
+  },
+  {
+    "id": 314,
+    "difficulty": "hard",
+    "category": "prompt-structured-output",
+    "question": "Claude sometimes answers conversationally instead of calling extract_invoice, breaking the pipeline. Which setting guarantees a call?",
+    "options": [
+      "tool_choice auto",
+      "tool_choice none",
+      "Setting temperature to 0",
+      "tool_choice forcing the specific tool: {\"type\": \"tool\", \"name\": \"extract_invoice\"}"
+    ],
+    "answer": 3,
+    "explanation": "A forced tool_choice guarantees that tool is called, so conversational replies cannot break downstream parsing."
+  },
+  {
+    "id": 315,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "What does tool_choice 'any' do?",
+    "options": [
+      "Lets Claude respond with text or a tool as it prefers",
+      "Requires Claude to call one of the provided tools, letting it choose which",
+      "Forbids tool calls",
+      "Calls every tool in parallel"
+    ],
+    "answer": 1,
+    "explanation": "any guarantees some tool call, while a named tool guarantees a specific one."
+  },
+  {
+    "id": 316,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "Which tool_choice setting lets Claude decide between replying in text and calling a tool?",
+    "options": [
+      "any",
+      "A forced named tool",
+      "auto",
+      "none"
+    ],
+    "answer": 2,
+    "explanation": "auto is the default. any and forced settings guarantee a call. none prevents tool use."
+  },
+  {
+    "id": 317,
+    "difficulty": "hard",
+    "category": "prompt-structured-output",
+    "question": "A document may be an invoice, receipt or contract, each with its own extraction tool, and structured output must always be produced. Which setting?",
+    "options": [
+      "tool_choice any, with one extraction tool per document type, so Claude must call one and chooses the matching one",
+      "auto",
+      "none",
+      "A forced single invoice tool"
+    ],
+    "answer": 0,
+    "explanation": "Unknown document type means the specific tool cannot be forced, but a tool call can be."
+  },
+  {
+    "id": 318,
+    "difficulty": "medium",
+    "category": "prompt-structured-output",
+    "question": "Which consequence should you expect when tool_choice forces a tool?",
+    "options": [
+      "Semantic correctness is guaranteed",
+      "No conversational preamble precedes the tool_use block",
+      "Claude calls every tool",
+      "Rate limits are bypassed"
+    ],
+    "answer": 1,
+    "explanation": "Forcing guarantees the call and its shape, not the correctness of the values."
+  },
+  {
+    "id": 319,
+    "difficulty": "hard",
+    "category": "tool-design-mcp",
+    "question": "A workflow needs get_customer before lookup_order and process_refund. How is the prerequisite order reliably enforced?",
+    "options": [
+      "A prompt line asking Claude to call get_customer first",
+      "Give all tools identical descriptions",
+      "Increase max_tokens",
+      "A programmatic gate or hook that blocks the dependent tools until verified customer data exists, optionally forcing get_customer first via tool_choice"
+    ],
+    "answer": 3,
+    "explanation": "When order failures have consequences, enforce it deterministically."
+  },
+  {
+    "id": 320,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "How can you guarantee extract_metadata runs before enrichment tools in a multi-step extraction?",
+    "options": [
+      "Force extract_metadata via tool_choice on the first request, then allow auto on later turns",
+      "Force it on every request",
+      "Hope the model picks it first",
+      "Remove the other tools permanently"
+    ],
+    "answer": 0,
+    "explanation": "Force the prerequisite once, then release control so later steps can choose normally."
+  },
+  {
+    "id": 321,
+    "difficulty": "hard",
+    "category": "tool-design-mcp",
+    "question": "Why not rely on prompt text alone for a tool prerequisite with financial impact?",
+    "options": [
+      "Prompts cannot mention tools",
+      "Hooks are slower",
+      "Prompt compliance is probabilistic, so deterministic gating is needed when ordering failures have consequences",
+      "The model never follows prompts"
+    ],
+    "answer": 2,
+    "explanation": "Probabilistic compliance is not enough for rules that must always hold."
+  },
+  {
+    "id": 322,
+    "difficulty": "medium",
+    "category": "claude-code",
+    "question": "You need every caller of processRefund in an unfamiliar codebase. Which approach is best?",
+    "options": [
+      "Read every file in the repo",
+      "Glob for all source files and read them",
+      "Ask the user for a file list",
+      "Grep for the function name, then Read the relevant files"
+    ],
+    "answer": 3,
+    "explanation": "Grep locates content efficiently without loading everything."
+  },
+  {
+    "id": 323,
+    "difficulty": "easy",
+    "category": "claude-code",
+    "question": "Which tool finds files by name pattern such as **/*.test.tsx?",
+    "options": [
+      "Grep",
+      "Glob",
+      "Read",
+      "Edit"
+    ],
+    "answer": 1,
+    "explanation": "Glob matches paths. Grep searches contents."
+  },
+  {
+    "id": 324,
+    "difficulty": "hard",
+    "category": "claude-code",
+    "question": "How should exploration of a large codebase be structured to stay within the context window?",
+    "options": [
+      "Read all files upfront",
+      "Glob and Read everything matched",
+      "Build understanding incrementally: Grep entry points, Read followed imports, trace flows, and use subagents for verbose discovery",
+      "Avoid reading files and guess"
+    ],
+    "answer": 2,
+    "explanation": "Incremental, targeted exploration manages context better than bulk reading."
+  },
+  {
+    "id": 325,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "Why must every Messages API request include the conversation history?",
+    "options": [
+      "The API is stateless: it keeps no memory between calls, so the client must send the relevant messages each time",
+      "The server stores history but billing requires resending",
+      "History is cached by session ID automatically",
+      "Only the latest message matters"
+    ],
+    "answer": 0,
+    "explanation": "State lives in the request you send."
+  },
+  {
+    "id": 326,
+    "difficulty": "hard",
+    "category": "context-reliability",
+    "question": "A chat app lets browsers send the whole messages array. What is the risk?",
+    "options": [
+      "The array may be too short",
+      "Untrusted clients can forge roles or inject fabricated assistant turns, so canonical history should be kept server-side",
+      "Tokens are not counted",
+      "Roles are ignored by the API"
+    ],
+    "answer": 1,
+    "explanation": "Whoever assembles the history controls what the model believes it said."
+  },
+  {
+    "id": 327,
+    "difficulty": "medium",
+    "category": "context-reliability",
+    "question": "In a tool loop, what must be appended to the messages list after Claude returns tool_use?",
+    "options": [
+      "Only the tool result as an assistant turn",
+      "Nothing; the API tracks it",
+      "A system message",
+      "The assistant turn with its tool_use blocks, then a user turn with matching tool_result blocks"
+    ],
+    "answer": 3,
+    "explanation": "The loop continues by extending the history with the assistant turn and its results."
+  },
+  {
+    "id": 328,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "Claude confuses search_orders and lookup_order. What is the first fix?",
+    "options": [
+      "Expand and differentiate the descriptions (purpose, inputs, examples, when to use versus the other)",
+      "Add a routing classifier",
+      "Merge them into one tool",
+      "Add few-shot examples first"
+    ],
+    "answer": 0,
+    "explanation": "Fix the primary selection signal before adding machinery."
+  },
+  {
+    "id": 329,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "Which information improves tool selection reliability most?",
+    "options": [
+      "A longer tool name",
+      "The tool's source code",
+      "Use-case examples, input format specifications and explicit disambiguation from similar tools",
+      "The company mission statement"
+    ],
+    "answer": 2,
+    "explanation": "Descriptions need to say what the tool is for, how to call it and when not to."
+  },
+  {
+    "id": 330,
+    "difficulty": "medium",
+    "category": "tool-design-mcp",
+    "question": "A shared .mcp.json needs an API token without committing the secret. Which approach?",
+    "options": [
+      "Hardcode the token",
+      "Put the token in CLAUDE.md",
+      "Commit ~/.claude.json",
+      "Use ${ENV_VAR} expansion in .mcp.json, set the variable per developer, and verify tool discovery with /mcp"
+    ],
+    "answer": 3,
+    "explanation": "Environment expansion keeps secrets out of version control while sharing the configuration."
   }
 ];
 
 // --- TOP 100 INTERVIEW INDICES ---
 // ZERO-BASED ARRAY INDICES (not question IDs), priority ordered.
-// 150-question bank. First 20 are MUST-KNOW; remaining items are weighted by the official exam blueprint.
+// 331-question bank. First 20 are MUST-KNOW; remaining items are weighted by the official exam blueprint.
 const hotsQuestions = [
     // TIER 1 - MUST KNOW
     108, // agentic-architecture

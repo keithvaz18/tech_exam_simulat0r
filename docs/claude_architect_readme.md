@@ -10,16 +10,53 @@
 <img width="1024" height="1536" alt="claude_architect_detailed_one_pager" src="assets/claude_architect_detailed_one_pager.png" />
 
 
+<!-- SCORE-REPORT:START -->
+## Score report revision priorities
+
+Built from the CCAR-F score report (percent correct per objective). Work the CRITICAL rows first, then Reinforce. Objectives already at 100% are kept for light revision only; scores of 100% are not a guarantee of mastery.
+
+| Objective (score report) | Score | Priority | Key recall | Practice question IDs |
+|---|---|---|---|---|
+| Orchestration safeguards: every session ends resolved or escalated | 0% | CRITICAL | Wrap the loop in orchestration code; every exit path (end_turn, iteration cap, max_tokens, tool failure, timeout, exception) ends in a resolution or a human escalation with a handoff package. The cap is a safety net, not the primary stop. | 272-276 |
+| Iterative refinement workflows | 0% | CRITICAL | Concrete input/output examples beat prose; test-first then feed specific failures; batch interacting issues in one message, fix independent ones sequentially; interview pattern for unclear requirements. | 285-289 |
+| Enforce via settings/hooks vs advise in CLAUDE.md | 0% | CRITICAL | CLAUDE.md is advisory context; settings permissions (deny rules) and hooks are deterministic. Anything that must always or never happen goes in hooks/permissions; conventions go in CLAUDE.md. | 290-293 |
+| Project context: @ references vs CLAUDE.md vs inline | 0% | CRITICAL | Reusable cross-session, team-wide → CLAUDE.md (import files with @). Specific file for this task → @ reference in the prompt. One-off detail → inline. Keep CLAUDE.md modular with @ imports or path-scoped rules. | 299-302 |
+| Escalation decision criteria | 0% | CRITICAL | Explicit human request → escalate immediately (no investigation first). Frustration alone → acknowledge and offer help, escalate if reiterated. Policy gap or no progress → escalate. Multiple matches → ask for identifiers. Sentiment and self-reported confidence are unreliable triggers. | 303-307 |
+| Structured output method; tool_use + tool_choice guarantee | 0% | CRITICAL | tool_use + JSON schema = strongest compliance (syntax, not semantics). tool_choice: auto (may reply in text) · any (must call a tool, model chooses) · {type:tool,name} (that tool) · none. Forced choice = no preamble. | 312-318 |
+| tool_choice and multi-tool sequencing | 0% | CRITICAL | Prerequisite order for consequential workflows is enforced programmatically (gate or hook), optionally forcing the first tool via tool_choice then returning to auto. Prompt order is probabilistic. | 319-321 |
+| Extraction schemas: optional, nullable, enums | 33% | CRITICAL | Required fields force fabrication → make fields optional/nullable. Enums get 'other' + detail and 'unclear'. Schemas fix syntax, not semantics. | 308-311 |
+| Codebase exploration with Grep, Glob, Read | 50% | Reinforce | Grep = search contents (callers, error strings); Glob = match file paths; Read = open a file. Build understanding incrementally: Grep entry points → Read → follow imports; subagents for verbose discovery; scratchpad notes. | 322-324 |
+| Stateless API and conversation history | 50% | Reinforce | Messages API is stateless: send the full relevant history every request. Keep canonical history server-side; append assistant tool_use turn then user tool_result turn; never let clients forge roles. | 325-327 |
+| Tool descriptions and MCP integration | 50% | Reinforce | Descriptions are the selection mechanism: purpose, input formats, examples, edge cases, when to use vs similar tools. MCP: project .mcp.json with ${ENV_VAR}, personal ~/.claude.json, verify discovery with /mcp. | 328-330 |
+| Session resumption and re-analysis | 67% | Reinforce | --resume a named session, then tell the agent exactly which files changed for targeted re-analysis; if tool results are stale, start fresh with an injected summary; fork_session to branch from a baseline. | 278-280 |
+| Configuration mechanism, commands and plan mode | 67% | Reinforce | CLAUDE.md = always-on standards; .claude/rules + paths glob = file-type conventions; skills = on-demand workflows; hooks = deterministic; settings = access. Commands: .claude/commands (shared) vs ~/.claude/commands (personal). Plan mode for big/ambiguous/multi-approach; direct for small, clear, reversible. | 294-298 |
+| Dynamic task decomposition | 75% | Maintain | Open-ended work: generate subtasks adaptively (map structure, prioritise, revise as findings arrive). Fixed chains only when steps are predictable. | 281-282 |
+| Structured handoff packages | 100% | Maintain | Handoff = customer ID, root cause, actions taken, amounts, authorization state, recommended next action. The human has no transcript. | 277-277 |
+| PreToolUse / PostToolUse hooks for business rules | 100% | Maintain | PreToolUse blocks or redirects before the call (refund limits); PostToolUse transforms or checks after (normalise data, format, lint, tests). Deterministic, not model discretion. | 283-284 |
+
+Also at 100% on the report (no new drills needed): slash commands (project `.claude/commands/` vs user `~/.claude/commands/`), PostToolUse quality hooks, MCP server scope, long-session context management, human review routing, sync vs Batches, feedback loops, MCP structured error handling.
+<!-- SCORE-REPORT:END -->
+
 ## Consolidated Mind Map
 
 ```text
-CLAUDE ARCHITECT
-  ├─ Question domains
-  │   ├─ agentic architecture
-  │   ├─ prompt structured output
-  │   ├─ context reliability
-  │   ├─ tool design mcp
-  │   ├─ claude code
+CLAUDE ARCHITECT — FOUNDATIONS
+  ├─ Agentic Architecture 27%
+  │     stop_reason loop · hub-and-spoke · Task + allowedTools · hooks over prompts · fork_session / --resume · tool_result per tool_use_id
+  ├─ Tool Design & MCP 18%
+  │     descriptions first · isError + category + retryable · scoped tools · tool_choice · .mcp.json vs ~/.claude.json · Prompt/Tool/Resource
+  ├─ Claude Code 20%
+  │     CLAUDE.md hierarchy · .claude/rules paths · commands & skills · plan vs direct · claude -p --json-schema
+  ├─ Prompt & Structured Output 20%
+  │     explicit criteria · few-shot · tool_use schema · nullable fields · validation-retry · Batches API
+  ├─ Context & Reliability 15%
+  │     case-facts block · escalation triggers · error propagation · provenance & conflicts · stratified sampling
+  ├─ Score-report priorities (added)
+  │     orchestration safeguards · escalation criteria · tool_choice · tool sequencing · enforce vs CLAUDE.md · project context · iterative refinement · nullable schemas
+  ├─ CI/CD Onboarding (added)
+  │     static → security → AI review → tests → human gate · risk-based approval · prompt-injection safe · independent reviewer · no self-approval
+  ├─ API & SDK basics (added)
+  │     AsyncAnthropic · 429 retries · cache breakpoints · temperature · eval graders · MCP client/Inspector · computer use · 4Ds
   └─ Decision loop
       ├─ Trigger: identify the scenario constraint
       ├─ Answer: recall the source-backed technical choice
@@ -29,13 +66,40 @@ CLAUDE ARCHITECT
 
 ## Four-keyword recall cards
 
-| Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
-|---|---|---|---|
-| Claude · Agent · SDK · agentic | stop_reason · tool_use · tools | The documented control flow is: continue while stop_reason is "tool_use", terminate when it is "end_turn". Parsing natural-language phrases, relying on arbitrary caps as the primary stop, or checking for text blocks are listed anti-patterns. | Trap: The assistant message contains any text content block |
-| ISO · extraction · fails · validation | Resend · original · document · failed | Retry with Feedback: appending the specific validation error guides the model to correct format or structural mistakes, but it cannot fix information absent from the source. | Trap: Increase max_tokens |
-| subagent · web · search · times | Structured · error · context · failure | Error Propagation: structured context enables intelligent coordinator recovery. Generic statuses hide information; swallowing errors or aborting the whole workflow are both anti-patterns. | Trap: "search unavailable" |
-| MCP · GitHub · teammate · personal | mcp.json · user-level · claude.json · shared | ~/.claude.json: user-scoped configuration for personal or experimental MCP servers. Project-scoped .mcp.json is version-controlled for shared tooling, using ${ENV_VAR} expansion for tokens. | Trap: The shared server in ~/.claude.json and the personal one in .mcp.json |
-| CI · comments · job · emit | output-format · json-schema · tool_use · json | --json-schema: constrains CI output to a defined structure. A tool_use Schema in API-based extraction gives the same syntactic guarantee, though semantic checks remain your job. | Trap: Parsing the terminal colors |
+| Domain | Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
+|---|---|---|---|---|
+| ★ Orchestration safeguards | session · ends · loop · cap | resolve · or · escalate · always | Every exit path (end_turn, iteration cap, max_tokens, tool failure, timeout) must end in a resolution or human escalation with a handoff package. Guarantee it in orchestration code; the cap is a safety net, not the primary stop. max_tokens = incomplete, never final. | Trap: Return the last text when the cap fires |
+| ★ Escalation criteria | customer · wants · human · agent | escalate · immediately · no · investigation | Explicit human request: honour immediately. Frustration alone: acknowledge, offer help, escalate if reiterated. Policy gap or no progress: escalate. Several matches: ask for an identifier. Sentiment/self-confidence are unreliable triggers. | Trap: Try tools first, escalate only if they fail |
+| ★ tool_choice | answers · text · pipeline · breaks | tool_choice · forced · tool · name | auto may reply in text; any must call some tool (model picks); {type:tool,name} forces that tool; none = no tools. Forced = no preamble. Tool use + schema fixes syntax, not semantics. | Trap: tool_choice auto or temperature 0 |
+| ★ Tool sequencing | get_customer · before · refund · order | gate · hook · force · first | Prerequisite order with consequences is enforced programmatically (gate/hook); force the first tool via tool_choice once, then back to auto. Prompt order is probabilistic. | Trap: Prompt line asking Claude to call it first |
+| ★ Enforce vs advise | never · edit · migrations · ignored | permissions · PreToolUse · hook · deny | CLAUDE.md is advisory context. Anything that must always/never happen goes in settings permissions or hooks (PreToolUse blocks, PostToolUse formats/lints/tests). Conventions stay in CLAUDE.md. | Trap: Make the CLAUDE.md sentence bold |
+| ★ Project context | conventions · every · session · team | CLAUDE.md · @ · import · inline | Reusable cross-session → project CLAUDE.md (@ imports keep it modular). One specific file this task → @ reference in the prompt. One-off detail → inline. File-type conventions → path-scoped .claude/rules. | Trap: Paste it into every prompt |
+| ★ Iterative refinement | output · inconsistent · prose · fails | examples · tests · batch · interview | 2-3 concrete input/output examples beat prose. Tests first, then feed specific failures. Interacting issues in one message; independent issues sequentially. Interview pattern for unclear requirements. | Trap: 'Make it better' or higher temperature |
+| ★ Nullable schemas | required · field · invented · values | nullable · optional · other · unclear | Required fields force fabrication. Make fields nullable/optional; enums get 'other' + detail and 'unclear'; add normalisation rules and few-shot examples. Schema fixes syntax, validation checks semantics. | Trap: 'Never lie' prompt line |
+| ★ Resume & explore | resume · files · changed · stale | --resume · inject · fork_session · Grep | Resume then tell the agent which files changed (targeted re-analysis); stale results → fresh session with injected summary; fork_session for divergent approaches. Explore: Grep content, Glob paths, Read files, incrementally, subagents for verbose discovery. | Trap: Resume silently or re-read everything |
+| ★ Stateless API | API · history · browser · roles | stateless · resend · server-side · canonical | The Messages API keeps no state; send the relevant history each request. Keep canonical history server-side; untrusted clients must not forge roles or assistant turns. Tool loop: assistant tool_use turn then user tool_result turn. | Trap: Trust the browser's messages array |
+| 1 Agentic loop | Claude · Agent · SDK · agentic | stop_reason · tool_use · tools | Continue while stop_reason is tool_use, stop on end_turn; append tool_result to history each turn. Text-block checks, phrase parsing and a primary iteration cap are anti-patterns. | Trap: The assistant message contains any text content block |
+| 1 Enforcement | refund · skipped · 12% · identity | hook · prerequisite · gate · programmatic | Non-zero failure rate plus financial or compliance impact needs deterministic enforcement (hooks, gates), not a stronger prompt. | Trap: A friendlier system-prompt reminder |
+| 1 Multi-agent | report · misses · topic · areas | coordinator · decomposition · too · narrow | Hub-and-spoke: the coordinator decomposes, delegates, aggregates. Subagents inherit nothing, so pass full findings; Task must be in allowedTools; parallel = several Task calls in one response. | Trap: Blame the subagents' search quality |
+| 2 Tool selection | wrong · tool · similar · descriptions | expand · descriptions · boundaries · examples | Descriptions are the primary selection mechanism. Fix vague or overlapping tools first, before routers, few-shot or consolidation. | Trap: Add a routing layer first |
+| 2 MCP errors | tool · fails · retry · loop | isError · category · isRetryable · message | Return structured errors so the agent can decide retry, reroute or escalate. A business-rule violation is non-retryable. Valid empty result is not an access failure. | Trap: Generic 'operation failed' string |
+| 2 MCP scope & primitives | MCP · personal · shared · button | .mcp.json · ~/.claude.json · Prompt · Tool | Project .mcp.json (with ${ENV_VAR}) is shared; ~/.claude.json is personal. Primitives: Prompt = user-controlled, Tool = model-controlled, Resource = application-controlled. | Trap: Personal server committed in .mcp.json |
+| 3 CLAUDE.md & rules | teammate · rules · missing · conventions | project · CLAUDE.md · rules · paths | User ~/.claude/CLAUDE.md is not shared. Project CLAUDE.md or .claude/rules/ with glob paths load conditionally and suit conventions spanning many directories. | Trap: Put team rules in the user-level file |
+| 3 Plan vs direct | migration · files · approaches · stack | plan · mode · explore · subagent | Plan mode for large, ambiguous or multi-approach work; direct execution for a single-file fix with a clear trace. Explore subagent isolates verbose discovery. | Trap: Plan mode for a one-line fix |
+| 3 CI usage | CI · hangs · output · parse | claude -p · output-format · json-schema | -p is non-interactive; --output-format json with --json-schema gives machine-readable output. CLAUDE_HEADLESS and --batch do not exist. | Trap: Pipe interactive session and scrape colours |
+| 3 Repo config map | tool · referenced · CLAUDE.md · authorised | settings.json · .mcp.json · verify · exists | CLAUDE.md and SKILL.md only reference tools; permissions live in .claude/settings.json, MCP in .mcp.json. CI verifies referenced tools exist and are not over-permitted. Approval: L1 docs/safe skills auto, L2 new skills/agents PR review, L3 new MCP/shell/permissions security. | Trap: Tool named in CLAUDE.md means it is authorised |
+| 3 CI/CD onboarding | new · agent · PR · approval | validate · scan · test · human gate | Stages: static validation → security/compliance → AI review → tests → human approval for high-risk → merge. Risk-based: docs automated; new tools/MCP security review; production permissions mandatory human approval. | Trap: Merge automatically when checks are green |
+| 3 CI/CD safety | PR · comments · untrusted · reviewer | prompt · injection · least · privilege | Outsider-authored PR text is data, not instructions. Limit tools and tokens, keep secrets out of context, use an independent review instance and never self-approve. | Trap: Ask Claude to ignore malicious comments |
+| 4 Explicit criteria | false · positives · reviewer · trust | explicit · criteria · few-shot · disable | Concrete categorical criteria beat 'be conservative'. Disable a noisy category, fix, then re-enable. 2-4 targeted examples fix inconsistent format. | Trap: Tell the model to only report high confidence |
+| 4 Structured output | extraction · invented · totals · schema | tool_use · nullable · validation · retry | tool_use + JSON schema removes syntax errors, not semantic ones. Nullable fields stop fabrication; retry with the error helps format problems, not missing source data. | Trap: Increase max_tokens |
+| 4 Batch vs sync | pre-merge · overnight · cost · SLA | Batches · 50% · 24h · custom_id | Message Batches: half price, up to 24 h, no latency SLA, no mid-request tool loops. Blocking checks use the synchronous API. | Trap: Batch API for a blocking merge check |
+| 5 Context facts | long · session · amounts · lost | case-facts · block · summaries · trim | Progressive summaries lose numbers and dates. Keep a case-facts block, trim tool output, put key findings at the start. | Trap: Rely on one rolling summary |
+| 5 Escalation | customer · human · sentiment · confidence | explicit · request · policy · gap | Escalate on request, policy gap or no progress. Sentiment and self-reported confidence are poor proxies. Hand off customer ID, root cause, amount and recommendation. | Trap: Escalate whenever sentiment is negative |
+| 5 Provenance & review | 97% · accuracy · segment · sources | stratified · sampling · claim-source · conflicts | Overall accuracy hides weak segments, so sample by type and field. Keep claim→source mappings; annotate conflicts with both values and dates. | Trap: Pick the more recent figure silently |
+| API 429 & caching | 429 · cache · hit · prefix | SDK · retries · cache_control · exact | SDKs auto-retry 429/5xx (default 2, honour retry-after). A cache breakpoint caches the prefix (tools→system→messages); dynamic data after it; up to 4 breakpoints. | Trap: Timestamp at the top of the cached prompt |
+| Evals & temperature | grader · judge · temperature · tests | code · first · binary · low | Code graders first, then an LLM judge (distinct model, binary or 1-3 scale, reasoning before score), then human calibration. Low temperature for extraction/evals, 0.8-1.0 for creative. | Trap: Judge grades its own output on a 1-10 scale |
+| MCP client & testing | MCP · client · test · stdio | initialize · list_tools · Inspector · stderr | Client = SDK + transport + initialize → list_tools → call_tool loop. Test with MCP Inspector or in-memory client/server; never print() to stdout on stdio servers. | Trap: Debug with print() on stdout |
+| 4Ds & safe agents | delegate · describe · discern · diligence | Delegation · Description · Discernment · Diligence | Delegation decides whether AI is used, Description communicates, Discernment evaluates outputs (looping back to Description), Diligence covers transparency and accountability. Computer use and env inspection: sandbox, read-only first. | Trap: Ship AI output unreviewed and undisclosed |
 
 ## How to use this map
 
@@ -47,8 +111,8 @@ CLAUDE ARCHITECT
 ## Source coverage
 
 - Question bank: `questionBank_claude_architect.js`
-- Questions in source bank: **211**
-- Consolidated recall cards: **5**
+- Questions in source bank: **331**
+- Consolidated recall cards: **32**
 - Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
 ---
@@ -58,7 +122,7 @@ CLAUDE ARCHITECT
 **Exam facts:** 60 items · 4 scenarios drawn from a bank of 6 · 120 min · pass = scaled **720 / 1000** · $125 · valid 12 months.
 The exam rewards **judgment about tradeoffs**: pick the *proportionate, root-cause* fix, and prefer **deterministic enforcement** over hopeful prompting.
 
-**Practice simulator coverage:** expanded to 150 curated questions plus a refreshed 100-question priority set (`hotsQuestions`). The Hot 100 follows the official blueprint: Agentic Architecture 27, Tool Design & MCP 18, Claude Code 20, Prompt & Structured Output 20, and Context & Reliability 15. This is a preparation bank, not a representation of the live exam item count.
+**Practice simulator coverage:** expanded to 331 curated questions (211 core + 40 API/SDK/MCP recall + 21 CI/CD onboarding and repo config + 59 score-report revision) plus a refreshed 100-question priority set (`hotsQuestions`). The Hot 100 follows the official blueprint: Agentic Architecture 27, Tool Design & MCP 18, Claude Code 20, Prompt & Structured Output 20, and Context & Reliability 15. This is a preparation bank, not a representation of the live exam item count.
 
 | # | Domain | Weight |
 | - | ------ | ------ |
@@ -314,6 +378,87 @@ Task statements per domain, condensed from section 6 of the guide:
 | Claude Code in CI/CD | Headless mode (-p, --output-format json, --json-schema), review prompts with explicit criteria, false-positive control, multi-pass review |
 | Structured data extraction | tool_use with JSON schemas, validation-retry loops, optional and nullable fields, batch processing |
 
+## Supplemental recall notes (API, SDK and MCP client basics)
+
+Added from the AI Mode recall transcript; practice questions 211-250 cover these; questions 251-271 cover CI/CD onboarding and repo configuration (below); questions 272-330 are score-report revision drills.
+
+| Topic | Remember |
+|---|---|
+| Async SDK | `Anthropic` vs `AsyncAnthropic`; Agent SDK `query()` returns an async iterator of messages |
+| MCP client | MCP SDK + transport (stdio local, Streamable HTTP remote) + `initialize()` -> `list_tools()` -> tool-use loop -> `call_tool()` |
+| Testing a server | MCP Inspector (`npx @modelcontextprotocol/inspector`, `mcp dev server.py`, needs Node); in-memory client/server for CI; never `print()` to stdout on stdio servers |
+| Why MCP | Removes hand-built wrappers/schemas per app (M x N); server owns tool definitions, client discovers them |
+| Primitives | **Prompt** = user-controlled (buttons) · **Tool** = model-controlled · **Resource** = application-controlled; `docs://documents/{doc_id}` = resource template |
+| File tools | Resolve path and enforce base dir (path traversal); bytes become blobs |
+| Tool function vs definition | Definition = schema Claude sees; function = your code that runs; result returns as `tool_result` |
+| Message shape | `content` is a list; text + `tool_use` is normal; check `stop_reason`; keep full `response.content` in history; return one `tool_result` per `tool_use_id`; `tool_choice` any/tool skips preamble |
+| Batch tool vs Batches API | Batch tool = parallel independent calls in a live loop; Message Batches API = offline, 50% cheaper, 24 h |
+| Retries | SDK auto-retries 429/408/409/5xx (default 2) honouring retry-after; `max_retries` to change; then handle `RateLimitError` |
+| Prompt caching | `cache_control` breakpoint caches the prefix (tools -> system -> messages); up to 4; exact prefix match; dynamic data after it; write ~1.25x, hit ~0.1x; check usage fields |
+| Temperature | Low for extraction/classification/evals; 0.8-1.0 for creative; extended thinking needs 1.0 |
+| Evals | Balanced 10-20 starter cases; code graders first, LLM judge (distinct model, binary/1-3 scale, reasoning first) second, human calibration |
+| Computer use | Screenshot -> action -> screenshot loop; sandbox it; prompt-injection risk |
+| Environment inspection | Read-only look-before-you-leap; mask secrets; bound output |
+| 4Ds of AI Fluency | Delegation, Description, Discernment, Diligence (description-discernment loop) |
+
+## CI/CD onboarding of Claude workflows and agents (quick notes)
+
+Pattern: **automated validation with human oversight**, not manual review of everything and not autonomous self-approval.
+
+| Stage | What runs | Tooling examples |
+|---|---|---|
+| 1 Static validation | YAML syntax, agent config schema, prompt structure, duplicate config | yamllint, actionlint, Python scripts |
+| 2 Security & compliance | tool permissions, secret detection, MCP server checks, least privilege, untrusted-input checks | Gitleaks, OPA / Conftest |
+| 3 AI-powered review | Claude reviews instructions, scope, prompt-injection risk (independent instance) | Claude Code Action, `claude -p --output-format json --json-schema` |
+| 4 Automated tests | unit, integration, agent-behaviour tests (assert tool calls and schema, rubric-graded quality) | Claude Agent SDK, eval set |
+| 5 Human approval | required for high-risk changes | CODEOWNERS / required reviewers |
+
+| Change category | Approval |
+|---|---|
+| Documentation-only | Automated |
+| Prompt improvements | Automated tests + review |
+| New agent definition | Automated validation + PR review |
+| New tools or MCP access | Security review |
+| Production permissions | Mandatory human approval |
+
+Always human-approved: agents with production infrastructure or deployment write access, new MCP/external connections, arbitrary shell execution, changed permission boundaries, anything exposing secrets. Green checks do not remove that requirement. "Automate 80-90% of routine validation" is a target, not a measured benchmark. Outsider-authored PR text is untrusted input (prompt injection): least-privilege tokens, scoped tools, no secrets in context, no self-approval by the authoring instance. Keep `CLAUDE.md`, `.claude/agents/` and `.github/workflows/` in version control and change them only through pull requests.
+
+### Where tools and capabilities are defined (and validated in CI)
+
+Mentioning a tool in `CLAUDE.md` or a skill does **not** mean it is installed, configured or authorised. CI must verify referenced tools actually exist and that access is not excessive.
+
+| Location | Purpose | CI/CD validation |
+|---|---|---|
+| `CLAUDE.md` | Project instructions, tool usage guidance, rules | Validate instructions and references |
+| `.claude/skills/<name>/SKILL.md` | Reusable skills and workflows (`context: fork`, `allowed-tools`, `argument-hint`) | Validate structure, frontmatter and metadata |
+| `.claude/agents/` | Custom agent definitions | Validate frontmatter, configuration and tool permissions |
+| `.claude/settings.json` | Tool permissions and configuration | Security and permission checks (detect excessive access) |
+| `.mcp.json` | MCP server definitions (`${ENV_VAR}` for secrets) | Validate server configuration, access and no committed secrets |
+| `.claude/commands/` | Custom slash commands | Validate command definitions |
+| `.github/workflows/` | The validation pipeline itself (for example `claude-validation.yml`) | actionlint; path-filtered trigger on the files above |
+
+```text
+my-project/
+├── CLAUDE.md
+├── .mcp.json
+├── .claude/
+│   ├── settings.json
+│   ├── agents/    (code-reviewer.md, security-reviewer.md)
+│   ├── skills/    (code-review/SKILL.md, deployment/SKILL.md)
+│   └── commands/  (deploy.md)
+└── .github/workflows/claude-validation.yml
+```
+
+**Three approval levels**
+
+| Level | Approval | Typical changes |
+|---|---|---|
+| 1 | Auto-approve | Documentation changes, safe skill updates |
+| 2 | PR review | New skills, new agents, changes to tool usage |
+| 3 | Security approval | New MCP servers, external integrations, shell execution, expanded permissions |
+
+Trigger the pipeline on pull requests touching `CLAUDE.md`, `.claude/**` or `.mcp.json`. Validation differs by artifact: skills (SKILL.md structure and metadata), agents (frontmatter, tool list, permissions), MCP (server config and security), plus AI-assisted instruction review. Clarify scope first: skills, agents, MCP tools, or all three, since each needs different rules.
+
 ## The agentic loop, precisely
 
 ```mermaid
@@ -404,12 +549,14 @@ The guide's appendix lists what may appear on the exam. Highlights worth studyin
 - **Claude Code CLI:** -p or --print for non-interactive use, --output-format json, --json-schema for structured CI output
 - **API:** tool_use with JSON schemas, tool_choice options, max_tokens, system prompts
 - **Message Batches API:** 50% cost savings, up to 24-hour window, custom_id correlation, no multi-turn tool calling
+- **Supplemental (added):** AsyncAnthropic, MCP client/transport/Inspector, MCP primitives (prompt/tool/resource, resource templates), tool function vs definition, 429 retry behaviour, prompt cache breakpoints, temperature, eval graders, computer use, environment inspection, 4D AI Fluency
+- **CI/CD onboarding (added):** staged pipeline, yamllint, actionlint, Gitleaks, OPA/Conftest, Claude Code Action, risk-based approval, prompt injection via PR content, independent reviewer
 - **Supporting concepts:** JSON Schema design (required versus optional, enums, nullable fields, "other" plus detail patterns, strict mode), Pydantic validation-retry loops, few-shot prompting, prompt chaining, token budgets and lost-in-the-middle effects, scratchpad files, session management, and confidence scoring with calibration
 
 
 # 🚫 Out of Scope (don't over-study)
 
-Fine-tuning · API auth/billing · MCP hosting/infra · Claude internals · RLHF/Constitutional AI · embeddings/vector DBs · computer use · vision · streaming/SSE · rate limits & pricing math · cloud-provider specifics · prompt caching internals · tokenization.
+Fine-tuning · API auth/billing · MCP hosting/infra · Claude internals · RLHF/Constitutional AI · embeddings/vector DBs · vision · streaming/SSE internals · pricing math · cloud-provider specifics · tokenization. *Conceptual* awareness of computer use, SDK 429 retries and prompt-cache breakpoints is now covered by a few supplemental questions (see Supplemental recall notes), but they are not blueprint domains.
 
 ---
 
@@ -424,9 +571,9 @@ Fine-tuning · API auth/billing · MCP hosting/infra · Claude internals · RLHF
 
 ## Practice bank and simulator files
 
-- `questionBank_claude_architect.js` contains 150 multiple-choice questions with stable zero-based IDs, difficulty, official blueprint category, four options, answer index, and rationale.
+- `questionBank_claude_architect.js` contains 331 multiple-choice questions with stable zero-based IDs, difficulty, official blueprint category, four options, answer index, and rationale.
 - `hotsQuestions` contains 100 unique zero-based indices, weighted to the five official domains and ordered by priority. Keep these as array indices; if the bank is reordered, regenerate the list.
 - `claude_architect_detailed_one_pager.png` is the companion visual quick reference for the five domains, scenario patterns, and root-cause fixes.
-- The exam guide states 60 live exam items, four scenarios selected from a bank of six, 120 minutes, and a scaled passing score of 720/1000. The 150-question bank is supplemental practice content.
+- The exam guide states 60 live exam items, four scenarios selected from a bank of six, 120 minutes, and a scaled passing score of 720/1000. The 331-question bank is supplemental practice content.
 
 **Preparation approach:** prioritize the Hot 100, explain why each distractor is wrong, and practice selecting the smallest deterministic fix that addresses the actual failure. Then complete all remaining questions and review scenario-based questions by domain. The current official exam guide remains authoritative if exam details change.

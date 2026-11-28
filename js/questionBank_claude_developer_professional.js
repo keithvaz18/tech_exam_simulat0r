@@ -1,4 +1,4 @@
-/* CLAUDE CERTIFIED DEVELOPER — PROFESSIONAL (CCDV-P) — 150 professional-level practice MCQs. */
+/* CLAUDE CERTIFIED DEVELOPER — PROFESSIONAL (CCDV-P) — 188 professional-level practice MCQs. */
 const questionBank = [
   {
     "id": 1,
@@ -2099,5 +2099,537 @@ const questionBank = [
     ],
     "answer": 2,
     "explanation": "Persist explicit task state and completed side effects with idempotent recovery semantics. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior."
+  },
+  {
+    "id": 151,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "Your agent loop is `while True:` calling the API until stop_reason == 'end_turn'. In production some runs never terminate and one crashed on a tool exception, leaving a paid order half-processed. What is the right implementation?",
+    "options": [
+      "Keep while True and add a prompt instruction to stop after 10 steps without changing anything else in the design",
+      "Catch exceptions and continue the loop so the model can recover on its own and document the decision for the team wiki",
+      "A bounded loop with an iteration cap and deadline, try/finally around tool execution, and a single finalise() that always records a resolved or escalated outcome",
+      "Add time.sleep between iterations to reduce load and document the decision for the team wiki"
+    ],
+    "answer": 2,
+    "explanation": "Termination and outcome recording must be enforced by code on every exit path. Prompt instructions and swallowed exceptions leave the same gaps."
+  },
+  {
+    "id": 152,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "Which stop_reason handling is correct inside an agent loop?",
+    "options": [
+      "tool_use: run tools and continue; end_turn: finish; max_tokens: treat as incomplete and retry or escalate; refusal: do not retry blindly, surface or escalate",
+      "end_turn: continue; tool_use: finish and rely on that approach for every case",
+      "Treat every stop_reason other than tool_use as a final answer and monitor the dashboards for problems afterwards",
+      "Ignore stop_reason and check whether the text contains 'done' and monitor the dashboards for problems afterwards"
+    ],
+    "answer": 0,
+    "explanation": "Each stop_reason has distinct semantics. Truncation and refusal are not successful completions."
+  },
+  {
+    "id": 153,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "A tool_use block is cut off by max_tokens. Your code json.loads the partial input and executes the tool. What is wrong?",
+    "options": [
+      "Nothing, since json.loads validates the arguments without changing anything else in the design",
+      "The tool should run twice to confirm, on the assumption that the model will cooperate",
+      "max_tokens only affects text blocks and monitor the dashboards for problems afterwards",
+      "Arguments from a truncated block are unreliable; the turn must be treated as incomplete and never executed"
+    ],
+    "answer": 3,
+    "explanation": "A parse that happens to succeed on a truncated input still may omit fields. Side-effecting tools must not run on incomplete calls."
+  },
+  {
+    "id": 154,
+    "difficulty": "medium",
+    "category": "agents-and-workflow-implementation",
+    "question": "A tool call raises a timeout. How should the loop report it to the model?",
+    "options": [
+      "Skip the tool_result so the model asks again and monitor the dashboards for problems afterwards",
+      "Return a tool_result with is_error true and structured detail (category, retryable, message) for the same tool_use_id",
+      "Raise the exception out of the loop and drop the session, then review the outcome after the next release",
+      "Return an empty string as content and monitor the dashboards for problems afterwards"
+    ],
+    "answer": 1,
+    "explanation": "Every tool_use needs a matching tool_result. is_error with structured information lets the model reason about retry or escalation."
+  },
+  {
+    "id": 155,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "Where should the 'every session ends resolved or escalated' guarantee be implemented?",
+    "options": [
+      "In the orchestration code that owns the loop, with a watchdog for sessions that die without an outcome",
+      "In the system prompt as a numbered rule and document the decision for the team wiki",
+      "In the model's tool descriptions and monitor the dashboards for problems afterwards",
+      "In a retry decorator on the HTTP client, keeping the existing flow otherwise unchanged"
+    ],
+    "answer": 0,
+    "explanation": "Only application code sees all failure modes, including process death. The model cannot guarantee it."
+  },
+  {
+    "id": 156,
+    "difficulty": "medium",
+    "category": "prompt,-context-and-output-handling",
+    "question": "A prompt that converts messy addresses to a normalised format fails on edge cases. Which refinement is most effective?",
+    "options": [
+      "Add more descriptive sentences about normalisation, keeping the existing flow otherwise unchanged",
+      "Increase temperature to encourage variety, keeping the existing flow otherwise unchanged",
+      "Switch to a bigger model without changing the prompt, keeping the existing flow otherwise unchanged",
+      "Add several input/output example pairs covering the failing cases and re-run the evaluation set"
+    ],
+    "answer": 3,
+    "explanation": "Concrete examples of the transformation outperform prose and are measurable against an eval set."
+  },
+  {
+    "id": 157,
+    "difficulty": "hard",
+    "category": "prompt,-context-and-output-handling",
+    "question": "You have 6 failing cases that all stem from one ambiguous instruction about currency symbols. How should you iterate?",
+    "options": [
+      "Patch each case with its own special-case rule and monitor the dashboards for problems afterwards",
+      "Describe the failure pattern with the specific cases, fix the instruction once, and re-run the whole set to check for regressions",
+      "Retrain the prompt from scratch and monitor the dashboards for problems afterwards",
+      "Ship it and monitor and document the decision for the team wiki"
+    ],
+    "answer": 1,
+    "explanation": "Group related failures into one targeted change, then evaluate everything to catch regressions."
+  },
+  {
+    "id": 158,
+    "difficulty": "medium",
+    "category": "claude-code-engineering-workflows",
+    "question": "For a new utility with clear acceptance criteria, which Claude Code workflow gives the most dependable refinement?",
+    "options": [
+      "Implement first and write tests at the end and document the decision for the team wiki",
+      "Describe the feature in prose and review visually, on the assumption that the model will cooperate",
+      "Write the failing tests first, then have Claude implement and iterate against those tests",
+      "Generate multiple versions and pick one by eye and treat any remaining failures as edge cases"
+    ],
+    "answer": 2,
+    "explanation": "Tests give objective, specific feedback for each iteration."
+  },
+  {
+    "id": 159,
+    "difficulty": "hard",
+    "category": "claude-code-engineering-workflows",
+    "question": "CLAUDE.md forbids reading .env, yet a log shows it was read once. How do you make the rule reliable?",
+    "options": [
+      "Repeat the instruction three times in CLAUDE.md, keeping the existing flow otherwise unchanged",
+      "Add it to the first user message each session, then review the outcome after the next release",
+      "Add a permissions deny rule for reading .env in settings, since CLAUDE.md is advisory",
+      "Rename .env to .env.local, then review the outcome after the next release"
+    ],
+    "answer": 2,
+    "explanation": "Permissions are enforced by the tool layer. CLAUDE.md is context the model may weigh against other instructions."
+  },
+  {
+    "id": 160,
+    "difficulty": "hard",
+    "category": "claude-code-engineering-workflows",
+    "question": "You need code formatted on every Claude edit regardless of model behaviour. Which mechanism?",
+    "options": [
+      "A PostToolUse hook on the edit and write tools that runs the formatter",
+      "A paragraph in CLAUDE.md, since that has worked in earlier projects",
+      "A custom slash command without changing anything else in the design",
+      "A Skill with formatting instructions and rely on that approach for every case"
+    ],
+    "answer": 0,
+    "explanation": "Hooks run deterministically as part of the tool lifecycle."
+  },
+  {
+    "id": 161,
+    "difficulty": "medium",
+    "category": "claude-code-engineering-workflows",
+    "question": "Which belongs in a .claude/rules file with a paths glob?",
+    "options": [
+      "A global rule about commit message tone, which is simpler than adding extra controls",
+      "A deny rule blocking secrets, keeping the existing flow otherwise unchanged",
+      "A reusable multi-step workflow and document the decision for the team wiki",
+      "Conventions that apply only to files matching, for example, src/api/**/*.ts"
+    ],
+    "answer": 3,
+    "explanation": "Path-scoped rules load conditionally for matching files. Permissions and workflows belong elsewhere."
+  },
+  {
+    "id": 162,
+    "difficulty": "hard",
+    "category": "claude-code-engineering-workflows",
+    "question": "A PreToolUse hook is meant to block writes to a protected directory. What must it do to block the call?",
+    "options": [
+      "Exit 0 and print a warning and monitor the dashboards for problems afterwards",
+      "Exit with the blocking status (exit code 2) and write the reason to stderr so Claude can see why",
+      "Delete the file after it is written and document the decision for the team wiki",
+      "Log the attempt and let it continue and document the decision for the team wiki"
+    ],
+    "answer": 1,
+    "explanation": "A blocking exit code stops the tool call and returns the message to the model; exit 0 allows it."
+  },
+  {
+    "id": 163,
+    "difficulty": "medium",
+    "category": "claude-code-engineering-workflows",
+    "question": "Which is the correct place for conventions every teammate's session should follow?",
+    "options": [
+      "The committed project CLAUDE.md, with @ imports to keep large sections modular",
+      "Each developer's ~/.claude/CLAUDE.md and document the decision for the team wiki",
+      "A comment in the first source file and monitor the dashboards for problems afterwards",
+      "A message pasted at the start of each session and rely on that approach for every case"
+    ],
+    "answer": 0,
+    "explanation": "Project CLAUDE.md is shared via version control. User files and pasted text are not."
+  },
+  {
+    "id": 164,
+    "difficulty": "medium",
+    "category": "claude-code-engineering-workflows",
+    "question": "You need Claude to read one specific design doc for this task only. What is the best approach?",
+    "options": [
+      "Add the doc to CLAUDE.md, keeping the existing flow otherwise unchanged",
+      "Create a hook to inject it and monitor the dashboards for problems afterwards",
+      "Describe it from memory and monitor the dashboards for problems afterwards",
+      "An @ reference to the file in the prompt"
+    ],
+    "answer": 3,
+    "explanation": "@ references pull a specific file into this request without permanent context cost."
+  },
+  {
+    "id": 165,
+    "difficulty": "hard",
+    "category": "claude-code-engineering-workflows",
+    "question": "A CLAUDE.md has grown to 1,100 lines. Which change keeps always-on context small without losing guidance?",
+    "options": [
+      "Truncate to the first 200 lines, on the assumption that the model will cooperate",
+      "Break it into imported files and move file-type specifics into path-scoped rules or on-demand Skills",
+      "Convert it to a single paragraph, then review the outcome after the next release",
+      "Remove all rules that were not violated last week and monitor the dashboards for problems afterwards"
+    ],
+    "answer": 1,
+    "explanation": "Modular imports plus conditional loading reduce always-on tokens while preserving coverage."
+  },
+  {
+    "id": 166,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "Implement escalation for a customer-service agent. Which rule set is correct?",
+    "options": [
+      "Escalate whenever sentiment score is below zero without changing anything else in the design",
+      "Escalate when the model says it is under 70% confident, since that has worked in earlier projects",
+      "Escalate on explicit human request, policy gaps or repeated failed attempts; do not escalate on sentiment or self-reported confidence alone",
+      "Never escalate; always attempt resolution, on the assumption that the model will cooperate"
+    ],
+    "answer": 2,
+    "explanation": "Observable, explicit triggers are reliable. Sentiment and self-reported confidence are weak proxies."
+  },
+  {
+    "id": 167,
+    "difficulty": "medium",
+    "category": "agents-and-workflow-implementation",
+    "question": "A user types 'I want to talk to a person.' What should the code path do?",
+    "options": [
+      "Run one more lookup first, since that has worked in earlier projects",
+      "Ask whether they are sure without changing anything else in the design",
+      "Skip further tool attempts and hand off immediately with a structured summary",
+      "Offer a coupon and monitor the dashboards for problems afterwards"
+    ],
+    "answer": 2,
+    "explanation": "An explicit request is honoured at once; investigation first overrides the user."
+  },
+  {
+    "id": 168,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "A lookup tool returns multiple matching customers. The code picks results[0]. What is the safer design?",
+    "options": [
+      "Detect the multiple-match case and ask the user for a distinguishing identifier before proceeding",
+      "Pick the newest record, on the assumption that the model will cooperate",
+      "Pick the record with the highest match score and rely on that approach for every case",
+      "Escalate every such case and treat any remaining failures as edge cases"
+    ],
+    "answer": 0,
+    "explanation": "Guessing acts on potentially the wrong person. Asking for an identifier resolves ambiguity safely."
+  },
+  {
+    "id": 169,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "A request falls outside every documented policy (competitor price matching). What should the implementation do?",
+    "options": [
+      "Let the model decide by analogy and monitor the dashboards for problems afterwards",
+      "Reject automatically and treat any remaining failures as edge cases",
+      "Offer the largest discount allowed, since that has worked in earlier projects",
+      "Escalate with the context, because inventing policy is not the agent's authority"
+    ],
+    "answer": 3,
+    "explanation": "A policy gap is a legitimate escalation trigger."
+  },
+  {
+    "id": 170,
+    "difficulty": "medium",
+    "category": "claude-api-mechanics-and-integration",
+    "question": "In the Python SDK, which parameter value forces Claude to call a tool named extract_invoice?",
+    "options": [
+      "tool_choice=\"extract_invoice\", on the assumption that the model will cooperate",
+      "tool_choice={\"type\": \"tool\", \"name\": \"extract_invoice\"}",
+      "tool_choice={\"type\": \"auto\"}, keeping the existing flow otherwise unchanged",
+      "tools=[\"extract_invoice\"] only, which is simpler than adding extra controls"
+    ],
+    "answer": 1,
+    "explanation": "A forced named tool uses type tool plus the name. auto lets the model answer in text."
+  },
+  {
+    "id": 171,
+    "difficulty": "hard",
+    "category": "claude-api-mechanics-and-integration",
+    "question": "A response parser fails because about 3% of replies contain prose and no tool_use block. The request uses tool_choice auto. What is the most reliable fix?",
+    "options": [
+      "Use tool_choice forcing the tool (or any when there is one tool) so the response always contains a tool_use block",
+      "Retry until a tool_use appears without changing anything else in the design",
+      "Add 'respond only with JSON' to the system prompt, then review the outcome after the next release",
+      "Parse JSON from the prose with a regex fallback, then review the outcome after the next release"
+    ],
+    "answer": 0,
+    "explanation": "Forcing removes the text-only option at the API level; prompts and retries do not guarantee it."
+  },
+  {
+    "id": 172,
+    "difficulty": "hard",
+    "category": "claude-api-mechanics-and-integration",
+    "question": "Extended thinking is enabled and the request sets a forced tool_choice. What happens?",
+    "options": [
+      "It works and the thinking tokens are hidden and rely on that approach for every case",
+      "The tool is called but thinking is dropped and rely on that approach for every case",
+      "It works only with the batches API and rely on that approach for every case",
+      "The API rejects it; with thinking, tool_choice must be auto or none"
+    ],
+    "answer": 3,
+    "explanation": "Forced tool choice and extended thinking are incompatible, so choose one or use auto with validation."
+  },
+  {
+    "id": 173,
+    "difficulty": "hard",
+    "category": "software-engineering-and-application-design",
+    "question": "An agent must call lookup_customer before issue_refund. Which implementation prevents a refund with an unverified customer?",
+    "options": [
+      "A system prompt line saying to look up the customer first, which is simpler than adding extra controls",
+      "A guard in the tool executor that rejects issue_refund unless a verified lookup result exists in session state",
+      "Ordering the tools list with lookup first and monitor the dashboards for problems afterwards",
+      "A comment in the tool description, which is simpler than adding extra controls"
+    ],
+    "answer": 1,
+    "explanation": "Order on a consequential action must be enforced in code. The model's compliance with prompt order is probabilistic."
+  },
+  {
+    "id": 174,
+    "difficulty": "hard",
+    "category": "prompt,-context-and-output-handling",
+    "question": "tool use with a JSON schema returns valid JSON but 'total' differs from the sum of 'line_items'. What is the correct response?",
+    "options": [
+      "Regenerate the JSON schema, on the assumption that the model will cooperate",
+      "Assume the schema is not strict enough and add more fields and rely on that approach for every case",
+      "Add semantic validation (sum check) and retry with the specific validation error appended",
+      "Accept it, since the JSON is valid, since that has worked in earlier projects"
+    ],
+    "answer": 2,
+    "explanation": "Schemas guarantee shape, not meaning. Validate semantics in code and feed back the exact error."
+  },
+  {
+    "id": 175,
+    "difficulty": "hard",
+    "category": "prompt,-context-and-output-handling",
+    "question": "A required field 'tax_id' causes fabricated values for documents that have none. What is the fix?",
+    "options": [
+      "Add a pattern regex for plausible IDs without changing anything else in the design",
+      "Keep it required and add 'do not guess' without changing anything else in the design",
+      "Declare the field as nullable or optional (type [\"string\",\"null\"]) and instruct the model to return null when absent",
+      "Make the whole schema free text, which is simpler than adding extra controls"
+    ],
+    "answer": 2,
+    "explanation": "A required field cannot represent absence honestly. Nullable fields can."
+  },
+  {
+    "id": 176,
+    "difficulty": "medium",
+    "category": "prompt,-context-and-output-handling",
+    "question": "Which enum design best handles categories you cannot fully enumerate and ambiguous documents?",
+    "options": [
+      "Include 'other' with a detail string and an 'unclear' value",
+      "Only the known categories and rely on that approach for every case",
+      "A free-text field with no constraints and document the decision for the team wiki",
+      "A default of the most common category and treat any remaining failures as edge cases"
+    ],
+    "answer": 0,
+    "explanation": "Escape values avoid forced misclassification and keep the output structured."
+  },
+  {
+    "id": 177,
+    "difficulty": "hard",
+    "category": "prompt,-context-and-output-handling",
+    "question": "Extraction accuracy varies widely across invoice layouts. Which combination best improves consistency?",
+    "options": [
+      "A longer free-text system prompt and treat any remaining failures as edge cases",
+      "Higher temperature, keeping the existing flow otherwise unchanged",
+      "A single example from the most common layout and document the decision for the team wiki",
+      "Structured schema with optional fields, format normalisation instructions, and few-shot examples from different layouts"
+    ],
+    "answer": 3,
+    "explanation": "Normalisation rules plus varied few-shot examples reduce layout sensitivity."
+  },
+  {
+    "id": 178,
+    "difficulty": "medium",
+    "category": "claude-api-mechanics-and-integration",
+    "question": "Your chat service forwards only the newest user message and the model loses context. What is the root cause?",
+    "options": [
+      "The API expires context after one minute and document the decision for the team wiki",
+      "The Messages API is stateless, so the full relevant message history must be sent with each request",
+      "Missing an API header and document the decision for the team wiki",
+      "The model has no memory by design flaw, keeping the existing flow otherwise unchanged"
+    ],
+    "answer": 1,
+    "explanation": "Conversation state belongs to the caller."
+  },
+  {
+    "id": 179,
+    "difficulty": "hard",
+    "category": "security,-safety-and-evaluation",
+    "question": "Where should conversation history be authoritative in a multi-tenant app?",
+    "options": [
+      "On the server, keyed by authenticated session, with roles and tool_result turns built by the server",
+      "In the browser, sent back each turn and monitor the dashboards for problems afterwards",
+      "In a cookie the user can edit and monitor the dashboards for problems afterwards",
+      "Inside the system prompt, keeping the existing flow otherwise unchanged"
+    ],
+    "answer": 0,
+    "explanation": "Client-supplied history can be forged, including fake assistant or tool_result turns."
+  },
+  {
+    "id": 180,
+    "difficulty": "medium",
+    "category": "claude-code-engineering-workflows",
+    "question": "Which approach explores an unfamiliar codebase efficiently in Claude Code?",
+    "options": [
+      "Read every file up front, on the assumption that the model will cooperate",
+      "Glob and read all matching files and monitor the dashboards for problems afterwards",
+      "Ask for a summary from memory and monitor the dashboards for problems afterwards",
+      "Grep for entry points or symbols, Read the relevant files, and follow imports incrementally"
+    ],
+    "answer": 3,
+    "explanation": "Incremental search-then-read manages context while building understanding."
+  },
+  {
+    "id": 181,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "Two tools, search_tickets and get_ticket, are confused by the model. What is the first thing to try?",
+    "options": [
+      "Add a classifier model to route tool selection, on the assumption that the model will cooperate",
+      "Rewrite the descriptions with purpose, input format, examples and an explicit contrast between the tools",
+      "Combine them into one tool and rely on that approach for every case",
+      "Lower temperature, then review the outcome after the next release"
+    ],
+    "answer": 1,
+    "explanation": "Descriptions drive selection. Fix them before adding routing layers."
+  },
+  {
+    "id": 182,
+    "difficulty": "medium",
+    "category": "software-engineering-and-application-design",
+    "question": "Where does a shared MCP server configuration with a secret belong?",
+    "options": [
+      "In .mcp.json with the token hard-coded and document the decision for the team wiki",
+      "In ~/.claude.json for the whole team, then review the outcome after the next release",
+      "In a committed .mcp.json that references the secret as ${ENV_VAR}",
+      "In CLAUDE.md, keeping the existing flow otherwise unchanged"
+    ],
+    "answer": 2,
+    "explanation": "Project scope shares the configuration; environment expansion keeps secrets out of version control."
+  },
+  {
+    "id": 183,
+    "difficulty": "hard",
+    "category": "claude-code-engineering-workflows",
+    "question": "After resuming a long session, two files were changed by a colleague. What is the best action?",
+    "options": [
+      "Trust the prior analysis, on the assumption that the model will cooperate",
+      "Start a new session from scratch always and document the decision for the team wiki",
+      "Tell the resumed session exactly which files changed so it re-analyses those only",
+      "Re-read the whole repository, on the assumption that the model will cooperate"
+    ],
+    "answer": 2,
+    "explanation": "Targeted re-analysis preserves valid findings."
+  },
+  {
+    "id": 184,
+    "difficulty": "medium",
+    "category": "claude-code-engineering-workflows",
+    "question": "Which task is best suited to plan mode?",
+    "options": [
+      "A multi-file refactor with several viable approaches that needs sign-off before changes",
+      "Fixing a typo in a README without changing anything else in the design",
+      "Renaming one local variable, then review the outcome after the next release",
+      "Running an already-written script, then review the outcome after the next release"
+    ],
+    "answer": 0,
+    "explanation": "Plan mode fits uncertainty, scope and review needs."
+  },
+  {
+    "id": 185,
+    "difficulty": "medium",
+    "category": "agents-and-workflow-implementation",
+    "question": "For open-ended 'improve reliability of this service', which decomposition is best?",
+    "options": [
+      "A fixed seven-step chain and document the decision for the team wiki",
+      "One undifferentiated task and treat any remaining failures as edge cases",
+      "Alphabetical file processing and document the decision for the team wiki",
+      "Dynamically generate and revise subtasks as findings are discovered"
+    ],
+    "answer": 3,
+    "explanation": "Unpredictable work needs adaptive planning."
+  },
+  {
+    "id": 186,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "A resumed agent repeats expensive lookups. What fixes it?",
+    "options": [
+      "Trust the model to remember, keeping the existing flow otherwise unchanged",
+      "Persist structured findings and inject them on resume, re-running only invalidated steps",
+      "Clear session history and monitor the dashboards for problems afterwards",
+      "Increase max_tokens and monitor the dashboards for problems afterwards"
+    ],
+    "answer": 1,
+    "explanation": "Durable state, not model memory, preserves prior work."
+  },
+  {
+    "id": 187,
+    "difficulty": "hard",
+    "category": "software-engineering-and-application-design",
+    "question": "An MCP tool returns only 'failed' for all errors, causing retry storms. What should change?",
+    "options": [
+      "Return structured errors with category, retryable flag, message and suggested next action",
+      "Return HTTP 200 with empty content and treat any remaining failures as edge cases",
+      "Add random delays, since that has worked in earlier projects",
+      "Return stack traces and rely on that approach for every case"
+    ],
+    "answer": 0,
+    "explanation": "The agent needs typed, actionable error information to choose retry, reroute or escalate."
+  },
+  {
+    "id": 188,
+    "difficulty": "hard",
+    "category": "security,-safety-and-evaluation",
+    "question": "When handing a case to a human reviewer, which package is required?",
+    "options": [
+      "The raw token usage, on the assumption that the model will cooperate",
+      "Only the last user message and monitor the dashboards for problems afterwards",
+      "The model's reasoning trace and monitor the dashboards for problems afterwards",
+      "Customer ID, root cause, actions taken, amounts, authorisation state and recommended next action"
+    ],
+    "answer": 3,
+    "explanation": "The reviewer has no transcript, so the package must carry facts and authority state."
   }
 ];

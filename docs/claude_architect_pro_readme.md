@@ -10,6 +10,29 @@
 <img width="1024" height="1536" alt="Claude Certified Architect Foundation reference one-pager" src="../assets/claude_architect_detailed_one_pager.png" />
 
 
+<!-- SCORE-REPORT:START -->
+## Score report revision priorities
+
+Built from the **Architect Foundations (CCAR-F)** score report (percent correct per objective). The Professional exams test the same habits at greater depth, so the objectives scored 0–75% are drilled here as scenario questions 173–212 (tagged *[Revision]* in the answer PDF). Work CRITICAL rows first. The report scores Foundations objectives, not this exam's blueprint, and 100% is not a guarantee of mastery.
+
+| Objective (score report) | Foundations score | Priority | Key recall | Practice question IDs |
+|---|---|---|---|---|
+| Orchestration safeguards: every session ends resolved or escalated | 0% | CRITICAL | One orchestration layer owns every exit path (end_turn, cap, max_tokens, tool failure/timeout, refusal, exception) and a watchdog catches dead sessions. Never execute a truncated tool_use. | 173-177 |
+| Iterative refinement workflows | 0% | CRITICAL | Concrete input/output examples; tests first, then specific failures; batch interacting issues, fix independent ones sequentially. | 178-180 |
+| Enforce via settings/hooks vs advise in CLAUDE.md | 0% | CRITICAL | CLAUDE.md is advisory; deny rules, hooks and managed settings are deterministic; PostToolUse for formatting/tests after every edit. | 181-184 |
+| Project context: @ references vs CLAUDE.md vs inline | 0% | CRITICAL | Cross-session team context → project CLAUDE.md (+ @imports, path-scoped rules); this-task file → @ reference; one-off → inline. | 185-187 |
+| Escalation decision criteria | 0% | CRITICAL | Explicit request → immediate; frustration alone → acknowledge and offer help; policy gap/no progress → escalate; multiple matches → ask identifier; sentiment/confidence unreliable. | 188-192 |
+| Structured output via tool use; tool_choice and sequencing | 0% | CRITICAL | auto / any / named tool / none; forced calls guarantee shape not meaning; thinking allows only auto/none; gate prerequisite tools in code. | 193-197 |
+| Extraction schemas: optional, nullable, enums | 33% | CRITICAL | Required fields force fabrication; use nullable/optional, 'other' + detail, 'unclear'; normalise formats with few-shot examples. | 198-200 |
+| Codebase exploration with Grep, Glob, Read | 50% | Reinforce | Grep contents, Glob paths, Read files; search first, read incrementally. | 201-202 |
+| Stateless API and conversation history | 50% | Reinforce | Resend history every request; keep canonical history server-side. | 203-204 |
+| Tool descriptions and MCP integration | 50% | Reinforce | Descriptions drive selection; shared MCP in .mcp.json with ${ENV_VAR}; typed errors. | 205-206, 211 |
+| Session resumption, plan mode, decomposition | 67-75% | Reinforce | Name changed files after --resume; persist and inject findings; plan mode for broad/uncertain work; adaptive subtasks for open-ended work. | 207-210 |
+| Structured handoff packages | 100% | Maintain | Customer ID, root cause, actions, amounts, authorisation state, next action. | 212 |
+
+Also at 100% (light revision only): slash commands, PostToolUse quality hooks, MCP scope, context management, human review routing, sync vs Batches, feedback loops, MCP error handling.
+<!-- SCORE-REPORT:END -->
+
 ## Consolidated Mind Map
 
 ```text
@@ -27,6 +50,8 @@ CLAUDE ARCHITECT PROFESSIONAL
   │   ├─ evaluation testing and optimization
   │   ├─ developer productivity and operational management
   │   ├─ claude models prompting and context
+  ├─ Score-report priorities (added)
+  │     safeguards · escalation · tool_choice · sequencing · enforce vs advise · project context · refinement · nullable schemas
   └─ Decision loop
       ├─ Trigger: identify the scenario constraint
       ├─ Answer: recall the source-backed technical choice
@@ -38,6 +63,18 @@ CLAUDE ARCHITECT PROFESSIONAL
 
 | Question trigger (max 4) | Answer recall (max 4) | Reason — why it works | Trap — what to reject |
 |---|---|---|---|
+| ★ session · cap · timeout · crash | orchestrator · finalise · resolve · escalate | Every exit path (end_turn, iteration cap, max_tokens, tool failure/timeout, refusal, exception, process death) maps to a resolution or a human escalation in orchestration code, with a watchdog for sessions that die silently. | Trap: a prompt line asking the model to escalate, or just raising the cap. |
+| ★ max_tokens · tool_use · cut-off · refund | never · execute · retry · escalate | A truncated tool_use block has unreliable arguments. Treat the turn as incomplete: no side effects, retry with a larger limit or escalate. | Trap: execute whatever parsed, or present the truncated text as the answer. |
+| ★ wants · human · frustrated · policy | request · immediately · gap · identifier | Explicit human request: escalate at once. Frustration alone: acknowledge, offer resolution, escalate if repeated. Policy gap or no progress: escalate. Multiple matches: ask for an identifier. Sentiment and self-reported confidence are weak triggers. | Trap: investigate first, pick results[0], or escalate on a sentiment score. |
+| ★ never · edit · ignored · audit | deny · permissions · PreToolUse · managed | CLAUDE.md is advisory context. Must-never and must-always rules go in settings permissions (deny) or hooks; org-wide rules in managed settings, which lower scopes cannot override. Formatting or tests after every edit: PostToolUse. | Trap: shout the rule louder in CLAUDE.md, a Skill or a user-level file. |
+| ★ team · every-session · one-off · file | CLAUDE.md · @import · @file · inline | Reusable team-wide, cross-session context: project CLAUDE.md, split with @ imports and path-scoped .claude/rules. One specific file for this task: @ reference. A one-off detail: inline. | Trap: pasting guidance each session or one 900-line CLAUDE.md. |
+| ★ inconsistent · prose · interacting · failures | examples · tests-first · batch · evaluate | Two or three concrete input/output examples beat prose; write tests first and feed specific failures; interacting issues go in one message and are evaluated together, independent ones sequentially. | Trap: more adjectives, one failure at a time for coupled bugs, or eyeballing. |
+| ★ text · instead · tool · parser | tool_choice · forced · name · any | auto may answer in prose; any must call some tool (model picks); {type:tool,name} forces that tool; none disables tools. Forcing guarantees the call and its shape, not the correctness of values. | Trap: 'always call the tool' in the prompt, or temperature 0. |
+| ★ thinking · forced · tool · error | auto · none · only · validate | With extended thinking, tool_choice is limited to auto or none. Pick structured-output-by-forcing or thinking, or use auto with a schema tool and validate. | Trap: assuming both features combine silently. |
+| ★ lookup · before · refund · guessed-ID | gate · session-state · verified · code | Consequential prerequisite order is enforced in the tool executor or a hook (reject until a verified result exists); optionally force the first tool, then return to auto. | Trap: numbering tools in the prompt or renaming them. |
+| ★ required · invented · missing · unreadable | nullable · optional · other · unclear | Required fields force fabrication. Make absent-able fields nullable/optional, give enums 'other' + detail and 'unclear', add normalisation rules and varied few-shot examples. Valid JSON is not correct JSON: validate semantics and retry with the error. | Trap: 'don't make things up' on a required field. |
+| ★ forgets · history · resume · changed-files | stateless · resend · server-side · re-analyse | The Messages API keeps no state: resend relevant history, held canonically server-side. After --resume, name the changed files for targeted re-analysis; persist findings and inject them rather than repeating work; fork_session to branch. | Trap: trusting model memory or client-held history. |
+| ★ callers · confused-tools · errors · handoff | Grep · descriptions · isError · package | Grep searches content, Glob matches paths, Read opens files; explore incrementally. Fix confused tools with fuller descriptions first. MCP errors: category, retryable, message, next action. Handoff: customer ID, root cause, actions, amounts, authorisation, next step. | Trap: reading every file, adding a router, or returning 'failed'. |
 | absent · production · design · review | Return · structured · validation · error | Return a structured validation error that identifies the missing field and is not marked retryable. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Solve the symptom locally without defining ownership, boundaries or recovery behavior |
 | instruction-like · documents · delivery · validating | Treat · document · content · isolate | Treat document content as data, isolate it with delimiters and enforce sensitive actions outside the model. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Increase model capacity and assume the architectural risk is resolved |
 | structure · delivery · validating · finds | Inspect · stop_reason · token · usage | Inspect stop_reason and token usage; increase output budget or continue safely when truncation is confirmed. This is preferred because it addresses the stated requirement with explicit controls and predictable behavior. | Trap: Increase model capacity and assume the architectural risk is resolved |
@@ -61,16 +98,16 @@ CLAUDE ARCHITECT PROFESSIONAL
 ## Source coverage
 
 - Question bank: `questionBank_claude_architect_professional.js`
-- Questions in source bank: **172**
-- Consolidated recall cards: **12**
+- Questions in source bank: **212**
+- Consolidated recall cards: **24**
 - Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
 ---
 
-This professional practice guide extends the simulator's **Claude Certified Architect – Foundations** guide. The image above intentionally reuses the foundation reference graphic; the professional assessment is a separate, deeper 172-question practice bank.
+This professional practice guide extends the simulator's **Claude Certified Architect – Foundations** guide. The image above intentionally reuses the foundation reference graphic; the professional assessment is a separate, deeper 212-question practice bank.
 
 ## Practice exam format
-- **172 professional-level practice MCQs** in the simulator bank.
+- **212 professional-level practice MCQs** in the simulator bank.
 - Questions emphasize architecture decisions, trade-offs, failure modes, operational controls and scenario-based judgment.
 - This is a preparation resource, not an official Anthropic exam or a claim about live exam item count, scoring, price or blueprint.
 
@@ -166,6 +203,9 @@ The original 150 simulator questions are retained. The 22 scenario questions fro
 
 ## Added study-guide questions
 The 22 sample questions in the attached study guide have been added verbatim to the practice bank as questions 151–172, distributed across all seven blueprint domains. Seven are multiple-response questions; the exam interface presents checkboxes and scores the complete answer set.
+
+## Revision questions
+Questions 173–212 were added from the Foundations score report (see the priorities table). They use the same schema as the rest of the bank.
 
 ## Simulator
 Select **Claude Certified Architect – Professional** from the portal. The bank uses the simulator question schema, including an answer-index array for multi-select items and is loaded by `exam.html` through `js/questionBank_claude_architect_professional.js`.

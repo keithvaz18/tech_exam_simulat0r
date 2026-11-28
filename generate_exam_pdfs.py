@@ -155,3 +155,8 @@ for name in ['26_exam_answer_pdfs_cleaned.zip','26_exam_pdfs_and_generator_clean
             if p.is_file(): z.write(p,p.name)
 print('TOTAL_PDFS',len(files),'TOTAL_QUESTIONS',sum(r['questions'] for r in reports))
 print('TOTAL_GENERIC_FILLER_REMOVED',sum(r['generic_reasoning_filler_removed'] for r in reports))
+
+# Re-apply hand-curated appendices (score-report revision cards) that this pass overwrites.
+import subprocess as _sp, sys as _sys
+for _s in ('build_architect_appendix.py', 'build_pro_appendix.py'):
+    _sp.run([_sys.executable, str(Path(__file__).resolve().parent/_s)], check=True, cwd=str(Path(__file__).resolve().parent))

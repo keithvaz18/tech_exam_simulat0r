@@ -235,3 +235,8 @@ with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=8) as z:
         if p.is_file() and not p.name.startswith('_appendix_') and '.tmp.' not in p.name:
             z.write(p,p.relative_to(ROOT.parent))
 print('ZIP',out,'bytes',out.stat().st_size,'reports',len(all_reports),'questions',sum(x['questions'] for x in all_reports))
+
+# Re-apply hand-curated appendices (score-report revision cards) that the generic pass above overwrites.
+import subprocess as _sp, sys as _sys
+for _s in ('build_architect_appendix.py', 'build_pro_appendix.py'):
+    _sp.run([_sys.executable, str(ROOT/_s)], check=True, cwd=str(ROOT))

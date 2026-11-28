@@ -15,10 +15,10 @@ All 26 question banks have a PDF revision appendix and a matching Markdown guide
 | questionBank_JavaScript.js | 261 | 8 | [PDF](docs/JavaScript_answers.pdf) | [README](docs/JavaScript_readme.md) | [PNG](../assets/JavaScript_quick_recall_mind_map.png) |
 | questionBank_SA_AI_Data_Technologies.js | 240 | 8 | [PDF](docs/SA_AI_Data_Technologies_answers.pdf) | [README](docs/Solution_Architect_readme.md) | [PNG](../assets/SA_AI_Data_Technologies_quick_recall_mind_map.png) |
 | questionBank_SQL.js | 270 | 8 | [PDF](docs/SQL_answers.pdf) | [README](docs/sql_readme.md) | [PNG](../assets/SQL_quick_recall_mind_map.png) |
-| questionBank_claude_architect.js | 211 | 5 | [PDF](docs/claude_architect_answers.pdf) | [README](docs/claude_architect_readme.md) | [PNG](../assets/claude_architect_quick_recall_mind_map.png) |
-| questionBank_claude_architect_professional.js | 172 | 12 | [PDF](docs/claude_architect_professional_answers.pdf) | [README](docs/claude_architect_pro_readme.md) | [PNG](../assets/claude_architect_professional_quick_recall_mind_map.png) |
+| questionBank_claude_architect.js | 331 | 32 | [PDF](docs/claude_architect_answers.pdf) | [README](docs/claude_architect_readme.md) | [PNG](../assets/claude_architect_quick_recall_mind_map.png) |
+| questionBank_claude_architect_professional.js | 212 | 24 | [PDF](docs/claude_architect_professional_answers.pdf) | [README](docs/claude_architect_pro_readme.md) | [PNG](../assets/claude_architect_professional_quick_recall_mind_map.png) |
 | questionBank_claude_developer.js | 195 | 8 | [PDF](docs/claude_developer_answers.pdf) | [README](docs/claude_developer_readme.md) | [PNG](../assets/claude_developer_quick_recall_mind_map.png) |
-| questionBank_claude_developer_professional.js | 150 | 6 | [PDF](docs/claude_developer_professional_answers.pdf) | [README](docs/claude_developer_pro_readme.md) | [PNG](../assets/claude_developer_professional_quick_recall_mind_map.png) |
+| questionBank_claude_developer_professional.js | 188 | 17 | [PDF](docs/claude_developer_professional_answers.pdf) | [README](docs/claude_developer_pro_readme.md) | [PNG](../assets/claude_developer_professional_quick_recall_mind_map.png) |
 | questionBank_databricks.js | 452 | 10 | [PDF](docs/databricks_answers.pdf) | [README](docs/Databricks_pySpark_readme.md) | [PNG](../assets/databricks_quick_recall_mind_map.png) |
 | questionBank_devOps.js | 180 | 8 | [PDF](docs/devOps_answers.pdf) | [README](docs/Devops_And_Observability_readme.md) | [PNG](../assets/devOps_quick_recall_mind_map.png) |
 | questionBank_dotnet.js | 357 | 10 | [PDF](docs/dotnet_answers.pdf) | [README](docs/dotnet_readme.md) | [PNG](../assets/dotnet_quick_recall_mind_map.png) |
