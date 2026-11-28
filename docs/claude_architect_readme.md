@@ -297,6 +297,47 @@ Glob rules beat per-directory CLAUDE.md when conventions span **many directories
 * **Skill** = on-demand task workflow · **CLAUDE.md** = always-on universal standards
 * `context: fork` isolates verbose output from the main conversation
 
+**Built-in slash commands (session controls, not files)**
+
+| Command | Purpose |
+|---|---|
+| `/plan` | Switch to read-only Plan Mode: outline changes before editing files |
+| `/compact` | Summarize the conversation to free context window space, **keeping the thread** |
+| `/clear` | **Wipe** the conversation history to start fresh on a new task |
+| `/init` | Generate a starter CLAUDE.md by analyzing the codebase |
+| `/review` | Review uncommitted changes or a pull request for bugs and style issues |
+| `/cost` | Show token usage and session cost |
+| `/mcp` | Check and manage connected MCP servers |
+
+**When to use `/clear` vs `/compact`**
+- **`/clear`:** you are starting an **unrelated task**, or the context is polluted by failed attempts, dead ends or verbose output you no longer need. Nothing from the old conversation carries over; CLAUDE.md is still loaded in the fresh one. If something must survive, write it to a file or scratchpad first.
+- **`/compact`:** you are **continuing the same task** but the context window is filling up. A summary is kept, so earlier decisions are not lost.
+- Rule of thumb: same task, long history -> `/compact`; new task -> `/clear`.
+- Neither one enforces anything. Rules that must always hold belong in settings permissions or hooks, not in conversation history.
+
+**Custom slash commands** are Markdown files: the filename becomes the command (`feature.md` -> `/feature`).
+- **Project (shared via git):** `.claude/commands/` · **Personal (global):** `~/.claude/commands/`
+- **`$ARGUMENTS`** is replaced by whatever follows the command (`/feature add dark mode toggle`).
+- They run **on demand**, only when invoked. Always-on standards go in CLAUDE.md.
+- Anthropic has been merging custom commands into the unified `.claude/skills/` system; `.claude/commands/` remains supported.
+
+| Example file | Usage | What the prompt does |
+|---|---|---|
+| `.claude/commands/feature.md` | `/feature add dark mode toggle` | Drafts a step-by-step plan for `$ARGUMENTS`: files to change, edge cases and breaking changes, then **waits for approval** before editing |
+| `.claude/commands/audit.md` | `/audit src/auth/` | Reviews `$ARGUMENTS` for security issues, performance bottlenecks and missing error handling, with fixes citing file paths and line numbers |
+| `.claude/commands/fix-tests.md` | `/fix-tests` | Runs the suite, fixes root causes **without weakening assertions**, re-runs to verify |
+| `.claude/commands/pr-summary.md` | `/pr-summary` | Inspects `git diff` and recent commits, writes a PR description (summary, testing, breaking changes) |
+
+Minimal example (`.claude/commands/feature.md`):
+```markdown
+Analyze the codebase and draft a step-by-step implementation plan for: $ARGUMENTS
+
+1. List all files that need to be created or modified.
+2. Highlight edge cases, dependencies, or breaking changes.
+3. Wait for my explicit approval before writing or editing any code.
+```
+Exam traps: a command placed in `~/.claude/commands/` is **not** shared with the team; "wait for approval" inside a command is advisory, not enforced.
+
 ### 🔑 Plan mode vs direct execution
 
 | Plan mode | Direct execution |
