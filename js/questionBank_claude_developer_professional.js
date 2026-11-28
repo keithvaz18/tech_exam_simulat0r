@@ -1,4 +1,4 @@
-/* CLAUDE CERTIFIED DEVELOPER — PROFESSIONAL (CCDV-P) — 188 professional-level practice MCQs. */
+/* CLAUDE CERTIFIED DEVELOPER — PROFESSIONAL (CCDV-P) — 203 professional-level practice MCQs. */
 const questionBank = [
   {
     "id": 1,
@@ -2631,5 +2631,215 @@ const questionBank = [
     ],
     "answer": 3,
     "explanation": "The reviewer has no transcript, so the package must carry facts and authority state."
+  },
+  {
+    "id": 189,
+    "difficulty": "hard",
+    "category": "agents-and-workflow-implementation",
+    "question": "In your refund workflow, specialist agents decide their own next step and the run drifts into invalid states (refund issued before compliance check). Which implementation best prevents this?",
+    "options": [
+      "Let workers call each other directly and add 'follow the process' to every worker prompt and monitor the dashboards for problems afterwards",
+      "A coordinator in code that holds an explicit state machine, allows only valid transitions, and validates each worker result before advancing",
+      "Give each worker a longer system prompt describing the complete refund process without changing anything else in the design while leaving the existing controls unchanged",
+      "Run the workers in parallel and take the first result that returns and treat any remaining failures as edge cases"
+    ],
+    "answer": 1,
+    "explanation": "State ownership and legal transitions belong in code. Prompts and parallel first-wins are not enforcement."
+  },
+  {
+    "id": 190,
+    "difficulty": "hard",
+    "category": "prompt,-context-and-output-handling",
+    "question": "After ~30 turns your agent forgets the verified customer ID. Which implementation is best?",
+    "options": [
+      "Append the full transcript to the system prompt on every request and rely on that approach for every case",
+      "Have the model rewrite a free-form memory paragraph after each turn and trust it, which is simpler than adding extra controls while leaving the existing controls unchanged",
+      "Switch to a larger model since this is a capability limit and monitor the dashboards for problems afterwards",
+      "Store verified fields in a structured session state updated only by tool handlers, and inject the current state into the system or user turn each request"
+    ],
+    "answer": 3,
+    "explanation": "Authoritative business state is written by deterministic code, not summarised freely by the model."
+  },
+  {
+    "id": 191,
+    "difficulty": "hard",
+    "category": "security,-safety-and-evaluation",
+    "question": "Your pairwise LLM-judge harness always prefers response A. What is the correct fix?",
+    "options": [
+      "Run each pair in both orders, randomise placement, and check the judge's agreement with human labels before using it as a CI gate",
+      "Raise the judge's temperature and rely on that approach for every case",
+      "Swap in a larger context window and document the decision for the team wiki",
+      "Remove the cases where the judge disagreed with the prompt author, then review the outcome after the next release, which keeps the number of moving parts low"
+    ],
+    "answer": 0,
+    "explanation": "This is position bias. Counterbalance order and calibrate against humans; temperature and context do not address it."
+  },
+  {
+    "id": 192,
+    "difficulty": "hard",
+    "category": "claude-api-mechanics-and-integration",
+    "question": "Prompt caching works in staging but cache reads are near zero in production. The system prompt begins with the current timestamp. What is the likely cause and fix?",
+    "options": [
+      "Caching only works for the first request of the day, so nothing can be done, which is simpler than adding extra controls",
+      "The timestamp must be longer so it exceeds the cache minimum length, keeping the existing flow otherwise unchanged",
+      "Volatile content at the start changes the prefix on every call; move it after the cached blocks and put cache_control at the end of the stable prefix",
+      "Disable caching because dynamic content cannot be mixed with static content, then review the outcome after the next release"
+    ],
+    "answer": 2,
+    "explanation": "Caching matches an exact prefix. Anything that varies before the breakpoint invalidates it, so keep stable content first."
+  },
+  {
+    "id": 193,
+    "difficulty": "hard",
+    "category": "software-engineering-and-application-design",
+    "question": "A tool wrapper retries a hanging downstream service 5 times with 60-second timeouts and exhausts workers. Which pattern is best?",
+    "options": [
+      "Short per-call timeouts, bounded retries with jitter, and a circuit breaker that fails fast with a typed error",
+      "Raise the timeout to 300 seconds so the service has time to finish, which is simpler than adding extra controls",
+      "Retry indefinitely until success, keeping the existing flow otherwise unchanged",
+      "Catch the exception and return an empty string to the model, which is simpler than adding extra controls"
+    ],
+    "answer": 0,
+    "explanation": "Fail fast and protect capacity. Long timeouts and unlimited retries increase pile-up; an empty result hides the failure."
+  },
+  {
+    "id": 194,
+    "difficulty": "hard",
+    "category": "claude-api-mechanics-and-integration",
+    "question": "While streaming, your code executes a tool as soon as the first input_json_delta arrives and sometimes runs with malformed arguments. What is the fix?",
+    "options": [
+      "Execute on the first delta and correct it later with a second call, keeping the existing flow otherwise unchanged while leaving the existing controls unchanged",
+      "Disable streaming for the whole application, keeping the existing flow otherwise unchanged",
+      "Accumulate the JSON fragments and parse and execute only after the content block has stopped (and not on max_tokens truncation)",
+      "Parse each fragment as JSON independently and merge the objects and treat any remaining failures as edge cases"
+    ],
+    "answer": 2,
+    "explanation": "Tool input arrives as partial JSON. Wait for block completion, and never run a call from a truncated stream."
+  },
+  {
+    "id": 195,
+    "difficulty": "medium",
+    "category": "claude-api-mechanics-and-integration",
+    "question": "Before sending a long document plus history, you need to know whether the request will fit within the context window. What should you use?",
+    "options": [
+      "Divide the character count by four and hope it is accurate, keeping the existing flow otherwise unchanged",
+      "The token-counting endpoint, then trim or summarise inputs and tool results if they exceed your budget",
+      "Send it and rely on the model to truncate automatically and monitor the dashboards for problems afterwards",
+      "Count the number of words in the user's message only, then review the outcome after the next release"
+    ],
+    "answer": 1,
+    "explanation": "Count tokens with the provided endpoint rather than estimating. Handle overflows by design, not by surprise errors."
+  },
+  {
+    "id": 196,
+    "difficulty": "hard",
+    "category": "prompt,-context-and-output-handling",
+    "question": "A long agent run accumulates large tool outputs that crowd out instructions. Which is the best remedy?",
+    "options": [
+      "Keep every tool output in the messages array verbatim without changing anything else in the design",
+      "Delete the system prompt to free space, keeping the existing flow otherwise unchanged",
+      "Lower max_tokens to keep outputs small and treat any remaining failures as edge cases",
+      "Clear or summarise stale tool results while keeping the latest and the structured state, and store raw outputs externally for retrieval if needed"
+    ],
+    "answer": 3,
+    "explanation": "Stale tool results are the cheapest thing to drop. Keep what the next step needs."
+  },
+  {
+    "id": 197,
+    "difficulty": "hard",
+    "category": "claude-api-mechanics-and-integration",
+    "question": "The model returns two tool_use blocks in one assistant turn. Your code sends two separate user messages, one tool_result each, and the next call errors. What is correct?",
+    "options": [
+      "Return only the first result and discard the second, since that has worked in earlier projects",
+      "Return all tool_result blocks in a single user message, each with its matching tool_use_id, placed before any text",
+      "Send the results as assistant messages and treat any remaining failures as edge cases",
+      "Merge both results into one block and omit the ids without changing anything else in the design"
+    ],
+    "answer": 1,
+    "explanation": "Each tool_use needs a result with its ID in the next user turn, and parallel calls are answered together."
+  },
+  {
+    "id": 198,
+    "difficulty": "hard",
+    "category": "security,-safety-and-evaluation",
+    "question": "A remote MCP server you build uses the access token supplied by the client to call a billing API on the user's behalf. A reviewer rejects it. Why?",
+    "options": [
+      "Tokens must be rotated every minute without changing anything else in the design",
+      "The billing API must accept tokens over HTTP and document the decision for the team wiki",
+      "The MCP protocol forbids calling any other service, which is simpler than adding extra controls",
+      "Passing the client's token through creates a confused-deputy problem; the server should use its own audience-bound credentials and enforce per-user authorisation"
+    ],
+    "answer": 3,
+    "explanation": "Token passthrough lets a server act with authority it was not issued. Use scoped credentials and authorise each request."
+  },
+  {
+    "id": 199,
+    "difficulty": "hard",
+    "category": "security,-safety-and-evaluation",
+    "question": "A CI pipeline should block a release if a prompt change degrades quality. Outputs vary between runs. What is the best design?",
+    "options": [
+      "Run a fixed golden set several times, compare aggregate metrics to a threshold with variance in mind, and fail the build on regression",
+      "Run each case once and fail on any difference in wording, keeping the existing flow otherwise unchanged and revisit the choice once the pilot is complete",
+      "Compare only the first five cases for speed and treat any remaining failures as edge cases",
+      "Replace evaluation with manual review before each merge, since that has worked in earlier projects"
+    ],
+    "answer": 0,
+    "explanation": "Handle non-determinism statistically; do not require identical text."
+  },
+  {
+    "id": 200,
+    "difficulty": "medium",
+    "category": "software-engineering-and-application-design",
+    "question": "Your production code calls a moving 'latest' model alias and a nightly job began failing after a provider update. What is the best practice?",
+    "options": [
+      "Add try/except around every call and monitor the dashboards for problems afterwards",
+      "Switch to a bigger model, then review the outcome after the next release",
+      "Pin an explicit model version, test candidates against a regression set, and migrate deliberately",
+      "Disable the nightly job, since that has worked in earlier projects, then adjust it if reviewers raise concerns"
+    ],
+    "answer": 2,
+    "explanation": "Pinning and testing protects against silent behaviour changes."
+  },
+  {
+    "id": 201,
+    "difficulty": "medium",
+    "category": "claude-code-engineering-workflows",
+    "question": "Two developers want Claude Code sessions to work on different features of the same repository at the same time without clobbering each other's files. What is the clean approach?",
+    "options": [
+      "Use separate git worktrees (one per session or branch) so each has its own working directory",
+      "Run both sessions in the same checkout and ask Claude to be careful, then review the outcome after the next release",
+      "Have each session copy the repository into a zip file, on the assumption that the model will cooperate",
+      "Let both edit the same branch and resolve conflicts afterwards and rely on that approach for every case"
+    ],
+    "answer": 0,
+    "explanation": "Worktrees isolate working directories and branches, which prevents overlapping edits."
+  },
+  {
+    "id": 202,
+    "difficulty": "hard",
+    "category": "security,-safety-and-evaluation",
+    "question": "A support tool logs full prompts for debugging, and they contain customer PII. Which change best satisfies privacy rules while keeping debuggability?",
+    "options": [
+      "Log nothing at all in production and monitor the dashboards for problems afterwards",
+      "Log everything and mask in the dashboard and monitor the dashboards for problems afterwards",
+      "Redact or tokenise PII before logging and sending, log structured spans for each step, and set access controls and retention limits",
+      "Log only on weekends and rely on that approach for every case"
+    ],
+    "answer": 2,
+    "explanation": "Minimise the data you store and retain structured traces for observability."
+  },
+  {
+    "id": 203,
+    "difficulty": "hard",
+    "category": "prompt,-context-and-output-handling",
+    "question": "A compliance bot needs to show the source passage for each claim. Which API-level approach is most reliable?",
+    "options": [
+      "Ask the model to list sources from memory and monitor the dashboards for problems afterwards",
+      "Provide the documents and use the citations feature, then verify in code that each cited span exists in the source",
+      "Lower temperature and trust the output without changing anything else in the design",
+      "Concatenate sources in a random order without changing anything else in the design as most teams do in their first release"
+    ],
+    "answer": 1,
+    "explanation": "Citations tie claims to supplied text and can be machine-verified."
   }
 ];

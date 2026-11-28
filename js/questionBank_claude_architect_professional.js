@@ -1,4 +1,4 @@
-/* CLAUDE CERTIFIED ARCHITECT — PROFESSIONAL (CCAR-P) — 212 professional-level practice MCQs. */
+/* CLAUDE CERTIFIED ARCHITECT — PROFESSIONAL (CCAR-P) — 228 professional-level practice MCQs. */
 const questionBank = [
   {
     "id": 1,
@@ -2997,5 +2997,229 @@ const questionBank = [
     ],
     "answer": 2,
     "explanation": "The human has no transcript. A structured package preserves the facts and authority state needed to act."
+  },
+  {
+    "id": 213,
+    "difficulty": "hard",
+    "category": "agentic-architecture-and-orchestration",
+    "question": "A refund workflow uses five specialist agents (lookup, payment check, refund, messaging, compliance) that message each other directly. Agents now reach conflicting decisions and nobody can say which step the workflow is on. What is the best structural change?",
+    "options": [
+      "Let every specialist read every other specialist's full output so they can reconcile conflicts themselves, on the assumption that the model will cooperate",
+      "Introduce a coordinator that owns workflow state, delegates bounded tasks, and validates each result before the next transition",
+      "Give each agent a larger context window so it can remember what the others decided during the run and rely on that approach for every case",
+      "Let each specialist decide independently whether the refund goes ahead and take the majority outcome and rely on that approach for every case"
+    ],
+    "answer": 1,
+    "explanation": "Peer-to-peer messaging spreads state across agents and makes transitions unauditable. A single owner of workflow state with bounded delegation and checked handoffs restores consistency. Context size does not fix ownership, and majority voting on a payment is not a control."
+  },
+  {
+    "id": 214,
+    "difficulty": "hard",
+    "category": "context-management-and-reliability",
+    "question": "A support agent loses customer IDs and refund decisions after about 30 turns, even with a larger context window. Which design best fixes this?",
+    "options": [
+      "Keep the whole conversation in the system prompt so that nothing is ever dropped from the window, since that has worked in earlier projects",
+      "Raise the sampling temperature so the model explores and recalls earlier details more freely, keeping the existing flow otherwise unchanged",
+      "Spawn an extra memory subagent that is asked to remember the earlier turns on behalf of the main agent, then review the outcome after the next release",
+      "Keep verified business state in a structured external store updated through controlled tools, and inject the relevant state into each turn"
+    ],
+    "answer": 3,
+    "explanation": "Conversation history is not a transactional database. Authoritative state belongs outside the model, written by deterministic code, and supplied each turn. A bigger prompt, temperature or another agent do not create reliable state."
+  },
+  {
+    "id": 215,
+    "difficulty": "hard",
+    "category": "integration",
+    "question": "A bank must run Claude in its approved AWS environment with data-residency commitments and wants minimal new infrastructure to own. What should the architect do first?",
+    "options": [
+      "Evaluate Amazon Bedrock, confirming regional model availability, required feature support, IAM controls and data-handling terms before committing",
+      "Choose the direct Anthropic API and build a separate hosting and governance stack for it and monitor the dashboards for problems afterwards",
+      "Select a self-hosted open-weight model so every component is under the bank's control, skipping evaluation and rely on that approach for every case",
+      "Standardise on developer-laptop tooling because it needs no cloud approval and monitor the dashboards for problems afterwards"
+    ],
+    "answer": 0,
+    "explanation": "The deployment surface is an architecture decision. The existing AWS governance points to Bedrock, but regions, models and features differ by platform, so verify before committing. The other options add ownership or drop the stated Claude and residency requirements."
+  },
+  {
+    "id": 216,
+    "difficulty": "hard",
+    "category": "evaluation-testing-and-optimization",
+    "question": "An LLM judge gives a new prompt a 95% win rate, but human reviewers see no improvement. You find the judge prefers whichever answer is shown first. What should happen before the judge gates any release?",
+    "options": [
+      "Give the judge a longer context window so it can compare both answers more completely and treat any remaining failures as edge cases and track the effect on the weekly report",
+      "Raise the judge's temperature so that its preference for the first answer averages out, keeping the existing flow otherwise unchanged",
+      "Randomise or swap answer order, measure agreement with human-labelled examples, refine the rubric, and only then grant gating authority",
+      "Shrink the evaluation set to cut cost and rely on the cases the judge scored highest, on the assumption that the model will cooperate"
+    ],
+    "answer": 2,
+    "explanation": "This is position bias plus poor validity. The evaluator itself must be evaluated against human labels and de-biased by ordering. Context length, temperature and fewer cases do not remove the bias."
+  },
+  {
+    "id": 217,
+    "difficulty": "hard",
+    "category": "context-management-and-reliability",
+    "question": "A downstream inventory API starts timing out. The agent keeps calling it, each call blocks for 60 seconds, and sessions pile up. Which control is most appropriate?",
+    "options": [
+      "Per-call timeouts with a circuit breaker that stops calling the failing dependency and returns a typed error or fallback path",
+      "Increase the retry count with exponential backoff so that the agent keeps trying until the API recovers, keeping the existing flow otherwise unchanged",
+      "Tell the model in the prompt to stop calling the inventory tool after several failures, which is simpler than adding extra controls",
+      "Raise the session's iteration cap so the agent has more attempts to succeed without changing anything else in the design"
+    ],
+    "answer": 0,
+    "explanation": "A circuit breaker fails fast and protects both the agent and the dependency. Unlimited retries amplify load, and a prompt instruction cannot stop a call the loop keeps issuing."
+  },
+  {
+    "id": 218,
+    "difficulty": "hard",
+    "category": "solution-design-and-architecture",
+    "question": "A team plans an orchestrator with eight workers for a task that is a fixed three-step extraction, with each document costing a few cents of value. What is the main objection?",
+    "options": [
+      "Multiple agents cannot call tools at the same time, so the workers would run strictly one after another and document the decision for the team wiki, which keeps the number of moving parts low",
+      "Orchestrators cannot return structured output, so downstream systems could not parse the result, keeping the existing flow otherwise unchanged",
+      "Multi-agent systems multiply token use and coordination cost, so they need a task with parallelisable breadth and high per-task value; a chained workflow fits here",
+      "Eight workers exceed the maximum number of agents a single application may start and monitor the dashboards for problems afterwards"
+    ],
+    "answer": 2,
+    "explanation": "The shape is fixed and low value, so the simplest sufficient structure wins. Multi-agent designs pay a large token multiplier that is only justified by breadth and value. The other claims are false."
+  },
+  {
+    "id": 219,
+    "difficulty": "hard",
+    "category": "context-management-and-reliability",
+    "question": "A research agent runs for hours and its context fills with old tool outputs. Which approach best sustains it?",
+    "options": [
+      "Raise max_tokens so the agent can output longer summaries of everything it has seen and monitor the dashboards for problems afterwards",
+      "Clear or summarise stale tool results, persist key findings to notes or a memory store outside the window, and re-load only what the next step needs",
+      "Restart the agent from the first message every hour and discard all prior findings and monitor the dashboards for problems afterwards",
+      "Append every tool output verbatim so the model keeps complete information, on the assumption that the model will cooperate"
+    ],
+    "answer": 1,
+    "explanation": "Long runs need active context management: drop what is stale, externalise what is durable, and reload selectively. Output limits, restarts and unlimited accumulation each waste work or degrade quality."
+  },
+  {
+    "id": 220,
+    "difficulty": "hard",
+    "category": "governance-safety-and-risk-management",
+    "question": "A prompt change is ready to ship to 2 million users. Offline evaluation looks good. What release approach best limits risk?",
+    "options": [
+      "Release to everyone at once and rely on user complaints to detect any regression quickly, keeping the existing flow otherwise unchanged",
+      "Run the offline evaluation a second time with a larger judge model and then release globally and document the decision for the team wiki",
+      "Skip staging since prompts, unlike code, cannot cause production incidents, then review the outcome after the next release and revisit the choice once the pilot is complete",
+      "Shadow or canary the change on a small traffic slice with monitored quality, latency and cost metrics, a defined rollback trigger, and a promotion gate"
+    ],
+    "answer": 3,
+    "explanation": "Offline results do not capture production distribution. Progressive exposure with metrics, a rollback condition and a gate controls blast radius."
+  },
+  {
+    "id": 221,
+    "difficulty": "medium",
+    "category": "claude-models-prompting-and-context",
+    "question": "A production system calls an alias that always points to the latest model version. After an upstream update, output formats subtly change and downstream parsing fails. What should the team do?",
+    "options": [
+      "Keep the alias and add more retries to the parser so that format changes are tolerated, which is simpler than adding extra controls",
+      "Pin an explicit model version in production, run the regression suite against a candidate before migrating, and track deprecation dates",
+      "Move to the largest model so that output formatting is always stable, on the assumption that the model will cooperate and track the effect on the weekly report",
+      "Freeze the prompt so that no one edits it and the problem cannot recur without changing anything else in the design"
+    ],
+    "answer": 1,
+    "explanation": "Models are not interchangeable at the output-detail level. Pin versions, test candidates against a golden set, and plan migrations around deprecations."
+  },
+  {
+    "id": 222,
+    "difficulty": "hard",
+    "category": "governance-safety-and-risk-management",
+    "question": "A compliance team requires that log data never expose customer PII, yet engineers need traces to debug agent behaviour. Which design fits?",
+    "options": [
+      "Disable logging in production completely and debug only in staging with synthetic prompts, keeping the existing flow otherwise unchanged",
+      "Log everything raw and rely on the security team to mask it later during audits, on the assumption that the model will cooperate",
+      "Log only the final answer, since intermediate steps cannot contain personal data without changing anything else in the design",
+      "Redact or tokenise PII before it reaches the model and logs, keep trace spans for each agent step and tool call, and restrict access with retention limits"
+    ],
+    "answer": 3,
+    "explanation": "Data minimisation plus structured tracing satisfies both needs. Turning logging off removes observability and raw logging breaks the requirement."
+  },
+  {
+    "id": 223,
+    "difficulty": "hard",
+    "category": "integration",
+    "question": "A compliance assistant must show which policy passage supports each statement it makes. Which approach is most appropriate?",
+    "options": [
+      "Supply the policy documents and use the citations capability so each claim references the source passage, then verify the citations in code",
+      "Ask the model to write source names from memory at the end of its answer, keeping the existing flow otherwise unchanged",
+      "Increase temperature so the model explores more passages before answering, keeping the existing flow otherwise unchanged, then adjust it if reviewers raise concerns",
+      "Remove the sources from the prompt to prevent the model from being biased by them, since that has worked in earlier projects"
+    ],
+    "answer": 0,
+    "explanation": "Grounded citations tie claims to supplied text and can be machine-checked. Memory-based source names invite fabrication."
+  },
+  {
+    "id": 224,
+    "difficulty": "hard",
+    "category": "tool-design-and-mcp-integration",
+    "question": "An MCP server calls a downstream HR system using the end user's access token that the client forwarded unchanged. A security review flags this. Why, and what is the fix?",
+    "options": [
+      "Tokens should be passed in query strings rather than headers to make auditing easier and treat any remaining failures as edge cases as most teams do in their first release",
+      "The server should use one shared admin token for all users to avoid expiry problems and monitor the dashboards for problems afterwards",
+      "Token passthrough creates a confused-deputy risk; the server should obtain its own audience-bound credentials and enforce per-user authorisation",
+      "Passing tokens is safe provided the system prompt tells the model not to leak them, since that has worked in earlier projects"
+    ],
+    "answer": 2,
+    "explanation": "Forwarding a client's token to another service lets the server act with authority it was never granted. Use properly scoped, audience-bound credentials with authorisation checks. A shared admin token and prompt-only protection are worse."
+  },
+  {
+    "id": 225,
+    "difficulty": "hard",
+    "category": "tool-design-and-mcp-integration",
+    "question": "A team connects a third-party MCP server. Later its tool descriptions change and begin including hidden instructions that steer the agent. What should the architecture include?",
+    "options": [
+      "Vet and pin server versions, review descriptions on change, and apply least-privilege and approval gates so a tool description cannot authorise sensitive actions",
+      "Trust descriptions because they are read by the model, not executed by it, since that has worked in earlier projects",
+      "Ask the vendor to add a note forbidding hidden instructions and take no further action, then review the outcome after the next release",
+      "Allow the server's tools to be auto-approved so users are not interrupted and monitor the dashboards for problems afterwards"
+    ],
+    "answer": 0,
+    "explanation": "Tool metadata is untrusted input that influences the model. Supply-chain controls plus deterministic permission gates limit damage."
+  },
+  {
+    "id": 226,
+    "difficulty": "hard",
+    "category": "stakeholder-communication-and-lifecycle-management",
+    "question": "A sponsor demands 'zero hallucinations' from an assistant. What is the best response from the architect?",
+    "options": [
+      "Agree to zero hallucinations in the contract and add a disclaimer to the interface and rely on that approach for every case and revisit the choice once the pilot is complete and track the effect on the weekly report",
+      "Refuse the project because no language-model system can meet any accuracy target, then review the outcome after the next release",
+      "Reframe it into measurable acceptance criteria, such as a maximum unsupported-claim rate on a representative evaluation set, with grounding, citations and human review for high-risk outputs",
+      "Promise zero hallucinations once the largest model is selected, then review the outcome after the next release"
+    ],
+    "answer": 2,
+    "explanation": "Absolute guarantees are not measurable. Convert the goal into evaluated rates and controls, and agree the residual risk path."
+  },
+  {
+    "id": 227,
+    "difficulty": "hard",
+    "category": "claude-models-prompting-and-context",
+    "question": "A support product has 80% simple classification requests and 20% hard reasoning cases. Latency and cost matter. Which model strategy is most defensible?",
+    "options": [
+      "Use the strongest model for every request to keep behaviour uniform and monitor the dashboards for problems afterwards",
+      "Route by measured difficulty: a smaller faster model for classification and a stronger model for hard cases, validated against an evaluation set",
+      "Use the smallest model for every request and accept a lower accuracy, then review the outcome after the next release",
+      "Choose a model by popularity rather than measuring performance and monitor the dashboards for problems afterwards, then adjust it if reviewers raise concerns"
+    ],
+    "answer": 1,
+    "explanation": "Match capability to the task and verify with data. A one-size choice either overspends or underperforms."
+  },
+  {
+    "id": 228,
+    "difficulty": "medium",
+    "category": "integration",
+    "question": "An application has an interactive chat UI and a nightly job that classifies 500,000 documents. Which pairing is best?",
+    "options": [
+      "Use batch for the chat UI and streaming for the nightly job, which is simpler than adding extra controls",
+      "Use synchronous calls for both and increase concurrency, since that has worked in earlier projects",
+      "Use streaming for both since it is always cheapest, then review the outcome after the next release",
+      "Stream responses for the chat UI and use the asynchronous batch interface for the nightly job"
+    ],
+    "answer": 3,
+    "explanation": "Interactive work needs low perceived latency; offline bulk work tolerates delay in exchange for lower cost. Reversing them breaks UX or wastes cost."
   }
 ];
