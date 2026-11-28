@@ -91,9 +91,9 @@ DEV_BR = [("Claude API Mechanics","1","#4f46e5","stateless history • stop_reas
 
 CFG = {
  'claude_architect_professional': dict(title='Claude Architect Professional', centre=['CLAUDE','ARCHITECT','PROFESSIONAL'], cards=ARCH_CARDS, rows=ARCH_ROWS, br=ARCH_BR,
-      readme='claude_architect_pro_readme.md', first_new=173, last=212, label='CCAR-P', area='Architect'),
+      readme='claude_architect_pro_readme.md', first_new=173, last=212, extra=(213, 228), label='CCAR-P', area='Architect'),
  'claude_developer_professional': dict(title='Claude Developer Professional', centre=['CLAUDE','DEVELOPER','PROFESSIONAL'], cards=DEV_CARDS, rows=DEV_ROWS, br=DEV_BR,
-      readme='claude_developer_pro_readme.md', first_new=151, last=188, label='CCDV-P', area='Developer'),
+      readme='claude_developer_pro_readme.md', first_new=151, last=188, extra=(189, 203), label='CCDV-P', area='Developer'),
 }
 S = ns['styles']
 
@@ -140,7 +140,7 @@ for stem, cfg in CFG.items():
     for n, q in enumerate(bank, 1):
         qt, _, _ = ns['clean_question'](q['question'], stem); idx = ns['answer_indices'](q)
         corr = '; '.join(str(q['options'][i]).strip() for i in idx)
-        tag = '  <font color="#b91c1c"><b>[Revision]</b></font>' if q['id'] >= cfg['first_new'] else ''
+        tag = '  <font color="#b91c1c"><b>[Revision]</b></font>' if cfg['first_new'] <= q['id'] <= cfg['last'] else ''
         blk = [Paragraph(f'<b>Q{n}.</b>{tag} {escape(qt)}', S['QX']), Paragraph(f'<b>Correct answer:</b> {escape(corr)}', S['CorrectX'])]
         ex = ns['concise_support'](q.get('explanation'), corr)
         if ex: blk.append(Paragraph(f'<b>Explanation:</b> {escape(ex)}', S['SupportX']))
@@ -192,5 +192,7 @@ for stem, cfg in CFG.items():
     t = t.replace('172-question practice bank', f'{len(bank)}-question practice bank')
     if 'Revision questions' not in t:
         t = t.replace('## Simulator', f"## Revision questions\nQuestions {cfg['first_new']}–{cfg['last']} were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.\n\n## Simulator", 1)
+    if 'Additional scenario questions' not in t:
+        t = t.replace('## Simulator', f"## Additional scenario questions\nQuestions {cfg['extra'][0]}–{cfg['extra'][1]} are extra scenario questions on topics the earlier bank covered thinly: coordinator state ownership, external scratchpads, LLM-judge bias, deployment surface, circuit breakers, context management for long runs, model version pinning, MCP token passthrough and supply-chain risk, canary releases, PII-safe logging and citations. They are original practice questions, not live exam items.\n\n## Simulator", 1)
     rp.write_text(t, encoding='utf-8')
     print(stem, len(bank), 'questions;', len(allcards), 'cards;', len(PdfReader(str(DOCS/f'{stem}_answers.pdf')).pages), 'pdf pages')
