@@ -81,7 +81,7 @@ CLAUDE DEVELOPER PROFESSIONAL
 ## Source coverage
 
 - Question bank: `questionBank_claude_developer_professional.js`
-- Questions in source bank: **188**
+- Questions in source bank: **203**
 - Consolidated recall cards: **17**
 - Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
@@ -90,7 +90,7 @@ CLAUDE DEVELOPER PROFESSIONAL
 This professional practice guide extends the simulator's **Claude Certified Developer – Foundations** guide. The image above intentionally reuses the foundation reference graphic; the professional assessment is a separate, deeper 150-question practice bank.
 
 ## Practice exam format
-- **188 professional-level practice MCQs** in the simulator bank.
+- **203 professional-level practice MCQs** in the simulator bank.
 - Questions emphasize API integration, production software engineering, agent-loop implementation, Claude Code workflows, context/output handling, security and evaluation.
 - This is a preparation resource, not an official Anthropic exam or a claim about live exam item count, scoring, price or blueprint.
 
@@ -111,6 +111,9 @@ This professional practice guide extends the simulator's **Claude Certified Deve
 
 ## Revision questions
 Questions 151–188 were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.
+
+## Additional scenario questions
+Questions 189–203 are extra scenario questions on topics the earlier bank covered thinly: coordinator state ownership, external scratchpads, LLM-judge bias, deployment surface, circuit breakers, context management for long runs, model version pinning, MCP token passthrough and supply-chain risk, canary releases, PII-safe logging and citations. They are original practice questions, not live exam items.
 
 ## Simulator
 Select **Claude Certified Developer – Professional** from the portal. The bank uses the existing simulator question schema and is loaded by `exam.html` through `js/questionBank_claude_developer_professional.js`.

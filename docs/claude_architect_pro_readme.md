@@ -97,7 +97,7 @@ CLAUDE ARCHITECT PROFESSIONAL
 ## Source coverage
 
 - Question bank: `questionBank_claude_architect_professional.js`
-- Questions in source bank: **212**
+- Questions in source bank: **228**
 - Consolidated recall cards: **24**
 - Recall cards are representative study aids derived from the supplied question bank, not an official exam blueprint.
 
@@ -106,7 +106,7 @@ CLAUDE ARCHITECT PROFESSIONAL
 This professional practice guide extends the simulator's **Claude Certified Architect – Foundations** guide. The image above intentionally reuses the foundation reference graphic; the professional assessment is a separate, deeper 212-question practice bank.
 
 ## Practice exam format
-- **212 professional-level practice MCQs** in the simulator bank.
+- **228 professional-level practice MCQs** in the simulator bank.
 - Questions emphasize architecture decisions, trade-offs, failure modes, operational controls and scenario-based judgment.
 - This is a preparation resource, not an official Anthropic exam or a claim about live exam item count, scoring, price or blueprint.
 
@@ -205,6 +205,9 @@ The 22 sample questions in the attached study guide have been added verbatim to 
 
 ## Revision questions
 Questions 173–212 were added as targeted revision drills (see the Revision priorities table). They use the same schema as the rest of the bank.
+
+## Additional scenario questions
+Questions 213–228 are extra scenario questions on topics the earlier bank covered thinly: coordinator state ownership, external scratchpads, LLM-judge bias, deployment surface, circuit breakers, context management for long runs, model version pinning, MCP token passthrough and supply-chain risk, canary releases, PII-safe logging and citations. They are original practice questions, not live exam items.
 
 ## Simulator
 Select **Claude Certified Architect – Professional** from the portal. The bank uses the simulator question schema, including an answer-index array for multi-select items and is loaded by `exam.html` through `js/questionBank_claude_architect_professional.js`.
