@@ -222,6 +222,51 @@ Build understanding incrementally: Grep entry points → Read to follow imports.
 
 # 💻 3. Claude Code Configuration & Workflows (20%)
 
+### 🔑 Tool control: three different layers (exam-confusing, keep them apart)
+`any`, `none`, `allowed-tools` and `deny` all sound alike but live in different places. **CLAUDE.md is plain Markdown: it never parses `tool:any`, `tool:none` or tool-ordering syntax.** Ask first: *which layer is this question about?*
+
+| Layer | Where it lives | Controls |
+|---|---|---|
+| 1. API `tool_choice` | Messages API request | Whether and how Claude calls tools on that one request |
+| 2. Claude Code tool scoping | SKILL.md / subagent frontmatter, CLI flags | Which tools a skill or agent may use, and which need prompts |
+| 3. Permissions and precedence | `settings.json` rules, CLAUDE.md load order | What is allowed or blocked, and which rule wins |
+
+**1. API `tool_choice`**
+
+| Value | Request JSON | Behaviour |
+|---|---|---|
+| `auto` | `{"type": "auto"}` | Claude decides: call a tool or reply in text (default) |
+| `any` | `{"type": "any"}` | Must call at least one tool; Claude picks which |
+| specific tool | `{"type": "tool", "name": "<tool_name>"}` | Must call that exact tool |
+| `none` | `{"type": "none"}` | No tool calls this turn |
+
+- Forcing guarantees the *call and its schema shape*, not correct values.
+- Forcing the first call, then returning to `auto` for follow-up turns, is the standard sequencing pattern.
+- Extended thinking only allows `auto` or `none`.
+
+**2. Claude Code tool scoping**
+
+| Setting | Effect | Trap |
+|---|---|---|
+| `allowed-tools` / `--allowedTools` | **Pre-approves** the listed tools (no permission prompt) | It does **not** remove unlisted tools from the pool |
+| `disallowed-tools` / `--disallowedTools` / deny rules | **Removes or blocks** the listed tools | In a SKILL.md it overrides `allowed-tools` |
+| `--tools` | Restricts which tools exist in the session | Not the same as pre-approval |
+| `tools` (subagent frontmatter) | Restricts the tools that subagent can use | |
+
+**3. Order and precedence (the only places order matters)**
+- There is **no required order** for listing tool names (`Read`, `Grep`, `Glob`, `Bash`) in `allowed-tools` or `tools`.
+- **Permission rules:** `deny` is evaluated first, then `ask`, then `allow`; first match wins and a `deny` is never overridden.
+- **CLAUDE.md loading:** files load from the root down to the working directory; the more specific, nearer file is read last and takes precedence.
+- **Tool-call ordering** (look up before refund) is enforced in code or a hook, not by listing order or CLAUDE.md.
+
+**Quick decision**
+- "Make the model call a tool instead of replying in text" -> `tool_choice` `any` or a named tool.
+- "Stop all tool use this turn" -> `tool_choice` `none`.
+- "Skip prompts for these tools" -> `allowed-tools`.
+- "Make sure this tool can never run" -> `deny` rule or `disallowed-tools`.
+- "Must always run A before B" -> executor gate or hook.
+- "Prefer X in this repo" -> CLAUDE.md (advisory only).
+
 ### 🔑 CLAUDE.md hierarchy
 
 * **User** `~/.claude/CLAUDE.md` – personal, **not shared** (classic "new teammate isn't getting rules" bug)
