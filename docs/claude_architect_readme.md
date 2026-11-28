@@ -305,6 +305,25 @@ Glob rules beat per-directory CLAUDE.md when conventions span **many directories
 
 Combine: **plan** to investigate → **execute** to implement. **Explore subagent** isolates verbose discovery.
 
+**Is a plan mandatory? No. It is recommended for complex work, and you can make it mandatory yourself.** Plan mode is a choice based on task scope, reversibility and uncertainty, not a default requirement.
+
+| Plan first (recommended) | Skip the plan (direct execution) |
+|---|---|
+| Multi-step or multi-file changes across components or systems | Small, isolated fix or single-file tweak |
+| Architectural or schema changes (database schema, core business logic, existing behaviour), which are costly to reverse | Clear stack trace, obvious one-line cause |
+| Ambiguous requirements or several valid approaches, so tradeoffs and clarifying questions surface early | Well-specified change with one obvious approach |
+| Stakeholder review needed before implementation | Easily reversible, low-risk edit |
+
+**Ways to make planning mandatory**
+- **Plan Mode:** press **Shift+Tab** (cycle modes) or type **/plan**. Claude stays read-only (no file edits or side effects) until you approve the plan.
+- **CLAUDE.md rule:** "On complex tasks, present a step-by-step plan and wait for approval before modifying files." This is **advisory**, so it can be skipped; use Plan Mode when it must not be.
+- **Settings permissions or a hook:** use these when edits must be blocked without exception (deterministic enforcement, see Enforcement vs guidance).
+
+**Exam traps**
+- "Plan mode is required for every change": wrong. Over-planning a trivial fix wastes time.
+- "A CLAUDE.md plan rule guarantees a plan": wrong. It is guidance, not enforcement.
+- "Skip planning for a 45-file migration because the goal is clear": wrong. Scale and multiple valid approaches call for plan mode.
+
 ### 🔑 Iterative refinement
 
 * 2-3 **input/output examples** beat prose when interpretation is inconsistent
